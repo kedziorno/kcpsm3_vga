@@ -1,0 +1,4 @@
+[submodule "Bitmap-VHDL-Package"]
+	path = Bitmap-VHDL-Package
+	url = https://github.com/jherkenhoff/Bitmap-VHDL-Package.git
+	branch = master

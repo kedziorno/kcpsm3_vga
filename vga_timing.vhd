@@ -96,9 +96,9 @@ begin
 
   o_blank <=
     '0' when
-      (h_counter <= h_visible_area)
+      (h_counter <= h_visible_area - 1)
       and
-      (v_counter <= v_visible_area)
+      (v_counter <= v_visible_area - 1)
     else '1';
 
   p_hv_counters : process (i_clock, i_reset) is
