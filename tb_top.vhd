@@ -58,8 +58,8 @@ signal o_vsync : std_logic;
 signal o_blank : std_logic;
 
 -- Clock period definitions
-constant i_clock_period : time := 39.720 ns;
---constant i_clock_period : time := 39.722 ns;
+--constant i_clock_period : time := 39.720 ns;
+constant i_clock_period : time := 39.722 ns;
 
 BEGIN
 
