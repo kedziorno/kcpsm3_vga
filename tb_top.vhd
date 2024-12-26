@@ -64,6 +64,20 @@ signal o_r, o_g, o_b : std_logic;
 --constant i_clock_period : time := 39.722 ns;
 constant i_clock_period : time := 40 ns;
 
+component vga_bmp_sink is
+generic (
+FILENAME     : string
+);
+port (
+clk_i        : in std_logic;
+rst_i        : in std_logic;
+dat_i        : in std_logic_vector (23 downto 0);
+active_vid_i : in std_logic;
+h_sync_i     : in std_logic;
+v_sync_i     : in std_logic
+);
+end component vga_bmp_sink;
+
 BEGIN
 
 -- Instantiate the Unit Under Test (UUT)
@@ -96,7 +110,21 @@ wait for i_clock_period;
 i_reset <= '0';
 wait for i_clock_period*10;
 -- insert stimulus here
-wait;
+wait for 34 ms;
+report "tb done" severity failure;
 end process;
+
+inst_vga_bmp_sink : vga_bmp_sink
+generic map (
+FILENAME     => "vga.bmp"
+)
+port map (
+clk_i        => i_clock,
+rst_i        => i_reset,
+dat_i        => o_r & "0000000" & o_g & "0000000" & o_b & "0000000",
+active_vid_i => not o_blank,
+h_sync_i     => o_hsync,
+v_sync_i     => o_vsync
+);
 
 END;

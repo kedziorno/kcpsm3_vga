@@ -1,4 +1,6 @@
 vhdl work "vga_timing.vhd"
 vhdl work "vga_rgb.vhd"
+vhdl work "Bitmap-VHDL-Package/rtl/bmp_pkg.vhd"
 vhdl work "top.vhd"
+vhdl work "Bitmap-VHDL-Package/rtl/vga_bmp_sink.vhd"
 vhdl work "tb_top.vhd"
