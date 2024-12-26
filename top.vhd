@@ -22,7 +22,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
@@ -68,9 +68,23 @@ constant c_color : t_color_array := (
 signal vga_blank : std_logic;
 signal vga_color : std_logic_vector (2 downto 0);
 
+signal lsfr : std_logic_vector (2 downto 0);
+
 begin
 
-vga_color <= c_color (7);
+p_lsfr : process (i_clock, i_reset) is
+  variable reg : std_logic;
+begin
+  if (i_reset = '1') then
+    lsfr <= "001";
+    reg := '0';
+  elsif (rising_edge (i_clock)) then
+    reg := lsfr (2) xor lsfr (1);
+    lsfr <= lsfr (1 downto 0) & reg;
+  end if;
+end process p_lsfr;
+
+vga_color <= c_color (to_integer (unsigned (lsfr)));
 o_blank <= vga_blank;
 
 inst_vga_timing : vga_timing
