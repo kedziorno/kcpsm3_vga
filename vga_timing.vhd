@@ -118,18 +118,18 @@ begin
         h_counter <= h_counter + 1;
       end if;
       if (
-        h_counter >= (h_visible_area + h_front_porch               )
+        h_counter >= (h_visible_area + h_front_porch                - 1)
         and
-        h_counter <  (h_visible_area + h_front_porch + h_sync_pulse)
+        h_counter <= (h_visible_area + h_front_porch + h_sync_pulse - 1)
       ) then
         o_hsync <= '0';
       else
         o_hsync <= '1';
       end if;
       if (
-        v_counter >= (v_visible_area + v_front_porch               )
+        v_counter >= (v_visible_area + v_front_porch                - 1)
         and
-        v_counter <  (v_visible_area + v_front_porch + v_sync_pulse)
+        v_counter <= (v_visible_area + v_front_porch + v_sync_pulse - 1)
       ) then
         o_vsync <= '0';
       else
