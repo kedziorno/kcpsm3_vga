@@ -76,17 +76,17 @@ end entity vga;
 
 architecture industry_standard_640x480_timing of vga is
 
-  constant h_visible_area : integer := 640; -- 25.4221
-  constant h_front_porch  : integer :=  16; -- 0.6753
-  constant h_sync_pulse   : integer :=  96; -- 3.8539
-  constant h_back_porch   : integer :=  48; -- 1.8272
+  constant h_visible_area : integer := 640; -- 25.42080
+  constant h_front_porch  : integer :=  16; -- 0.635520
+  constant h_sync_pulse   : integer :=  96; -- 3.813120
+  constant h_back_porch   : integer :=  48; -- 1.906560
   constant whole_line     : integer := 800; -- 31.7776
 
-  constant v_visible_area : integer := 480;
-  constant v_front_porch  : integer :=  10;
-  constant v_sync_pulse   : integer :=   2;
-  constant v_back_porch   : integer :=  33;
-  constant whole_frame    : integer := 525; -- 16.6832
+  constant v_visible_area : integer := 480; -- 15.24612480
+  constant v_front_porch  : integer :=  10; -- 0.292378920
+  constant v_sync_pulse   : integer :=   2; -- 0.0635520
+  constant v_back_porch   : integer :=  33; -- 1.080344280
+  constant whole_frame    : integer := 525; -- 16.68240
 
   signal h_counter : integer range 0 to whole_line  - 1;
   signal v_counter : integer range 0 to whole_frame - 1;
