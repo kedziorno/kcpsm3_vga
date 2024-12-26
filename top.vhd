@@ -72,19 +72,46 @@ signal lsfr : std_logic_vector (2 downto 0);
 
 begin
 
-p_lsfr : process (i_clock, i_reset) is
-  variable reg : std_logic;
+--p_lsfr : process (i_clock, i_reset) is
+--  variable reg : std_logic;
+--begin
+--  if (i_reset = '1') then
+--    lsfr <= "001";
+--    reg := '0';
+--  elsif (rising_edge (i_clock)) then
+--    reg := lsfr (2) xor lsfr (1);
+--    lsfr <= lsfr (1 downto 0) & reg;
+--  end if;
+--end process p_lsfr;
+
+p_bars : process (i_clock, i_reset) is
+  constant c_cnr : integer := 8;
+  constant c_max : integer := 640;
+  variable index : integer range 0 to c_max - 1;
 begin
   if (i_reset = '1') then
-    lsfr <= "001";
-    reg := '0';
+    index := 0;
   elsif (rising_edge (i_clock)) then
-    reg := lsfr (2) xor lsfr (1);
-    lsfr <= lsfr (1 downto 0) & reg;
+    if (vga_blank = '0') then
+      if (index = c_max - 1) then
+        index := 0;
+      else
+        index := index + 1;
+      end if;
+    end if;
+    case (index) is
+      when 000 to 079 => vga_color <= c_color (0);
+      when 080 to 159 => vga_color <= c_color (1);
+      when 160 to 239 => vga_color <= c_color (2);
+      when 240 to 319 => vga_color <= c_color (3);
+      when 320 to 399 => vga_color <= c_color (4);
+      when 400 to 479 => vga_color <= c_color (5);
+      when 480 to 559 => vga_color <= c_color (6);
+      when 560 to 639 => vga_color <= c_color (7);
+    end case;
   end if;
-end process p_lsfr;
+end process p_bars;
 
-vga_color <= c_color (to_integer (unsigned (lsfr)));
 o_blank <= vga_blank;
 
 inst_vga_timing : vga_timing
