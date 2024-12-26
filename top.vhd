@@ -35,13 +35,14 @@ i_clock : in std_logic;
 i_reset : in std_logic;
 o_hsync : out std_logic;
 o_vsync : out std_logic;
-o_blank : out std_logic
+o_blank : out std_logic;
+o_r, o_g, o_b : out std_logic
 );
 end top;
 
 architecture behavioral of top is
 
-component vga is
+component vga_timing is
 port (
 i_clock : in std_logic;
 i_reset : in std_logic;
@@ -49,17 +50,45 @@ o_hsync : out std_logic;
 o_vsync : out std_logic;
 o_blank : out std_logic
 );
-end component vga;
+end component vga_timing;
+
+component vga_rgb is
+port (
+i_color : in std_logic_vector (2 downto 0);
+i_blank : in std_logic;
+o_r, o_g, o_b : out std_logic
+);
+end component vga_rgb;
+
+type t_color_array is array (7 downto 0) of std_logic_vector (2 downto 0);
+constant c_color : t_color_array := (
+  "111", "110", "101", "100", "011", "010", "001", "000"
+);
+
+signal vga_blank : std_logic;
+signal vga_color : std_logic_vector (2 downto 0);
 
 begin
 
-inst_vga : vga
+vga_color <= c_color (7);
+o_blank <= vga_blank;
+
+inst_vga_timing : vga_timing
 port map (
 i_clock => i_clock,
 i_reset => i_reset,
 o_hsync => o_hsync,
 o_vsync => o_vsync,
-o_blank => o_blank
+o_blank => vga_blank
+);
+
+inst_vga_rgb : vga_rgb
+port map (
+i_color => vga_color,
+i_blank => vga_blank,
+o_r => o_r,
+o_g => o_g,
+o_b => o_b
 );
 
 end architecture behavioral;

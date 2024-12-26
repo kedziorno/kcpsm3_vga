@@ -1,3 +1,4 @@
-vhdl work "vga.vhd"
+vhdl work "vga_timing.vhd"
+vhdl work "vga_rgb.vhd"
 vhdl work "top.vhd"
 vhdl work "tb_top.vhd"

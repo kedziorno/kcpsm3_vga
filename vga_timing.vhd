@@ -29,7 +29,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity vga is
+entity vga_timing is
 port (
 i_clock : in std_logic;
 i_reset : in std_logic;
@@ -37,7 +37,7 @@ o_hsync : out std_logic;
 o_vsync : out std_logic;
 o_blank : out std_logic
 );
-end entity vga;
+end entity vga_timing;
 
 -- http://www.tinyvga.com/vga-timing/640x480@60Hz
 --
@@ -74,7 +74,7 @@ end entity vga;
 -- |  Whole frame | 525 | 16.683217477656 |
 -- +--------------+-----+-----------------+
 
-architecture industry_standard_640x480_timing of vga is
+architecture industry_standard_640x480_timing of vga_timing is
 
   -- 40.000, 39.720, 39.722
   constant h_visible_area : integer := 640; -- 25.640    , 25.42080     , 25.422080

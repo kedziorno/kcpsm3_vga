@@ -44,7 +44,8 @@ i_clock : IN  std_logic;
 i_reset : IN  std_logic;
 o_hsync : OUT  std_logic;
 o_vsync : OUT  std_logic;
-o_blank : OUT  std_logic
+o_blank : OUT  std_logic;
+o_r, o_g, o_b : out std_logic
 );
 END COMPONENT;
 
@@ -56,6 +57,7 @@ signal i_reset : std_logic := '0';
 signal o_hsync : std_logic;
 signal o_vsync : std_logic;
 signal o_blank : std_logic;
+signal o_r, o_g, o_b : std_logic;
 
 -- Clock period definitions
 --constant i_clock_period : time := 39.720 ns;
@@ -70,7 +72,10 @@ i_clock => i_clock,
 i_reset => i_reset,
 o_hsync => o_hsync,
 o_vsync => o_vsync,
-o_blank => o_blank
+o_blank => o_blank,
+o_r => o_r,
+o_g => o_g,
+o_b => o_b
 );
 
 -- Clock process definitions
