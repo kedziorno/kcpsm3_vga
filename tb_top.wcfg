@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/tb_top_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="std_logic_1164" />
+            <top_module name="tb_top" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="1" />
+   <wvobject fp_name="group22" type="group">
+      <obj_property name="label">vga</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_vga/i_clock" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">i_clock</obj_property>
+         <obj_property name="ObjectShortName">i_clock</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/i_reset" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">i_reset</obj_property>
+         <obj_property name="ObjectShortName">i_reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/o_hsync" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">o_hsync</obj_property>
+         <obj_property name="ObjectShortName">o_hsync</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/o_vsync" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">o_vsync</obj_property>
+         <obj_property name="ObjectShortName">o_vsync</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/o_blank" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">o_blank</obj_property>
+         <obj_property name="ObjectShortName">o_blank</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/h_counter" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">h_counter</obj_property>
+         <obj_property name="ObjectShortName">h_counter</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/v_counter" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">v_counter</obj_property>
+         <obj_property name="ObjectShortName">v_counter</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/h_visible_area" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">h_visible_area</obj_property>
+         <obj_property name="ObjectShortName">h_visible_area</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/h_front_porch" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">h_front_porch</obj_property>
+         <obj_property name="ObjectShortName">h_front_porch</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/h_sync_pulse" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">h_sync_pulse</obj_property>
+         <obj_property name="ObjectShortName">h_sync_pulse</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/h_back_porch" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">h_back_porch</obj_property>
+         <obj_property name="ObjectShortName">h_back_porch</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/whole_line" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">whole_line</obj_property>
+         <obj_property name="ObjectShortName">whole_line</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/v_visible_area" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">v_visible_area</obj_property>
+         <obj_property name="ObjectShortName">v_visible_area</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/v_front_porch" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">v_front_porch</obj_property>
+         <obj_property name="ObjectShortName">v_front_porch</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/v_sync_pulse" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">v_sync_pulse</obj_property>
+         <obj_property name="ObjectShortName">v_sync_pulse</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/v_back_porch" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">v_back_porch</obj_property>
+         <obj_property name="ObjectShortName">v_back_porch</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_vga/whole_frame" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">whole_frame</obj_property>
+         <obj_property name="ObjectShortName">whole_frame</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>
