@@ -77,16 +77,16 @@ end entity vga;
 architecture industry_standard_640x480_timing of vga is
 
   -- 40.000, 39.720, 39.722
-  constant h_visible_area : integer := 640; -- 25.60,  25.42080,  25.422080
+  constant h_visible_area : integer := 640; -- 25.640,  25.42080,  25.422080
   constant h_front_porch  : integer :=  16; --  0.640,  0.635520,  0.635552
   constant h_sync_pulse   : integer :=  96; --  3.840,  3.813120,  3.813312
-  constant h_back_porch   : integer :=  48; --  1.920,  1.906560,  1.906656
+  constant h_back_porch   : integer :=  48; --  1.880,  1.906560,  1.906656
   constant whole_line     : integer := 800; -- 32.0,    31.7776,  31.7776
 
-  constant v_visible_area : integer := 480; -- 15.35360,  15.24612480,  15.246892480
-  constant v_front_porch  : integer :=  10; --  0.294440,  0.292378920,  0.292393642
+  constant v_visible_area : integer := 480; -- 15.385640,  15.24612480,  15.246892480
+  constant v_front_porch  : integer :=  10; --  0.294400,  0.292378920,  0.292393642
   constant v_sync_pulse   : integer :=   2; --  0.0640,    0.0635520,    0.06355520
-  constant v_back_porch   : integer :=  33; --  1.087960,  1.080344280,  1.080398678
+  constant v_back_porch   : integer :=  33; --  1.055960,  1.080344280,  1.080398678
   constant whole_frame    : integer := 525; -- 16.80,      16.68240,     16.683240
 
   signal h_counter : integer range 0 to whole_line  - 1;
@@ -96,9 +96,9 @@ begin
 
   o_blank <=
     '0' when
-      (h_counter <= h_visible_area - 1)
+      (h_counter <= h_visible_area)
       and
-      (v_counter <= v_visible_area - 1)
+      (v_counter <= v_visible_area)
     else '1';
 
   p_hv_counters : process (i_clock, i_reset) is
@@ -118,18 +118,18 @@ begin
         h_counter <= h_counter + 1;
       end if;
       if (
-        h_counter >= (h_visible_area + h_front_porch                - 1)
+        h_counter >= (h_visible_area + h_front_porch               )
         and
-        h_counter <  (h_visible_area + h_front_porch + h_sync_pulse - 1)
+        h_counter <  (h_visible_area + h_front_porch + h_sync_pulse)
       ) then
         o_hsync <= '0';
       else
         o_hsync <= '1';
       end if;
       if (
-        v_counter >= (v_visible_area + v_front_porch                - 1)
+        v_counter >= (v_visible_area + v_front_porch               )
         and
-        v_counter <  (v_visible_area + v_front_porch + v_sync_pulse - 1)
+        v_counter <  (v_visible_area + v_front_porch + v_sync_pulse)
       ) then
         o_vsync <= '0';
       else
