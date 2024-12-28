@@ -109,7 +109,13 @@ wait for i_clock_period/2;
 end process;
 
 i_vga_bmp_clock : process
+  variable first_wait : time := 0 ns;
+  variable first_wait_flag : boolean := false;
 begin
+if (first_wait_flag = false) then
+  wait for first_wait;
+  first_wait_flag := true;
+end if;
 vga_clock <= '0';
 wait for vga_clock_period/2;
 vga_clock <= '1';

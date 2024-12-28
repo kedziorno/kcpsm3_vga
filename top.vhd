@@ -22,12 +22,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
-use IEEE.NUMERIC_STD.ALL;
+--use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
 --library UNISIM;
 --use UNISIM.VComponents.all;
+
+use work.numeric_std.all; -- XXX ONLY FOR DISABLE WARNIGS (I am not worthy and I am unworthy to modify this saint file ;-P). Please copy and modify own file.
 
 entity top is
 port (
@@ -46,11 +48,12 @@ architecture behavioral of top is
 
 component vga_timing is
 port (
-i_clock : in  std_logic;
-i_reset : in  std_logic;
-o_hsync : out std_logic;
-o_vsync : out std_logic;
-o_blank : out std_logic
+i_clock   : in  std_logic;
+i_reset   : in  std_logic;
+o_hsync   : out std_logic;
+o_vsync   : out std_logic;
+o_h_blank : out std_logic;
+o_v_blank : out std_logic
 );
 end component vga_timing;
 
@@ -92,7 +95,8 @@ doutb : OUT STD_LOGIC_VECTOR (5 DOWNTO 0)
 END COMPONENT ipcore_vga_ramb16_dp;
 
 signal vga_clock : std_logic;
-signal vga_blank : std_logic;
+signal vga_h_blank : std_logic;
+signal vga_v_blank : std_logic;
 signal vga_color : std_logic_vector (5 downto 0);
 signal vga_color1 : std_logic_vector (5 downto 0);
 
@@ -119,21 +123,22 @@ begin
   end if;
 end process p_vga_clock_divider;
 
-o_blank <= vga_blank;
+o_blank <= (vga_h_blank or vga_v_blank);
 
 inst_vga_timing : vga_timing
 port map (
-i_clock => vga_clock,
-i_reset => i_reset,
-o_hsync => o_hsync,
-o_vsync => o_vsync,
-o_blank => vga_blank
+i_clock   => vga_clock,
+i_reset   => i_reset,
+o_hsync   => o_hsync,
+o_vsync   => o_vsync,
+o_h_blank => vga_h_blank,
+o_v_blank => vga_v_blank
 );
 
 inst_vga_rgb : vga_rgb
 port map (
 i_color => vga_color1,
-i_blank => vga_blank,
+i_blank => vga_h_blank,
 o_r => o_r,
 o_g => o_g,
 o_b => o_b
@@ -146,7 +151,7 @@ begin
   if (i_reset = '1') then
     i_all_pixels := 0;
   elsif (rising_edge (vga_clock)) then
-    if (vga_blank = '0') then
+    if (vga_h_blank = '0') then
       if (i_all_pixels = c_all_pixels - 1) then
         i_all_pixels := 0;
       else
@@ -174,7 +179,7 @@ begin
     i_x := 0;
     i_y := 0;
   elsif (rising_edge (vga_clock)) then
-    if (vga_blank = '0') then
+    if (vga_h_blank = '0') then
       if (i_x_step = c_x_step - 1) then
         i_x_step := 0;
         vga_address <= std_logic_vector (to_unsigned (to_integer (unsigned (vga_address)) + 1, 14));
@@ -182,7 +187,7 @@ begin
           i_x := 0;
           if (i_y = c_y - 1) then
             i_y := 0;
-            vga_address <= (others => '0');
+            vga_address <= (others => '1');
           else
             i_y := i_y + 1;
           end if;
@@ -192,6 +197,9 @@ begin
       else
         i_x_step := i_x_step + 1;
       end if;
+    end if;
+    if (vga_v_blank = '1') then
+      vga_address <= (others => '1');
     end if;
   end if;
 end process p_address_gen;

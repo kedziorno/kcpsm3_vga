@@ -31,11 +31,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity vga_timing is
 port (
-i_clock : in std_logic;
-i_reset : in std_logic;
-o_hsync : out std_logic;
-o_vsync : out std_logic;
-o_blank : out std_logic
+i_clock   : in  std_logic;
+i_reset   : in  std_logic;
+o_hsync   : out std_logic;
+o_vsync   : out std_logic;
+o_v_blank : out std_logic;
+o_h_blank : out std_logic
 );
 end entity vga_timing;
 
@@ -94,11 +95,12 @@ architecture industry_standard_640x480_timing of vga_timing is
 
 begin
 
-  o_blank <=
-    '0' when
-      (h_counter < h_visible_area)
-      and
-      (v_counter < v_visible_area)
+  o_h_blank <=
+    '0' when h_counter < h_visible_area
+    else '1';
+
+  o_v_blank <=
+    '0' when v_counter < v_visible_area
     else '1';
 
   p_hv_counters : process (i_clock, i_reset) is

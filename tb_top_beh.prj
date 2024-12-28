@@ -1,6 +1,7 @@
 vhdl work "ipcore_dir/ipcore_vga_ramb16_dp.vhd"
 vhdl work "vga_timing.vhd"
 vhdl work "vga_rgb.vhd"
+vhdl work "numeric_std.vhd"
 vhdl work "lsfr.vhd"
 vhdl work "Bitmap-VHDL-Package/rtl/bmp_pkg.vhd"
 vhdl work "top.vhd"

@@ -8,7 +8,7 @@
             <top_module name="bmp_pkg" />
             <top_module name="math_real" />
             <top_module name="numeric_std" />
-            <top_module name="p_package1" />
+            <top_module name="numeric_std" />
             <top_module name="std_logic_1164" />
             <top_module name="std_logic_arith" />
             <top_module name="std_logic_textio" />
@@ -18,7 +18,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="13" />
+   <WVObjectSize size="25" />
    <wvobject fp_name="/tb_top/uut/i_clock" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">i_clock</obj_property>
       <obj_property name="ObjectShortName">i_clock</obj_property>
@@ -34,6 +34,14 @@
    <wvobject fp_name="/tb_top/uut/o_vsync" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">o_vsync</obj_property>
       <obj_property name="ObjectShortName">o_vsync</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/vga_h_blank" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">vga_h_blank</obj_property>
+      <obj_property name="ObjectShortName">vga_h_blank</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/vga_v_blank" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">vga_v_blank</obj_property>
+      <obj_property name="ObjectShortName">vga_v_blank</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/o_blank" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">o_blank</obj_property>
@@ -55,10 +63,6 @@
       <obj_property name="ElementShortName">vga_clock</obj_property>
       <obj_property name="ObjectShortName">vga_clock</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_blank" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_blank</obj_property>
-      <obj_property name="ObjectShortName">vga_blank</obj_property>
-   </wvobject>
    <wvobject fp_name="/tb_top/uut/vga_color" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">vga_color[5:0]</obj_property>
       <obj_property name="ObjectShortName">vga_color[5:0]</obj_property>
@@ -71,5 +75,49 @@
       <obj_property name="ElementShortName">vga_address[13:0]</obj_property>
       <obj_property name="ObjectShortName">vga_address[13:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/i_clock" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_clock</obj_property>
+      <obj_property name="ObjectShortName">i_clock</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/i_reset" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_reset</obj_property>
+      <obj_property name="ObjectShortName">i_reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/o_hsync" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_hsync</obj_property>
+      <obj_property name="ObjectShortName">o_hsync</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/o_vsync" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_vsync</obj_property>
+      <obj_property name="ObjectShortName">o_vsync</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/o_blank" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_blank</obj_property>
+      <obj_property name="ObjectShortName">o_blank</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/o_r" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_r[1:0]</obj_property>
+      <obj_property name="ObjectShortName">o_r[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/o_g" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_g[1:0]</obj_property>
+      <obj_property name="ObjectShortName">o_g[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/o_b" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_b[1:0]</obj_property>
+      <obj_property name="ObjectShortName">o_b[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/vga_clock" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">vga_clock</obj_property>
+      <obj_property name="ObjectShortName">vga_clock</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/i_clock_period" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">i_clock_period</obj_property>
+      <obj_property name="ObjectShortName">i_clock_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/vga_clock_period" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">vga_clock_period</obj_property>
+      <obj_property name="ObjectShortName">vga_clock_period</obj_property>
    </wvobject>
 </wave_config>
