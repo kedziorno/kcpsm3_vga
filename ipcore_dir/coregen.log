@@ -3,12 +3,9 @@ WARNING:coreutil:995 - User repository directory path
 WARNING:coreutil:882 - Repository directory
    '/home/user/workspace/melexis_mlx90641/ipcore_dir/' does not match index file
    entry ''.
-Welcome to Xilinx CORE Generator.
-Help system initialized.
-The IP Catalog has been reloaded.
-Opening project file
-/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/coregen.cgp.
-Recustomize and Generate (Under Original Project Settings)INFO:sim:172 - Generating IP...
+INFO:sim:172 - Generating IP...
+Applying current project options...
+Finished applying current project options.
 WARNING:sim - A core named 'ipcore_vga_ramb16_dp' already exists in the project.
    Output products for this core may be overwritten.
 Resolving generics for 'ipcore_vga_ramb16_dp'...
@@ -32,6 +29,7 @@ Delivered 1 file into directory
 _dp
 Generating ASY schematic symbol...
 INFO:sim:949 - Finished generation of ASY schematic symbol.
+Generating SYM schematic symbol for 'ipcore_vga_ramb16_dp'...
 Generating metadata file...
 Regenerating ISE project file for 'ipcore_vga_ramb16_dp'...
 Generating ISE project...
@@ -49,6 +47,9 @@ Checking file
 File
 "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/tmp/_cg/ipcore_vga_ramb1
 6_dp.ngc" device information matches project device.
+Adding
+/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/tmp/_cg/ipcore_vga_ramb16
+_dp.sym -view all -origin_type imported
 Adding
 /home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/tmp/_cg/ipcore_vga_ramb16
 _dp.vhd -view all -origin_type created
@@ -70,5 +71,4 @@ INFO:sim:948 - Finished FLIST file generation.
 Launching README viewer...
 Moving files to output directory...
 Finished moving files to output directory
-Saved CGP file for project 'coregen'.
-Closed project file.
+Wrote CGP file for project 'ipcore_vga_ramb16_dp'.

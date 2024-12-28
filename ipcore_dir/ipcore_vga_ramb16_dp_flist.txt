@@ -47,6 +47,7 @@ ipcore_vga_ramb16_dp/simulation/timing/wave_ncsim.sv
 ipcore_vga_ramb16_dp.asy
 ipcore_vga_ramb16_dp.gise
 ipcore_vga_ramb16_dp.ngc
+ipcore_vga_ramb16_dp.sym
 ipcore_vga_ramb16_dp.vhd
 ipcore_vga_ramb16_dp.vho
 ipcore_vga_ramb16_dp.xco

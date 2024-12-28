@@ -66,7 +66,10 @@ signal o_b : std_logic_vector (1 downto 0);
 -- Clock period definitions
 --constant i_clock_period : time := 39.720 ns;
 --constant i_clock_period : time := 39.722 ns;
-constant i_clock_period : time := 40 ns;
+--constant i_clock_period : time := 40 ns;
+constant i_clock_period : time := 10 ns;
+constant vga_clock_period : time := 40 ns;
+signal vga_clock : std_logic;
 
 component vga_bmp_sink is
 generic (
@@ -105,6 +108,14 @@ i_clock <= '1';
 wait for i_clock_period/2;
 end process;
 
+i_vga_bmp_clock : process
+begin
+vga_clock <= '0';
+wait for vga_clock_period/2;
+vga_clock <= '1';
+wait for vga_clock_period/2;
+end process;
+
 -- Stimulus process
 stim_proc: process
 begin
@@ -123,7 +134,7 @@ generic map (
 FILENAME     => "vga.bmp"
 )
 port map (
-clk_i        => i_clock,
+clk_i        => vga_clock,
 rst_i        => i_reset,
 dat_i        => o_r (1) & o_r (0) & "000000" & o_g (1) & o_g (0) & "000000" & o_b (1) & o_b (0) & "000000",
 active_vid_i => not o_blank,

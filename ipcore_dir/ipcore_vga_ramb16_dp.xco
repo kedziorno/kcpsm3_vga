@@ -1,7 +1,7 @@
 ##############################################################
 #
 # Xilinx Core Generator version 14.7
-# Date: Sat Dec 28 16:52:01 2024
+# Date: Sat Dec 28 18:17:59 2024
 #
 ##############################################################
 #
@@ -49,8 +49,8 @@ CSET byte_size=9
 CSET coe_file=no_coe_file_loaded
 CSET collision_warnings=ALL
 CSET component_name=ipcore_vga_ramb16_dp
-CSET disable_collision_warnings=false
-CSET disable_out_of_range_warnings=false
+CSET disable_collision_warnings=true
+CSET disable_out_of_range_warnings=true
 CSET ecc=false
 CSET ecctype=No_ECC
 CSET enable_32bit_address=false
@@ -105,4 +105,4 @@ CSET write_width_b=6
 MISC pkg_timestamp=2012-11-19T16:22:25Z
 # END Extra information
 GENERATE
-# CRC: 37235ead
+# CRC: 52299956
