@@ -32,13 +32,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity lsfr is
 port (
 i_clock, i_reset : in std_logic;
-o_lsfr : out std_logic_vector (2 downto 0)
+o_lsfr : out std_logic_vector (5 downto 0)
 );
 end entity lsfr;
 
 architecture behavioral of lsfr is
 
-  signal lsfr : std_logic_vector (2 downto 0);
+  signal lsfr : std_logic_vector (5 downto 0);
 
 begin
 
@@ -48,10 +48,10 @@ begin
     variable reg : std_logic;
   begin
     if (i_reset = '1') then
-      lsfr <= "000";
+      lsfr <= (others => '0');
       reg := '1';
     elsif (rising_edge (i_clock)) then
-      lsfr <= lsfr (1 downto 0) & reg;
+      lsfr <= lsfr (4 downto 0) & reg;
       reg := lsfr (2) xor lsfr (1);
     end if;
   end process p_lsfr;

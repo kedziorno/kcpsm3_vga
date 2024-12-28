@@ -64,13 +64,20 @@ o_b      : out std_logic_vector (1 downto 0)
 );
 end component vga_rgb;
 
-component vga_colorbar is
+--component vga_colorbar is
+--port (
+--i_clock, i_reset : in std_logic;
+--i_vga_blank : in std_logic;
+--o_vga_color : out std_logic_vector (5 downto 0)
+--);
+--end component vga_colorbar;
+
+component lsfr is
 port (
 i_clock, i_reset : in std_logic;
-i_vga_blank : in std_logic;
-o_vga_color : out std_logic_vector (5 downto 0)
+o_lsfr : out std_logic_vector (5 downto 0)
 );
-end component vga_colorbar;
+end component lsfr;
 
 COMPONENT ipcore_vga_ramb16_dp
 PORT (
@@ -90,6 +97,8 @@ signal vga_color : std_logic_vector (5 downto 0);
 signal vga_color1 : std_logic_vector (5 downto 0);
 
 signal vga_address : std_logic_vector (13 downto 0);
+
+signal vga_all_pixels : std_logic_vector (13 downto 0);
 
 begin
 
@@ -129,6 +138,24 @@ o_r => o_r,
 o_g => o_g,
 o_b => o_b
 );
+
+p_address_input : process (vga_clock, i_reset) is
+  constant c_all_pixels : integer := 307200;
+  variable i_all_pixels : integer range 0 to c_all_pixels - 1;
+begin
+  if (i_reset = '1') then
+    i_all_pixels := 0;
+  elsif (rising_edge (vga_clock)) then
+    if (vga_blank = '0') then
+      if (i_all_pixels = c_all_pixels - 1) then
+        i_all_pixels := 0;
+      else
+        i_all_pixels := i_all_pixels + 1;
+      end if;
+    end if;
+    vga_all_pixels <= std_logic_vector (to_unsigned (i_all_pixels, 14));
+  end if;
+end process p_address_input;
 
 p_address_gen : process (vga_clock, i_reset) is
     constant c_x_step : integer := 5;
@@ -171,21 +198,28 @@ end process p_address_gen;
 
 inst_ipcore_vga_ramb16_dp : ipcore_vga_ramb16_dp
 port map (
-clka  => vga_clock,
+clka  => i_clock,
 wea   => "1",
-addra => vga_address,
+addra => vga_all_pixels,
 dina  => vga_color,
 clkb  => vga_clock,
 addrb => vga_address,
 doutb => vga_color1
 );
 
-inst_vga_colorbar : vga_colorbar
+--inst_vga_colorbar : vga_colorbar
+--port map (
+--i_clock     => vga_clock,
+--i_reset     => i_reset,
+--i_vga_blank => vga_blank,
+--o_vga_color => vga_color
+--);
+
+inst_lsfr : lsfr
 port map (
-i_clock     => vga_clock,
-i_reset     => i_reset,
-i_vga_blank => vga_blank,
-o_vga_color => vga_color
+i_clock => i_clock,
+i_reset => i_reset,
+o_lsfr => vga_color
 );
 
 end architecture behavioral;
