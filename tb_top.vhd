@@ -42,10 +42,12 @@ COMPONENT top
 PORT(
 i_clock : IN  std_logic;
 i_reset : IN  std_logic;
-o_hsync : OUT  std_logic;
-o_vsync : OUT  std_logic;
-o_blank : OUT  std_logic;
-o_r, o_g, o_b : out std_logic
+o_hsync : OUT std_logic;
+o_vsync : OUT std_logic;
+o_blank : OUT std_logic;
+o_r     : OUT std_logic_vector (1 downto 0);
+o_g     : OUT std_logic_vector (1 downto 0);
+o_b     : OUT std_logic_vector (1 downto 0)
 );
 END COMPONENT;
 
@@ -57,7 +59,9 @@ signal i_reset : std_logic := '0';
 signal o_hsync : std_logic;
 signal o_vsync : std_logic;
 signal o_blank : std_logic;
-signal o_r, o_g, o_b : std_logic;
+signal o_r : std_logic_vector (1 downto 0);
+signal o_g : std_logic_vector (1 downto 0);
+signal o_b : std_logic_vector (1 downto 0);
 
 -- Clock period definitions
 --constant i_clock_period : time := 39.720 ns;
@@ -121,7 +125,7 @@ FILENAME     => "vga.bmp"
 port map (
 clk_i        => i_clock,
 rst_i        => i_reset,
-dat_i        => o_r & "0000000" & o_g & "0000000" & o_b & "0000000",
+dat_i        => o_r (1) & o_r (0) & "000000" & o_g (1) & o_g (0) & "000000" & o_b (1) & o_b (0) & "000000",
 active_vid_i => not o_blank,
 h_sync_i     => o_hsync,
 v_sync_i     => o_vsync

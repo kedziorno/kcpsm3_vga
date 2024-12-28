@@ -2,9 +2,9 @@
 -- Company:
 -- Engineer:
 --
--- Create Date:    12/26/2024
+-- Create Date:    12/28/2024
 -- Design Name:
--- Module Name:    vga_rgb
+-- Module Name:    lsfr
 -- Project Name:
 -- Target Devices:
 -- Tool versions:
@@ -29,26 +29,31 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity vga_rgb is
+entity lsfr is
 port (
-i_color : in  std_logic_vector (5 downto 0);
-i_blank : in  std_logic;
-o_r     : out std_logic_vector (1 downto 0);
-o_g     : out std_logic_vector (1 downto 0);
-o_b     : out std_logic_vector (1 downto 0)
+i_clock, i_reset : in std_logic;
+o_lsfr : out std_logic_vector (2 downto 0)
 );
-end entity vga_rgb;
+end entity lsfr;
 
-architecture behavioral of vga_rgb is
+architecture behavioral of lsfr is
+
+  signal lsfr : std_logic_vector (2 downto 0);
 
 begin
 
-  -- 64 colors RGB
-  o_r (1) <= i_color (5) when i_blank = '0' else '0';
-  o_r (0) <= i_color (4) when i_blank = '0' else '0';
-  o_g (1) <= i_color (3) when i_blank = '0' else '0';
-  o_g (0) <= i_color (2) when i_blank = '0' else '0';
-  o_b (1) <= i_color (1) when i_blank = '0' else '0';
-  o_b (0) <= i_color (0) when i_blank = '0' else '0';
+  o_lsfr <= lsfr;
+
+  p_lsfr : process (i_clock, i_reset) is
+    variable reg : std_logic;
+  begin
+    if (i_reset = '1') then
+      lsfr <= "000";
+      reg := '1';
+    elsif (rising_edge (i_clock)) then
+      lsfr <= lsfr (1 downto 0) & reg;
+      reg := lsfr (2) xor lsfr (1);
+    end if;
+  end process p_lsfr;
 
 end architecture behavioral;
