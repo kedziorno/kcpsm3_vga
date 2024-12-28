@@ -1,0 +1,74 @@
+WARNING:coreutil:995 - User repository directory path
+   '/home/user/workspace/melexis_mlx90641/ipcore_dir/' does not exist.
+WARNING:coreutil:882 - Repository directory
+   '/home/user/workspace/melexis_mlx90641/ipcore_dir/' does not match index file
+   entry ''.
+Welcome to Xilinx CORE Generator.
+Help system initialized.
+The IP Catalog has been reloaded.
+Opening project file
+/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/coregen.cgp.
+Recustomize and Generate (Under Original Project Settings)INFO:sim:172 - Generating IP...
+WARNING:sim - A core named 'ipcore_vga_ramb16_dp' already exists in the project.
+   Output products for this core may be overwritten.
+Resolving generics for 'ipcore_vga_ramb16_dp'...
+WARNING:sim - A core named 'ipcore_vga_ramb16_dp' already exists in the project.
+   Output products for this core may be overwritten.
+Applying external generics to 'ipcore_vga_ramb16_dp'...
+Delivering associated files for 'ipcore_vga_ramb16_dp'...
+Delivering EJava files for 'ipcore_vga_ramb16_dp'...
+Generating implementation netlist for 'ipcore_vga_ramb16_dp'...
+INFO:sim - Pre-processing HDL files for 'ipcore_vga_ramb16_dp'...
+Running synthesis for 'ipcore_vga_ramb16_dp'
+Running ngcbuild...
+Writing VHO instantiation template for 'ipcore_vga_ramb16_dp'...
+Writing VHDL behavioral simulation model for 'ipcore_vga_ramb16_dp'...
+WARNING:sim - Overwriting existing file
+   /home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/tmp/_cg/ipcore_vga_ram
+   b16_dp/doc/blk_mem_gen_v7_3_vinfo.html with file from view
+   xilinx_documentation
+Delivered 1 file into directory
+/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/tmp/_cg/ipcore_vga_ramb16
+_dp
+Generating ASY schematic symbol...
+INFO:sim:949 - Finished generation of ASY schematic symbol.
+Generating metadata file...
+Regenerating ISE project file for 'ipcore_vga_ramb16_dp'...
+Generating ISE project...
+XCO file found: ipcore_vga_ramb16_dp.xco
+XMDF file found: ipcore_vga_ramb16_dp_xmdf.tcl
+Adding
+/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/tmp/_cg/ipcore_vga_ramb16
+_dp.asy -view all -origin_type imported
+Adding
+/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/tmp/_cg/ipcore_vga_ramb16
+_dp.ngc -view all -origin_type created
+Checking file
+"/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/tmp/_cg/ipcore_vga_ramb1
+6_dp.ngc" for project device match ...
+File
+"/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/tmp/_cg/ipcore_vga_ramb1
+6_dp.ngc" device information matches project device.
+Adding
+/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/tmp/_cg/ipcore_vga_ramb16
+_dp.vhd -view all -origin_type created
+INFO:HDLCompiler:1061 - Parsing VHDL file
+   "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/tmp/_cg/ipcore_vga_ra
+   mb16_dp.vhd" into library work
+INFO:ProjectMgmt - Parsing design hierarchy completed successfully.
+Adding
+/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/tmp/_cg/ipcore_vga_ramb16
+_dp.vho -view all -origin_type imported
+INFO:TclTasksC:2116 - The automatic calculation of top has been turned-off.
+   Please set the new top explicitly by running the "project set top" command.
+   To re-calculate the new top automatically, set the "Auto Implementation Top"
+   property to true.
+Top level has been set to "/ipcore_vga_ramb16_dp"
+Generating README file...
+Generating FLIST file...
+INFO:sim:948 - Finished FLIST file generation.
+Launching README viewer...
+Moving files to output directory...
+Finished moving files to output directory
+Saved CGP file for project 'coregen'.
+Closed project file.

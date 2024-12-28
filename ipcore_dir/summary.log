@@ -1,0 +1,18 @@
+
+User Configuration
+-------------------------------------
+Algorithm				:	Fixed_Primitives
+Memory Type				:	Simple_Dual_Port_RAM
+Port A Write Width		:	6
+Port B Read Width		:	6
+Memory Depth			:	16384
+--------------------------------------------------------------
+
+Block RAM resource(s) (18K BRAMs)		: 6
+--------------------------------------------------------------
+Clock A Frequency		:  100
+Port A Enable Rate		:  100
+Port A Write Rate		:  50
+----------------------------------------------------------
+Estimated Power for IP : 29.948664 mW
+----------------------------------------------------------
