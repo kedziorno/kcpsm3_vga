@@ -52,7 +52,7 @@ begin
       reg := '1';
     elsif (rising_edge (i_clock)) then
       lsfr <= lsfr (4 downto 0) & reg;
-      reg := lsfr (2) xor lsfr (1);
+      reg := lsfr (1) xor lsfr (0);
     end if;
   end process p_lsfr;
 

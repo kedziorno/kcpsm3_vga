@@ -47,6 +47,11 @@ end entity top;
 
 architecture behavioral of top is
 
+constant c_x_step : integer := 5;
+constant c_y_step : integer := 4;
+constant c_x : integer := 640 / c_x_step; -- 128
+constant c_y : integer := 480 / c_y_step; -- 120
+
 component vga_timing is
 port (
 i_clock   : in  std_logic;
@@ -71,6 +76,9 @@ o_b      : out std_logic_vector (1 downto 0)
 end component vga_rgb;
 
 component vga_colorbar is
+generic (
+constant g_step : integer := c_x_step
+);
 port (
 i_clock, i_reset : in std_logic;
 i_vga_blank : in std_logic;
@@ -78,13 +86,6 @@ i_address : in std_logic_vector (13 downto 0);
 o_vga_color : out std_logic_vector (5 downto 0)
 );
 end component vga_colorbar;
-
---component lsfr is
---port (
---i_clock, i_reset : in std_logic;
---o_lsfr : out std_logic_vector (5 downto 0)
---);
---end component lsfr;
 
 COMPONENT ipcore_vga_ramb16_dp
 PORT (
@@ -171,12 +172,8 @@ begin
 end process p_address_input;
 
 p_address_gen : process (i_vga_clock, i_reset) is
-    constant c_x_step : integer := 5;
-    constant c_y_step : integer := 4;
     variable i_x_step : integer range 0 to c_x_step - 1;
     variable i_y_step : integer range 0 to c_y_step - 1;
-    constant c_x : integer := 640 / c_x_step; -- 128
-    constant c_y : integer := 480 / c_y_step; -- 120
     variable i_x : integer range 0 to c_x - 1;
     variable i_y : integer range 0 to c_y - 1;
 begin
@@ -231,12 +228,5 @@ i_vga_blank => vga_blank,
 i_address   => vga_address,
 o_vga_color => vga_color
 );
-
---inst_lsfr : lsfr
---port map (
---i_clock => i_cpu_clock,
---i_reset => i_reset,
---o_lsfr  => vga_color
---);
 
 end architecture behavioral;
