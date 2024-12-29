@@ -130,11 +130,11 @@ stim_proc : process
 begin
 -- hold reset state for 100 ns.
 i_reset <= '1';
-wait for i_cpu_clock_period;
+wait for i_cpu_clock_period*10;
 i_reset <= '0';
 wait for i_cpu_clock_period*10;
 -- insert stimulus here
-wait for 34 ms;
+wait for 16.81 ms * 3;
 report "tb done" severity failure;
 end process;
 

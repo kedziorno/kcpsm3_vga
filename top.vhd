@@ -101,6 +101,7 @@ END COMPONENT ipcore_vga_ramb16_dp;
 
 signal vga_clock : std_logic;
 signal vga_blank : std_logic;
+signal vga_blank_prev : std_logic;
 signal vga_h_blank : std_logic;
 signal vga_v_blank : std_logic;
 signal vga_color : std_logic_vector (5 downto 0);
@@ -131,9 +132,18 @@ end process p_vga_clock_divider;
 
 o_blank <= vga_blank;
 
+p_vga_blank_prev : process (vga_clock, i_reset) is
+begin
+  if (i_reset = '1') then
+    vga_blank_prev <= '0';
+  elsif (rising_edge (vga_clock)) then
+    vga_blank_prev <= vga_blank;
+  end if;
+end process p_vga_blank_prev;
+
 inst_vga_timing : vga_timing
 port map (
-i_clock   => i_vga_clock,
+i_clock   => vga_clock,
 i_reset   => i_reset,
 o_hsync   => o_hsync,
 o_vsync   => o_vsync,
@@ -144,7 +154,7 @@ o_v_blank => vga_v_blank
 
 inst_vga_rgb : vga_rgb
 port map (
-i_clock => i_vga_clock,
+i_clock => vga_clock,
 i_reset => i_reset,
 i_color => vga_color1,
 i_blank => vga_blank,
@@ -153,13 +163,13 @@ o_g => o_g,
 o_b => o_b
 );
 
-p_address_input : process (i_vga_clock, i_reset) is
+p_address_input : process (vga_clock, i_reset) is
   constant c_all_pixels : integer := 307200;
   variable i_all_pixels : integer range 0 to c_all_pixels - 1;
 begin
   if (i_reset = '1') then
     i_all_pixels := 0;
-  elsif (rising_edge (i_vga_clock)) then
+  elsif (rising_edge (vga_clock)) then
     if (vga_blank = '0') then
       if (i_all_pixels = c_all_pixels - 1) then
         i_all_pixels := 0;
@@ -171,7 +181,7 @@ begin
   end if;
 end process p_address_input;
 
-p_address_gen : process (i_vga_clock, i_reset) is
+p_address_gen : process (vga_clock, i_reset) is
     variable i_x_step : integer range 0 to c_x_step - 1;
     variable i_y_step : integer range 0 to c_y_step - 1;
     variable i_x : integer range 0 to c_x - 1;
@@ -183,7 +193,7 @@ begin
     i_y_step := 0;
     i_x := 0;
     i_y := 0;
-  elsif (rising_edge (i_vga_clock)) then
+  elsif (rising_edge (vga_clock)) then
     if (vga_blank = '0') then
       if (i_x_step = c_x_step - 1) then
         i_x_step := 0;
@@ -215,14 +225,14 @@ clka  => i_cpu_clock,
 wea   => "1",
 addra => vga_all_pixels,
 dina  => vga_color,
-clkb  => i_vga_clock,
+clkb  => vga_clock,
 addrb => vga_address,
 doutb => vga_color1
 );
 
 inst_vga_colorbar : vga_colorbar
 port map (
-i_clock     => i_vga_clock,
+i_clock     => vga_clock,
 i_reset     => i_reset,
 i_vga_blank => vga_blank,
 i_address   => vga_address,
