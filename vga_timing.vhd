@@ -35,6 +35,7 @@ i_clock   : in  std_logic;
 i_reset   : in  std_logic;
 o_hsync   : out std_logic;
 o_vsync   : out std_logic;
+o_blank   : out std_logic;
 o_v_blank : out std_logic;
 o_h_blank : out std_logic
 );
@@ -94,6 +95,13 @@ architecture industry_standard_640x480_timing of vga_timing is
   signal v_counter : integer range 0 to whole_frame - 1;
 
 begin
+
+  o_blank <=
+    '0' when (
+      h_counter < h_visible_area
+      and
+      v_counter < v_visible_area
+    ) else '1';
 
   o_h_blank <=
     '0' when h_counter < h_visible_area

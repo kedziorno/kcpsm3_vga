@@ -40,19 +40,21 @@ ARCHITECTURE behavior OF tb_top IS
 -- Component Declaration for the Unit Under Test (UUT)
 COMPONENT top
 PORT(
-i_clock : IN  std_logic;
-i_reset : IN  std_logic;
-o_hsync : OUT std_logic;
-o_vsync : OUT std_logic;
-o_blank : OUT std_logic;
-o_r     : OUT std_logic_vector (1 downto 0);
-o_g     : OUT std_logic_vector (1 downto 0);
-o_b     : OUT std_logic_vector (1 downto 0)
+i_cpu_clock : IN  std_logic;
+i_vga_clock : IN  std_logic;
+i_reset     : IN  std_logic;
+o_hsync     : OUT std_logic;
+o_vsync     : OUT std_logic;
+o_blank     : OUT std_logic;
+o_r         : OUT std_logic_vector (1 downto 0);
+o_g         : OUT std_logic_vector (1 downto 0);
+o_b         : OUT std_logic_vector (1 downto 0)
 );
 END COMPONENT;
 
 --Inputs
-signal i_clock : std_logic := '0';
+signal i_cpu_clock : std_logic := '1';
+signal i_vga_clock : std_logic := '1';
 signal i_reset : std_logic := '0';
 
 --Outputs
@@ -64,12 +66,10 @@ signal o_g : std_logic_vector (1 downto 0);
 signal o_b : std_logic_vector (1 downto 0);
 
 -- Clock period definitions
---constant i_clock_period : time := 39.720 ns;
---constant i_clock_period : time := 39.722 ns;
---constant i_clock_period : time := 40 ns;
-constant i_clock_period : time := 10 ns;
-constant vga_clock_period : time := 40 ns;
-signal vga_clock : std_logic;
+constant i_cpu_clock_period : time := 10 ns;
+--constant i_vga_clock_period : time := 39.720 ns;
+--constant i_vga_clock_period : time := 39.722 ns;
+constant i_vga_clock_period : time := 40 ns;
 
 component vga_bmp_sink is
 generic (
@@ -88,27 +88,20 @@ end component vga_bmp_sink;
 BEGIN
 
 -- Instantiate the Unit Under Test (UUT)
-uut: top PORT MAP (
-i_clock => i_clock,
-i_reset => i_reset,
-o_hsync => o_hsync,
-o_vsync => o_vsync,
-o_blank => o_blank,
-o_r => o_r,
-o_g => o_g,
-o_b => o_b
+uut : top PORT MAP (
+i_cpu_clock => i_cpu_clock,
+i_vga_clock => i_vga_clock,
+i_reset     => i_reset,
+o_hsync     => o_hsync,
+o_vsync     => o_vsync,
+o_blank     => o_blank,
+o_r         => o_r,
+o_g         => o_g,
+o_b         => o_b
 );
 
 -- Clock process definitions
-i_clock_process: process
-begin
-i_clock <= '0';
-wait for i_clock_period/2;
-i_clock <= '1';
-wait for i_clock_period/2;
-end process;
-
-i_vga_bmp_clock : process
+i_cpu_clock_process : process
   variable first_wait : time := 0 ns;
   variable first_wait_flag : boolean := false;
 begin
@@ -116,20 +109,30 @@ if (first_wait_flag = false) then
   wait for first_wait;
   first_wait_flag := true;
 end if;
-vga_clock <= '0';
-wait for vga_clock_period/2;
-vga_clock <= '1';
-wait for vga_clock_period/2;
-end process;
+i_cpu_clock <= not i_cpu_clock;
+wait for i_cpu_clock_period/2;
+end process i_cpu_clock_process;
+
+i_vga_clock_process : process
+  variable first_wait : time := 0 ns;
+  variable first_wait_flag : boolean := false;
+begin
+if (first_wait_flag = false) then
+  wait for first_wait;
+  first_wait_flag := true;
+end if;
+i_vga_clock <= not i_vga_clock;
+wait for i_vga_clock_period/2;
+end process i_vga_clock_process;
 
 -- Stimulus process
-stim_proc: process
+stim_proc : process
 begin
 -- hold reset state for 100 ns.
 i_reset <= '1';
-wait for i_clock_period;
+wait for i_cpu_clock_period;
 i_reset <= '0';
-wait for i_clock_period*10;
+wait for i_cpu_clock_period*10;
 -- insert stimulus here
 wait for 34 ms;
 report "tb done" severity failure;
@@ -140,7 +143,7 @@ generic map (
 FILENAME     => "vga.bmp"
 )
 port map (
-clk_i        => vga_clock,
+clk_i        => i_vga_clock,
 rst_i        => i_reset,
 dat_i        => o_r (1) & o_r (0) & "000000" & o_g (1) & o_g (0) & "000000" & o_b (1) & o_b (0) & "000000",
 active_vid_i => not o_blank,
