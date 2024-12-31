@@ -96,7 +96,7 @@ architecture industry_standard_640x480_timing of vga_timing is
 
 begin
 
-  o_blank <=
+  o_blank <= '1' when i_reset = '1' else
     '0' when (
       h_counter < h_visible_area
       and

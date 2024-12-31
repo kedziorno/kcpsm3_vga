@@ -101,16 +101,31 @@ Verilog 2001                       : YES
 Auto BRAM Packing                  : NO
 Slice Utilization Ratio Delta      : 5
 
+---- Other Options
+Cores Search Directories           : {"ipcore_dir"  }
+
 =========================================================================
 
 
 =========================================================================
 *                          HDL Compilation                              *
 =========================================================================
+Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/p_package1.vhd" in Library work.
+Architecture p_package1 of Entity p_package1 is up to date.
+Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" in Library work.
+WARNING:HDLParsers:3350 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" Line 878. Null range: 0 downto 1
+WARNING:HDLParsers:3350 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" Line 879. Null range: 0 downto 1
+Architecture numeric_std of Entity numeric_std is up to date.
+Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/lsfr.vhd" in Library work.
+Architecture behavioral of Entity lsfr is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_timing.vhd" in Library work.
 Architecture industry_standard_640x480_timing of Entity vga_timing is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_rgb.vhd" in Library work.
 Architecture behavioral of Entity vga_rgb is up to date.
+Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/ipcore_vga_ramb16_dp.vhd" in Library work.
+Architecture ipcore_vga_ramb16_dp_a of Entity ipcore_vga_ramb16_dp is up to date.
+Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" in Library work.
+Architecture behavioral of Entity vga_colorbar is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" in Library work.
 Entity <top> compiled.
 Entity <top> (Architecture <behavioral>) compiled.
@@ -124,11 +139,22 @@ Analyzing hierarchy for entity <vga_timing> in library <work> (architecture <ind
 
 Analyzing hierarchy for entity <vga_rgb> in library <work> (architecture <behavioral>).
 
+Analyzing hierarchy for entity <vga_colorbar> in library <work> (architecture <behavioral>) with generics.
+	g_step = 5
+
+Analyzing hierarchy for entity <lsfr> in library <work> (architecture <behavioral>).
+
 
 =========================================================================
 *                            HDL Analysis                               *
 =========================================================================
 Analyzing Entity <top> in library <work> (Architecture <behavioral>).
+WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" line 3240: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" line 3240: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" line 3240: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" line 3240: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" line 3240: VHDL Assertion Statement with non constant condition is ignored.
+WARNING:Xst:2211 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" line 282: Instantiating black box module <ipcore_vga_ramb16_dp>.
 Entity <top> analyzed. Unit <top> generated.
 
 Analyzing Entity <vga_timing> in library <work> (Architecture <industry_standard_640x480_timing>).
@@ -136,6 +162,13 @@ Entity <vga_timing> analyzed. Unit <vga_timing> generated.
 
 Analyzing Entity <vga_rgb> in library <work> (Architecture <behavioral>).
 Entity <vga_rgb> analyzed. Unit <vga_rgb> generated.
+
+Analyzing generic Entity <vga_colorbar> in library <work> (Architecture <behavioral>).
+	g_step = 5
+Entity <vga_colorbar> analyzed. Unit <vga_colorbar> generated.
+
+Analyzing Entity <lsfr> in library <work> (Architecture <behavioral>).
+Entity <lsfr> analyzed. Unit <lsfr> generated.
 
 
 =========================================================================
@@ -149,12 +182,12 @@ Synthesizing Unit <vga_timing>.
     Found 1-bit register for signal <o_vsync>.
     Found 1-bit register for signal <o_hsync>.
     Found 10-bit up counter for signal <h_counter>.
-    Found 10-bit comparator less for signal <o_blank$cmp_lt0000> created at line 97.
-    Found 10-bit comparator less for signal <o_blank$cmp_lt0001> created at line 97.
-    Found 10-bit comparator greater for signal <o_hsync$cmp_gt0000> created at line 120.
-    Found 10-bit comparator less for signal <o_hsync$cmp_lt0000> created at line 120.
-    Found 10-bit comparator greater for signal <o_vsync$cmp_gt0000> created at line 129.
-    Found 10-bit comparator less for signal <o_vsync$cmp_lt0000> created at line 129.
+    Found 10-bit comparator less for signal <o_h_blank$cmp_lt0000> created at line 106.
+    Found 10-bit comparator greater for signal <o_hsync$cmp_gt0000> created at line 130.
+    Found 10-bit comparator less for signal <o_hsync$cmp_lt0000> created at line 130.
+    Found 10-bit comparator less for signal <o_v_blank$cmp_lt0000> created at line 110.
+    Found 10-bit comparator greater for signal <o_vsync$cmp_gt0000> created at line 139.
+    Found 10-bit comparator less for signal <o_vsync$cmp_lt0000> created at line 139.
     Found 10-bit up counter for signal <v_counter>.
     Summary:
 	inferred   2 Counter(s).
@@ -165,18 +198,87 @@ Unit <vga_timing> synthesized.
 
 Synthesizing Unit <vga_rgb>.
     Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_rgb.vhd".
+WARNING:Xst:647 - Input <i_reset> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <i_clock> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 Unit <vga_rgb> synthesized.
+
+
+Synthesizing Unit <lsfr>.
+    Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/lsfr.vhd".
+    Found 6-bit register for signal <lsfr>.
+    Found 1-bit register for signal <reg>.
+    Found 1-bit xor2 for signal <reg$xor0000> created at line 55.
+    Summary:
+	inferred   7 D-type flip-flop(s).
+Unit <lsfr> synthesized.
+
+
+Synthesizing Unit <vga_colorbar>.
+    Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd".
+WARNING:Xst:647 - Input <i_address> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:646 - Signal <o_lsfr> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 128x6-bit ROM for signal <o_vga_color$mux0001> created at line 75.
+    Found 6-bit register for signal <o_vga_color>.
+    Found 7-bit register for signal <index>.
+    Found 7-bit adder for signal <index$addsub0000> created at line 72.
+    Summary:
+	inferred   1 ROM(s).
+	inferred  13 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+Unit <vga_colorbar> synthesized.
 
 
 Synthesizing Unit <top>.
     Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd".
-    Found 640x6-bit ROM for signal <vga_color$mux0001> created at line 156.
-    Found 10-bit up counter for signal <index>.
-    Found 6-bit register for signal <vga_color>.
+WARNING:Xst:1780 - Signal <vga_blank_prev> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <t_vga_address_step_temp> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <state> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:737 - Found 1-bit latch for signal <first_next>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 1-bit register for signal <first>.
+    Found 19-bit register for signal <i_all_pixels>.
+    Found 19-bit adder for signal <i_all_pixels$addsub0000> created at line 198.
+    Found 31-bit adder for signal <I_VAL0$add0000> created at line 245.
+    Found 31-bit adder for signal <I_VAL2$add0000> created at line 253.
+    Found 1-bit register for signal <i_vga25<0>>.
+    Found 7-bit up counter for signal <i_x>.
+    Found 3-bit up counter for signal <i_x_step>.
+    Found 7-bit up counter for signal <i_y>.
+    Found 2-bit up counter for signal <i_y_step>.
+    Found 31-bit adder for signal <RESULT0$addsub0000> created at line 3189.
+    Found 31-bit adder for signal <RESULT0$addsub0001> created at line 3189.
+    Found 31-bit adder for signal <RESULT0$addsub0002> created at line 3189.
+    Found 31-bit adder for signal <RESULT0$addsub0003> created at line 3189.
+    Found 31-bit adder for signal <RESULT0$addsub0004> created at line 3189.
+    Found 31-bit adder for signal <RESULT0$addsub0005> created at line 3189.
+    Found 31-bit adder for signal <RESULT0$addsub0006> created at line 3189.
+    Found 31-bit adder for signal <RESULT0$addsub0007> created at line 3189.
+    Found 31-bit adder for signal <RESULT0$addsub0008> created at line 3189.
+    Found 31-bit adder for signal <RESULT0$addsub0009> created at line 3189.
+    Found 31-bit adder for signal <RESULT0$addsub0010> created at line 3189.
+    Found 31-bit adder for signal <RESULT0$addsub0011> created at line 3189.
+    Found 31-bit adder for signal <RESULT0$addsub0012> created at line 3189.
+    Found 31-bit adder for signal <RESULT3$addsub0000> created at line 3189.
+    Found 31-bit adder for signal <RESULT3$addsub0001> created at line 3189.
+    Found 31-bit adder for signal <RESULT3$addsub0002> created at line 3189.
+    Found 31-bit adder for signal <RESULT3$addsub0003> created at line 3189.
+    Found 31-bit adder for signal <RESULT3$addsub0004> created at line 3189.
+    Found 31-bit adder for signal <RESULT3$addsub0005> created at line 3189.
+    Found 31-bit adder for signal <RESULT3$addsub0006> created at line 3189.
+    Found 31-bit adder for signal <RESULT3$addsub0007> created at line 3189.
+    Found 31-bit adder for signal <RESULT3$addsub0008> created at line 3189.
+    Found 31-bit adder for signal <RESULT3$addsub0009> created at line 3189.
+    Found 31-bit adder for signal <RESULT3$addsub0010> created at line 3189.
+    Found 31-bit adder for signal <RESULT3$addsub0011> created at line 3189.
+    Found 31-bit adder for signal <RESULT3$addsub0012> created at line 3189.
+    Found 14-bit register for signal <vga_address>.
+    Found 14-bit register for signal <vga_address_step>.
+    Found 14-bit register for signal <vga_address_step_temp>.
+    Found 14-bit register for signal <vga_all_pixels>.
+    Found 1-bit register for signal <vga_clock>.
     Summary:
-	inferred   1 ROM(s).
-	inferred   1 Counter(s).
-	inferred   6 D-type flip-flop(s).
+	inferred   4 Counter(s).
+	inferred  78 D-type flip-flop(s).
+	inferred  29 Adder/Subtractor(s).
 Unit <top> synthesized.
 
 
@@ -185,15 +287,29 @@ HDL Synthesis Report
 
 Macro Statistics
 # ROMs                                                 : 1
- 640x6-bit ROM                                         : 1
-# Counters                                             : 3
- 10-bit up counter                                     : 3
-# Registers                                            : 3
- 1-bit register                                        : 2
- 6-bit register                                        : 1
+ 128x6-bit ROM                                         : 1
+# Adders/Subtractors                                   : 30
+ 19-bit adder                                          : 1
+ 31-bit adder                                          : 28
+ 7-bit adder                                           : 1
+# Counters                                             : 6
+ 10-bit up counter                                     : 2
+ 2-bit up counter                                      : 1
+ 3-bit up counter                                      : 1
+ 7-bit up counter                                      : 2
+# Registers                                            : 12
+ 1-bit register                                        : 4
+ 14-bit register                                       : 4
+ 19-bit register                                       : 1
+ 6-bit register                                        : 2
+ 7-bit register                                        : 1
+# Latches                                              : 1
+ 1-bit latch                                           : 1
 # Comparators                                          : 6
  10-bit comparator greater                             : 2
  10-bit comparator less                                : 4
+# Xors                                                 : 1
+ 1-bit xor2                                            : 1
 
 =========================================================================
 
@@ -201,40 +317,58 @@ Macro Statistics
 *                       Advanced HDL Synthesis                          *
 =========================================================================
 
+Reading core <ipcore_dir/ipcore_vga_ramb16_dp.ngc>.
+Loading core <ipcore_vga_ramb16_dp> for timing and area information for instance <inst_ipcore_vga_ramb16_dp>.
+WARNING:Xst:1290 - Hierarchical block <inst_lsfr> is unconnected in block <inst_vga_colorbar>.
+   It will be removed from the design.
 
-Synthesizing (advanced) Unit <top>.
-INFO:Xst:3044 - The ROM <Mrom_vga_color_mux0001> will be implemented as a read-only BLOCK RAM, absorbing the register: <vga_color>.
-INFO:Xst:3225 - The RAM <Mrom_vga_color_mux0001> will be implemented as BLOCK RAM
+Synthesizing (advanced) Unit <vga_colorbar>.
+INFO:Xst:3044 - The ROM <Mrom_o_vga_color_mux0001> will be implemented as a read-only BLOCK RAM, absorbing the register: <o_vga_color>.
+INFO:Xst:3225 - The RAM <Mrom_o_vga_color_mux0001> will be implemented as BLOCK RAM
     -----------------------------------------------------------------------
     | ram_type           | Block                               |          |
     -----------------------------------------------------------------------
     | Port A                                                              |
-    |     aspect ratio   | 640-word x 6-bit                    |          |
+    |     aspect ratio   | 128-word x 6-bit                    |          |
     |     mode           | write-first                         |          |
     |     clkA           | connected to signal <i_clock>       | rise     |
     |     enA            | connected to signal <i_reset>       | low      |
-    |     weA            | connected to signal <GND>           | high     |
-    |     addrA          | connected to signal <index>         |          |
-    |     diA            | connected to signal <GND>           |          |
-    |     doA            | connected to signal <vga_color>     |          |
+    |     weA            | connected to internal node          | high     |
+    |     addrA          | connected to internal node          |          |
+    |     diA            | connected to internal node          |          |
+    |     doA            | connected to signal <o_vga_color>   |          |
     -----------------------------------------------------------------------
     | optimization       | speed                               |          |
     -----------------------------------------------------------------------
-Unit <top> synthesized (advanced).
+Unit <vga_colorbar> synthesized (advanced).
 
 =========================================================================
 Advanced HDL Synthesis Report
 
 Macro Statistics
 # RAMs                                                 : 1
- 640x6-bit single-port block RAM                       : 1
-# Counters                                             : 3
- 10-bit up counter                                     : 3
-# Registers                                            : 2
- Flip-Flops                                            : 2
+ 128x6-bit single-port block RAM                       : 1
+# Adders/Subtractors                                   : 30
+ 13-bit adder                                          : 2
+ 14-bit adder                                          : 4
+ 19-bit adder                                          : 1
+ 28-bit adder                                          : 20
+ 29-bit adder                                          : 2
+ 7-bit adder                                           : 1
+# Counters                                             : 6
+ 10-bit up counter                                     : 2
+ 2-bit up counter                                      : 1
+ 3-bit up counter                                      : 1
+ 7-bit up counter                                      : 2
+# Registers                                            : 92
+ Flip-Flops                                            : 92
+# Latches                                              : 1
+ 1-bit latch                                           : 1
 # Comparators                                          : 6
  10-bit comparator greater                             : 2
  10-bit comparator less                                : 4
+# Xors                                                 : 1
+ 1-bit xor2                                            : 1
 
 =========================================================================
 
@@ -246,9 +380,20 @@ Optimizing unit <top> ...
 
 Optimizing unit <vga_timing> ...
 
+Optimizing unit <lsfr> ...
+
+Optimizing unit <vga_colorbar> ...
+WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/reg> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/lsfr_0> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/lsfr_1> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/lsfr_2> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/lsfr_3> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/lsfr_4> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/lsfr_5> of sequential type is unconnected in block <top>.
+
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 5) on block top, actual ratio is 0.
+Found area constraint ratio of 100 (+ 5) on block top, actual ratio is 1.
 
 Final Macro Processing ...
 
@@ -256,8 +401,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 32
- Flip-Flops                                            : 32
+# Registers                                            : 124
+ Flip-Flops                                            : 124
 
 =========================================================================
 
@@ -283,34 +428,37 @@ Optimization Goal                  : Speed
 Keep Hierarchy                     : No
 
 Design Statistics
-# IOs                              : 11
+# IOs                              : 14
 
 Cell Usage :
-# BELS                             : 149
-#      GND                         : 1
-#      INV                         : 4
-#      LUT1                        : 27
-#      LUT2                        : 31
-#      LUT2_L                      : 1
-#      LUT3                        : 4
-#      LUT3_L                      : 1
-#      LUT4                        : 17
-#      LUT4_D                      : 4
-#      LUT4_L                      : 1
-#      MUXCY                       : 27
-#      VCC                         : 1
-#      XORCY                       : 30
-# FlipFlops/Latches                : 32
-#      FDC                         : 10
-#      FDCE                        : 20
-#      FDE                         : 2
-# RAMS                             : 1
+# BELS                             : 319
+#      GND                         : 2
+#      INV                         : 8
+#      LUT1                        : 49
+#      LUT2                        : 36
+#      LUT2_D                      : 2
+#      LUT2_L                      : 2
+#      LUT3                        : 13
+#      LUT3_L                      : 2
+#      LUT4                        : 75
+#      LUT4_D                      : 9
+#      LUT4_L                      : 17
+#      MUXCY                       : 49
+#      VCC                         : 2
+#      XORCY                       : 53
+# FlipFlops/Latches                : 125
+#      FDC                         : 37
+#      FDCE                        : 43
+#      FDE                         : 44
+#      LD_1                        : 1
+# RAMS                             : 7
+#      RAMB16_S1_S1                : 6
 #      RAMB16_S9                   : 1
-# Clock Buffers                    : 1
-#      BUFGP                       : 1
-# IO Buffers                       : 10
+# Clock Buffers                    : 2
+#      BUFGP                       : 2
+# IO Buffers                       : 12
 #      IBUF                        : 1
-#      OBUF                        : 9
+#      OBUF                        : 11
 =========================================================================
 
 Device utilization summary:
@@ -318,13 +466,13 @@ Device utilization summary:
 
 Selected Device : 3s1200efg320-4 
 
- Number of Slices:                       47  out of   8672     0%  
- Number of Slice Flip Flops:             32  out of  17344     0%  
- Number of 4 input LUTs:                 90  out of  17344     0%  
- Number of IOs:                          11
- Number of bonded IOBs:                  11  out of    250     4%  
- Number of BRAMs:                         1  out of     28     3%  
- Number of GCLKs:                         1  out of     24     4%  
+ Number of Slices:                      123  out of   8672     1%  
+ Number of Slice Flip Flops:            125  out of  17344     0%  
+ Number of 4 input LUTs:                213  out of  17344     1%  
+ Number of IOs:                          14
+ Number of bonded IOBs:                  14  out of    250     5%  
+ Number of BRAMs:                         7  out of     28    25%  
+ Number of GCLKs:                         2  out of     24     8%  
 
 ---------------------------
 Partition Resource Summary:
@@ -344,109 +492,163 @@ NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
 
 Clock Information:
 ------------------
------------------------------------+------------------------+-------+
-Clock Signal                       | Clock buffer(FF name)  | Load  |
------------------------------------+------------------------+-------+
-i_clock                            | BUFGP                  | 33    |
------------------------------------+------------------------+-------+
+---------------------------------------+------------------------+-------+
+Clock Signal                           | Clock buffer(FF name)  | Load  |
+---------------------------------------+------------------------+-------+
+i_cpu_clock                            | BUFGP                  | 6     |
+i_vga_clock                            | BUFGP                  | 131   |
+o_blank_OBUF(inst_vga_timing/o_blank:O)| NONE(*)(first_next)    | 1     |
+---------------------------------------+------------------------+-------+
+(*) This 1 clock signal(s) are generated by combinatorial logic,
+and XST is not able to identify which are the primary clock signals.
+Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
 
 Asynchronous Control Signals Information:
 ----------------------------------------
 -----------------------------------+------------------------+-------+
 Control Signal                     | Buffer(FF name)        | Load  |
 -----------------------------------+------------------------+-------+
-i_reset                            | IBUF                   | 30    |
+i_reset                            | IBUF                   | 80    |
 -----------------------------------+------------------------+-------+
 
 Timing Summary:
 ---------------
 Speed Grade: -4
 
-   Minimum period: 5.320ns (Maximum Frequency: 187.970MHz)
-   Minimum input arrival time before clock: 4.485ns
-   Maximum output required time after clock: 7.791ns
-   Maximum combinational path delay: No path found
+   Minimum period: 7.124ns (Maximum Frequency: 140.371MHz)
+   Minimum input arrival time before clock: 6.791ns
+   Maximum output required time after clock: 10.166ns
+   Maximum combinational path delay: 9.213ns
 
 Timing Detail:
 --------------
 All values displayed in nanoseconds (ns)
 
 =========================================================================
-Timing constraint: Default period analysis for Clock 'i_clock'
-  Clock period: 5.320ns (frequency: 187.970MHz)
-  Total number of paths / destination ports: 678 / 62
+Timing constraint: Default period analysis for Clock 'i_vga_clock'
+  Clock period: 7.124ns (frequency: 140.371MHz)
+  Total number of paths / destination ports: 3707 / 271
 -------------------------------------------------------------------------
-Delay:               5.320ns (Levels of Logic = 3)
-  Source:            inst_vga_timing/h_counter_4 (FF)
-  Destination:       inst_vga_timing/h_counter_4 (FF)
-  Source Clock:      i_clock rising
-  Destination Clock: i_clock rising
+Delay:               7.124ns (Levels of Logic = 4)
+  Source:            inst_vga_timing/v_counter_6 (FF)
+  Destination:       vga_address_step_0 (FF)
+  Source Clock:      i_vga_clock rising
+  Destination Clock: i_vga_clock rising
 
-  Data Path: inst_vga_timing/h_counter_4 to inst_vga_timing/h_counter_4
+  Data Path: inst_vga_timing/v_counter_6 to vga_address_step_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDC:C->Q              4   0.591   0.762  inst_vga_timing/h_counter_4 (inst_vga_timing/h_counter_4)
-     LUT4:I0->O            2   0.704   0.451  inst_vga_timing/h_counter_cmp_eq000022 (inst_vga_timing/h_counter_cmp_eq000022)
-     LUT4:I3->O           15   0.704   1.096  inst_vga_timing/h_counter_cmp_eq000024_1 (inst_vga_timing/h_counter_cmp_eq000024)
-     LUT2:I1->O            1   0.704   0.000  inst_vga_timing/Mcount_h_counter_eqn_01 (inst_vga_timing/Mcount_h_counter_eqn_0)
-     FDC:D                     0.308          inst_vga_timing/h_counter_0
+     FDCE:C->Q             4   0.591   0.762  inst_vga_timing/v_counter_6 (inst_vga_timing/v_counter_6)
+     LUT2_L:I0->LO         1   0.704   0.104  inst_vga_timing/o_v_blank_SW0 (N27)
+     LUT4:I3->O            8   0.704   0.761  inst_vga_timing/o_v_blank (o_v_blank_OBUF)
+     LUT4_D:I3->O          3   0.704   0.535  inst_vga_timing/o_blank_1 (inst_vga_timing/o_blank)
+     LUT4:I3->O           14   0.704   1.000  vga_address_step_not0001 (vga_address_step_not0001)
+     FDCE:CE                   0.555          vga_address_step_0
     ----------------------------------------
-    Total                      5.320ns (3.011ns logic, 2.309ns route)
-                                       (56.6% logic, 43.4% route)
+    Total                      7.124ns (3.962ns logic, 3.162ns route)
+                                       (55.6% logic, 44.4% route)
 
 =========================================================================
-Timing constraint: Default OFFSET IN BEFORE for Clock 'i_clock'
-  Total number of paths / destination ports: 3 / 3
+Timing constraint: Default period analysis for Clock 'o_blank_OBUF'
+  Clock period: 2.214ns (frequency: 451.671MHz)
+  Total number of paths / destination ports: 1 / 1
 -------------------------------------------------------------------------
-Offset:              4.485ns (Levels of Logic = 2)
+Delay:               2.214ns (Levels of Logic = 1)
+  Source:            first_next (LATCH)
+  Destination:       first_next (LATCH)
+  Source Clock:      o_blank_OBUF rising
+  Destination Clock: o_blank_OBUF rising
+
+  Data Path: first_next to first_next
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD_1:G->Q             2   0.676   0.526  first_next (first_next)
+     LUT4:I1->O            1   0.704   0.000  first_next_mux0003 (first_next_mux0003)
+     LD_1:D                    0.308          first_next
+    ----------------------------------------
+    Total                      2.214ns (1.688ns logic, 0.526ns route)
+                                       (76.2% logic, 23.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'i_vga_clock'
+  Total number of paths / destination ports: 219 / 139
+-------------------------------------------------------------------------
+Offset:              6.791ns (Levels of Logic = 4)
   Source:            i_reset (PAD)
-  Destination:       Mrom_vga_color_mux0001 (RAM)
-  Destination Clock: i_clock rising
+  Destination:       i_all_pixels_0 (FF)
+  Destination Clock: i_vga_clock rising
 
-  Data Path: i_reset to Mrom_vga_color_mux0001
+  Data Path: i_reset to i_all_pixels_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            31   1.218   1.262  i_reset_IBUF (i_reset_IBUF)
-     INV:I->O              3   0.704   0.531  i_reset_inv_INV_0 (i_reset_inv)
-     RAMB16_S9:EN              0.770          Mrom_vga_color_mux0001
+     IBUF:I->O            89   1.218   1.455  i_reset_IBUF (i_reset_IBUF)
+     LUT4:I0->O            1   0.704   0.595  inst_vga_timing/o_blank_SW2 (N78)
+     LUT4_D:I0->O         18   0.704   1.103  i_all_pixels_mux0001<0>1107 (N9)
+     LUT4:I2->O            2   0.704   0.000  i_all_pixels_mux0001<9>1 (i_all_pixels_mux0001<9>)
+     FDC:D                     0.308          i_all_pixels_9
     ----------------------------------------
-    Total                      4.485ns (2.692ns logic, 1.793ns route)
-                                       (60.0% logic, 40.0% route)
+    Total                      6.791ns (3.638ns logic, 3.153ns route)
+                                       (53.6% logic, 46.4% route)
 
 =========================================================================
-Timing constraint: Default OFFSET OUT AFTER for Clock 'i_clock'
-  Total number of paths / destination ports: 64 / 9
+Timing constraint: Default OFFSET OUT AFTER for Clock 'i_vga_clock'
+  Total number of paths / destination ports: 72 / 11
 -------------------------------------------------------------------------
-Offset:              7.791ns (Levels of Logic = 2)
-  Source:            Mrom_vga_color_mux0001 (RAM)
+Offset:              10.166ns (Levels of Logic = 5)
+  Source:            inst_vga_timing/v_counter_6 (FF)
   Destination:       o_b<1> (PAD)
-  Source Clock:      i_clock rising
+  Source Clock:      i_vga_clock rising
 
-  Data Path: Mrom_vga_color_mux0001 to o_b<1>
+  Data Path: inst_vga_timing/v_counter_6 to o_b<1>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     RAMB16_S9:CLK->DO1    1   2.800   0.595  Mrom_vga_color_mux0001 (vga_color<1>)
-     LUT4:I0->O            1   0.704   0.420  inst_vga_rgb/o_b_1_mux00001 (o_b_1_OBUF)
-     OBUF:I->O                 3.272          o_b_1_OBUF (o_b<1>)
+     FDCE:C->Q             4   0.591   0.762  inst_vga_timing/v_counter_6 (inst_vga_timing/v_counter_6)
+     LUT2_L:I0->LO         1   0.704   0.104  inst_vga_timing/o_v_blank_SW0 (N27)
+     LUT4:I3->O            8   0.704   0.761  inst_vga_timing/o_v_blank (o_v_blank_OBUF)
+     LUT4:I3->O           41   0.704   1.440  inst_vga_timing/o_blank (o_blank_OBUF)
+     LUT2:I0->O            1   0.704   0.420  inst_vga_rgb/o_r_1_mux00001 (o_r_1_OBUF)
+     OBUF:I->O                 3.272          o_r_1_OBUF (o_r<1>)
     ----------------------------------------
-    Total                      7.791ns (6.776ns logic, 1.015ns route)
-                                       (87.0% logic, 13.0% route)
+    Total                     10.166ns (6.679ns logic, 3.487ns route)
+                                       (65.7% logic, 34.3% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 7 / 7
+-------------------------------------------------------------------------
+Delay:               9.213ns (Levels of Logic = 4)
+  Source:            i_reset (PAD)
+  Destination:       o_b<1> (PAD)
+
+  Data Path: i_reset to o_b<1>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            89   1.218   1.455  i_reset_IBUF (i_reset_IBUF)
+     LUT4:I0->O           41   0.704   1.440  inst_vga_timing/o_blank (o_blank_OBUF)
+     LUT2:I0->O            1   0.704   0.420  inst_vga_rgb/o_r_1_mux00001 (o_r_1_OBUF)
+     OBUF:I->O                 3.272          o_r_1_OBUF (o_r<1>)
+    ----------------------------------------
+    Total                      9.213ns (5.898ns logic, 3.315ns route)
+                                       (64.0% logic, 36.0% route)
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 8.00 secs
-Total CPU time to Xst completion: 7.07 secs
+Total REAL time to Xst completion: 16.00 secs
+Total CPU time to Xst completion: 15.56 secs
  
 --> 
 
 
-Total memory usage is 513600 kilobytes
+Total memory usage is 546272 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :    0 (   0 filtered)
-Number of infos    :    2 (   0 filtered)
+Number of warnings :   24 (   0 filtered)
+Number of infos    :    3 (   0 filtered)
 
