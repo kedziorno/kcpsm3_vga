@@ -125,10 +125,75 @@ Architecture behavioral of Entity vga_rgb is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/ipcore_vga_ramb16_dp.vhd" in Library work.
 Architecture ipcore_vga_ramb16_dp_a of Entity ipcore_vga_ramb16_dp is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" in Library work.
-Architecture behavioral of Entity vga_colorbar is up to date.
+Entity <vga_colorbar> compiled.
+Entity <vga_colorbar> (Architecture <mosaic>) compiled.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 102. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 103. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 104. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 105. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 106. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 107. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 108. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 109. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 110. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 111. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 112. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 113. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 114. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 115. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 116. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 117. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 118. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 119. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 120. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 121. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 122. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 123. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 124. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 125. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 126. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 127. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 128. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 129. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 130. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 131. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 132. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 133. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 134. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 135. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 136. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 137. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 138. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 139. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 140. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 141. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 142. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 143. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 144. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 145. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 146. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 147. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 148. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 149. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 150. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 151. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 152. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 153. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 154. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 155. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 156. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 157. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 158. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 159. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 160. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 161. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 162. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 163. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 164. Choice .to. is not a locally static expression.
+WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 165. Choice .to. is not a locally static expression.
+Entity <vga_colorbar> (Architecture <architecture_lsfr>) compiled.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" in Library work.
-Entity <top> compiled.
-Entity <top> (Architecture <behavioral>) compiled.
+Architecture behavioral of Entity top is up to date.
 
 =========================================================================
 *                     Design Hierarchy Analysis                         *
@@ -139,10 +204,9 @@ Analyzing hierarchy for entity <vga_timing> in library <work> (architecture <ind
 
 Analyzing hierarchy for entity <vga_rgb> in library <work> (architecture <behavioral>).
 
-Analyzing hierarchy for entity <vga_colorbar> in library <work> (architecture <behavioral>) with generics.
-	g_step = 5
-
-Analyzing hierarchy for entity <lsfr> in library <work> (architecture <behavioral>).
+Analyzing hierarchy for entity <vga_colorbar> in library <work> (architecture <mosaic>) with generics.
+	g_step_x = 8
+	g_step_y = 8
 
 
 =========================================================================
@@ -154,7 +218,7 @@ WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd"
 WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" line 3240: VHDL Assertion Statement with non constant condition is ignored.
 WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" line 3240: VHDL Assertion Statement with non constant condition is ignored.
 WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" line 3240: VHDL Assertion Statement with non constant condition is ignored.
-WARNING:Xst:2211 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" line 257: Instantiating black box module <ipcore_vga_ramb16_dp>.
+WARNING:Xst:2211 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" line 260: Instantiating black box module <ipcore_vga_ramb16_dp>.
 Entity <top> analyzed. Unit <top> generated.
 
 Analyzing Entity <vga_timing> in library <work> (Architecture <industry_standard_640x480_timing>).
@@ -163,12 +227,10 @@ Entity <vga_timing> analyzed. Unit <vga_timing> generated.
 Analyzing Entity <vga_rgb> in library <work> (Architecture <behavioral>).
 Entity <vga_rgb> analyzed. Unit <vga_rgb> generated.
 
-Analyzing generic Entity <vga_colorbar> in library <work> (Architecture <behavioral>).
-	g_step = 5
+Analyzing generic Entity <vga_colorbar> in library <work> (Architecture <mosaic>).
+	g_step_x = 8
+	g_step_y = 8
 Entity <vga_colorbar> analyzed. Unit <vga_colorbar> generated.
-
-Analyzing Entity <lsfr> in library <work> (Architecture <behavioral>).
-Entity <lsfr> analyzed. Unit <lsfr> generated.
 
 
 =========================================================================
@@ -203,27 +265,16 @@ WARNING:Xst:647 - Input <i_clock> is never used. This port will be preserved and
 Unit <vga_rgb> synthesized.
 
 
-Synthesizing Unit <lsfr>.
-    Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/lsfr.vhd".
-    Found 6-bit register for signal <lsfr>.
-    Found 1-bit register for signal <reg>.
-    Found 1-bit xor2 for signal <reg$xor0000> created at line 55.
-    Summary:
-	inferred   7 D-type flip-flop(s).
-Unit <lsfr> synthesized.
-
-
 Synthesizing Unit <vga_colorbar>.
     Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd".
 WARNING:Xst:647 - Input <i_address> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:646 - Signal <o_lsfr> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
-    Found 128x6-bit ROM for signal <o_vga_color$mux0001> created at line 75.
+    Found 64x6-bit ROM for signal <o_vga_color$rom0000> created at line 61.
     Found 6-bit register for signal <o_vga_color>.
-    Found 7-bit register for signal <index>.
-    Found 7-bit adder for signal <index$addsub0000> created at line 72.
+    Found 6-bit register for signal <index_color>.
+    Found 6-bit adder for signal <index_color$addsub0000> created at line 64.
     Summary:
 	inferred   1 ROM(s).
-	inferred  13 D-type flip-flop(s).
+	inferred  12 D-type flip-flop(s).
 	inferred   1 Adder/Subtractor(s).
 Unit <vga_colorbar> synthesized.
 
@@ -232,13 +283,13 @@ Synthesizing Unit <top>.
     Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd".
 WARNING:Xst:647 - Input <i_vga_clock> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Found 19-bit up counter for signal <i_all_pixels>.
-    Found 31-bit adder for signal <I_VAL0$add0000> created at line 223.
-    Found 31-bit adder for signal <I_VAL2$add0000> created at line 230.
+    Found 31-bit adder for signal <I_VAL0$add0000> created at line 226.
+    Found 31-bit adder for signal <I_VAL2$add0000> created at line 233.
     Found 1-bit register for signal <i_vga25<0>>.
     Found 7-bit up counter for signal <i_x>.
     Found 3-bit up counter for signal <i_x_step>.
-    Found 7-bit up counter for signal <i_y>.
-    Found 2-bit up counter for signal <i_y_step>.
+    Found 6-bit up counter for signal <i_y>.
+    Found 3-bit up counter for signal <i_y_step>.
     Found 31-bit adder for signal <RESULT0$addsub0000> created at line 3189.
     Found 31-bit adder for signal <RESULT0$addsub0001> created at line 3189.
     Found 31-bit adder for signal <RESULT0$addsub0002> created at line 3189.
@@ -278,7 +329,7 @@ WARNING:Xst:647 - Input <i_vga_clock> is never used. This port will be preserved
     Found 31-bit adder for signal <RESULT9$addsub0010> created at line 3189.
     Found 31-bit adder for signal <RESULT9$addsub0011> created at line 3189.
     Found 31-bit adder for signal <RESULT9$addsub0012> created at line 3189.
-    Found 2-bit up counter for signal <row_index>.
+    Found 3-bit up counter for signal <row_index>.
     Found 14-bit register for signal <vga_address_step>.
     Found 14-bit register for signal <vga_address_step_temp>.
     Found 1-bit register for signal <vga_clock>.
@@ -294,26 +345,23 @@ HDL Synthesis Report
 
 Macro Statistics
 # ROMs                                                 : 1
- 128x6-bit ROM                                         : 1
+ 64x6-bit ROM                                          : 1
 # Adders/Subtractors                                   : 42
  31-bit adder                                          : 41
- 7-bit adder                                           : 1
+ 6-bit adder                                           : 1
 # Counters                                             : 8
  10-bit up counter                                     : 2
  19-bit up counter                                     : 1
- 2-bit up counter                                      : 2
- 3-bit up counter                                      : 1
- 7-bit up counter                                      : 2
-# Registers                                            : 10
- 1-bit register                                        : 5
+ 3-bit up counter                                      : 3
+ 6-bit up counter                                      : 1
+ 7-bit up counter                                      : 1
+# Registers                                            : 8
+ 1-bit register                                        : 4
  14-bit register                                       : 2
  6-bit register                                        : 2
- 7-bit register                                        : 1
 # Comparators                                          : 6
  10-bit comparator greater                             : 2
  10-bit comparator less                                : 4
-# Xors                                                 : 1
- 1-bit xor2                                            : 1
 
 =========================================================================
 
@@ -323,55 +371,34 @@ Macro Statistics
 
 Reading core <ipcore_dir/ipcore_vga_ramb16_dp.ngc>.
 Loading core <ipcore_vga_ramb16_dp> for timing and area information for instance <inst_ipcore_vga_ramb16_dp>.
-WARNING:Xst:1290 - Hierarchical block <inst_lsfr> is unconnected in block <inst_vga_colorbar>.
-   It will be removed from the design.
 
 Synthesizing (advanced) Unit <vga_colorbar>.
-INFO:Xst:3044 - The ROM <Mrom_o_vga_color_mux0001> will be implemented as a read-only BLOCK RAM, absorbing the register: <o_vga_color>.
-INFO:Xst:3225 - The RAM <Mrom_o_vga_color_mux0001> will be implemented as BLOCK RAM
-    -----------------------------------------------------------------------
-    | ram_type           | Block                               |          |
-    -----------------------------------------------------------------------
-    | Port A                                                              |
-    |     aspect ratio   | 128-word x 6-bit                    |          |
-    |     mode           | write-first                         |          |
-    |     clkA           | connected to signal <i_clock>       | rise     |
-    |     enA            | connected to signal <i_reset>       | low      |
-    |     weA            | connected to internal node          | high     |
-    |     addrA          | connected to internal node          |          |
-    |     diA            | connected to internal node          |          |
-    |     doA            | connected to signal <o_vga_color>   |          |
-    -----------------------------------------------------------------------
-    | optimization       | speed                               |          |
-    -----------------------------------------------------------------------
+INFO:Xst:3034 - In order to maximize performance and save block RAM resources, the small ROM <Mrom_o_vga_color_rom0000> will be implemented on LUT. If you want to force its implementation on block, use option/constraint rom_style.
 Unit <vga_colorbar> synthesized (advanced).
 
 =========================================================================
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# RAMs                                                 : 1
- 128x6-bit single-port block RAM                       : 1
+# ROMs                                                 : 1
+ 64x6-bit ROM                                          : 1
 # Adders/Subtractors                                   : 42
  12-bit adder                                          : 1
  13-bit adder                                          : 3
  14-bit adder                                          : 5
  28-bit adder                                          : 30
  29-bit adder                                          : 2
- 7-bit adder                                           : 1
+ 6-bit adder                                           : 1
 # Counters                                             : 7
  10-bit up counter                                     : 2
  19-bit up counter                                     : 1
- 2-bit up counter                                      : 2
- 3-bit up counter                                      : 1
+ 3-bit up counter                                      : 3
  7-bit up counter                                      : 1
-# Registers                                            : 46
- Flip-Flops                                            : 46
+# Registers                                            : 44
+ Flip-Flops                                            : 44
 # Comparators                                          : 6
  10-bit comparator greater                             : 2
  10-bit comparator less                                : 4
-# Xors                                                 : 1
- 1-bit xor2                                            : 1
 
 =========================================================================
 
@@ -384,16 +411,7 @@ Optimizing unit <top> ...
 
 Optimizing unit <vga_timing> ...
 
-Optimizing unit <lsfr> ...
-
 Optimizing unit <vga_colorbar> ...
-WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/reg> of sequential type is unconnected in block <top>.
-WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/lsfr_0> of sequential type is unconnected in block <top>.
-WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/lsfr_1> of sequential type is unconnected in block <top>.
-WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/lsfr_2> of sequential type is unconnected in block <top>.
-WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/lsfr_3> of sequential type is unconnected in block <top>.
-WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/lsfr_4> of sequential type is unconnected in block <top>.
-WARNING:Xst:2677 - Node <inst_vga_colorbar/inst_lsfr/lsfr_5> of sequential type is unconnected in block <top>.
 
 Mapping all equations...
 Building and optimizing final netlist ...
@@ -405,8 +423,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 90
- Flip-Flops                                            : 90
+# Registers                                            : 96
+ Flip-Flops                                            : 96
 
 =========================================================================
 
@@ -435,29 +453,29 @@ Design Statistics
 # IOs                              : 14
 
 Cell Usage :
-# BELS                             : 339
+# BELS                             : 358
 #      GND                         : 2
-#      INV                         : 9
-#      LUT1                        : 49
-#      LUT2                        : 58
-#      LUT2_D                      : 2
-#      LUT2_L                      : 2
-#      LUT3                        : 13
-#      LUT3_L                      : 6
-#      LUT4                        : 66
-#      LUT4_D                      : 11
-#      LUT4_L                      : 10
-#      MUXCY                       : 54
-#      MUXF5                       : 2
+#      INV                         : 13
+#      LUT1                        : 57
+#      LUT2                        : 49
+#      LUT2_D                      : 3
+#      LUT2_L                      : 1
+#      LUT3                        : 15
+#      LUT3_D                      : 12
+#      LUT3_L                      : 9
+#      LUT4                        : 62
+#      LUT4_D                      : 3
+#      LUT4_L                      : 1
+#      MUXCY                       : 63
+#      MUXF5                       : 3
 #      VCC                         : 2
-#      XORCY                       : 53
-# FlipFlops/Latches                : 90
-#      FDC                         : 18
-#      FDCE                        : 56
-#      FDE                         : 16
-# RAMS                             : 7
+#      XORCY                       : 63
+# FlipFlops/Latches                : 96
+#      FDC                         : 11
+#      FDCE                        : 63
+#      FDE                         : 22
+# RAMS                             : 6
 #      RAMB16_S1_S1                : 6
-#      RAMB16_S9                   : 1
 # Clock Buffers                    : 2
 #      BUFG                        : 1
 #      BUFGP                       : 1
@@ -471,12 +489,12 @@ Device utilization summary:
 
 Selected Device : 3s1200efg320-4 
 
- Number of Slices:                      118  out of   8672     1%  
- Number of Slice Flip Flops:             90  out of  17344     0%  
- Number of 4 input LUTs:                226  out of  17344     1%  
+ Number of Slices:                      115  out of   8672     1%  
+ Number of Slice Flip Flops:             96  out of  17344     0%  
+ Number of 4 input LUTs:                225  out of  17344     1%  
  Number of IOs:                          14
  Number of bonded IOBs:                  13  out of    250     5%  
- Number of BRAMs:                         7  out of     28    25%  
+ Number of BRAMs:                         6  out of     28    21%  
  Number of GCLKs:                         2  out of     24     8%  
 
 ---------------------------
@@ -501,7 +519,7 @@ Clock Information:
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
 i_cpu_clock                        | BUFGP                  | 8     |
-vga_clock1                         | BUFG                   | 95    |
+vga_clock1                         | BUFG                   | 100   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -516,9 +534,9 @@ Timing Summary:
 ---------------
 Speed Grade: -4
 
-   Minimum period: 8.021ns (Maximum Frequency: 124.673MHz)
-   Minimum input arrival time before clock: 8.004ns
-   Maximum output required time after clock: 10.329ns
+   Minimum period: 8.072ns (Maximum Frequency: 123.885MHz)
+   Minimum input arrival time before clock: 7.453ns
+   Maximum output required time after clock: 9.547ns
    Maximum combinational path delay: 8.928ns
 
 Timing Detail:
@@ -527,28 +545,30 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'vga_clock1'
-  Clock period: 8.021ns (frequency: 124.673MHz)
-  Total number of paths / destination ports: 2951 / 248
+  Clock period: 8.072ns (frequency: 123.885MHz)
+  Total number of paths / destination ports: 3211 / 260
 -------------------------------------------------------------------------
-Delay:               8.021ns (Levels of Logic = 4)
+Delay:               8.072ns (Levels of Logic = 6)
   Source:            inst_vga_timing/v_counter_6 (FF)
-  Destination:       vga_address_step_temp_0 (FF)
+  Destination:       vga_address_step_temp_11 (FF)
   Source Clock:      vga_clock1 rising
   Destination Clock: vga_clock1 rising
 
-  Data Path: inst_vga_timing/v_counter_6 to vga_address_step_temp_0
+  Data Path: inst_vga_timing/v_counter_6 to vga_address_step_temp_11
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDCE:C->Q             4   0.591   0.762  inst_vga_timing/v_counter_6 (inst_vga_timing/v_counter_6)
-     LUT2_L:I0->LO         1   0.704   0.104  inst_vga_timing/o_v_blank_SW0 (N37)
-     LUT4:I3->O           23   0.704   1.206  inst_vga_timing/o_v_blank (o_v_blank_OBUF)
+     LUT2_D:I0->LO         1   0.704   0.104  inst_vga_timing/o_v_blank_SW0 (N93)
+     LUT4:I3->O            1   0.704   0.424  inst_vga_timing/o_v_blank_1 (inst_vga_timing/o_v_blank)
      LUT4:I3->O           13   0.704   0.987  inst_vga_timing/o_blank (o_blank_OBUF)
-     LUT4:I3->O           14   0.704   1.000  vga_address_step_temp_and00001 (vga_address_step_temp_and0000)
-     FDE:CE                    0.555          vga_address_step_temp_0
+     LUT4:I3->O           17   0.704   1.055  vga_address_step_next<0>2 (N17)
+     LUT4:I3->O            1   0.704   0.000  vga_address_step_next<11>21 (vga_address_step_next<11>2)
+     MUXF5:I1->O           1   0.321   0.000  vga_address_step_next<11>2_f5 (vga_address_step_next<11>)
+     FDE:D                     0.308          vga_address_step_temp_11
     ----------------------------------------
-    Total                      8.021ns (3.962ns logic, 4.059ns route)
-                                       (49.4% logic, 50.6% route)
+    Total                      8.072ns (4.740ns logic, 3.332ns route)
+                                       (58.7% logic, 41.3% route)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'i_cpu_clock'
@@ -574,32 +594,32 @@ Delay:               2.470ns (Levels of Logic = 1)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'vga_clock1'
-  Total number of paths / destination ports: 124 / 90
+  Total number of paths / destination ports: 108 / 88
 -------------------------------------------------------------------------
-Offset:              8.004ns (Levels of Logic = 5)
+Offset:              7.453ns (Levels of Logic = 5)
   Source:            i_reset (PAD)
-  Destination:       vga_address_step_temp_12 (FF)
+  Destination:       vga_address_step_temp_11 (FF)
   Destination Clock: vga_clock1 rising
 
-  Data Path: i_reset to vga_address_step_temp_12
+  Data Path: i_reset to vga_address_step_temp_11
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            80   1.218   1.452  i_reset_IBUF (i_reset_IBUF)
-     LUT4_D:I0->O          6   0.704   0.748  inst_vga_timing/o_blank_SW1 (N59)
-     LUT4:I1->O           16   0.704   1.038  vga_address_step_not00011_1 (vga_address_step_not00011)
-     LUT4:I3->O            1   0.704   0.424  vga_address_step_next<12>247_SW0 (N67)
-     LUT4:I3->O            1   0.704   0.000  vga_address_step_next<12>1 (vga_address_step_next<12>)
-     FDE:D                     0.308          vga_address_step_temp_12
+     IBUF:I->O            78   1.218   1.452  i_reset_IBUF (i_reset_IBUF)
+     LUT4:I0->O           13   0.704   0.987  inst_vga_timing/o_blank (o_blank_OBUF)
+     LUT4:I3->O           17   0.704   1.055  vga_address_step_next<0>2 (N17)
+     LUT4:I3->O            1   0.704   0.000  vga_address_step_next<11>21 (vga_address_step_next<11>2)
+     MUXF5:I1->O           1   0.321   0.000  vga_address_step_next<11>2_f5 (vga_address_step_next<11>)
+     FDE:D                     0.308          vga_address_step_temp_11
     ----------------------------------------
-    Total                      8.004ns (4.342ns logic, 3.662ns route)
-                                       (54.2% logic, 45.8% route)
+    Total                      7.453ns (3.959ns logic, 3.494ns route)
+                                       (53.1% logic, 46.9% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'vga_clock1'
   Total number of paths / destination ports: 72 / 11
 -------------------------------------------------------------------------
-Offset:              10.329ns (Levels of Logic = 5)
+Offset:              9.547ns (Levels of Logic = 5)
   Source:            inst_vga_timing/v_counter_6 (FF)
   Destination:       o_b<1> (PAD)
   Source Clock:      vga_clock1 rising
@@ -609,14 +629,14 @@ Offset:              10.329ns (Levels of Logic = 5)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDCE:C->Q             4   0.591   0.762  inst_vga_timing/v_counter_6 (inst_vga_timing/v_counter_6)
-     LUT2_L:I0->LO         1   0.704   0.104  inst_vga_timing/o_v_blank_SW0 (N37)
-     LUT4:I3->O           23   0.704   1.206  inst_vga_timing/o_v_blank (o_v_blank_OBUF)
+     LUT2_D:I0->LO         1   0.704   0.104  inst_vga_timing/o_v_blank_SW0 (N93)
+     LUT4:I3->O            1   0.704   0.424  inst_vga_timing/o_v_blank_1 (inst_vga_timing/o_v_blank)
      LUT4:I3->O           13   0.704   1.158  inst_vga_timing/o_blank (o_blank_OBUF)
      LUT2:I0->O            1   0.704   0.420  inst_vga_rgb/o_r_1_mux00001 (o_r_1_OBUF)
      OBUF:I->O                 3.272          o_r_1_OBUF (o_r<1>)
     ----------------------------------------
-    Total                     10.329ns (6.679ns logic, 3.650ns route)
-                                       (64.7% logic, 35.3% route)
+    Total                      9.547ns (6.679ns logic, 2.868ns route)
+                                       (70.0% logic, 30.0% route)
 
 =========================================================================
 Timing constraint: Default path analysis
@@ -630,7 +650,7 @@ Delay:               8.928ns (Levels of Logic = 4)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            80   1.218   1.452  i_reset_IBUF (i_reset_IBUF)
+     IBUF:I->O            78   1.218   1.452  i_reset_IBUF (i_reset_IBUF)
      LUT4:I0->O           13   0.704   1.158  inst_vga_timing/o_blank (o_blank_OBUF)
      LUT2:I0->O            1   0.704   0.420  inst_vga_rgb/o_r_1_mux00001 (o_r_1_OBUF)
      OBUF:I->O                 3.272          o_r_1_OBUF (o_r<1>)
@@ -641,15 +661,15 @@ Delay:               8.928ns (Levels of Logic = 4)
 =========================================================================
 
 
-Total REAL time to Xst completion: 17.00 secs
-Total CPU time to Xst completion: 16.87 secs
+Total REAL time to Xst completion: 16.00 secs
+Total CPU time to Xst completion: 15.76 secs
  
 --> 
 
 
-Total memory usage is 556616 kilobytes
+Total memory usage is 555956 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   21 (   0 filtered)
-Number of infos    :    3 (   0 filtered)
+Number of warnings :   76 (   0 filtered)
+Number of infos    :    2 (   0 filtered)
 
