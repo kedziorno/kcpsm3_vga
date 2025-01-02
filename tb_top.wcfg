@@ -19,7 +19,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="37" />
+   <WVObjectSize size="34" />
    <wave_markers>
       <marker time="64060000000" label="" />
       <marker time="96060000000" label="" />
@@ -84,10 +84,6 @@
       <obj_property name="ElementShortName">vga_blank</obj_property>
       <obj_property name="ObjectShortName">vga_blank</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_blank_prev" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_blank_prev</obj_property>
-      <obj_property name="ObjectShortName">vga_blank_prev</obj_property>
-   </wvobject>
    <wvobject fp_name="/tb_top/uut/vga_h_blank" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">vga_h_blank</obj_property>
       <obj_property name="ObjectShortName">vga_h_blank</obj_property>
@@ -116,15 +112,11 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ff00ff</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/state" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">state</obj_property>
-      <obj_property name="ObjectShortName">state</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/state_next" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">state_next</obj_property>
-      <obj_property name="ObjectShortName">state_next</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject fp_name="/tb_top/uut/row_index" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">row_index</obj_property>
+      <obj_property name="ObjectShortName">row_index</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/i_x_step" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">i_x_step</obj_property>
@@ -165,13 +157,6 @@
       <obj_property name="ElementShortName">i_y_next</obj_property>
       <obj_property name="ObjectShortName">i_y_next</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/t_vga_address_step_temp" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">t_vga_address_step_temp[13:0]</obj_property>
-      <obj_property name="ObjectShortName">t_vga_address_step_temp[13:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/vga_address_step" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">vga_address_step[13:0]</obj_property>
