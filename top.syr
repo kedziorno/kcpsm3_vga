@@ -5,14 +5,14 @@ Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.06 secs
+Total CPU time to Xst completion: 0.08 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.06 secs
+Total CPU time to Xst completion: 0.08 secs
  
 --> 
 Reading design: top.prj
@@ -110,90 +110,27 @@ Cores Search Directories           : {"ipcore_dir"  }
 =========================================================================
 *                          HDL Compilation                              *
 =========================================================================
-Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/p_package1.vhd" in Library work.
-Architecture p_package1 of Entity p_package1 is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" in Library work.
 WARNING:HDLParsers:3350 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" Line 878. Null range: 0 downto 1
 WARNING:HDLParsers:3350 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" Line 879. Null range: 0 downto 1
 Architecture numeric_std of Entity numeric_std is up to date.
-Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/lsfr.vhd" in Library work.
-Architecture behavioral of Entity lsfr is up to date.
+Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/ipcore_vga_ramb16_dp.vhd" in Library work.
+Entity <ipcore_vga_ramb16_dp> compiled.
+Entity <ipcore_vga_ramb16_dp> (Architecture <ipcore_vga_ramb16_dp_a>) compiled.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_timing.vhd" in Library work.
 Architecture industry_standard_640x480_timing of Entity vga_timing is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_rgb.vhd" in Library work.
-Architecture behavioral of Entity vga_rgb is up to date.
-Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/ipcore_vga_ramb16_dp.vhd" in Library work.
-Architecture ipcore_vga_ramb16_dp_a of Entity ipcore_vga_ramb16_dp is up to date.
-Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" in Library work.
-Entity <vga_colorbar> compiled.
-Entity <vga_colorbar> (Architecture <mosaic>) compiled.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 102. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 103. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 104. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 105. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 106. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 107. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 108. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 109. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 110. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 111. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 112. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 113. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 114. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 115. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 116. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 117. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 118. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 119. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 120. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 121. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 122. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 123. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 124. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 125. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 126. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 127. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 128. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 129. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 130. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 131. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 132. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 133. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 134. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 135. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 136. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 137. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 138. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 139. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 140. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 141. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 142. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 143. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 144. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 145. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 146. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 147. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 148. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 149. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 150. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 151. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 152. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 153. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 154. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 155. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 156. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 157. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 158. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 159. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 160. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 161. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 162. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 163. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 164. Choice .to. is not a locally static expression.
-WARNING:HDLParsers:817 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd" Line 165. Choice .to. is not a locally static expression.
-Entity <vga_colorbar> (Architecture <architecture_lsfr>) compiled.
+Entity <vga_rgb> compiled.
+Entity <vga_rgb> (Architecture <behavioral>) compiled.
+Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" in Library work.
+Entity <kcpsm3> compiled.
+Entity <kcpsm3> (Architecture <low_level_definition>) compiled.
+Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" in Library work.
+Entity <program> compiled.
+Entity <program> (Architecture <low_level_definition>) compiled.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" in Library work.
-Architecture behavioral of Entity top is up to date.
+Entity <top> compiled.
+Entity <top> (Architecture <behavioral>) compiled.
 
 =========================================================================
 *                     Design Hierarchy Analysis                         *
@@ -204,10 +141,121 @@ Analyzing hierarchy for entity <vga_timing> in library <work> (architecture <ind
 
 Analyzing hierarchy for entity <vga_rgb> in library <work> (architecture <behavioral>).
 
-Analyzing hierarchy for entity <vga_colorbar> in library <work> (architecture <mosaic>) with generics.
-	g_step_x = 8
-	g_step_y = 8
+Analyzing hierarchy for entity <kcpsm3> in library <work> (architecture <low_level_definition>).
 
+Analyzing hierarchy for entity <program> in library <work> (architecture <low_level_definition>).
+
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 289: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 1200: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 452: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 483: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 606: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 614: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 381: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 423: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 525: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 597: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 682: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 1109: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 1136: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 1220: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 1269: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 332: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 371: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 403: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 413: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 432: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 442: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 468: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 493: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 554: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 587: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 794: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 871: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 886: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 937: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 956: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 1244: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 1301: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 1311: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 1327: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 1415: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 1448: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 828: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 1368: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 906: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INITP_00> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INITP_01> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INITP_02> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INITP_03> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INITP_04> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INITP_05> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INITP_06> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INITP_07> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_00> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_01> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_02> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_03> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_04> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_05> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_06> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_07> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_08> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_09> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_0A> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_0B> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_0C> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_0D> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_0E> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_0F> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_10> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_11> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_12> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_13> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_14> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_15> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_16> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_17> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_18> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_19> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_1A> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_1B> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_1C> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_1D> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_1E> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_1F> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_20> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_21> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_22> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_23> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_24> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_25> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_26> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_27> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_28> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_29> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_2A> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_2B> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_2C> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_2D> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_2E> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_2F> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_30> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_31> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_32> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_33> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_34> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_35> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_36> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_37> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_38> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_39> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_3A> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_3B> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_3C> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_3D> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_3E> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
+WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" line 181: attribute on instance <INIT_3F> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
 
 =========================================================================
 *                            HDL Analysis                               *
@@ -217,8 +265,7 @@ WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd"
 WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" line 3240: VHDL Assertion Statement with non constant condition is ignored.
 WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" line 3240: VHDL Assertion Statement with non constant condition is ignored.
 WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" line 3240: VHDL Assertion Statement with non constant condition is ignored.
-WARNING:Xst:1748 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" line 3240: VHDL Assertion Statement with non constant condition is ignored.
-WARNING:Xst:2211 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" line 260: Instantiating black box module <ipcore_vga_ramb16_dp>.
+WARNING:Xst:2211 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" line 256: Instantiating black box module <ipcore_vga_ramb16_dp>.
 Entity <top> analyzed. Unit <top> generated.
 
 Analyzing Entity <vga_timing> in library <work> (Architecture <industry_standard_640x480_timing>).
@@ -227,10 +274,298 @@ Entity <vga_timing> analyzed. Unit <vga_timing> generated.
 Analyzing Entity <vga_rgb> in library <work> (Architecture <behavioral>).
 Entity <vga_rgb> analyzed. Unit <vga_rgb> generated.
 
-Analyzing generic Entity <vga_colorbar> in library <work> (Architecture <mosaic>).
-	g_step_x = 8
-	g_step_y = 8
-Entity <vga_colorbar> analyzed. Unit <vga_colorbar> generated.
+Analyzing Entity <kcpsm3> in library <work> (Architecture <low_level_definition>).
+    Set user-defined property "INIT =  1" for instance <t_state_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <toggle_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  1" for instance <reset_flop1> in unit <kcpsm3>.
+    Set user-defined property "INIT =  1" for instance <reset_flop2> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <int_capture_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0080" for instance <int_pulse_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <int_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <ack_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <shadow_carry_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <shadow_zero_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  EAAA" for instance <int_update_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  04" for instance <int_value_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <int_enable_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  7400" for instance <move_group_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  5A3C" for instance <condition_met_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  2F" for instance <normal_count_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  1000" for instance <call_type_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  5400" for instance <push_pop_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  D" for instance <valid_move_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  41FC" for instance <flag_type_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <flag_write_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  8" for instance <flag_enable_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0001" for instance <low_zero_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0001" for instance <high_zero_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  3F" for instance <sel_shadow_zero_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <zero_flag_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  6996" for instance <low_parity_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  6996" for instance <high_parity_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  F3FF" for instance <sel_parity_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  F3" for instance <sel_arith_carry_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  C" for instance <sel_shift_carry_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  3" for instance <sel_shadow_carry_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <carry_flag_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[0].vector_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[0].value_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <pc_loop[0].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[1].vector_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[1].value_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <pc_loop[1].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[2].vector_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[2].value_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <pc_loop[2].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[3].vector_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[3].value_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <pc_loop[3].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[4].vector_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[4].value_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <pc_loop[4].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[5].vector_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[5].value_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <pc_loop[5].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[6].vector_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[6].value_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <pc_loop[6].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[7].vector_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[7].value_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <pc_loop[7].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[8].vector_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[8].value_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <pc_loop[8].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[9].vector_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <pc_loop[9].value_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <pc_loop[9].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0145" for instance <register_type_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <register_write_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  8" for instance <register_enable_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000" for instance <reg_loop[0].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <reg_loop[0].operand_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000" for instance <reg_loop[1].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <reg_loop[1].operand_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000" for instance <reg_loop[2].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <reg_loop[2].operand_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000" for instance <reg_loop[3].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <reg_loop[3].operand_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000" for instance <reg_loop[4].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <reg_loop[4].operand_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000" for instance <reg_loop[5].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <reg_loop[5].operand_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000" for instance <reg_loop[6].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <reg_loop[6].operand_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000" for instance <reg_loop[7].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <reg_loop[7].operand_select_mux> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0400" for instance <memory_type_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <memory_write_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  8000" for instance <memory_enable_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000000000000000" for instance <store_loop[0].memory_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <store_loop[0].store_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000000000000000" for instance <store_loop[1].memory_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <store_loop[1].store_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000000000000000" for instance <store_loop[2].memory_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <store_loop[2].store_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000000000000000" for instance <store_loop[3].memory_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <store_loop[3].store_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000000000000000" for instance <store_loop[4].memory_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <store_loop[4].store_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000000000000000" for instance <store_loop[5].memory_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <store_loop[5].store_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000000000000000" for instance <store_loop[6].memory_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <store_loop[6].store_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0000000000000000" for instance <store_loop[7].memory_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <store_loop[7].store_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  FFE2" for instance <sel_logical_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  6E8A" for instance <logical_loop[0].logical_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <logical_loop[0].logical_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  6E8A" for instance <logical_loop[1].logical_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <logical_loop[1].logical_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  6E8A" for instance <logical_loop[2].logical_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <logical_loop[2].logical_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  6E8A" for instance <logical_loop[3].logical_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <logical_loop[3].logical_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  6E8A" for instance <logical_loop[4].logical_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <logical_loop[4].logical_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  6E8A" for instance <logical_loop[5].logical_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <logical_loop[5].logical_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  6E8A" for instance <logical_loop[6].logical_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <logical_loop[6].logical_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  6E8A" for instance <logical_loop[7].logical_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <logical_loop[7].logical_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <high_shift_in_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <low_shift_in_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <shift_carry_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <pipeline_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <shift_loop[0].lsb_shift.shift_mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <shift_loop[0].shift_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <shift_loop[1].mid_shift.shift_mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <shift_loop[1].shift_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <shift_loop[2].mid_shift.shift_mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <shift_loop[2].shift_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <shift_loop[3].mid_shift.shift_mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <shift_loop[3].shift_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <shift_loop[4].mid_shift.shift_mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <shift_loop[4].shift_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <shift_loop[5].mid_shift.shift_mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <shift_loop[5].shift_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <shift_loop[6].mid_shift.shift_mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <shift_loop[6].shift_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <shift_loop[7].msb_shift.shift_mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <shift_loop[7].shift_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  1F" for instance <sel_arith_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  6C" for instance <arith_loop[0].lsb_arith.arith_carry_in_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  96" for instance <arith_loop[0].arith_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <arith_loop[0].arith_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  96" for instance <arith_loop[1].arith_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <arith_loop[1].arith_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  96" for instance <arith_loop[2].arith_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <arith_loop[2].arith_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  96" for instance <arith_loop[3].arith_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <arith_loop[3].arith_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  96" for instance <arith_loop[4].arith_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <arith_loop[4].arith_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  96" for instance <arith_loop[5].arith_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <arith_loop[5].arith_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  96" for instance <arith_loop[6].arith_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <arith_loop[6].arith_flop> in unit <kcpsm3>.
+WARNING:Xst:1961 - The length of the hex value for the attribute INIT on instance arith_loop[7].msb_arith.arith_carry_out_lut should be 2 bits long. The current value set is 4 bits long.  Value has been truncated
+    Set user-defined property "INIT =  2" for instance <arith_loop[7].msb_arith.arith_carry_out_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <arith_loop[7].msb_arith.arith_carry_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  96" for instance <arith_loop[7].arith_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <arith_loop[7].arith_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0002" for instance <input_fetch_type_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <sel_group_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  FE" for instance <alu_mux_loop[0].or_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <alu_mux_loop[0].mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  FE" for instance <alu_mux_loop[1].or_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <alu_mux_loop[1].mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  FE" for instance <alu_mux_loop[2].or_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <alu_mux_loop[2].mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  FE" for instance <alu_mux_loop[3].or_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <alu_mux_loop[3].mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  FE" for instance <alu_mux_loop[4].or_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <alu_mux_loop[4].mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  FE" for instance <alu_mux_loop[5].or_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <alu_mux_loop[5].mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  FE" for instance <alu_mux_loop[6].or_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <alu_mux_loop[6].mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  FE" for instance <alu_mux_loop[7].or_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  E4" for instance <alu_mux_loop[7].mux_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0010" for instance <io_decode_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  4000" for instance <write_active_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <write_strobe_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0100" for instance <read_active_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <read_strobe_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  00000000" for instance <stack_ram_loop[0].stack_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_ram_loop[0].stack_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  00000000" for instance <stack_ram_loop[1].stack_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_ram_loop[1].stack_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  00000000" for instance <stack_ram_loop[2].stack_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_ram_loop[2].stack_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  00000000" for instance <stack_ram_loop[3].stack_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_ram_loop[3].stack_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  00000000" for instance <stack_ram_loop[4].stack_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_ram_loop[4].stack_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  00000000" for instance <stack_ram_loop[5].stack_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_ram_loop[5].stack_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  00000000" for instance <stack_ram_loop[6].stack_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_ram_loop[6].stack_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  00000000" for instance <stack_ram_loop[7].stack_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_ram_loop[7].stack_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  00000000" for instance <stack_ram_loop[8].stack_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_ram_loop[8].stack_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  00000000" for instance <stack_ram_loop[9].stack_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_ram_loop[9].stack_flop> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_count_loop[0].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  6555" for instance <stack_count_loop[0].lsb_stack_count.count_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_count_loop[1].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  A999" for instance <stack_count_loop[1].mid_stack_count.count_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_count_loop[2].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  A999" for instance <stack_count_loop[2].mid_stack_count.count_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_count_loop[3].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  A999" for instance <stack_count_loop[3].mid_stack_count.count_lut> in unit <kcpsm3>.
+    Set user-defined property "INIT =  0" for instance <stack_count_loop[4].register_bit> in unit <kcpsm3>.
+    Set user-defined property "INIT =  A999" for instance <stack_count_loop[4].msb_stack_count.count_lut> in unit <kcpsm3>.
+Entity <kcpsm3> analyzed. Unit <kcpsm3> generated.
+
+Analyzing Entity <program> in library <work> (Architecture <low_level_definition>).
+    Set user-defined property "INIT =  00000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_00 =  0000000000000000000000000000000000000000000000003888888888888888" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_01 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_02 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_03 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_04 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_05 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_00 =  C1170100C0160002C2200200C1170100C0160001C220023FC1170100C0160000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_01 =  0000401EC2200203C1170100C0160004C220020CC1170100C0160003C2200230" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_02 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_03 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_04 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_05 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_08 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_09 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_0A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_0B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_0C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_0D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_0E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_0F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_10 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_11 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_12 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_13 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_14 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_15 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_16 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_17 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_18 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_19 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_1A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_1B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_1C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_1D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_1E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_1F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_20 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_21 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_22 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_23 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_24 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_25 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_26 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_27 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_28 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_29 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_2A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_2B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_2C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_2D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_2E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_2F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_30 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_31 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_32 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_33 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_34 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_35 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_36 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_37 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_38 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_39 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_3A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_3B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_3C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_3D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_3E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_3F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "SRVAL =  00000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "WRITE_MODE =  WRITE_FIRST" for instance <ram_1024_x_18> in unit <program>.
+Entity <program> analyzed. Unit <program> generated.
 
 
 =========================================================================
@@ -265,78 +600,83 @@ WARNING:Xst:647 - Input <i_clock> is never used. This port will be preserved and
 Unit <vga_rgb> synthesized.
 
 
-Synthesizing Unit <vga_colorbar>.
-    Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_colorbar.vhd".
-WARNING:Xst:647 - Input <i_address> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 64x6-bit ROM for signal <o_vga_color$rom0000> created at line 61.
-    Found 6-bit register for signal <o_vga_color>.
-    Found 6-bit register for signal <index_color>.
-    Found 6-bit adder for signal <index_color$addsub0000> created at line 64.
-    Summary:
-	inferred   1 ROM(s).
-	inferred  12 D-type flip-flop(s).
-	inferred   1 Adder/Subtractor(s).
-Unit <vga_colorbar> synthesized.
+Synthesizing Unit <kcpsm3>.
+    Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd".
+Unit <kcpsm3> synthesized.
+
+
+Synthesizing Unit <program>.
+    Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD".
+Unit <program> synthesized.
 
 
 Synthesizing Unit <top>.
     Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd".
 WARNING:Xst:647 - Input <i_vga_clock> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 19-bit up counter for signal <i_all_pixels>.
-    Found 31-bit adder for signal <I_VAL0$add0000> created at line 226.
-    Found 31-bit adder for signal <I_VAL2$add0000> created at line 233.
+WARNING:Xst:646 - Signal <kcpsm3_read_strobe> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <kcpsm3_interrupt_ack> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:653 - Signal <kcpsm3_interrupt> is used but never assigned. This sourceless signal will be automatically connected to value 0.
+WARNING:Xst:653 - Signal <kcpsm3_in_port> is used but never assigned. This sourceless signal will be automatically connected to value 00000000.
+WARNING:Xst:1780 - Signal <i_all_pixels> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+    Found 31-bit adder for signal <I_VAL$add0000> created at line 202.
+    Found 31-bit adder for signal <I_VAL1$add0000> created at line 211.
     Found 1-bit register for signal <i_vga25<0>>.
-    Found 7-bit up counter for signal <i_x>.
-    Found 3-bit up counter for signal <i_x_step>.
-    Found 6-bit up counter for signal <i_y>.
-    Found 3-bit up counter for signal <i_y_step>.
-    Found 31-bit adder for signal <RESULT0$addsub0000> created at line 3189.
-    Found 31-bit adder for signal <RESULT0$addsub0001> created at line 3189.
-    Found 31-bit adder for signal <RESULT0$addsub0002> created at line 3189.
-    Found 31-bit adder for signal <RESULT0$addsub0003> created at line 3189.
-    Found 31-bit adder for signal <RESULT0$addsub0004> created at line 3189.
-    Found 31-bit adder for signal <RESULT0$addsub0005> created at line 3189.
-    Found 31-bit adder for signal <RESULT0$addsub0006> created at line 3189.
-    Found 31-bit adder for signal <RESULT0$addsub0007> created at line 3189.
-    Found 31-bit adder for signal <RESULT0$addsub0008> created at line 3189.
-    Found 31-bit adder for signal <RESULT0$addsub0009> created at line 3189.
-    Found 31-bit adder for signal <RESULT0$addsub0010> created at line 3189.
-    Found 31-bit adder for signal <RESULT0$addsub0011> created at line 3189.
-    Found 31-bit adder for signal <RESULT0$addsub0012> created at line 3189.
-    Found 31-bit adder for signal <RESULT3$addsub0000> created at line 3189.
-    Found 31-bit adder for signal <RESULT3$addsub0001> created at line 3189.
-    Found 31-bit adder for signal <RESULT3$addsub0002> created at line 3189.
-    Found 31-bit adder for signal <RESULT3$addsub0003> created at line 3189.
-    Found 31-bit adder for signal <RESULT3$addsub0004> created at line 3189.
-    Found 31-bit adder for signal <RESULT3$addsub0005> created at line 3189.
-    Found 31-bit adder for signal <RESULT3$addsub0006> created at line 3189.
-    Found 31-bit adder for signal <RESULT3$addsub0007> created at line 3189.
-    Found 31-bit adder for signal <RESULT3$addsub0008> created at line 3189.
-    Found 31-bit adder for signal <RESULT3$addsub0009> created at line 3189.
-    Found 31-bit adder for signal <RESULT3$addsub0010> created at line 3189.
-    Found 31-bit adder for signal <RESULT3$addsub0011> created at line 3189.
-    Found 31-bit adder for signal <RESULT3$addsub0012> created at line 3189.
-    Found 31-bit adder for signal <RESULT9$addsub0000> created at line 3189.
-    Found 31-bit adder for signal <RESULT9$addsub0001> created at line 3189.
-    Found 31-bit adder for signal <RESULT9$addsub0002> created at line 3189.
-    Found 31-bit adder for signal <RESULT9$addsub0003> created at line 3189.
-    Found 31-bit adder for signal <RESULT9$addsub0004> created at line 3189.
-    Found 31-bit adder for signal <RESULT9$addsub0005> created at line 3189.
-    Found 31-bit adder for signal <RESULT9$addsub0006> created at line 3189.
-    Found 31-bit adder for signal <RESULT9$addsub0007> created at line 3189.
-    Found 31-bit adder for signal <RESULT9$addsub0008> created at line 3189.
-    Found 31-bit adder for signal <RESULT9$addsub0009> created at line 3189.
-    Found 31-bit adder for signal <RESULT9$addsub0010> created at line 3189.
-    Found 31-bit adder for signal <RESULT9$addsub0011> created at line 3189.
-    Found 31-bit adder for signal <RESULT9$addsub0012> created at line 3189.
-    Found 3-bit up counter for signal <row_index>.
-    Found 14-bit register for signal <vga_address_step>.
-    Found 14-bit register for signal <vga_address_step_temp>.
+    Found 8-bit up counter for signal <i_x>.
+    Found 2-bit up counter for signal <i_x_step>.
+    Found 7-bit up counter for signal <i_y>.
+    Found 2-bit up counter for signal <i_y_step>.
+    Found 31-bit adder for signal <RESULT$addsub0000> created at line 3189.
+    Found 31-bit adder for signal <RESULT$addsub0001> created at line 3189.
+    Found 31-bit adder for signal <RESULT$addsub0002> created at line 3189.
+    Found 31-bit adder for signal <RESULT$addsub0003> created at line 3189.
+    Found 31-bit adder for signal <RESULT$addsub0004> created at line 3189.
+    Found 31-bit adder for signal <RESULT$addsub0005> created at line 3189.
+    Found 31-bit adder for signal <RESULT$addsub0006> created at line 3189.
+    Found 31-bit adder for signal <RESULT$addsub0007> created at line 3189.
+    Found 31-bit adder for signal <RESULT$addsub0008> created at line 3189.
+    Found 31-bit adder for signal <RESULT$addsub0009> created at line 3189.
+    Found 31-bit adder for signal <RESULT$addsub0010> created at line 3189.
+    Found 31-bit adder for signal <RESULT$addsub0011> created at line 3189.
+    Found 31-bit adder for signal <RESULT$addsub0012> created at line 3189.
+    Found 31-bit adder for signal <RESULT$addsub0013> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0000> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0001> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0002> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0003> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0004> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0005> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0006> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0007> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0008> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0009> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0010> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0011> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0012> created at line 3189.
+    Found 31-bit adder for signal <RESULT2$addsub0013> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0000> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0001> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0002> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0003> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0004> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0005> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0006> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0007> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0008> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0009> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0010> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0011> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0012> created at line 3189.
+    Found 31-bit adder for signal <RESULT8$addsub0013> created at line 3189.
+    Found 2-bit up counter for signal <row_index>.
+    Found 15-bit register for signal <vga_address_step>.
+    Found 15-bit register for signal <vga_address_step_temp>.
+    Found 15-bit register for signal <vga_all_pixels>.
     Found 1-bit register for signal <vga_clock>.
+    Found 6-bit register for signal <vga_color>.
     Summary:
-	inferred   6 Counter(s).
-	inferred  30 D-type flip-flop(s).
-	inferred  41 Adder/Subtractor(s).
+	inferred   5 Counter(s).
+	inferred  53 D-type flip-flop(s).
+	inferred  44 Adder/Subtractor(s).
 Unit <top> synthesized.
 
 
@@ -344,21 +684,17 @@ Unit <top> synthesized.
 HDL Synthesis Report
 
 Macro Statistics
-# ROMs                                                 : 1
- 64x6-bit ROM                                          : 1
-# Adders/Subtractors                                   : 42
- 31-bit adder                                          : 41
- 6-bit adder                                           : 1
-# Counters                                             : 8
+# Adders/Subtractors                                   : 44
+ 31-bit adder                                          : 44
+# Counters                                             : 7
  10-bit up counter                                     : 2
- 19-bit up counter                                     : 1
- 3-bit up counter                                      : 3
- 6-bit up counter                                      : 1
+ 2-bit up counter                                      : 3
  7-bit up counter                                      : 1
-# Registers                                            : 8
- 1-bit register                                        : 4
- 14-bit register                                       : 2
- 6-bit register                                        : 2
+ 8-bit up counter                                      : 1
+# Registers                                            : 22
+ 1-bit register                                        : 19
+ 15-bit register                                       : 2
+ 6-bit register                                        : 1
 # Comparators                                          : 6
  10-bit comparator greater                             : 2
  10-bit comparator less                                : 4
@@ -372,30 +708,22 @@ Macro Statistics
 Reading core <ipcore_dir/ipcore_vga_ramb16_dp.ngc>.
 Loading core <ipcore_vga_ramb16_dp> for timing and area information for instance <inst_ipcore_vga_ramb16_dp>.
 
-Synthesizing (advanced) Unit <vga_colorbar>.
-INFO:Xst:3034 - In order to maximize performance and save block RAM resources, the small ROM <Mrom_o_vga_color_rom0000> will be implemented on LUT. If you want to force its implementation on block, use option/constraint rom_style.
-Unit <vga_colorbar> synthesized (advanced).
-
 =========================================================================
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# ROMs                                                 : 1
- 64x6-bit ROM                                          : 1
-# Adders/Subtractors                                   : 42
- 12-bit adder                                          : 1
- 13-bit adder                                          : 3
- 14-bit adder                                          : 5
- 28-bit adder                                          : 30
+# Adders/Subtractors                                   : 44
+ 13-bit adder                                          : 1
+ 14-bit adder                                          : 3
+ 15-bit adder                                          : 5
+ 28-bit adder                                          : 33
  29-bit adder                                          : 2
- 6-bit adder                                           : 1
-# Counters                                             : 7
+# Counters                                             : 6
  10-bit up counter                                     : 2
- 19-bit up counter                                     : 1
- 3-bit up counter                                      : 3
- 7-bit up counter                                      : 1
-# Registers                                            : 44
- Flip-Flops                                            : 44
+ 2-bit up counter                                      : 3
+ 8-bit up counter                                      : 1
+# Registers                                            : 131
+ Flip-Flops                                            : 131
 # Comparators                                          : 6
  10-bit comparator greater                             : 2
  10-bit comparator less                                : 4
@@ -411,11 +739,11 @@ Optimizing unit <top> ...
 
 Optimizing unit <vga_timing> ...
 
-Optimizing unit <vga_colorbar> ...
+Optimizing unit <kcpsm3> ...
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 5) on block top, actual ratio is 1.
+Found area constraint ratio of 100 (+ 5) on block top, actual ratio is 2.
 
 Final Macro Processing ...
 
@@ -423,8 +751,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 96
- Flip-Flops                                            : 96
+# Registers                                            : 163
+ Flip-Flops                                            : 163
 
 =========================================================================
 
@@ -453,29 +781,38 @@ Design Statistics
 # IOs                              : 14
 
 Cell Usage :
-# BELS                             : 358
+# BELS                             : 499
 #      GND                         : 2
-#      INV                         : 13
-#      LUT1                        : 57
-#      LUT2                        : 49
-#      LUT2_D                      : 3
+#      INV                         : 17
+#      LUT1                        : 49
+#      LUT2                        : 37
+#      LUT2_D                      : 1
 #      LUT2_L                      : 1
-#      LUT3                        : 15
-#      LUT3_D                      : 12
-#      LUT3_L                      : 9
-#      LUT4                        : 62
-#      LUT4_D                      : 3
-#      LUT4_L                      : 1
-#      MUXCY                       : 63
-#      MUXF5                       : 3
+#      LUT3                        : 86
+#      LUT4                        : 92
+#      LUT4_D                      : 11
+#      LUT4_L                      : 15
+#      MUXCY                       : 87
+#      MUXF5                       : 9
 #      VCC                         : 2
-#      XORCY                       : 63
-# FlipFlops/Latches                : 96
+#      XORCY                       : 90
+# FlipFlops/Latches                : 166
+#      FD                          : 24
 #      FDC                         : 11
-#      FDCE                        : 63
-#      FDE                         : 22
-# RAMS                             : 6
+#      FDCE                        : 53
+#      FDE                         : 28
+#      FDR                         : 30
+#      FDRE                        : 8
+#      FDRSE                       : 10
+#      FDS                         : 2
+# RAMS                             : 35
+#      RAM16X1D                    : 8
+#      RAM32X1S                    : 10
+#      RAM64X1S                    : 8
+#      RAMB16_S18                  : 1
 #      RAMB16_S1_S1                : 6
+#      RAMB16_S2_S2                : 1
+#      RAMB16_S4_S4                : 1
 # Clock Buffers                    : 2
 #      BUFG                        : 1
 #      BUFGP                       : 1
@@ -489,12 +826,14 @@ Device utilization summary:
 
 Selected Device : 3s1200efg320-4 
 
- Number of Slices:                      115  out of   8672     1%  
- Number of Slice Flip Flops:             96  out of  17344     0%  
- Number of 4 input LUTs:                225  out of  17344     1%  
+ Number of Slices:                      198  out of   8672     2%  
+ Number of Slice Flip Flops:            166  out of  17344     0%  
+ Number of 4 input LUTs:                377  out of  17344     2%  
+    Number used as logic:               309
+    Number used as RAMs:                 68
  Number of IOs:                          14
  Number of bonded IOBs:                  13  out of    250     5%  
- Number of BRAMs:                         6  out of     28    21%  
+ Number of BRAMs:                         9  out of     28    32%  
  Number of GCLKs:                         2  out of     24     8%  
 
 ---------------------------
@@ -518,8 +857,8 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-i_cpu_clock                        | BUFGP                  | 8     |
-vga_clock1                         | BUFG                   | 100   |
+vga_clock1                         | BUFG                   | 75    |
+i_cpu_clock                        | BUFGP                  | 134   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -527,17 +866,17 @@ Asynchronous Control Signals Information:
 -----------------------------------+------------------------+-------+
 Control Signal                     | Buffer(FF name)        | Load  |
 -----------------------------------+------------------------+-------+
-i_reset                            | IBUF                   | 74    |
+i_reset                            | IBUF                   | 64    |
 -----------------------------------+------------------------+-------+
 
 Timing Summary:
 ---------------
 Speed Grade: -4
 
-   Minimum period: 8.072ns (Maximum Frequency: 123.885MHz)
-   Minimum input arrival time before clock: 7.453ns
-   Maximum output required time after clock: 9.547ns
-   Maximum combinational path delay: 8.928ns
+   Minimum period: 10.069ns (Maximum Frequency: 99.319MHz)
+   Minimum input arrival time before clock: 7.117ns
+   Maximum output required time after clock: 10.272ns
+   Maximum combinational path delay: 8.808ns
 
 Timing Detail:
 --------------
@@ -545,81 +884,104 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'vga_clock1'
-  Clock period: 8.072ns (frequency: 123.885MHz)
-  Total number of paths / destination ports: 3211 / 260
+  Clock period: 8.569ns (frequency: 116.702MHz)
+  Total number of paths / destination ports: 2141 / 236
 -------------------------------------------------------------------------
-Delay:               8.072ns (Levels of Logic = 6)
+Delay:               8.569ns (Levels of Logic = 5)
   Source:            inst_vga_timing/v_counter_6 (FF)
-  Destination:       vga_address_step_temp_11 (FF)
+  Destination:       vga_address_step_temp_0 (FF)
   Source Clock:      vga_clock1 rising
   Destination Clock: vga_clock1 rising
 
-  Data Path: inst_vga_timing/v_counter_6 to vga_address_step_temp_11
+  Data Path: inst_vga_timing/v_counter_6 to vga_address_step_temp_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDCE:C->Q             4   0.591   0.762  inst_vga_timing/v_counter_6 (inst_vga_timing/v_counter_6)
-     LUT2_D:I0->LO         1   0.704   0.104  inst_vga_timing/o_v_blank_SW0 (N93)
-     LUT4:I3->O            1   0.704   0.424  inst_vga_timing/o_v_blank_1 (inst_vga_timing/o_v_blank)
-     LUT4:I3->O           13   0.704   0.987  inst_vga_timing/o_blank (o_blank_OBUF)
-     LUT4:I3->O           17   0.704   1.055  vga_address_step_next<0>2 (N17)
-     LUT4:I3->O            1   0.704   0.000  vga_address_step_next<11>21 (vga_address_step_next<11>2)
-     MUXF5:I1->O           1   0.321   0.000  vga_address_step_next<11>2_f5 (vga_address_step_next<11>)
-     FDE:D                     0.308          vga_address_step_temp_11
+     LUT2_L:I0->LO         1   0.704   0.104  inst_vga_timing/o_v_blank_SW0 (N02)
+     LUT4:I3->O           34   0.704   1.267  inst_vga_timing/o_v_blank (o_v_blank_OBUF)
+     LUT4:I3->O           12   0.704   0.996  inst_vga_timing/o_blank (o_blank_OBUF)
+     LUT3:I2->O           15   0.704   1.021  vga_address_step_next<10>11 (N01)
+     LUT4:I3->O            1   0.704   0.000  vga_address_step_next<5>2 (vga_address_step_next<5>)
+     FDCE:D                    0.308          vga_address_step_temp_5
     ----------------------------------------
-    Total                      8.072ns (4.740ns logic, 3.332ns route)
-                                       (58.7% logic, 41.3% route)
+    Total                      8.569ns (4.419ns logic, 4.150ns route)
+                                       (51.6% logic, 48.4% route)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'i_cpu_clock'
-  Clock period: 2.470ns (frequency: 404.858MHz)
-  Total number of paths / destination ports: 3 / 3
+  Clock period: 10.069ns (frequency: 99.319MHz)
+  Total number of paths / destination ports: 5246 / 550
 -------------------------------------------------------------------------
-Delay:               2.470ns (Levels of Logic = 1)
-  Source:            i_vga25_0 (FF)
-  Destination:       i_vga25_0 (FF)
+Delay:               10.069ns (Levels of Logic = 4)
+  Source:            inst_program/ram_1024_x_18 (RAM)
+  Destination:       vga_all_pixels_0 (FF)
   Source Clock:      i_cpu_clock rising
   Destination Clock: i_cpu_clock rising
 
-  Data Path: i_vga25_0 to i_vga25_0
+  Data Path: inst_program/ram_1024_x_18 to vga_all_pixels_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDC:C->Q              2   0.591   0.447  i_vga25_0 (i_vga25_0)
-     INV:I->O              1   0.704   0.420  i_vga25_0_mux00001_INV_0 (i_vga25_0_mux0000)
-     FDC:D                     0.308          i_vga25_0
+     RAMB16_S18:CLK->DO4   10   2.800   0.882  inst_program/ram_1024_x_18 (kcpsm3_instruction<4>)
+     RAM16X1D:DPRA0->DPO    1   0.704   0.455  inst_kcpsm3/reg_loop[2].register_bit (inst_kcpsm3/sy<2>)
+     LUT3:I2->O           68   0.704   1.278  inst_kcpsm3/reg_loop[2].operand_select_mux (kcpsm3_port_id<2>)
+     LUT4:I3->O            2   0.704   0.526  vga_all_pixels_0_and0000212 (vga_all_pixels_0_and0000212)
+     LUT3:I1->O            8   0.704   0.757  vga_all_pixels_0_and00001 (vga_all_pixels_0_and0000)
+     FDE:CE                    0.555          vga_all_pixels_0
     ----------------------------------------
-    Total                      2.470ns (1.603ns logic, 0.867ns route)
-                                       (64.9% logic, 35.1% route)
+    Total                     10.069ns (6.171ns logic, 3.898ns route)
+                                       (61.3% logic, 38.7% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'vga_clock1'
-  Total number of paths / destination ports: 108 / 88
+  Total number of paths / destination ports: 59 / 59
 -------------------------------------------------------------------------
-Offset:              7.453ns (Levels of Logic = 5)
+Offset:              7.105ns (Levels of Logic = 4)
   Source:            i_reset (PAD)
-  Destination:       vga_address_step_temp_11 (FF)
+  Destination:       vga_address_step_temp_0 (FF)
   Destination Clock: vga_clock1 rising
 
-  Data Path: i_reset to vga_address_step_temp_11
+  Data Path: i_reset to vga_address_step_temp_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            78   1.218   1.452  i_reset_IBUF (i_reset_IBUF)
-     LUT4:I0->O           13   0.704   0.987  inst_vga_timing/o_blank (o_blank_OBUF)
-     LUT4:I3->O           17   0.704   1.055  vga_address_step_next<0>2 (N17)
-     LUT4:I3->O            1   0.704   0.000  vga_address_step_next<11>21 (vga_address_step_next<11>2)
-     MUXF5:I1->O           1   0.321   0.000  vga_address_step_next<11>2_f5 (vga_address_step_next<11>)
-     FDE:D                     0.308          vga_address_step_temp_11
+     IBUF:I->O            71   1.218   1.450  i_reset_IBUF (i_reset_IBUF)
+     LUT4:I0->O           12   0.704   0.996  inst_vga_timing/o_blank (o_blank_OBUF)
+     LUT3:I2->O           15   0.704   1.021  vga_address_step_next<10>11 (N01)
+     LUT4:I3->O            1   0.704   0.000  vga_address_step_next<5>2 (vga_address_step_next<5>)
+     FDCE:D                    0.308          vga_address_step_temp_5
     ----------------------------------------
-    Total                      7.453ns (3.959ns logic, 3.494ns route)
-                                       (53.1% logic, 46.9% route)
+    Total                      7.105ns (3.638ns logic, 3.467ns route)
+                                       (51.2% logic, 48.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'i_cpu_clock'
+  Total number of paths / destination ports: 23 / 23
+-------------------------------------------------------------------------
+Offset:              7.117ns (Levels of Logic = 4)
+  Source:            i_reset (PAD)
+  Destination:       vga_all_pixels_0 (FF)
+  Destination Clock: i_cpu_clock rising
+
+  Data Path: i_reset to vga_all_pixels_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            71   1.218   1.354  i_reset_IBUF (i_reset_IBUF)
+     LUT2:I1->O            1   0.704   0.595  vga_all_pixels_0_and000022 (vga_all_pixels_0_and000022)
+     LUT4:I0->O            2   0.704   0.526  vga_all_pixels_0_and0000212 (vga_all_pixels_0_and0000212)
+     LUT3:I1->O            8   0.704   0.757  vga_all_pixels_0_and00001 (vga_all_pixels_0_and0000)
+     FDE:CE                    0.555          vga_all_pixels_0
+    ----------------------------------------
+    Total                      7.117ns (3.885ns logic, 3.232ns route)
+                                       (54.6% logic, 45.4% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'vga_clock1'
-  Total number of paths / destination ports: 72 / 11
+  Total number of paths / destination ports: 98 / 11
 -------------------------------------------------------------------------
-Offset:              9.547ns (Levels of Logic = 5)
+Offset:              10.272ns (Levels of Logic = 5)
   Source:            inst_vga_timing/v_counter_6 (FF)
   Destination:       o_b<1> (PAD)
   Source Clock:      vga_clock1 rising
@@ -629,20 +991,20 @@ Offset:              9.547ns (Levels of Logic = 5)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDCE:C->Q             4   0.591   0.762  inst_vga_timing/v_counter_6 (inst_vga_timing/v_counter_6)
-     LUT2_D:I0->LO         1   0.704   0.104  inst_vga_timing/o_v_blank_SW0 (N93)
-     LUT4:I3->O            1   0.704   0.424  inst_vga_timing/o_v_blank_1 (inst_vga_timing/o_v_blank)
-     LUT4:I3->O           13   0.704   1.158  inst_vga_timing/o_blank (o_blank_OBUF)
-     LUT2:I0->O            1   0.704   0.420  inst_vga_rgb/o_r_1_mux00001 (o_r_1_OBUF)
+     LUT2_L:I0->LO         1   0.704   0.104  inst_vga_timing/o_v_blank_SW0 (N02)
+     LUT4:I3->O           34   0.704   1.267  inst_vga_timing/o_v_blank (o_v_blank_OBUF)
+     LUT4:I3->O           12   0.704   1.040  inst_vga_timing/o_blank (o_blank_OBUF)
+     LUT2:I1->O            1   0.704   0.420  inst_vga_rgb/o_r_1_mux00001 (o_r_1_OBUF)
      OBUF:I->O                 3.272          o_r_1_OBUF (o_r<1>)
     ----------------------------------------
-    Total                      9.547ns (6.679ns logic, 2.868ns route)
-                                       (70.0% logic, 30.0% route)
+    Total                     10.272ns (6.679ns logic, 3.593ns route)
+                                       (65.0% logic, 35.0% route)
 
 =========================================================================
 Timing constraint: Default path analysis
   Total number of paths / destination ports: 7 / 7
 -------------------------------------------------------------------------
-Delay:               8.928ns (Levels of Logic = 4)
+Delay:               8.808ns (Levels of Logic = 4)
   Source:            i_reset (PAD)
   Destination:       o_b<1> (PAD)
 
@@ -650,26 +1012,26 @@ Delay:               8.928ns (Levels of Logic = 4)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            78   1.218   1.452  i_reset_IBUF (i_reset_IBUF)
-     LUT4:I0->O           13   0.704   1.158  inst_vga_timing/o_blank (o_blank_OBUF)
-     LUT2:I0->O            1   0.704   0.420  inst_vga_rgb/o_r_1_mux00001 (o_r_1_OBUF)
+     IBUF:I->O            71   1.218   1.450  i_reset_IBUF (i_reset_IBUF)
+     LUT4:I0->O           12   0.704   1.040  inst_vga_timing/o_blank (o_blank_OBUF)
+     LUT2:I1->O            1   0.704   0.420  inst_vga_rgb/o_r_1_mux00001 (o_r_1_OBUF)
      OBUF:I->O                 3.272          o_r_1_OBUF (o_r<1>)
     ----------------------------------------
-    Total                      8.928ns (5.898ns logic, 3.030ns route)
-                                       (66.1% logic, 33.9% route)
+    Total                      8.808ns (5.898ns logic, 2.910ns route)
+                                       (67.0% logic, 33.0% route)
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 16.00 secs
-Total CPU time to Xst completion: 15.76 secs
+Total REAL time to Xst completion: 23.00 secs
+Total CPU time to Xst completion: 21.67 secs
  
 --> 
 
 
-Total memory usage is 555956 kilobytes
+Total memory usage is 574408 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   76 (   0 filtered)
-Number of infos    :    2 (   0 filtered)
+Number of warnings :  127 (   0 filtered)
+Number of infos    :    1 (   0 filtered)
 

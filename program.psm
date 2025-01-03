@@ -1,0 +1,55 @@
+; This simple program can write each 64 colors to the indicated memory address.
+; Low 7 bits is available in out_address_low, but 6 bits is on out_address_high.
+; Point matrix have 160x120 on VGA (640x480) resolution.
+; Use Xilinx PicoBlaze 8Bit CPU.
+;
+CONSTANT  out_address_low,    16; 7 bit
+CONSTANT  out_address_high,   17; 6 bit
+CONSTANT  out_color,          20;
+NAMEREG   s0,                 address_low;
+NAMEREG   s1,                 address_high;
+NAMEREG   s2,                 color;
+;
+; Example: from upper-left corner put 5 pixels in one column with differ colors.
+;
+; WHITE - 0
+LOAD address_low, 00;
+LOAD address_high, 00;
+LOAD color, 3F;
+CALL PIXEL;
+; BLACK - 160
+LOAD address_low, A0;
+LOAD address_high, 00;
+LOAD color, 00;
+CALL PIXEL;
+;
+; RED - 320
+LOAD address_low, 40;
+LOAD address_high, 01;
+LOAD color, 30;
+CALL PIXEL;
+;
+; GREEN - 480
+LOAD address_low, E0;
+LOAD address_high, 01;
+LOAD color, 0C;
+CALL PIXEL;
+;
+; BLUE - 640
+LOAD address_low, 80;
+LOAD address_high, 02;
+LOAD color, 03;
+CALL PIXEL;
+;
+JUMP END;
+;
+PIXEL:
+OUTPUT address_low, out_address_low;
+OUTPUT address_high, out_address_high;
+OUTPUT color, out_color;
+RETURN;
+;
+; HALT CPU
+END:
+JUMP END;
+

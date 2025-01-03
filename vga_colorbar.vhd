@@ -38,10 +38,10 @@ constant g_step_x : integer := 1;
 constant g_step_y : integer := 1
 );
 port (
-i_clock, i_reset : in std_logic;
-i_vga_blank : in std_logic;
-i_address : in std_logic_vector (13 downto 0);
-o_vga_color : out std_logic_vector (5 downto 0)
+i_clock, i_reset : in  std_logic;
+i_vga_blank      : in  std_logic;
+i_address        : in  std_logic_vector (14 downto 0);
+o_vga_color      : out std_logic_vector (5 downto 0)
 );
 end entity vga_colorbar;
 

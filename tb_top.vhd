@@ -57,17 +57,17 @@ END COMPONENT;
 --Inputs
 signal i_cpu_clock : std_logic := '1';
 signal i_vga_clock : std_logic := '1';
-signal i_reset : std_logic := '0';
+signal i_reset     : std_logic := '0';
 
 --Outputs
-signal o_hsync : std_logic;
-signal o_vsync : std_logic;
-signal o_blank : std_logic;
+signal o_hsync   : std_logic;
+signal o_vsync   : std_logic;
+signal o_blank   : std_logic;
 signal o_h_blank : std_logic;
 signal o_v_blank : std_logic;
-signal o_r : std_logic_vector (1 downto 0);
-signal o_g : std_logic_vector (1 downto 0);
-signal o_b : std_logic_vector (1 downto 0);
+signal o_r       : std_logic_vector (1 downto 0);
+signal o_g       : std_logic_vector (1 downto 0);
+signal o_b       : std_logic_vector (1 downto 0);
 
 -- Clock period definitions
 constant i_cpu_clock_period : time := 10 ns;
@@ -122,7 +122,7 @@ i_cpu_clock <= not i_cpu_clock;
 wait for i_cpu_clock_period/2;
 end process i_cpu_clock_process;
 
-i_vga_clock_process : process
+i_vga_clock_for_vga_sink_process : process
   variable first_wait : time := 0 ns;
   variable first_wait_flag : boolean := false;
 begin
@@ -132,7 +132,7 @@ if (first_wait_flag = false) then
 end if;
 i_vga_clock <= not i_vga_clock;
 wait for i_vga_clock_period/2;
-end process i_vga_clock_process;
+end process i_vga_clock_for_vga_sink_process;
 
 -- Stimulus process
 stim_proc : process

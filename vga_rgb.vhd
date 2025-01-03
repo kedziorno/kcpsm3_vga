@@ -32,11 +32,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity vga_rgb is
 port (
 i_clock, i_reset : in std_logic;
-i_color : in  std_logic_vector (5 downto 0);
-i_blank : in  std_logic;
-o_r     : out std_logic_vector (1 downto 0);
-o_g     : out std_logic_vector (1 downto 0);
-o_b     : out std_logic_vector (1 downto 0)
+i_color          : in  std_logic_vector (5 downto 0);
+i_blank          : in  std_logic;
+o_r              : out std_logic_vector (1 downto 0);
+o_g              : out std_logic_vector (1 downto 0);
+o_b              : out std_logic_vector (1 downto 0)
 );
 end entity vga_rgb;
 

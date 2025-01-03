@@ -6,7 +6,7 @@ package p_package1 is
 
   type t_color_array is array (63 downto 0) of std_logic_vector (5 downto 0);
   constant c_color : t_color_array := (
-    std_logic_vector (to_unsigned (63, 6)),
+    std_logic_vector (to_unsigned (63, 6)), -- white
     std_logic_vector (to_unsigned (62, 6)),
     std_logic_vector (to_unsigned (61, 6)),
     std_logic_vector (to_unsigned (60, 6)),
@@ -21,7 +21,7 @@ package p_package1 is
     std_logic_vector (to_unsigned (51, 6)),
     std_logic_vector (to_unsigned (50, 6)),
     std_logic_vector (to_unsigned (49, 6)),
-    std_logic_vector (to_unsigned (48, 6)),
+    std_logic_vector (to_unsigned (48, 6)), -- red
     std_logic_vector (to_unsigned (47, 6)),
     std_logic_vector (to_unsigned (46, 6)),
     std_logic_vector (to_unsigned (45, 6)),
@@ -57,7 +57,7 @@ package p_package1 is
     std_logic_vector (to_unsigned (15, 6)),
     std_logic_vector (to_unsigned (14, 6)),
     std_logic_vector (to_unsigned (13, 6)),
-    std_logic_vector (to_unsigned (12, 6)),
+    std_logic_vector (to_unsigned (12, 6)), -- green
     std_logic_vector (to_unsigned (11, 6)),
     std_logic_vector (to_unsigned (10, 6)),
     std_logic_vector (to_unsigned (09, 6)),
@@ -66,10 +66,10 @@ package p_package1 is
     std_logic_vector (to_unsigned (06, 6)),
     std_logic_vector (to_unsigned (05, 6)),
     std_logic_vector (to_unsigned (04, 6)),
-    std_logic_vector (to_unsigned (03, 6)),
+    std_logic_vector (to_unsigned (03, 6)), -- blue
     std_logic_vector (to_unsigned (02, 6)),
     std_logic_vector (to_unsigned (01, 6)),
-    std_logic_vector (to_unsigned (00, 6))
+    std_logic_vector (to_unsigned (00, 6)) -- black
   );
 
 end package p_package1;
