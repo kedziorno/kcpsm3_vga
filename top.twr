@@ -44,7 +44,7 @@ Setup/Hold to clock i_cpu_clock
             |Max Setup to|Max Hold to |                  | Clock  |
 Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------------+--------+
-i_reset     |    8.429(R)|   -0.824(R)|i_cpu_clock_BUFGP |   0.000|
+i_reset     |    6.797(R)|   -3.694(R)|i_cpu_clock_BUFGP |   0.000|
 ------------+------------+------------+------------------+--------+
 
 Clock to Setup on destination clock i_cpu_clock
@@ -52,24 +52,24 @@ Clock to Setup on destination clock i_cpu_clock
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-i_cpu_clock    |    9.585|         |         |         |
+i_cpu_clock    |    9.854|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 Pad to Pad
 ---------------+---------------+---------+
 Source Pad     |Destination Pad|  Delay  |
 ---------------+---------------+---------+
-i_reset        |o_b<0>         |   11.758|
-i_reset        |o_b<1>         |   10.594|
-i_reset        |o_blank        |    9.440|
-i_reset        |o_g<0>         |    9.908|
-i_reset        |o_g<1>         |    9.915|
-i_reset        |o_r<0>         |   10.828|
-i_reset        |o_r<1>         |   10.069|
+i_reset        |o_b<0>         |   10.441|
+i_reset        |o_b<1>         |   10.744|
+i_reset        |o_blank        |    9.613|
+i_reset        |o_g<0>         |   11.245|
+i_reset        |o_g<1>         |   11.444|
+i_reset        |o_r<0>         |   11.037|
+i_reset        |o_r<1>         |   11.387|
 ---------------+---------------+---------+
 
 
-Analysis completed Sat Jan  4 12:31:36 2025 
+Analysis completed Sun Jan  5 12:59:37 2025 
 --------------------------------------------------------------------------------
 
 Trace Settings:

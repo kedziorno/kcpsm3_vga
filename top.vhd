@@ -30,6 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 use work.numeric_std.all; -- XXX ONLY FOR DISABLE WARNIGS (I am not worthy and I am unworthy to modify this saint file ;-P). Please copy and modify own file.
+use work.p_package1.all;
 
 entity top is
 port (
@@ -49,11 +50,12 @@ end entity top;
 
 architecture behavioral of top is
 
-  constant c_x_step     : integer := 4;
-  constant c_y_step     : integer := 4;
-  constant c_x          : integer := 640 / c_x_step; -- 160
-  constant c_y          : integer := 480 / c_y_step; -- 120
-  constant c_all_pixels : integer := c_x * c_y; -- 19200,307200
+  component vga_clock_25mhz is
+  port (
+  i_clock, i_reset : in  std_logic;
+  o_vga_clock      : out std_logic
+  );
+  end component vga_clock_25mhz;
 
   component vga_timing is
   port (
@@ -66,6 +68,15 @@ architecture behavioral of top is
   );
   end component vga_timing;
 
+  component vga_address_generator is
+  port (
+  i_clock, i_reset : in  std_logic;
+  i_vga_blank      : in  std_logic;
+  i_vga_v_blank    : in  std_logic;
+  o_vga_address    : out std_logic_vector (c_memory_address_bits - 1 downto 0)
+  );
+  end component vga_address_generator;
+
   component vga_rgb is
   port (
   i_clock, i_reset : in  std_logic;
@@ -76,18 +87,6 @@ architecture behavioral of top is
   o_b              : out std_logic_vector (1 downto 0)
   );
   end component vga_rgb;
-
-  COMPONENT ipcore_vga_ramb16_dp
-  PORT (
-  clka  : IN  STD_LOGIC;
-  wea   : IN  STD_LOGIC_VECTOR (0 DOWNTO 0);
-  addra : IN  STD_LOGIC_VECTOR (14 DOWNTO 0);
-  dina  : IN  STD_LOGIC_VECTOR (5 DOWNTO 0);
-  clkb  : IN  STD_LOGIC;
-  addrb : IN  STD_LOGIC_VECTOR (14 DOWNTO 0);
-  doutb : OUT STD_LOGIC_VECTOR (5 DOWNTO 0)
-  );
-  END COMPONENT ipcore_vga_ramb16_dp;
 
   component kcpsm3 -- PicoBlaze 8-bit CPU
   port (
@@ -113,20 +112,35 @@ architecture behavioral of top is
   );
   end component program;
 
-  signal vga_clock                           : std_logic;
-  signal vga_write                           : std_logic_vector (0 downto 0);
-  signal vga_blank, vga_h_blank, vga_v_blank : std_logic;
-  signal vga_color, vga_color1               : std_logic_vector (5 downto 0);
-  signal vga_address,vga_all_pixels          : std_logic_vector (14 downto 0);
-  signal i_all_pixels                        : integer range 0 to c_all_pixels - 1;
+  component kcpsm3_io_registers_decoder is
+  port (
+  i_clock, i_reset      : in  std_logic;
+  i_kcpsm3_port_id      : in  std_logic_vector (7 downto 0);
+  i_kcpsm3_out_port     : in  std_logic_vector (7 downto 0);
+  i_kcpsm3_write_strobe : in  std_logic;
+  o_pixel_coordination  : out std_logic_vector (c_memory_address_bits - 1 downto 0);
+  o_pixel_color         : out std_logic_vector (c_color_bits - 1 downto 0);
+  o_pixel_write         : out std_logic_vector (0 downto 0)
+  );
+  end component kcpsm3_io_registers_decoder;
 
-  signal i_x_step, i_x_step_next                           : integer range 0 to c_x_step - 1;
-  signal i_y_step, i_y_step_next                           : integer range 0 to c_y_step - 1;
-  signal i_x, i_x_next                                     : integer range 0 to c_x      - 1;
-  signal i_y, i_y_next                                     : integer range 0 to c_y      - 1;
-  signal row_index, row_index_next                         : integer range 0 to c_y_step - 1;
-  signal vga_address_step, vga_address_step_next           : std_logic_vector (14 downto 0);
-  signal vga_address_step_temp, vga_address_step_temp_next : std_logic_vector (14 downto 0); -- this address is load when <c_y_step and stored when =c_y_step
+  COMPONENT ipcore_vga_ramb16_dp
+  PORT (
+  clka  : IN  STD_LOGIC;
+  wea   : IN  STD_LOGIC_VECTOR (0 DOWNTO 0);
+  addra : IN  STD_LOGIC_VECTOR (14 DOWNTO 0);
+  dina  : IN  STD_LOGIC_VECTOR (5 DOWNTO 0);
+  clkb  : IN  STD_LOGIC;
+  addrb : IN  STD_LOGIC_VECTOR (14 DOWNTO 0);
+  doutb : OUT STD_LOGIC_VECTOR (5 DOWNTO 0)
+  );
+  END COMPONENT ipcore_vga_ramb16_dp;
+
+  signal vga_clock                           : std_logic;
+  signal vga_blank, vga_h_blank, vga_v_blank : std_logic;
+  signal pixel_coordination, vga_address     : std_logic_vector (c_memory_address_bits - 1 downto 0);
+  signal pixel_color, vga_color              : std_logic_vector (c_color_bits - 1 downto 0);
+  signal pixel_write                         : std_logic_vector (0 downto 0);
 
   signal kcpsm3_address       : std_logic_vector (9 downto 0);
   signal kcpsm3_instruction   : std_logic_vector (17 downto 0);
@@ -140,155 +154,26 @@ architecture behavioral of top is
 
 begin
 
-  o_blank <= vga_blank;
+  o_blank   <= vga_blank;
   o_h_blank <= vga_h_blank;
   o_v_blank <= vga_v_blank;
 
-  p_vga_clock_divider : process (i_cpu_clock, i_reset) is
-    constant c_vga25 : integer := 2;
-    variable i_vga25 : integer range 0 to c_vga25 - 1;
-  begin
-    if (i_reset = '1') then
-      vga_clock <= '0';
-      i_vga25 := 0;
-    elsif (rising_edge (i_cpu_clock)) then
-      if (i_vga25 = c_vga25 - 1) then
-        i_vga25 := 0;
-        vga_clock <= not vga_clock;
-      else
-        i_vga25 := i_vga25 + 1;
-      end if;
-    end if;
-  end process p_vga_clock_divider;
-
-  p_vga_address_generator_registers : process (vga_clock, i_reset) is
-  begin
-    if (i_reset = '1') then
-      i_x_step              <= 0;
-      i_y_step              <= 0;
-      i_x                   <= 0;
-      i_y                   <= 0;
-      row_index             <= 0;
-      vga_address_step      <= (others => '0');
-      vga_address_step_temp <= (others => '0');
-    elsif (rising_edge (vga_clock)) then
-      i_x_step              <= i_x_step_next;
-      i_y_step              <= i_y_step_next;
-      i_x                   <= i_x_next;
-      i_y                   <= i_y_next;
-      vga_address_step      <= vga_address_step_next;
-      vga_address_step_temp <= vga_address_step_temp_next;
-      row_index             <= row_index_next;
-    end if;
-  end process p_vga_address_generator_registers;
-
-  p_vga_address_generator_combinatorial : process (
-    vga_blank, vga_v_blank,
-    vga_address_step, vga_address_step_temp,
-    i_x, i_y,
-    i_x_step, i_y_step,
-    row_index
-  ) is
-  begin
-    i_x_next                   <= i_x;
-    i_y_next                   <= i_y;
-    i_x_step_next              <= i_x_step;
-    i_y_step_next              <= i_y_step;
-    vga_address_step_next      <= vga_address_step;
-    vga_address_step_temp_next <= vga_address_step_temp;
-    row_index_next             <= row_index;
-    if (vga_blank = '0') then
-      if (i_x_step = c_x_step - 1) then
-        i_x_step_next <= 0;
-        vga_address_step_next <=
-          std_logic_vector (to_unsigned (to_integer (unsigned (vga_address_step)) + 1, 15));
-        if (i_x = c_x - 1) then
-          vga_address_step_next <=
-            std_logic_vector (to_unsigned (to_integer (unsigned (vga_address_step_temp)), 15));
-          i_x_next <= 0;
-          if (i_y_step = c_y_step - 1) then
-            i_y_step_next <= 0;
-            row_index_next <= 0;
-            vga_address_step_next <=
-              std_logic_vector (to_unsigned (to_integer (unsigned (vga_address_step_temp)) + c_x, 15));
-            if (i_y = c_y - 1) then
-              i_y_next <= 0;
-            else
-              i_y_next <= i_y + 1;
-            end if;
-          else
-            i_y_step_next <= i_y_step + 1;
-            row_index_next <= row_index + 1;
-          end if;
-        else
-          i_x_next <= i_x + 1;
-        end if;
-      else
-        i_x_step_next <= i_x_step + 1;
-      end if;
-    else
-      if (row_index = 0) then
-        vga_address_step_temp_next <=
-          std_logic_vector (to_unsigned (to_integer (unsigned (vga_address_step_next)), 15));
-      end if;
-    end if;
-    if (vga_v_blank = '1') then
-      vga_address_step_next <= (others => '0');
-    end if;
-  end process p_vga_address_generator_combinatorial;
-
   --synthesis translate_off
-  p_report_address_and_color : process (vga_write(0)) is
+  p_report_address_and_color : process (pixel_write(0)) is
   begin
-    if (rising_edge (vga_write(0))) then
+    if (rising_edge (pixel_write(0))) then
       report
-        "Color " & integer'image (to_integer (unsigned (vga_color))) & " " &
-        "at address " & integer'image (to_integer (unsigned (vga_all_pixels)));
+        "Color " & integer'image (to_integer (unsigned (pixel_color))) & " " &
+        "at address " & integer'image (to_integer (unsigned (pixel_coordination)));
     end if;
   end process p_report_address_and_color;
   --synthesis translate_on
 
-  p_io_registers_decoder : process (i_cpu_clock, i_reset) is
-  begin
-    if (i_reset = '1') then
-      vga_all_pixels <= (others => '0');
-      vga_color <= (others => '0');
-      vga_write <= "0";
-    elsif (rising_edge (i_cpu_clock)) then
-      case (kcpsm3_port_id) is
-        when x"16" =>
-          if (kcpsm3_write_strobe = '1') then
-            vga_all_pixels (7 downto 0) <= kcpsm3_out_port (7 downto 0);
-            vga_write <= "0";
-          end if;
-        when x"17" =>
-          if (kcpsm3_write_strobe = '1') then
-            vga_all_pixels (14 downto 8) <= kcpsm3_out_port (6 downto 0);
-            vga_write <= "0";
-          end if;
-        when x"20" =>
-          if (kcpsm3_write_strobe = '1') then
-            vga_color (5 downto 0) <= kcpsm3_out_port (5 downto 0);
-            vga_write <= "1";
-          end if;
-        when others =>
-          vga_write <= "0";
-          vga_all_pixels <= (others => '0');
-          vga_color <= (others => '0');
-      end case;
-    end if;
-  end process p_io_registers_decoder;
-
-  vga_address <= vga_address_step; -- input
-  inst_ipcore_vga_ramb16_dp : ipcore_vga_ramb16_dp
+  inst_vga_clock_25mhz : vga_clock_25mhz
   port map (
-  clka  => i_cpu_clock,
-  wea   => vga_write,
-  addra => vga_all_pixels,
-  dina  => vga_color,
-  clkb  => vga_clock,
-  addrb => vga_address,
-  doutb => vga_color1
+  i_clock     => i_cpu_clock,
+  i_reset     => i_reset,
+  o_vga_clock => vga_clock
   );
 
   inst_vga_timing : vga_timing
@@ -302,11 +187,20 @@ begin
   o_v_blank => vga_v_blank
   );
 
+  inst_vga_address_generator : vga_address_generator
+  port map (
+  i_clock       => vga_clock,
+  i_reset       => i_reset,
+  i_vga_blank   => vga_blank,
+  i_vga_v_blank => vga_v_blank,
+  o_vga_address => vga_address
+  );
+
   inst_vga_rgb : vga_rgb
   port map (
   i_clock => vga_clock,
   i_reset => i_reset,
-  i_color => vga_color1,
+  i_color => vga_color,
   i_blank => vga_blank,
   o_r     => o_r,
   o_g     => o_g,
@@ -333,6 +227,29 @@ begin
   address     => kcpsm3_address,
   instruction => kcpsm3_instruction,
   clk         => i_cpu_clock
+  );
+
+  inst_kcpsm3_io_registers_decoder : kcpsm3_io_registers_decoder
+  port map (
+  i_clock               => i_cpu_clock,
+  i_reset               => i_reset,
+  i_kcpsm3_port_id      => kcpsm3_port_id,
+  i_kcpsm3_out_port     => kcpsm3_out_port,
+  i_kcpsm3_write_strobe => kcpsm3_write_strobe,
+  o_pixel_coordination  => pixel_coordination,
+  o_pixel_color         => pixel_color,
+  o_pixel_write         => pixel_write
+  );
+
+  inst_ipcore_vga_ramb16_dp : ipcore_vga_ramb16_dp
+  port map (
+  clka  => i_cpu_clock,
+  wea   => pixel_write,
+  addra => pixel_coordination,
+  dina  => pixel_color,
+  clkb  => vga_clock,
+  addrb => vga_address,
+  doutb => vga_color
   );
 
 end architecture behavioral;

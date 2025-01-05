@@ -4,6 +4,18 @@ use ieee.numeric_std.all;
 
 package p_package1 is
 
+  constant c_x_step                     : integer := 4;
+  constant c_y_step                     : integer := 4;
+  constant c_x                          : integer := 640 / c_x_step; -- 160
+  constant c_y                          : integer := 480 / c_y_step; -- 120
+  constant c_all_pixels                 : integer := c_x * c_y; -- 19200,307200
+  constant c_memory_address_bits        : integer := 15;
+  constant c_color_bits                 : integer := 6;
+  constant c_vga_clock_divider_25mhz    : integer := 2;
+  constant c_kcpsm3_pixel_address_low   : std_logic_vector (7 downto 0) := x"16";
+  constant c_kcpsm3_pixel_address_high  : std_logic_vector (7 downto 0) := x"17";
+  constant c_kcpsm3_pixel_address_color : std_logic_vector (7 downto 0) := x"20";
+
   type t_color_array is array (63 downto 0) of std_logic_vector (5 downto 0);
   constant c_color : t_color_array := (
     std_logic_vector (to_unsigned (63, 6)), -- white
@@ -35,7 +47,7 @@ package p_package1 is
     std_logic_vector (to_unsigned (37, 6)),
     std_logic_vector (to_unsigned (36, 6)),
     std_logic_vector (to_unsigned (35, 6)),
-    std_logic_vector (to_unsigned (34, 6)),
+    std_logic_vector (to_unsigned (34, 6)), -- violet
     std_logic_vector (to_unsigned (33, 6)),
     std_logic_vector (to_unsigned (32, 6)),
     std_logic_vector (to_unsigned (31, 6)),
