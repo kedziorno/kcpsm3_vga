@@ -5,14 +5,14 @@ Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.07 secs
+Total CPU time to Xst completion: 0.06 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.07 secs
+Total CPU time to Xst completion: 0.06 secs
  
 --> 
 Reading design: top.prj
@@ -286,7 +286,7 @@ Analyzing Entity <vga_timing> in library <work> (Architecture <industry_standard
 Entity <vga_timing> analyzed. Unit <vga_timing> generated.
 
 Analyzing Entity <vga_address_generator> in library <work> (Architecture <behavioral>).
-WARNING:Xst:819 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_address_generator.vhd" line 78: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+WARNING:Xst:819 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_address_generator.vhd" line 80: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
    <o_vga_address>
 Entity <vga_address_generator> analyzed. Unit <vga_address_generator> generated.
 
@@ -510,7 +510,7 @@ Entity <kcpsm3> analyzed. Unit <kcpsm3> generated.
 
 Analyzing Entity <program> in library <work> (Architecture <low_level_definition>).
     Set user-defined property "INIT =  00000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INITP_00 =  0000000000000000003AA9DDD5D575DDD777775D75D77777577743C0C0C0C0C0" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_00 =  000000000000000000000EAA7775374DDD377774DDD37777477743C0C0C0C0C0" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INITP_01 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INITP_02 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INITP_03 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
@@ -519,11 +519,11 @@ Analyzing Entity <program> in library <work> (Architecture <low_level_definition
     Set user-defined property "INITP_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INITP_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INIT_00 =  0015020C01000012001502300100000C00150222010000060015023F01000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_01 =  AF008E9C8E0100568E0100568E0100568E011F101E00405A0015020301000018" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_02 =  8E0100568E018E010056AF008E9C00568E0100568E0100568E0100568E010056" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_03 =  0056AF008E9C00568E0100568E0100568E0100568E010056AF008E9C00568E01" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_04 =  00568E01AF008E9C00568E018E018E018E010056AF008E9C00568E0200568E02" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_05 =  00000000000000000000405AA000C220CF17CE16A0008E0100568E0100568E01" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_01 =  8F011E008E0100518E0100518E0100518E011F101E0040550015020301000018" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_02 =  00518E0200518E0200518F011E0000518E0100518E0100518E0100518E010051" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_03 =  00518E0200518F011E0000518E0100518E0100518E0100518E0100518F011E00" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_04 =  8E0100518E0100518E0100518E018F011E0000518E0400518F011E0000518E02" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_05 =  00000000000000000000000000000000000000004055A000C220CF17CE16A000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INIT_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INIT_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INIT_08 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
@@ -627,7 +627,7 @@ Unit <vga_timing> synthesized.
 Synthesizing Unit <vga_address_generator>.
     Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_address_generator.vhd".
     Found 2-bit up counter for signal <row_index_q>.
-    Found 15-bit adder for signal <vga_address_step_next_i$share0000> created at line 102.
+    Found 15-bit adder for signal <vga_address_step_next_i$share0000> created at line 104.
     Found 15-bit register for signal <vga_address_step_q>.
     Found 15-bit register for signal <vga_address_step_temp_q>.
     Found 8-bit up counter for signal <x_q>.
@@ -653,8 +653,14 @@ Synthesizing Unit <kcpsm3_io_registers_decoder>.
     Found 1-bit register for signal <o_pixel_write<0>>.
     Found 15-bit register for signal <o_pixel_coordination>.
     Found 6-bit register for signal <o_pixel_color>.
+    Found 15-bit adder for signal <o_pixel_coordination$addsub0000> created at line 92.
+    Found 8-bit register for signal <x_coordination>.
+    Found 15-bit register for signal <y_coordination>.
+    Found 7x8-bit multiplier for signal <y_coordination$mult0000> created at line 83.
     Summary:
-	inferred  22 D-type flip-flop(s).
+	inferred  45 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred   1 Multiplier(s).
 Unit <kcpsm3_io_registers_decoder> synthesized.
 
 
@@ -683,17 +689,20 @@ INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmet
 HDL Synthesis Report
 
 Macro Statistics
-# Adders/Subtractors                                   : 1
- 15-bit adder                                          : 1
+# Multipliers                                          : 1
+ 7x8-bit multiplier                                    : 1
+# Adders/Subtractors                                   : 2
+ 15-bit adder                                          : 2
 # Counters                                             : 7
  10-bit up counter                                     : 2
  2-bit up counter                                      : 3
  7-bit up counter                                      : 1
  8-bit up counter                                      : 1
-# Registers                                            : 23
- 1-bit register                                        : 20
- 15-bit register                                       : 2
+# Registers                                            : 11
+ 1-bit register                                        : 5
+ 15-bit register                                       : 4
  6-bit register                                        : 1
+ 8-bit register                                        : 1
 # Comparators                                          : 6
  10-bit comparator greater                             : 2
  10-bit comparator less                                : 4
@@ -707,18 +716,26 @@ Macro Statistics
 Reading core <ipcore_dir/ipcore_vga_ramb16_dp.ngc>.
 Loading core <ipcore_vga_ramb16_dp> for timing and area information for instance <inst_ipcore_vga_ramb16_dp>.
 
+Synthesizing (advanced) Unit <kcpsm3_io_registers_decoder>.
+	Found pipelined multiplier on signal <y_coordination_mult0000>:
+		- 1 pipeline level(s) found in a register connected to the multiplier macro output.
+		Pushing register(s) into the multiplier macro.
+Unit <kcpsm3_io_registers_decoder> synthesized (advanced).
+
 =========================================================================
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# Adders/Subtractors                                   : 1
- 15-bit adder                                          : 1
+# Multipliers                                          : 1
+ 7x8-bit registered multiplier                         : 1
+# Adders/Subtractors                                   : 2
+ 15-bit adder                                          : 2
 # Counters                                             : 6
  10-bit up counter                                     : 2
  2-bit up counter                                      : 3
  8-bit up counter                                      : 1
-# Registers                                            : 132
- Flip-Flops                                            : 132
+# Registers                                            : 140
+ Flip-Flops                                            : 140
 # Comparators                                          : 6
  10-bit comparator greater                             : 2
  10-bit comparator less                                : 4
@@ -750,8 +767,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 164
- Flip-Flops                                            : 164
+# Registers                                            : 172
+ Flip-Flops                                            : 172
 
 =========================================================================
 
@@ -780,27 +797,28 @@ Design Statistics
 # IOs                              : 14
 
 Cell Usage :
-# BELS                             : 490
+# BELS                             : 563
 #      GND                         : 2
 #      INV                         : 14
-#      LUT1                        : 27
-#      LUT2                        : 38
+#      LUT1                        : 33
+#      LUT2                        : 67
 #      LUT2_D                      : 1
-#      LUT2_L                      : 7
-#      LUT3                        : 100
-#      LUT4                        : 108
-#      LUT4_D                      : 7
-#      LUT4_L                      : 14
+#      LUT2_L                      : 2
+#      LUT3                        : 101
+#      LUT3_D                      : 1
+#      LUT4                        : 103
+#      LUT4_D                      : 6
+#      LUT4_L                      : 33
 #      MULT_AND                    : 2
-#      MUXCY                       : 78
-#      MUXF5                       : 10
+#      MUXCY                       : 92
+#      MUXF5                       : 9
 #      VCC                         : 2
-#      XORCY                       : 80
-# FlipFlops/Latches                : 167
+#      XORCY                       : 95
+# FlipFlops/Latches                : 175
 #      FD                          : 24
 #      FDC                         : 48
 #      FDCE                        : 38
-#      FDE                         : 7
+#      FDE                         : 15
 #      FDR                         : 30
 #      FDRE                        : 8
 #      FDRSE                       : 10
@@ -819,6 +837,8 @@ Cell Usage :
 # IO Buffers                       : 12
 #      IBUF                        : 1
 #      OBUF                        : 11
+# MULTs                            : 1
+#      MULT18X18SIO                : 1
 =========================================================================
 
 Device utilization summary:
@@ -826,14 +846,15 @@ Device utilization summary:
 
 Selected Device : 3s1200efg320-4 
 
- Number of Slices:                      203  out of   8672     2%  
- Number of Slice Flip Flops:            167  out of  17344     0%  
- Number of 4 input LUTs:                384  out of  17344     2%  
-    Number used as logic:               316
+ Number of Slices:                      226  out of   8672     2%  
+ Number of Slice Flip Flops:            175  out of  17344     1%  
+ Number of 4 input LUTs:                429  out of  17344     2%  
+    Number used as logic:               361
     Number used as RAMs:                 68
  Number of IOs:                          14
  Number of bonded IOBs:                  13  out of    250     5%  
  Number of BRAMs:                         9  out of     28    32%  
+ Number of MULT18X18SIOs:                 1  out of     28     3%  
  Number of GCLKs:                         2  out of     24     8%  
 
 ---------------------------
@@ -858,7 +879,7 @@ Clock Information:
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
 inst_vga_clock_25mhz/vga_clock1    | BUFG                   | 75    |
-i_cpu_clock                        | BUFGP                  | 135   |
+i_cpu_clock                        | BUFGP                  | 144   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -873,7 +894,7 @@ Timing Summary:
 ---------------
 Speed Grade: -4
 
-   Minimum period: 11.044ns (Maximum Frequency: 90.551MHz)
+   Minimum period: 11.106ns (Maximum Frequency: 90.039MHz)
    Minimum input arrival time before clock: 8.384ns
    Maximum output required time after clock: 9.796ns
    Maximum combinational path delay: 8.932ns
@@ -898,7 +919,7 @@ Delay:               9.877ns (Levels of Logic = 20)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDCE:C->Q             2   0.591   0.622  inst_vga_address_generator/x_q_3 (inst_vga_address_generator/x_q_3)
-     LUT4:I0->O            1   0.704   0.424  inst_vga_address_generator/x_q_cmp_eq00002_SW0 (N56)
+     LUT4:I0->O            1   0.704   0.424  inst_vga_address_generator/x_q_cmp_eq00002_SW0 (N42)
      LUT4:I3->O           24   0.704   1.331  inst_vga_address_generator/x_q_cmp_eq00002 (inst_vga_address_generator/x_q_cmp_eq0000_mand)
      LUT2:I1->O            4   0.704   0.591  inst_vga_address_generator/x_q_cmp_eq00001 (inst_vga_address_generator/x_q_cmp_eq0000)
      LUT4:I3->O            1   0.704   0.000  inst_vga_address_generator/Madd_vga_address_step_next_i_share0000_lut<0> (inst_vga_address_generator/Madd_vga_address_step_next_i_share0000_lut<0>)
@@ -925,29 +946,29 @@ Delay:               9.877ns (Levels of Logic = 20)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'i_cpu_clock'
-  Clock period: 11.044ns (frequency: 90.551MHz)
-  Total number of paths / destination ports: 7427 / 538
+  Clock period: 11.106ns (frequency: 90.039MHz)
+  Total number of paths / destination ports: 7390 / 562
 -------------------------------------------------------------------------
-Delay:               11.044ns (Levels of Logic = 5)
-  Source:            inst_program/ram_1024_x_18 (RAM)
-  Destination:       inst_kcpsm3_io_registers_decoder/o_pixel_coordination_14 (FF)
+Delay:               11.106ns (Levels of Logic = 5)
+  Source:            inst_kcpsm3_rom_memory_content/ram_1024_x_18 (RAM)
+  Destination:       inst_kcpsm3_io_registers_decoder/o_pixel_coordination_13 (FF)
   Source Clock:      i_cpu_clock rising
   Destination Clock: i_cpu_clock rising
 
-  Data Path: inst_program/ram_1024_x_18 to inst_kcpsm3_io_registers_decoder/o_pixel_coordination_14
+  Data Path: inst_kcpsm3_rom_memory_content/ram_1024_x_18 to inst_kcpsm3_io_registers_decoder/o_pixel_coordination_13
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     RAMB16_S18:CLK->DO4   10   2.800   0.882  inst_program/ram_1024_x_18 (kcpsm3_instruction<4>)
-     RAM16X1D:DPRA0->DPO    1   0.704   0.455  inst_kcpsm3/reg_loop[1].register_bit (inst_kcpsm3/sy<1>)
-     LUT3:I2->O           71   0.704   1.310  inst_kcpsm3/reg_loop[1].operand_select_mux (kcpsm3_port_id<1>)
-     LUT4_D:I2->O         15   0.704   1.021  inst_kcpsm3_io_registers_decoder/o_pixel_write_0_mux000041 (inst_kcpsm3_io_registers_decoder/N12)
-     LUT4_D:I3->O          6   0.704   0.748  inst_kcpsm3_io_registers_decoder/o_pixel_coordination_10_mux000021 (inst_kcpsm3_io_registers_decoder/N111)
-     LUT4:I1->O            1   0.704   0.000  inst_kcpsm3_io_registers_decoder/o_pixel_coordination_8_mux00001 (inst_kcpsm3_io_registers_decoder/o_pixel_coordination_8_mux0000)
-     FDC:D                     0.308          inst_kcpsm3_io_registers_decoder/o_pixel_coordination_8
+     RAMB16_S18:CLK->DO5   10   2.800   0.882  inst_kcpsm3_rom_memory_content/ram_1024_x_18 (kcpsm3_instruction<5>)
+     RAM16X1D:DPRA1->DPO    1   0.704   0.455  inst_kcpsm3/reg_loop[4].register_bit (inst_kcpsm3/sy<4>)
+     LUT3:I2->O           23   0.704   1.377  inst_kcpsm3/reg_loop[4].operand_select_mux (kcpsm3_port_id<4>)
+     LUT4_D:I0->O         29   0.704   1.340  inst_kcpsm3_io_registers_decoder/x_coordination_and0000111_2 (inst_kcpsm3_io_registers_decoder/x_coordination_and00001111)
+     LUT2:I1->O            1   0.704   0.424  inst_kcpsm3_io_registers_decoder/o_pixel_coordination_mux0000<1>1_SW0 (N54)
+     LUT4:I3->O            1   0.704   0.000  inst_kcpsm3_io_registers_decoder/o_pixel_coordination_mux0000<1>1 (inst_kcpsm3_io_registers_decoder/o_pixel_coordination_mux0000<1>)
+     FDC:D                     0.308          inst_kcpsm3_io_registers_decoder/o_pixel_coordination_1
     ----------------------------------------
-    Total                     11.044ns (6.628ns logic, 4.416ns route)
-                                       (60.0% logic, 40.0% route)
+    Total                     11.106ns (6.628ns logic, 4.478ns route)
+                                       (59.7% logic, 40.3% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'inst_vga_clock_25mhz/vga_clock1'
@@ -962,7 +983,7 @@ Offset:              8.384ns (Levels of Logic = 5)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            91   1.218   1.456  i_reset_IBUF (i_reset_IBUF)
+     IBUF:I->O            92   1.218   1.456  i_reset_IBUF (i_reset_IBUF)
      LUT4:I0->O           13   0.704   0.987  inst_vga_timing/o_blank (o_blank_OBUF)
      LUT4:I3->O            1   0.704   0.424  inst_vga_address_generator/vga_address_step_next_i<0>5_SW0 (N4)
      LUT4_D:I3->O         14   0.704   1.175  inst_vga_address_generator/vga_address_step_next_i<0>5 (inst_vga_address_generator/N5)
@@ -974,22 +995,24 @@ Offset:              8.384ns (Levels of Logic = 5)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'i_cpu_clock'
-  Total number of paths / destination ports: 2 / 2
+  Total number of paths / destination ports: 11 / 11
 -------------------------------------------------------------------------
-Offset:              3.410ns (Levels of Logic = 1)
+Offset:              5.920ns (Levels of Logic = 3)
   Source:            i_reset (PAD)
-  Destination:       inst_kcpsm3/reset_flop2 (FF)
+  Destination:       inst_kcpsm3_io_registers_decoder/x_coordination_7 (FF)
   Destination Clock: i_cpu_clock rising
 
-  Data Path: i_reset to inst_kcpsm3/reset_flop2
+  Data Path: i_reset to inst_kcpsm3_io_registers_decoder/x_coordination_7
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            91   1.218   1.281  i_reset_IBUF (i_reset_IBUF)
-     FDS:S                     0.911          inst_kcpsm3/reset_flop1
+     IBUF:I->O            92   1.218   1.360  i_reset_IBUF (i_reset_IBUF)
+     LUT2:I1->O            2   0.704   0.622  inst_kcpsm3_io_registers_decoder/x_coordination_and000011_SW0 (N114)
+     LUT4:I0->O            8   0.704   0.757  inst_kcpsm3_io_registers_decoder/x_coordination_and00002 (inst_kcpsm3_io_registers_decoder/x_coordination_and0000)
+     FDE:CE                    0.555          inst_kcpsm3_io_registers_decoder/x_coordination_0
     ----------------------------------------
-    Total                      3.410ns (2.129ns logic, 1.281ns route)
-                                       (62.4% logic, 37.6% route)
+    Total                      5.920ns (3.181ns logic, 2.739ns route)
+                                       (53.7% logic, 46.3% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'inst_vga_clock_25mhz/vga_clock1'
@@ -1026,7 +1049,7 @@ Delay:               8.932ns (Levels of Logic = 4)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            91   1.218   1.456  i_reset_IBUF (i_reset_IBUF)
+     IBUF:I->O            92   1.218   1.456  i_reset_IBUF (i_reset_IBUF)
      LUT4:I0->O           13   0.704   1.158  inst_vga_timing/o_blank (o_blank_OBUF)
      LUT2:I0->O            1   0.704   0.420  inst_vga_rgb/o_r_1_mux00001 (o_r_1_OBUF)
      OBUF:I->O                 3.272          o_r_1_OBUF (o_r<1>)
@@ -1037,13 +1060,13 @@ Delay:               8.932ns (Levels of Logic = 4)
 =========================================================================
 
 
-Total REAL time to Xst completion: 15.00 secs
-Total CPU time to Xst completion: 14.01 secs
+Total REAL time to Xst completion: 14.00 secs
+Total CPU time to Xst completion: 13.27 secs
  
 --> 
 
 
-Total memory usage is 541752 kilobytes
+Total memory usage is 541656 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :  123 (   0 filtered)

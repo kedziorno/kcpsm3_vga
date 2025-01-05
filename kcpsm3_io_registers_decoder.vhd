@@ -15,14 +15,21 @@
 -- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
---
+--   - Coordinations is stored at absolute addresses (0 - 19199) :
+--      - 0x16 - X (rows) , 0 - 159 / use 8bit.
+--      - 0x17 - Y (cols) , 0 - 119 / use 7bit, expect first MSB.
+--   - Colors have index 0 - 63 at address 0x20.
+--   - After concatenation to YYYYYYYXXXXXXXX format (15 bit)
+--       decoder make address (coordination), data (color) and write (boolean)
+--       signals for access to dual-port memory (A)
+--       where pixels with color is stored.
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
@@ -48,28 +55,44 @@ architecture behavioral of kcpsm3_io_registers_decoder is
 begin
 
   p_io_registers_decoder : process (i_clock, i_reset) is
+    variable x_coordination : integer range 0 to c_x - 1; -- 7 bit
+    variable y_coordination : integer range 0 to c_y * c_x - 1; -- 6 bit
   begin
     if (i_reset = '1') then
       o_pixel_write        <= "0";
       o_pixel_coordination <= (others => '0');
       o_pixel_color        <= (others => '0');
+      --synthesis translate_off
+      report "c_x : " & integer'image (c_x);
+      report "c_y : " & integer'image (c_y);
+      --synthesis translate_on
     elsif (rising_edge (i_clock)) then
       case (i_kcpsm3_port_id) is
-        when c_kcpsm3_pixel_address_low =>
+        when c_kcpsm3_pixel_address_low => -- x coordination pixel 7 bit (0 to 159)
           if (i_kcpsm3_write_strobe = '1') then
             o_pixel_write <= "0";
-            o_pixel_coordination (7 downto 0) <=
-              i_kcpsm3_out_port (7 downto 0);
+            x_coordination :=
+              to_integer (unsigned (i_kcpsm3_out_port (7 downto 0)));
+            --synthesis translate_off
+            report "x_coordination : " & integer'image (x_coordination);
+            --synthesis translate_on
           end if;
-        when c_kcpsm3_pixel_address_high =>
+        when c_kcpsm3_pixel_address_high => -- y coordination pixel 6 bit (0 to 119)
           if (i_kcpsm3_write_strobe = '1') then
             o_pixel_write <= "0";
-            o_pixel_coordination (c_memory_address_bits - 1 downto 8) <=
-              i_kcpsm3_out_port (6 downto 0);
+            y_coordination :=
+              to_integer (unsigned (i_kcpsm3_out_port (6 downto 0))) * c_x;
+            --synthesis translate_off
+            report "y_coordination : " & integer'image (y_coordination);
+            --synthesis translate_on
           end if;
-        when c_kcpsm3_pixel_address_color =>
+        when c_kcpsm3_pixel_address_color => -- color pixel (0 to 63)
           if (i_kcpsm3_write_strobe = '1') then
             o_pixel_write <= "1";
+            o_pixel_coordination <= std_logic_vector (to_unsigned (y_coordination + x_coordination, c_memory_address_bits));
+            --synthesis translate_off
+            report "o_pixel_coordination : " & integer'image (y_coordination + x_coordination);
+            --synthesis translate_on
             o_pixel_color <=
               i_kcpsm3_out_port (c_color_bits - 1 downto 0);
           end if;

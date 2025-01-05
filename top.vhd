@@ -104,7 +104,7 @@ architecture behavioral of top is
   );
   end component kcpsm3;
 
-  component program -- kcpsm3_rom_memory_content
+  component program
   port (
   address     : in  std_logic_vector (9 downto 0);
   instruction : out std_logic_vector (17 downto 0);
@@ -222,7 +222,7 @@ begin
   clk           => i_cpu_clock
   );
 
-  inst_program : program
+  inst_kcpsm3_rom_memory_content : program
   port map (
   address     => kcpsm3_address,
   instruction => kcpsm3_instruction,

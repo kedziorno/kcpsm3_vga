@@ -1,46 +1,46 @@
 ; This simple program can write each 64 colors to the indicated memory address.
-; Low 7 bits is available in out_low_address, but 6 bits is on out_high_address.
+; Coordinations use x16 (X) and x17 (Y) registers and get absolute values.
 ; Point matrix have 160x120 on VGA (640x480) resolution.
-; Use Xilinx PicoBlaze 8Bit CPU.
+; Use Xilinx PicoBlaze 8-Bit CPU.
 ;
-CONSTANT  out_low_address,    16; 7 bit
-CONSTANT  out_high_address,   17; 6 bit
-CONSTANT  out_color,          20;
-NAMEREG   s0,                 low_address;
-NAMEREG   s1,                 high_address;
-NAMEREG   s2,                 color;
+CONSTANT  X_ROW ,    16;
+CONSTANT  Y_COL ,    17;
+CONSTANT  COLOR ,    20;
+NAMEREG   s0    ,     X;
+NAMEREG   s1    ,     Y;
+NAMEREG   s2    , color;
 ;
-; Example : from upper-left corner put 5 5x7 typeface color characters.
+; Example : from upper-left corner put 5 5x7 typeface color characters in row.
 ;
 ; WHITE
-LOAD low_address, 00;
-LOAD high_address, 00;
-LOAD color, 3F;
-CALL SMILE;
+LOAD X     , 00;
+LOAD Y     , 00;
+LOAD color , 3F;
+CALL SMILE     ;
 ;
 ; VIOLET
-LOAD low_address  , 06;
-LOAD high_address , 00;
-LOAD color        , 22;
-CALL SMILE;
+LOAD X      , 06;
+LOAD Y      , 00;
+LOAD color  , 22;
+CALL SMILE      ;
 ;
 ; RED
-LOAD low_address  , 0C;
-LOAD high_address , 00;
-LOAD color        , 30;
-CALL SMILE;
+LOAD X     , 0C;
+LOAD Y     , 00;
+LOAD color , 30;
+CALL SMILE     ;
 ;
 ; GREEN
-LOAD low_address  , 12;
-LOAD high_address , 00;
-LOAD color        , 0C;
-CALL SMILE;
+LOAD X     , 12;
+LOAD Y     , 00;
+LOAD color , 0C;
+CALL SMILE     ;
 ;
 ; BLUE
-LOAD low_address  , 18;
-LOAD high_address , 00;
-LOAD color        , 03;
-CALL SMILE;
+LOAD X     , 18;
+LOAD Y     , 00;
+LOAD color , 03;
+CALL SMILE     ;
 ;
 ; FINISH
 JUMP END;
@@ -50,95 +50,90 @@ SMILE:
 ;
 ; .***.
 ;
-  LOAD  sE    ,    low_address  ;
-  LOAD  sF    ,   high_address  ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
+  LOAD  sE    ,  X  ;
+  LOAD  sF    ,  Y  ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
 ;
 ; *****
 ;
-  ADD   sE    ,             9C  ;
-  ADDCY sF    ,             00  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
+  LOAD  sE    ,  X  ;
+  ADD   sF    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
 ;
 ; *.*.*
 ;
-  ADD   sE    ,             9C  ;
-  ADDCY sF    ,             00  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
+  LOAD  sE    ,  X  ;
+  ADD   sF    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 02  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 02  ;
+  CALL  PIXEL       ;
 ;
 ; *****
 ;
-  ADD   sE    ,             9C  ;
-  ADDCY sF    ,             00  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
+  LOAD  sE    ,  X  ;
+  ADD   sF    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
 ;
 ; *.*.*
 ;
-  ADD   sE    ,             9C  ;
-  ADDCY sF    ,             00  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             02  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             02  ;
-  CALL  PIXEL                   ;
+  LOAD  sE    ,  X  ;
+  ADD   sF    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 02  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 02  ;
+  CALL  PIXEL       ;
 ;
 ; *...*
 ;
-  ADD   sE    ,             9C  ;
-  ADDCY sF    ,             00  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  ADD   sE    ,             01  ;
-  ADD   sE    ,             01  ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
+  LOAD  sE    ,  X  ;
+  ADD   sF    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 04  ;
+  CALL  PIXEL       ;
 ;
 ; .***.
 ;
-  ADD   sE    ,             9C  ;
-  ADDCY sF    ,             00  ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
-  CALL  PIXEL                   ;
-  ADD   sE    ,             01  ;
+  LOAD  sE    ,  X  ;
+  ADD   sF    , 01  ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
+  CALL  PIXEL       ;
+  ADD   sE    , 01  ;
   RETURN;
 ;
-; DRAW PIXEL STORED IN sF/sE REGS - 6bit/7bit (MAX 19200 - 160x120 PIXELS).
+; DRAW PIXEL WITH COORDINATION STORED IN sE/sF REGS (MAX 19199).
 PIXEL:
-  OUTPUT sE    , out_low_address;
-  OUTPUT sF    , out_high_address;
-  OUTPUT color , out_color;
+  OUTPUT sE    , X_ROW; 0 - 159
+  OUTPUT sF    , Y_COL; 0 - 119
+  OUTPUT color , COLOR; 0 - 63
   RETURN;
 ;
 ; STAY CPU IN ACTIVE LOOP
