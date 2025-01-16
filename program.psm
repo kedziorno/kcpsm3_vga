@@ -6,137 +6,449 @@
 CONSTANT  X_ROW ,    16;
 CONSTANT  Y_COL ,    17;
 CONSTANT  COLOR ,    20;
-NAMEREG   s0    ,     X;
-NAMEREG   s1    ,     Y;
-NAMEREG   s2    , color;
+
+CONSTANT PORT_1, 01;
+CONSTANT PORT_2, 02;
+CONSTANT PORT_3, 03;
+CONSTANT PORT_4, 04;
+
+LOAD s0,2d;
+STORE s0, 00;
+LOAD s0,00;
+STORE s0, 01;
+LOAD s0,1a;
+STORE s0, 02;
+LOAD s0,91;
+STORE s0, 03;
+LOAD s0,0e;
+STORE s0, 04;
+LOAD s0,09;
+STORE s0, 05;
+LOAD s0,07;
+STORE s0, 06;
+LOAD s0,20;
+STORE s0, 07;
+LOAD s0,03;
+STORE s0, 08;
+LOAD s0,94;
+STORE s0, 09;
+LOAD s0,01;
+STORE s0, 0a;
+LOAD s0,ca;
+STORE s0, 0b;
+LOAD s0,00;
+STORE s0, 0c;
+LOAD s0,e5;
+STORE s0, 0d;
+LOAD s0,00;
+STORE s0, 0e;
+LOAD s0,73;
+STORE s0, 0f;
+LOAD s0,00;
+STORE s0, 10;
+LOAD s0,39;
+STORE s0, 11;
+LOAD s0,00;
+STORE s0, 12;
+LOAD s0,1c;
+STORE s0, 13;
+LOAD s0,00;
+STORE s0, 14;
+LOAD s0,0e;
+STORE s0, 15;
+LOAD s0,00;
+STORE s0, 16;
+LOAD s0,07;
+STORE s0, 17;
+LOAD s0,00;
+STORE s0, 18;
+LOAD s0,04;
+STORE s0, 19;
+LOAD s0,00;
+STORE s0, 1a;
+LOAD s0,02;
+STORE s0, 1b;
+LOAD s0,00;
+STORE s0, 1c;
+LOAD s0,01;
+STORE s0, 1d;
+
+CONSTANT ROM_START,00;
+CONSTANT ROM_EN,1D;
+
+CONSTANT X_NEW_LO, 1E;
+CONSTANT X_NEW_HI, 1F;
+CONSTANT Y_NEW_LO, 20;
+CONSTANT Y_NEW_HI, 21;
+CONSTANT CURRENT_ANGLE_LO, 22;
+CONSTANT CURRENT_ANGLE_HI, 23;
+CONSTANT DESIRED_ANGLE_LO, 24;
+CONSTANT DESIRED_ANGLE_HI, 25;
+CONSTANT ANGLE_LO, 26;
+CONSTANT ANGLE_HI, 27;
+
+CONSTANT C_90mul256_LO, 00;
+CONSTANT C_90mul256_HI, 5A;
+CONSTANT C_180mul256_LO, 00;
+CONSTANT C_180mul256_HI, B4;
+CONSTANT C_360_LO, 68;
+CONSTANT C_360_HI, 01;
+
+; s0-s3 - reserved
+
+NAMEREG s4, COMPARE_REG;
+NAMEREG s5, TEMP_REG;
+NAMEREG s6, INDEX;
+NAMEREG s7, INDEX_MAX;
+NAMEREG s8, COLOR_REG;
+NAMEREG s9, TEMP_INDEX;
+NAMEREG sA, TEMP_LO;
+NAMEREG sB, TEMP_HI;
+NAMEREG sC, Y_LO;
+NAMEREG sD, Y_HI;
+NAMEREG sE, X_LO;
+NAMEREG sF, X_HI;
+
+main:
+
+OUTPUT s0, PORT_1;
+OUTPUT s1, PORT_2;
+OUTPUT s2, PORT_3;
+OUTPUT s3, PORT_4;
+
+STORE s0,28;
+STORE s1,29;
+STORE s2,2a;
+STORE s3,2b;
+
+LOAD s3, s1;
+LOAD s2, s0;
+LOAD s1, 00;
+LOAD s0, 01;
+CALL adder_16;
+LOAD s3,C_360_HI;
+LOAD s2,C_360_LO;
+CALL compare_16;
+
+FETCH s0,28;
+FETCH s1,29;
+FETCH s2,2a;
+FETCH s3,2b;
+
+COMPARE COMPARE_REG, 01;
+JUMP Z, END;
+
+STORE s1,CURRENT_ANGLE_HI;
+STORE s0,CURRENT_ANGLE_LO;
+
+CALL CORDIC_MAIN;
+
+STORE s0, 30;
+STORE s1, 31;
+STORE s2, 32;
+STORE s3, 33;
+STORE COMPARE_REG, 34;
+STORE TEMP_REG, 35;
+STORE INDEX, 36;
+STORE INDEX_MAX, 37;
+STORE COLOR_REG, 38;
+STORE TEMP_INDEX, 39;
+STORE TEMP_LO, 3a;
+STORE TEMP_HI, 3b;
+STORE Y_LO, 3c;
+STORE Y_HI, 3d;
+STORE X_LO, 3e;
+STORE X_HI, 3f;
+
+;STORE X_HI,33; X = Xnew
+;STORE X_LO,32;
+;STORE Y_HI,31; Y = Ynew
+;STORE Y_LO,30;
+
+FETCH s0,33; X = Xnew
+FETCH s1,32;
+FETCH s2,31; Y = Ynew
+FETCH s3,30;
+
+OUTPUT s1,X_ROW;
+OUTPUT s3,Y_COL;
+LOAD COLOR_REG, 63;
+OUTPUT COLOR_REG,COLOR;
+
+OUTPUT s0, PORT_1;
+OUTPUT s1, PORT_2;
+OUTPUT s2, PORT_3;
+OUTPUT s3, PORT_4;
+JUMP main;
+
+; CORDIC For Dummies PDF
+;   Author: thitt
 ;
-; Example : from upper-left corner put 5 5x7 typeface color characters in row.
+
+CORDIC_MAIN:
+
+LOAD X_HI,00; X = 155
+LOAD X_LO,9B;
+LOAD Y_HI,00; Y
+LOAD Y_LO,00;
+
+LOAD TEMP_REG,00;
+STORE TEMP_REG,ANGLE_HI; angle = 0
+LOAD TEMP_REG,00;
+STORE TEMP_REG,ANGLE_LO;
+LOAD TEMP_REG,CURRENT_ANGLE_HI;
+STORE TEMP_REG,DESIRED_ANGLE_HI;
+LOAD TEMP_REG,CURRENT_ANGLE_LO;
+STORE TEMP_REG,DESIRED_ANGLE_LO;
+
+FETCH s3,DESIRED_ANGLE_HI; desiredAngle
+FETCH s2,DESIRED_ANGLE_LO;
+LOAD s1,C_90mul256_HI; 90 * 256
+LOAD s0,C_90mul256_LO;
+CALL compare_16;
+COMPARE COMPARE_REG,04; >
+JUMP NZ,aaa1;
+
+LOAD s0,C_180mul256_HI;
+STORE s0,ANGLE_HI; angle = 180 * 256
+LOAD s0,C_180mul256_LO;
+STORE s0,ANGLE_LO;
+
+aaa1:
+LOAD INDEX, 00; i
+LOAD INDEX_MAX, 0e; 0...14
+
+loop:
+FETCH s3,DESIRED_ANGLE_HI;
+FETCH s2,DESIRED_ANGLE_LO;
+FETCH s1,ANGLE_HI; angle
+FETCH s0,ANGLE_LO;
+CALL compare_16;
+COMPARE COMPARE_REG,04; >
+JUMP NZ, l1;
+
+l0:
+
+LOAD TEMP_INDEX,INDEX; i
+LOAD TEMP_HI,Y_HI; temp Y
+LOAD TEMP_LO,Y_LO;
+ttt1:
+SR0 TEMP_HI; Y >> i
+SRA TEMP_LO;
+SUB TEMP_INDEX,01;
+JUMP NZ,ttt1;
+
+LOAD s3,TEMP_HI; Y >> i
+LOAD s2,TEMP_LO;
+LOAD s1,X_HI; X
+LOAD s0,X_LO;
+CALL subtract_16; Xnew = X - (Y>>i)
+STORE s1,X_NEW_HI; Xnew
+STORE s0,X_NEW_LO;
+
+LOAD TEMP_INDEX,INDEX; i
+LOAD TEMP_HI,X_HI; temp X
+LOAD TEMP_LO,X_LO;
+ttt2:
+SR0 TEMP_HI; X >> i
+SRA TEMP_LO;
+SUB TEMP_INDEX,01;
+JUMP NZ,ttt2;
+
+LOAD s3,TEMP_HI; X >> i
+LOAD s2,TEMP_LO;
+LOAD s1,Y_HI; Y
+LOAD s0,Y_LO;
+CALL adder_16; Ynew = Y + (X>>i)
+STORE s1,Y_NEW_HI; Ynew
+STORE s0,Y_NEW_LO;
+
+LOAD s3,INDEX;
+ADD s3,01;
+FETCH s3,(s3); atan(i+1)
+FETCH s2,(INDEX); atan(i)
+FETCH s1,ANGLE_HI;
+FETCH s0,ANGLE_LO;
+CALL adder_16; angle = angle + atan(i)
+STORE s1,ANGLE_HI;
+STORE s0,ANGLE_LO;
+
+l1:
+
+LOAD TEMP_INDEX,INDEX; i
+LOAD TEMP_HI,Y_HI; temp Y
+LOAD TEMP_LO,Y_LO;
+ttt3:
+SR0 TEMP_HI; Y >> i
+SRA TEMP_LO;
+SUB TEMP_INDEX,01;
+JUMP NZ,ttt3;
+
+LOAD s3,TEMP_HI; Y >> i
+LOAD s2,TEMP_LO;
+LOAD s1,X_HI; X
+LOAD s0,X_LO;
+CALL adder_16; Xnew = X + (Y>>i)
+STORE s1,21; Xnew
+STORE s0,20;
+
+LOAD TEMP_INDEX,INDEX; i
+LOAD TEMP_HI,X_HI; temp X
+LOAD TEMP_LO,X_LO;
+ttt4:
+SR0 TEMP_HI; X >> i
+SRA TEMP_LO;
+SUB TEMP_INDEX,01;
+JUMP NZ,ttt4;
+
+LOAD s3,TEMP_HI; X >> i
+LOAD s2,TEMP_LO;
+LOAD s1,Y_HI; Y
+LOAD s0,Y_LO;
+CALL subtract_16; Ynew = Y - (X>>i)
+STORE s1,23; Ynew
+STORE s0,22;
+
+LOAD s3,INDEX;
+ADD s3,01;
+FETCH s3,(s3); atan(i+1)
+FETCH s2,(INDEX); atan(i)
+FETCH s1,ANGLE_HI;
+FETCH s0,ANGLE_LO;
+CALL subtract_16; angle = angle - atan(i)
+STORE s1,ANGLE_HI;
+STORE s0,ANGLE_LO;
+
+FETCH X_HI,X_NEW_HI; X = Xnew
+FETCH X_LO,X_NEW_LO;
+FETCH Y_HI,Y_NEW_HI; Y = Ynew
+FETCH Y_LO,Y_NEW_LO;
+
+ADD INDEX,01; i = i + 1
+COMPARE INDEX,INDEX_MAX; i < 14
+JUMP C, loop;
+
+FETCH s3,DESIRED_ANGLE_HI; desiredAngle
+FETCH s2,DESIRED_ANGLE_LO;
+LOAD s1,C_90mul256_HI; 90 * 256
+LOAD s0,C_90mul256_LO;
+CALL compare_16;
+COMPARE COMPARE_REG,04; >
+JUMP NZ, aaa2;
+XOR X_HI,FF; X = -X
+XOR X_LO,FF;
+ADD X_LO,01;
+ADDCY X_HI,00;
+XOR Y_HI,FF; Y = -Y
+XOR Y_LO,FF;
+ADD Y_LO,01;
+ADDCY Y_HI,00;
+aaa2:
+STORE X_HI,33; X = Xnew
+STORE X_LO,32;
+STORE Y_HI,31; Y = Ynew
+STORE Y_LO,30;
+
+;FETCH sC,33; X = Xnew
+;FETCH sD,32;
+;FETCH sE,31; Y = Ynew
+;FETCH sF,30;
+;OUTPUT X_LO, PORT_1; DEBUG
+;OUTPUT X_HI, PORT_2; DEBUG
+;OUTPUT Y_LO, PORT_3; DEBUG
+;OUTPUT Y_HI, PORT_4; DEBUG
+
+FETCH s0, 30;
+FETCH s1, 31;
+FETCH s2, 32;
+FETCH s3, 33;
+FETCH COMPARE_REG, 34;
+FETCH TEMP_REG, 35;
+FETCH INDEX, 36;
+FETCH INDEX_MAX, 37;
+FETCH COLOR_REG, 38;
+FETCH TEMP_INDEX, 39;
+FETCH TEMP_LO, 3a;
+FETCH TEMP_HI, 3b;
+FETCH Y_LO, 3c;
+FETCH Y_HI, 3d;
+FETCH X_LO, 3e;
+FETCH X_HI, 3f;
+
+RETURN;
+
+;USER_CODE_END:
+;  JUMP END;
+
+compare_16:
+; INPUT  :
+;   - A [s3,s2]
+;   - B [s1,s0]
+; OUTPUT :
+;   - A < B - s4 = 0x01
+;   - A = B - s4 = 0x02
+;   - A > B - s4 = 0x04
+; INFO   :
 ;
-; WHITE
-LOAD X     , 00;
-LOAD Y     , 00;
-LOAD color , 3F;
-CALL SMILE     ;
+_compare_16_start:                                      ;
+                      COMPARE s3 , s1                   ;
+                      JUMP     C , _compare_16_less     ;
+                      JUMP     Z , _compare_16_equal_hi ;
+                      JUMP         _compare_16_more     ;
+_compare_16_equal_hi:                                   ;
+                      COMPARE s2 , s0                   ;
+                      JUMP     C , _compare_16_less     ;
+                      JUMP    NZ , _compare_16_more     ;
+                      JUMP         _compare_16_equal    ;
+_compare_16_less:                                       ; s3,s2 < s1,s0
+                      LOAD    COMPARE_REG , 01                   ;
+                      JUMP         _compare_16_end      ;
+_compare_16_equal:                                      ; s3,s2 = s1,s0
+                      LOAD    COMPARE_REG , 02                   ;
+                      JUMP         _compare_16_end      ;
+_compare_16_more:                                       ; s3,s2 > s1,s0
+                      LOAD    COMPARE_REG , 04                   ;
+_compare_16_end:                                        ;
+                      RETURN                            ;
+
+subtract_16:
+; Figure 3-9: 16-Bit Subtraction Using SUB and SUBCY Instructions
+;   ug129.pdf
+; INPUT  :
+;   s3 = subtrahend (a) HI
+;   s2 = subtrahend (a) LO
+;   s1 = minuend (b) HI
+;   s0 = minuend (b) LO
+; OUTPUT :
+;   s1 = difference MTEMP_HI
+;   s0 = difference LTEMP_HI
+; INFO   :
 ;
-; VIOLET
-LOAD X      , 06;
-LOAD Y      , 00;
-LOAD color  , 22;
-CALL SMILE      ;
+_subtract_16_start:               ;
+                    SUB   s0 , s2 ;
+                    SUBCY s1 , s3 ;
+_subtract_16_end:                 ;
+                    RETURN        ;
+
+adder_16:
+; Figure 3-8: 16-Bit Addition Using ADD and ADDCY Instructions
+;   ug129.pdf
+; INPUT  :
+;   s3 = addition (a) HI
+;   s2 = addition (a) LO
+;   s1 = addition (b) HI
+;   s0 = addition (b) LO
+; OUTPUT :
+;   s1 = product MTEMP_HI
+;   s0 = product LTEMP_HI
+; INFO   :
 ;
-; RED
-LOAD X     , 0C;
-LOAD Y     , 00;
-LOAD color , 30;
-CALL SMILE     ;
-;
-; GREEN
-LOAD X     , 12;
-LOAD Y     , 00;
-LOAD color , 0C;
-CALL SMILE     ;
-;
-; BLUE
-LOAD X     , 18;
-LOAD Y     , 00;
-LOAD color , 03;
-CALL SMILE     ;
-;
-; FINISH
-JUMP END;
-;
-; DRAW CHARACTER CREATED BY RAW OPERATIONS
-SMILE:
-;
-; .***.
-;
-  LOAD  sE    ,  X  ;
-  LOAD  sF    ,  Y  ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-;
-; *****
-;
-  LOAD  sE    ,  X  ;
-  ADD   sF    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-;
-; *.*.*
-;
-  LOAD  sE    ,  X  ;
-  ADD   sF    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 02  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 02  ;
-  CALL  PIXEL       ;
-;
-; *****
-;
-  LOAD  sE    ,  X  ;
-  ADD   sF    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-;
-; *.*.*
-;
-  LOAD  sE    ,  X  ;
-  ADD   sF    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 02  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 02  ;
-  CALL  PIXEL       ;
-;
-; *...*
-;
-  LOAD  sE    ,  X  ;
-  ADD   sF    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 04  ;
-  CALL  PIXEL       ;
-;
-; .***.
-;
-  LOAD  sE    ,  X  ;
-  ADD   sF    , 01  ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-  CALL  PIXEL       ;
-  ADD   sE    , 01  ;
-  RETURN;
-;
-; DRAW PIXEL WITH COORDINATION STORED IN sE/sF REGS (MAX 19199).
-PIXEL:
-  OUTPUT sE    , X_ROW; 0 - 159
-  OUTPUT sF    , Y_COL; 0 - 119
-  OUTPUT color , COLOR; 0 - 63
-  RETURN;
-;
-; STAY CPU IN ACTIVE LOOP
+_adder_16_start:                  ;
+                  ADD    s0 , s2  ; add LTEMP_HIs
+                  ADDCY  s1 , s3  ; add MTEMP_HIs
+_adder_16_end:                    ;
+                  RETURN          ; keep result in s1 and s0
+
 END:
   JUMP END;
 

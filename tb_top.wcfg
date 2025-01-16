@@ -9,6 +9,7 @@
             <top_module name="math_real" />
             <top_module name="numeric_std" />
             <top_module name="numeric_std" />
+            <top_module name="p_package1" />
             <top_module name="std_logic_1164" />
             <top_module name="std_logic_arith" />
             <top_module name="std_logic_textio" />
@@ -22,7 +23,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="53" />
+   <WVObjectSize size="33" />
    <wave_markers>
       <marker time="64060000000" label="" />
       <marker time="96060000000" label="" />
@@ -97,6 +98,34 @@
          <obj_property name="ObjectShortName">filename[1:7]</obj_property>
       </wvobject>
    </wvobject>
+   <wvobject fp_name="/tb_top/uut/o_test3" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_test3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_test3[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff0000</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/o_test2" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_test2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_test2[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff0000</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/o_test1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_test1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_test1[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff0000</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/o_test0" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_test0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_test0[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff0000</obj_property>
+   </wvobject>
    <wvobject fp_name="/tb_top/uut/i_cpu_clock" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">i_cpu_clock</obj_property>
       <obj_property name="ObjectShortName">i_cpu_clock</obj_property>
@@ -168,116 +197,18 @@
       <obj_property name="ElementShortName">vga_v_blank</obj_property>
       <obj_property name="ObjectShortName">vga_v_blank</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_address_step" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_address_step[14:0]</obj_property>
-      <obj_property name="ObjectShortName">vga_address_step[14:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_address_step_next" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_address_step_next[14:0]</obj_property>
-      <obj_property name="ObjectShortName">vga_address_step_next[14:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_address_step_temp" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_address_step_temp[14:0]</obj_property>
-      <obj_property name="ObjectShortName">vga_address_step_temp[14:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_address_step_temp_next" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_address_step_temp_next[14:0]</obj_property>
-      <obj_property name="ObjectShortName">vga_address_step_temp_next[14:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_all_pixels" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_all_pixels[14:0]</obj_property>
-      <obj_property name="ObjectShortName">vga_all_pixels[14:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffa500</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_all_pixels" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_all_pixels[14:0]</obj_property>
-      <obj_property name="ObjectShortName">vga_all_pixels[14:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffa500</obj_property>
-   </wvobject>
-   <wvobject fp_name="vbus98" type="vbus" db_ref_id="1">
+   <wvobject fp_name="vbus98" type="vbus">
       <obj_property name="label">vap_0_7</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[7]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[7]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[7]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[6]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[6]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[6]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[5]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[5]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[5]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[4]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[4]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[4]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[3]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[3]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[3]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[2]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[2]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[2]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[1]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[1]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[1]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[0]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[0]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[0]</obj_property>
-      </wvobject>
    </wvobject>
-   <wvobject fp_name="vbus107" type="vbus" db_ref_id="1">
+   <wvobject fp_name="vbus107" type="vbus">
       <obj_property name="label">vap_14_8</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[14]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[14]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[14]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[13]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[13]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[13]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[12]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[12]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[12]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[11]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[11]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[11]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[10]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[10]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[10]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[9]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[9]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[9]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/uut/vga_all_pixels[8]" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">[8]</obj_property>
-         <obj_property name="ObjectShortName">vga_all_pixels[8]</obj_property>
-      </wvobject>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/vga_color" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">vga_color[5:0]</obj_property>
       <obj_property name="ObjectShortName">vga_color[5:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_write" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_write[0:0]</obj_property>
-      <obj_property name="ObjectShortName">vga_write[0:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/vga_address" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">vga_address[14:0]</obj_property>
@@ -286,15 +217,10 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ff00ff</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_color1" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_color1[5:0]</obj_property>
-      <obj_property name="ObjectShortName">vga_color1[5:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
    <wvobject fp_name="/tb_top/uut/kcpsm3_address" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">kcpsm3_address[9:0]</obj_property>
       <obj_property name="ObjectShortName">kcpsm3_address[9:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/kcpsm3_instruction" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">kcpsm3_instruction[17:0]</obj_property>
@@ -331,85 +257,5 @@
    <wvobject fp_name="/tb_top/uut/kcpsm3_interrupt_ack" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">kcpsm3_interrupt_ack</obj_property>
       <obj_property name="ObjectShortName">kcpsm3_interrupt_ack</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_all_pixels" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">i_all_pixels</obj_property>
-      <obj_property name="ObjectShortName">i_all_pixels</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_x_step" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">i_x_step</obj_property>
-      <obj_property name="ObjectShortName">i_x_step</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_x_step_next" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">i_x_step_next</obj_property>
-      <obj_property name="ObjectShortName">i_x_step_next</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_y_step" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">i_y_step</obj_property>
-      <obj_property name="ObjectShortName">i_y_step</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_y_step_next" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">i_y_step_next</obj_property>
-      <obj_property name="ObjectShortName">i_y_step_next</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_x" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">i_x</obj_property>
-      <obj_property name="ObjectShortName">i_x</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_x_next" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">i_x_next</obj_property>
-      <obj_property name="ObjectShortName">i_x_next</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_y" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">i_y</obj_property>
-      <obj_property name="ObjectShortName">i_y</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_y_next" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">i_y_next</obj_property>
-      <obj_property name="ObjectShortName">i_y_next</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/row_index" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">row_index</obj_property>
-      <obj_property name="ObjectShortName">row_index</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/row_index_next" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">row_index_next</obj_property>
-      <obj_property name="ObjectShortName">row_index_next</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/c_x_step" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">c_x_step</obj_property>
-      <obj_property name="ObjectShortName">c_x_step</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/c_y_step" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">c_y_step</obj_property>
-      <obj_property name="ObjectShortName">c_y_step</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/c_x" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">c_x</obj_property>
-      <obj_property name="ObjectShortName">c_x</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/c_y" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">c_y</obj_property>
-      <obj_property name="ObjectShortName">c_y</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/c_all_pixels" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">c_all_pixels</obj_property>
-      <obj_property name="ObjectShortName">c_all_pixels</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
 </wave_config>

@@ -120,7 +120,11 @@ architecture behavioral of top is
   i_kcpsm3_write_strobe : in  std_logic;
   o_pixel_coordination  : out std_logic_vector (c_memory_address_bits - 1 downto 0);
   o_pixel_color         : out std_logic_vector (c_color_bits - 1 downto 0);
-  o_pixel_write         : out std_logic_vector (0 downto 0)
+  o_pixel_write         : out std_logic_vector (0 downto 0);
+  o_test3               : out std_logic_vector (7 downto 0);
+  o_test2               : out std_logic_vector (7 downto 0);
+  o_test1               : out std_logic_vector (7 downto 0);
+  o_test0               : out std_logic_vector (7 downto 0)
   );
   end component kcpsm3_io_registers_decoder;
 
@@ -152,6 +156,8 @@ architecture behavioral of top is
   signal kcpsm3_interrupt     : std_logic := '0';
   signal kcpsm3_interrupt_ack : std_logic;
 
+  signal o_test3, o_test2, o_test1, o_test0 : std_logic_vector (7 downto 0);
+
 begin
 
   o_blank   <= vga_blank;
@@ -159,14 +165,27 @@ begin
   o_v_blank <= vga_v_blank;
 
   --synthesis translate_off
-  p_report_address_and_color : process (pixel_write(0)) is
+--  p_report_address_and_color : process (pixel_write(0)) is
+--  begin
+--    if (rising_edge (pixel_write(0))) then
+--      report
+--        "Color " & integer'image (to_integer (unsigned (pixel_color))) & " " &
+--        "at address " & integer'image (to_integer (unsigned (pixel_coordination)));
+--    end if;
+--  end process p_report_address_and_color;
+  --synthesis translate_on
+
+  --synthesis translate_off
+  p_report1 : process (i_cpu_clock) is
+    variable i : integer := 0;
   begin
-    if (rising_edge (pixel_write(0))) then
-      report
-        "Color " & integer'image (to_integer (unsigned (pixel_color))) & " " &
-        "at address " & integer'image (to_integer (unsigned (pixel_coordination)));
+    if (rising_edge (i_cpu_clock)) then
+      if (to_integer (unsigned (kcpsm3_address)) = 103) then
+        report integer'image (i) & " tick address " & integer'image (to_integer (unsigned (kcpsm3_address)));
+        i := i + 1;
+      end if;
     end if;
-  end process p_report_address_and_color;
+  end process p_report1;
   --synthesis translate_on
 
   inst_vga_clock_25mhz : vga_clock_25mhz
@@ -238,7 +257,11 @@ begin
   i_kcpsm3_write_strobe => kcpsm3_write_strobe,
   o_pixel_coordination  => pixel_coordination,
   o_pixel_color         => pixel_color,
-  o_pixel_write         => pixel_write
+  o_pixel_write         => pixel_write,
+  o_test3               => o_test3,
+  o_test2               => o_test2,
+  o_test1               => o_test1,
+  o_test0               => o_test0
   );
 
   inst_ipcore_vga_ramb16_dp : ipcore_vga_ramb16_dp

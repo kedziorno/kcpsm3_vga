@@ -46,7 +46,11 @@ i_kcpsm3_out_port     : in  std_logic_vector (7 downto 0);
 i_kcpsm3_write_strobe : in  std_logic;
 o_pixel_coordination  : out std_logic_vector (c_memory_address_bits - 1 downto 0);
 o_pixel_color         : out std_logic_vector (c_color_bits - 1 downto 0);
-o_pixel_write         : out std_logic_vector (0 downto 0)
+o_pixel_write         : out std_logic_vector (0 downto 0);
+o_test3               : out std_logic_vector (7 downto 0);
+o_test2               : out std_logic_vector (7 downto 0);
+o_test1               : out std_logic_vector (7 downto 0);
+o_test0               : out std_logic_vector (7 downto 0)
 );
 end entity kcpsm3_io_registers_decoder;
 
@@ -63,8 +67,8 @@ begin
       o_pixel_coordination <= (others => '0');
       o_pixel_color        <= (others => '0');
       --synthesis translate_off
-      report "c_x : " & integer'image (c_x);
-      report "c_y : " & integer'image (c_y);
+--      report "c_x : " & integer'image (c_x);
+--      report "c_y : " & integer'image (c_y);
       --synthesis translate_on
     elsif (rising_edge (i_clock)) then
       case (i_kcpsm3_port_id) is
@@ -74,7 +78,7 @@ begin
             x_coordination :=
               to_integer (unsigned (i_kcpsm3_out_port (7 downto 0)));
             --synthesis translate_off
-            report "x_coordination : " & integer'image (x_coordination);
+--            report "x_coordination : " & integer'image (x_coordination);
             --synthesis translate_on
           end if;
         when c_kcpsm3_pixel_address_high => -- y coordination pixel 6 bit (0 to 119)
@@ -83,7 +87,7 @@ begin
             y_coordination :=
               to_integer (unsigned (i_kcpsm3_out_port (6 downto 0))) * c_x;
             --synthesis translate_off
-            report "y_coordination : " & integer'image (y_coordination);
+--            report "y_coordination : " & integer'image (y_coordination);
             --synthesis translate_on
           end if;
         when c_kcpsm3_pixel_address_color => -- color pixel (0 to 63)
@@ -91,7 +95,7 @@ begin
             o_pixel_write <= "1";
             o_pixel_coordination <= std_logic_vector (to_unsigned (y_coordination + x_coordination, c_memory_address_bits));
             --synthesis translate_off
-            report "o_pixel_coordination : " & integer'image (y_coordination + x_coordination);
+--            report "o_pixel_coordination : " & integer'image (y_coordination + x_coordination);
             --synthesis translate_on
             o_pixel_color <=
               i_kcpsm3_out_port (c_color_bits - 1 downto 0);
@@ -103,5 +107,39 @@ begin
       end case;
     end if;
   end process p_io_registers_decoder;
+
+  p_io_registers_decoder_debug : process (i_clock, i_reset) is
+  begin
+    if (i_reset = '1') then
+      o_test0 <= (others => '0');
+      o_test1 <= (others => '0');
+      o_test2 <= (others => '0');
+      o_test3 <= (others => '0');
+    elsif (rising_edge (i_clock)) then
+      case (i_kcpsm3_port_id) is
+        when x"01" =>
+          if (i_kcpsm3_write_strobe = '1') then
+            o_test0 <= i_kcpsm3_out_port;
+          end if;
+        when x"02" =>
+          if (i_kcpsm3_write_strobe = '1') then
+            o_test1 <= i_kcpsm3_out_port;
+          end if;
+        when x"03" =>
+          if (i_kcpsm3_write_strobe = '1') then
+            o_test2 <= i_kcpsm3_out_port;
+          end if;
+        when x"04" =>
+          if (i_kcpsm3_write_strobe = '1') then
+            o_test3 <= i_kcpsm3_out_port;
+          end if;
+        when others =>
+          o_test0 <= (others => '0');
+          o_test1 <= (others => '0');
+          o_test2 <= (others => '0');
+          o_test3 <= (others => '0');
+      end case;
+    end if;
+  end process p_io_registers_decoder_debug;
 
 end architecture behavioral;
