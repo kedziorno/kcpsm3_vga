@@ -23,7 +23,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="33" />
+   <WVObjectSize size="30" />
    <wave_markers>
       <marker time="64060000000" label="" />
       <marker time="96060000000" label="" />
@@ -33,6 +33,9 @@
       <marker time="100000000" label="" />
       <marker time="33728140000000" label="" />
       <marker time="33600060000000" label="" />
+      <marker time="933735000000" label="" />
+      <marker time="50400075000000" label="" />
+      <marker time="16800075000000" label="" />
    </wave_markers>
    <wvobject fp_name="group64" type="group">
       <obj_property name="label">vga_bmp</obj_property>
@@ -98,33 +101,123 @@
          <obj_property name="ObjectShortName">filename[1:7]</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_test3" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_test3[7:0]</obj_property>
-      <obj_property name="ObjectShortName">o_test3[7:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff0000</obj_property>
+   <wvobject fp_name="vbus56" type="vbus" db_ref_id="1">
+      <obj_property name="label">port21</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_top/uut/o_test1" type="array" db_ref_id="1">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_test1[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test1[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+         <obj_property name="label">port_2[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/o_test0" type="array" db_ref_id="1">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_test0[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test0[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+         <obj_property name="label">port_1[7:0]</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_test2" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_test2[7:0]</obj_property>
-      <obj_property name="ObjectShortName">o_test2[7:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff0000</obj_property>
+   <wvobject fp_name="vbus56" type="vbus" db_ref_id="1">
+      <obj_property name="label">port21</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject fp_name="/tb_top/uut/o_test1" type="array" db_ref_id="1">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_test1[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test1[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+         <obj_property name="label">port_2[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/o_test0" type="array" db_ref_id="1">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_test0[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test0[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+         <obj_property name="label">port_1[7:0]</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_test1" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_test1[7:0]</obj_property>
-      <obj_property name="ObjectShortName">o_test1[7:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff0000</obj_property>
+   <wvobject fp_name="vbus51" type="vbus" db_ref_id="1">
+      <obj_property name="label">port43</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_top/uut/o_test3" type="array" db_ref_id="1">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_test3[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test3[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+         <obj_property name="label">port_4[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/o_test2" type="array" db_ref_id="1">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_test2[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test2[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+         <obj_property name="label">port_3[7:0]</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_test0" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_test0[7:0]</obj_property>
-      <obj_property name="ObjectShortName">o_test0[7:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff0000</obj_property>
+   <wvobject fp_name="vbus51" type="vbus" db_ref_id="1">
+      <obj_property name="label">port43</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject fp_name="/tb_top/uut/o_test3" type="array" db_ref_id="1">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_test3[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test3[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+         <obj_property name="label">port_4[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/o_test2" type="array" db_ref_id="1">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">o_test2[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test2[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+         <obj_property name="label">port_3[7:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group67" type="group">
+      <obj_property name="label">cancat</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_top/uut/test_concatenate_10" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">test_concatenate_10[15:0]</obj_property>
+         <obj_property name="ObjectShortName">test_concatenate_10[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/test_concatenate_21" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">test_concatenate_21[15:0]</obj_property>
+         <obj_property name="ObjectShortName">test_concatenate_21[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/test_concatenate_32" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">test_concatenate_32[15:0]</obj_property>
+         <obj_property name="ObjectShortName">test_concatenate_32[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/test_concatenate_210" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">test_concatenate_210[23:0]</obj_property>
+         <obj_property name="ObjectShortName">test_concatenate_210[23:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/test_concatenate_321" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">test_concatenate_321[23:0]</obj_property>
+         <obj_property name="ObjectShortName">test_concatenate_321[23:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/test_concatenate_3210" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">test_concatenate_3210[31:0]</obj_property>
+         <obj_property name="ObjectShortName">test_concatenate_3210[31:0]</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/i_cpu_clock" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">i_cpu_clock</obj_property>
@@ -240,22 +333,5 @@
    <wvobject fp_name="/tb_top/uut/kcpsm3_write_strobe" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">kcpsm3_write_strobe</obj_property>
       <obj_property name="ObjectShortName">kcpsm3_write_strobe</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/kcpsm3_in_port" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">kcpsm3_in_port[7:0]</obj_property>
-      <obj_property name="ObjectShortName">kcpsm3_in_port[7:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/kcpsm3_read_strobe" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">kcpsm3_read_strobe</obj_property>
-      <obj_property name="ObjectShortName">kcpsm3_read_strobe</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/kcpsm3_interrupt" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">kcpsm3_interrupt</obj_property>
-      <obj_property name="ObjectShortName">kcpsm3_interrupt</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/kcpsm3_interrupt_ack" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">kcpsm3_interrupt_ack</obj_property>
-      <obj_property name="ObjectShortName">kcpsm3_interrupt_ack</obj_property>
    </wvobject>
 </wave_config>

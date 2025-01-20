@@ -158,7 +158,21 @@ architecture behavioral of top is
 
   signal o_test3, o_test2, o_test1, o_test0 : std_logic_vector (7 downto 0);
 
+  signal test_concatenate_10 : std_logic_vector (15 downto 0);
+  signal test_concatenate_21 : std_logic_vector (15 downto 0);
+  signal test_concatenate_32 : std_logic_vector (15 downto 0);
+  signal test_concatenate_210 : std_logic_vector (23 downto 0);
+  signal test_concatenate_321 : std_logic_vector (23 downto 0);
+  signal test_concatenate_3210 : std_logic_vector (31 downto 0);
+
 begin
+
+  test_concatenate_3210 <= o_test3 & o_test2 & o_test1 & o_test0;
+  test_concatenate_10 <= o_test1 & o_test0;
+  test_concatenate_21 <= o_test2 & o_test1;
+  test_concatenate_32 <= o_test3 & o_test2;
+  test_concatenate_210 <= o_test2 & o_test1 & o_test0;
+  test_concatenate_321 <= o_test3 & o_test2 & o_test1;
 
   o_blank   <= vga_blank;
   o_h_blank <= vga_h_blank;

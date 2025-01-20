@@ -143,7 +143,7 @@ wait for i_cpu_clock_period*10;
 i_reset <= '0';
 wait for i_cpu_clock_period*10;
 -- insert stimulus here
-wait for 16.81 ms * 3;
+wait for 16.81 ms * 5;
 report "tb done" severity failure;
 end process;
 

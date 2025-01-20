@@ -1,12 +1,13 @@
-# From Wikipedia
 # Used to calculate x,y and return normalize numbers based on ITERS constant.
+# 3 types of CORDIC to compare outputs.
+#
 
 from math import atan2, sqrt, sin, cos, radians, floor, ceil
 
-ITERS = 9 #1,2,4,8,16,32,64 - with 9 iterations we have "magic" numbers (angles +/- : 0, 30, 45, 90)
+ITERS = 8 # 1,2,4,8,16,32,64 - with 9 iterations we have "magic" numbers (angles +/- : 0, 30, 45, 90)
 iters_pow2 = pow(2,ITERS)-1
-RANGE_L = -90#-PI/2
-RANGE_R = 90#PI/2
+RANGE_L = -90 #-PI/2
+RANGE_R = 90 #PI/2
 RANGE_STEP = 15
 norm = pow(2,ITERS) #dummies
 norm_tt = pow(2,ITERS)
@@ -178,7 +179,7 @@ if __name__ == "__main__":
         six_x_dummies\t\
         cos_x_dummies")
     #print (f"K_n = {K_n:+.8f} , ITERS = {ITERS} , normalize numbers must be divided (or shifted) by {pow(2,ITERS*2)} ( >> {ITERS*2} )")
-    exit (0)
+    #exit (0)
     for arc_tangent in theta_table_wiki[:ITERS]:
       atg = arc_tangent
       arc_tangent_ceil = ceil(arc_tangent)

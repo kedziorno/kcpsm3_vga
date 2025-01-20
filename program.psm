@@ -1,8 +1,8 @@
-; This simple program can write each 64 colors to the indicated memory address.
-; Coordinations use x16 (X) and x17 (Y) registers and get absolute values.
-; Point matrix have 160x120 on VGA (640x480) resolution.
-; Use Xilinx PicoBlaze 8-Bit CPU.
+; cordic based on nistir4480.pdf
+; dont work
 ;
+CONSTANT ZERO, 00;
+
 CONSTANT  X_ROW ,    16;
 CONSTANT  Y_COL ,    17;
 CONSTANT  COLOR ,    20;
@@ -12,373 +12,587 @@ CONSTANT PORT_2, 02;
 CONSTANT PORT_3, 03;
 CONSTANT PORT_4, 04;
 
-LOAD s0,2d;
-STORE s0, 00;
-LOAD s0,00;
-STORE s0, 01;
-LOAD s0,1a;
-STORE s0, 02;
-LOAD s0,91;
-STORE s0, 03;
-LOAD s0,0e;
-STORE s0, 04;
-LOAD s0,09;
-STORE s0, 05;
-LOAD s0,07;
-STORE s0, 06;
-LOAD s0,20;
-STORE s0, 07;
-LOAD s0,03;
-STORE s0, 08;
-LOAD s0,94;
-STORE s0, 09;
-LOAD s0,01;
-STORE s0, 0a;
-LOAD s0,ca;
-STORE s0, 0b;
-LOAD s0,00;
-STORE s0, 0c;
-LOAD s0,e5;
-STORE s0, 0d;
-LOAD s0,00;
-STORE s0, 0e;
-LOAD s0,73;
-STORE s0, 0f;
-LOAD s0,00;
-STORE s0, 10;
-LOAD s0,39;
-STORE s0, 11;
-LOAD s0,00;
-STORE s0, 12;
-LOAD s0,1c;
-STORE s0, 13;
-LOAD s0,00;
-STORE s0, 14;
-LOAD s0,0e;
-STORE s0, 15;
-LOAD s0,00;
-STORE s0, 16;
-LOAD s0,07;
-STORE s0, 17;
-LOAD s0,00;
-STORE s0, 18;
-LOAD s0,04;
-STORE s0, 19;
-LOAD s0,00;
-STORE s0, 1a;
-LOAD s0,02;
-STORE s0, 1b;
-LOAD s0,00;
-STORE s0, 1c;
-LOAD s0,01;
-STORE s0, 1d;
+CONSTANT ANGLE_16_HI,00;
+CONSTANT ANGLE_16_LO,01;
+CONSTANT COSINE_16_HI,02;
+CONSTANT COSINE_16_LO,03;
+CONSTANT SINE_16_HI,04;
+CONSTANT SINE_16_LO,05;
+CONSTANT K,06;
+CONSTANT XTMP_0,07;
+CONSTANT XTMP_1,08;
+CONSTANT YTMP_0,09;
+CONSTANT YTMP_1,0A;
+CONSTANT X_0,0B;
+CONSTANT X_1,0C;
+CONSTANT Y_0,0D;
+CONSTANT Y_1,0E;
+CONSTANT Z_0,0F;
+CONSTANT Z_1,10;
+CONSTANT E_0,11;
+CONSTANT E_1,12;
 
-CONSTANT ROM_START,00;
-CONSTANT ROM_EN,1D;
+NAMEREG s4, R0;
+NAMEREG s5, R1;
+NAMEREG s6, R2;
+NAMEREG s7, R3;
+NAMEREG s8, R4;
+NAMEREG s9, A;
+NAMEREG sA, DPTR;
 
-CONSTANT X_NEW_LO, 1E;
-CONSTANT X_NEW_HI, 1F;
-CONSTANT Y_NEW_LO, 20;
-CONSTANT Y_NEW_HI, 21;
-CONSTANT CURRENT_ANGLE_LO, 22;
-CONSTANT CURRENT_ANGLE_HI, 23;
-CONSTANT DESIRED_ANGLE_LO, 24;
-CONSTANT DESIRED_ANGLE_HI, 25;
-CONSTANT ANGLE_LO, 26;
-CONSTANT ANGLE_HI, 27;
+CONSTANT E_00_START,13;
+CONSTANT E_00_END,2E;
+CONSTANT E_00_LEN, 2f;
 
-CONSTANT C_90mul256_LO, 00;
-CONSTANT C_90mul256_HI, 5A;
-CONSTANT C_180mul256_LO, 00;
-CONSTANT C_180mul256_HI, B4;
-CONSTANT C_360_LO, 68;
-CONSTANT C_360_HI, 01;
+E_00:
+LOAD A,22;
+STORE A,13;
+LOAD A,19;
+STORE A,14;
+LOAD A,D6;
+STORE A,15;
+LOAD A,0E;
+STORE A,16;
+LOAD A,D7;
+STORE A,17;
+LOAD A,07;
+STORE A,18;
+LOAD A,FB;
+STORE A,19;
+LOAD A,03;
+STORE A,1A;
+LOAD A,FF;
+STORE A,1B;
+LOAD A,01;
+STORE A,1C;
+LOAD A,00;
+STORE A,1D;
+LOAD A,01;
+STORE A,1E;
+LOAD A,80;
+STORE A,1F;
+LOAD A,00;
+STORE A,20;
+LOAD A,40;
+STORE A,21;
+LOAD A,00;
+STORE A,22;
+LOAD A,20;
+STORE A,23;
+LOAD A,00;
+STORE A,24;
+LOAD A,10;
+STORE A,25;
+LOAD A,00;
+STORE A,26;
+LOAD A,08;
+STORE A,27;
+LOAD A,00;
+STORE A,28;
+LOAD A,04;
+STORE A,29;
+LOAD A,00;
+STORE A,2A;
+LOAD A,02;
+STORE A,2B;
+LOAD A,00;
+STORE A,2C;
+LOAD A,01;
+STORE A,2D;
+LOAD A,00;
+STORE A,2E;
 
-; s0-s3 - reserved
+CONSTANT C_RADIUS, 50; 80
 
-NAMEREG s4, COMPARE_REG;
-NAMEREG s5, TEMP_REG;
-NAMEREG s6, INDEX;
-NAMEREG s7, INDEX_MAX;
-NAMEREG s8, COLOR_REG;
-NAMEREG s9, TEMP_INDEX;
-NAMEREG sA, TEMP_LO;
-NAMEREG sB, TEMP_HI;
-NAMEREG sC, Y_LO;
-NAMEREG sD, Y_HI;
-NAMEREG sE, X_LO;
-NAMEREG sF, X_HI;
+ANGLE_16:
+LOAD A,6F; INITIALIZE X[0]
+STORE A,X_0;
+LOAD A,13;
+STORE A,X_1;
+LOAD A,00; INITIALIZE Y[0]
+STORE A,Y_0;
+LOAD A,00;
+STORE A,Y_1;
 
+LOAD A, E_00_END;
+LOAD s1, E_00_START;
+SUB A, s1;
+ADD A, 01;
+SR0 A;
+STORE A, E_00_LEN;
+
+;LOAD A, 00;
+;STORE A, ANGLE_16_HI;
+;LOAD A, 00;
+;STORE A, ANGLE_16_LO;
+
+NAMEREG sE, A_LO;
+NAMEREG sF, A_HI;
+CONSTANT C_A_STEP_HI, 00;
+CONSTANT C_A_STEP_LO, 39; 1rad=57.3248ang
+CONSTANT C_A_MIN_HI, d7;
+CONSTANT C_A_MIN_LO, b2; -180*rad
+CONSTANT C_A_MAX_HI, 28;
+CONSTANT C_A_MAX_LO, 4e; 180*1rad
+
+; DEBUG
+LOAD A, 00;
+OUTPUT A, X_ROW;
+LOAD A, 00;
+OUTPUT A, Y_COL;
+LOAD A, 3F;
+OUTPUT A, COLOR;
+
+LOAD A, 9f;
+OUTPUT A, X_ROW;
+LOAD A, 77;
+OUTPUT A, Y_COL;
+LOAD A, 3F;
+OUTPUT A, COLOR;
+
+LOAD A, 9f;
+OUTPUT A, X_ROW;
+LOAD A, 00;
+OUTPUT A, Y_COL;
+LOAD A, 3F;
+OUTPUT A, COLOR;
+
+LOAD A, 00;
+OUTPUT A, X_ROW;
+LOAD A, 77;
+OUTPUT A, Y_COL;
+LOAD A, 3F;
+OUTPUT A, COLOR;
+
+LOAD A_LO, C_A_MIN_LO;
+LOAD A_HI, C_A_MIN_HI;
 main:
-
-OUTPUT s0, PORT_1;
-OUTPUT s1, PORT_2;
-OUTPUT s2, PORT_3;
-OUTPUT s3, PORT_4;
-
-STORE s0,28;
-STORE s1,29;
-STORE s2,2a;
-STORE s3,2b;
-
-LOAD s3, s1;
-LOAD s2, s0;
-LOAD s1, 00;
-LOAD s0, 01;
-CALL adder_16;
-LOAD s3,C_360_HI;
-LOAD s2,C_360_LO;
+ADD A_LO, C_A_STEP_LO;
+ADDCY A_HI, C_A_STEP_HI;
+;OUTPUT A_LO, PORT_1;
+;OUTPUT A_HI, PORT_2;
+LOAD s3, C_A_MAX_HI;
+LOAD s2, C_A_MAX_LO;
+LOAD s1, A_HI;
+LOAD s0, A_LO;
 CALL compare_16;
+COMPARE R0, 04; >
+JUMP Z, USER_CODE_END;
+STORE A_LO, ANGLE_16_LO;
+STORE A_HI, ANGLE_16_HI;
+CALL cordic1;
 
-FETCH s0,28;
-FETCH s1,29;
-FETCH s2,2a;
-FETCH s3,2b;
+;NAMEREG s4, R0;
+;NAMEREG s5, R1;
+;NAMEREG s6, R2;
+;NAMEREG s7, R3;
+;NAMEREG s8, R4;
+;NAMEREG s9, A;
+;NAMEREG sA, DPTR;
 
-COMPARE COMPARE_REG, 01;
-JUMP Z, END;
+; INPUT  :
+;   s3,s2 - N
+;   s1,s0 - D
+; OUTPUT :
+;   R3,R2 - Q
+;   R1,R0 - R
 
-STORE s1,CURRENT_ANGLE_HI;
-STORE s0,CURRENT_ANGLE_LO;
+FETCH s3, COSINE_16_HI;
+FETCH s2, COSINE_16_LO;
+OUTPUT s3, PORT_2;
+OUTPUT s2, PORT_1;
+LOAD s1, 03; FFFF/C_RADIUS
+LOAD s0, 33;
+CALL divide_16;
+;   s5,s4 - R
+LOAD R1, R3;
+LOAD R0, R2;
+LOAD R3, 00;
+LOAD R2, 00;
+LOAD s3, 00;
+LOAD s2, 00;
+LOAD s1, 00;
+LOAD s0, 28;
+CALL add32;
+STORE s0, 3c;
 
-CALL CORDIC_MAIN;
-
-STORE s0, 30;
-STORE s1, 31;
-STORE s2, 32;
-STORE s3, 33;
-STORE COMPARE_REG, 34;
-STORE TEMP_REG, 35;
-STORE INDEX, 36;
-STORE INDEX_MAX, 37;
-STORE COLOR_REG, 38;
-STORE TEMP_INDEX, 39;
-STORE TEMP_LO, 3a;
-STORE TEMP_HI, 3b;
-STORE Y_LO, 3c;
-STORE Y_HI, 3d;
-STORE X_LO, 3e;
-STORE X_HI, 3f;
-
-;STORE X_HI,33; X = Xnew
-;STORE X_LO,32;
-;STORE Y_HI,31; Y = Ynew
-;STORE Y_LO,30;
-
-FETCH s0,33; X = Xnew
-FETCH s1,32;
-FETCH s2,31; Y = Ynew
-FETCH s3,30;
-
-OUTPUT s1,X_ROW;
-OUTPUT s3,Y_COL;
-LOAD COLOR_REG, 63;
-OUTPUT COLOR_REG,COLOR;
-
-OUTPUT s0, PORT_1;
-OUTPUT s1, PORT_2;
-OUTPUT s2, PORT_3;
+FETCH s3, SINE_16_HI;
+FETCH s2, SINE_16_LO;
 OUTPUT s3, PORT_4;
+OUTPUT s2, PORT_3;
+LOAD s1, 03; FFFF/C_RADIUS
+LOAD s0, 33;
+CALL divide_16;
+;   s5,s4 - R
+LOAD R1, R3;
+LOAD R0, R2;
+LOAD R3, 00;
+LOAD R2, 00;
+LOAD s3, 00;
+LOAD s2, 00;
+LOAD s1, 00;
+LOAD s0, 28;
+CALL add32;
+STORE s0, 3b;
+
+FETCH A, 3c;
+OUTPUT A, X_ROW; 
+FETCH A, 3b;
+OUTPUT A, Y_COL; 
+LOAD A, 3F;
+OUTPUT A, COLOR; 
+
 JUMP main;
 
-; CORDIC For Dummies PDF
-;   Author: thitt
+cordic1:
+
+LOAD R2,00; INITIALIZE SIGN INDICATOR REGISTER AS POSITIVE FOR BOTH SINE AND COSINE.
+
+AND A,A; CLEAR THE BORROW (CARRY)
+
+FETCH A, ANGLE_16_LO; PLACE LOWER BYTE OF ANGLE IN A
+SUBCY A, 44; SUBTRACT LOWER BYTE BY PI/2
+STORE A, Z_0; PLACE RESULT IN LOWER BYTE OF Z[0]
+FETCH A, ANGLE_16_HI; PLACE UPPER BYTE OF ANGLE IN ACCUM
+SUBCY A, 32; SUBT (WITH BORROW) UPPER BYTE OF PI
+STORE A, Z_1; PLACE RESULT IN UPPER BYTE OF Z[0]
+JUMP C,ADD_PIDIV2; IF BORROW SET, ANGLE WAS [0,PI/2]
+
+;AND A,A; CLEAR THE BORROW (CARRY)
+
+; NOW CHECK IF THE ANGLE IS IN [PI/2,PI], IF NOT CONTINUE
+LOAD R2,02; ;INITIALIZE SIGN INDICATOR REGISTER POSITIVE FOR SINE NEGATIVE FOR COSINE.
+FETCH A,Z_0; PLACE LOWER BYTE OF ANGLE IN ACCUMULATOR
+SUBCY A, 44; SUBTRACT LOWER BYTE BY PI/2
+STORE A, Z_0; PLACE RESULT IN LOWER BYTE OF Z[0]
+FETCH A, Z_1; PLACE UPPER BYTE OF ANGLE IN ACCUM.
+SUBCY A, 32; SUBT WITH BORROW UPPER BYTE BY PI/2
+STORE A, Z_1; PLACE RESULT IN UPPER BYTE OF Z[0]
+JUMP C,TWOS; IF BORROW SET, ANGLE WAS IN [PI/2,PI)
+
+;AND A,A; CLEAR THE BORROW (CARRY)
+
+;NOW CHECK IF THE ANGLE IS BETWEEN PI AND 3PI/2, IF NOT CONTINUE
+LOAD R2,03; INITIALIZE SIGN INDICATOR REGISTER NEGATIVE FOR BOTH SINE AND COSINE
+FETCH A, Z_0; PLACE LOWER BYTE OF ANGLE IN ACCUM.
+SUBCY A, 44; SUBTRACT LOWER BYTE BY PI/2
+STORE A, Z_0; PLACE RESULT IN LOWER BYTE OF Z[0]
+FETCH A, Z_1; PLACE UPPER BYTE OF ANGLE IN ACCUM
+SUBCY A, 32; SUBT (WITH BORROW) UPPER BYTE OF PI
+STORE A, Z_1; PLACE RESULT IN UPPER BYTE OF Z[0]
+JUMP C, ADD_PIDIV2; IF BORROW SET, ANGLE WAS IN [PI,3PI/2)
+
+;AND A,A; CLEAR THE BORROW (CARRY)
+
+; IF WE GET THIS FAR, THE ANGLE IS BETWEEN 3PI/2 AND 2PI.
+LOAD R2,01; INITIALIZE SIGN INDICATOR REGISTER POSITIVE FOR COSINE AND NEGATIVE FOR SINE
+FETCH A,Z_0; PLACE LOWER BYTE OF ANGLE IN ACCUM
+SUBCY A, 44; SUBTRACT LOWER BYTE BY PI/2
+STORE A, Z_0; PLACE RESULT IN LOWER BYTE OF Z[0]
+FETCH A, Z_1; PLACE UPPER BYTE OF ANGLE IN ACCUM
+SUBCY A, 32; SUBT WITH BORROW UPPER BYTE BY PI/2
+STORE A, Z_1; PLACE RESULT IN UPPER BYTE OF Z[0]
+
+TWOS:
+FETCH A, Z_0; FORM THE TWOS COMPARELEMENT OF Z[0]
+XOR A, FF;
+ADD A, 01;
+STORE A, Z_0;
+FETCH A, Z_1;
+XOR A, FF;
+ADDCY A, 00;
+STORE A, Z_1;
+JUMP CORDIC_ALGO;
+
+ADD_PIDIV2: ; ADD BACK PI/2
+FETCH A, Z_0;
+ADD A, 44;
+STORE A, Z_0;
+FETCH A, Z_1;
+ADDCY A, 32;
+STORE A, Z_1;
+
+; IT IS AT THIS POINT THAT THE CORDIC ALGORIYHM BEGINS
+CORDIC_ALGO:
+LOAD DPTR, E_00_START; INIT DATA POINTER AT CORDIC
+LOAD R1, 00;
+LOAD A, 00;
+STORE A, K;
+
+; BELOW IS THE CORDIC LOOP
+CORDIC_LOOP:
+FETCH R0,K; Temporarily store K for Shift_XY
+FETCH A,X_0;
+STORE A,XTMP_0; Temporarily store X[K]
+FETCH A,X_1;
+STORE A,XTMP_1;
+FETCH A,Y_0;
+STORE A,YTMP_0; Temporarily store Y[K]
+FETCH A,Y_1;
+STORE A,YTMP_1;
+
+LOAD sB, DPTR;
+FETCH A, (sB); Temporarily store E[K]
+STORE A, E_0;
+ADD sB, 01;
+FETCH A, (sB);
+STORE A, E_1;
+ADD DPTR, 01;
+ADD DPTR, 01;
+
+; SET UP THE CONTSR0 REGISTER, R3, THAT WILL CONTAIN INFO ON THE NEGATIVITY OF X[K], Y[K], AND Z[K]
+LOAD R3,00;
+FETCH A,X_1;
+AND A,80;
+SR0 A;
+OR A,R3;
+LOAD R3,A;
+FETCH A,Y_1;
+AND A,80;
+SR0 A;
+SR0 A;
+OR A,R3;
+LOAD R3,A;
+FETCH A,Z_1;
+AND A,80;
+SR0 A;
+SR0 A;
+SR0 A;
+OR A,R3;
+LOAD R3,A;
+ADD R3,01; THIS STEP REQUIRED FOR LATER DJNZ INSTRUCTIONS
+
+; COMPAREUTE Z[K+1]
+FETCH A,Z_1;
+AND A,80;
+JUMP NZ,ADD_Z; TEST FOR NEGATIVE
+
+FETCH A,E_0; FORM TWOS COMPARELEMENT OF E[K] IF Z[K] IS POSITIVE, SINCE THEN A SUBTRACTION IS REQUIRED
+XOR A,FF;
+ADD A,01;
+STORE A,E_0;
+FETCH A,E_1;
+XOR A,FF;
+ADDCY A,00;
+STORE A,E_1;
+
+ADD_Z:
+FETCH A,E_0;
+FETCH s1,Z_0;
+ADD A,s1;
+STORE A,Z_0;
+FETCH A,E_1;
+FETCH s1,Z_1;
+ADDCY A,s1;
+STORE A,Z_1;
+
+; COMPAREUTE X[K+1] AND Y[K+1]
+CASE1:
+SUB R3,01;
+JUMP NZ,CASE2;
+CALL SHIFT_XY;
+CALL TWOS_Y_SHIFTED;
+JUMP ADD_XY;
+
+CASE2:
+SUB R3,01;
+JUMP NZ, CASE3;
+CALL ABS_X;
+CALL SHIFT_XY;
+CALL TWOS_X_SHIFTED;
+CALL TWOS_Y_SHIFTED
+JUMP ADD_XY;
+
+CASE3:
+SUB R3,01;
+JUMP NZ, CASE4;
+CALL ABS_Y;
+CALL SHIFT_XY;
+JUMP ADD_XY;
+
+CASE4:
+SUB R3,01;
+JUMP NZ,CASE5;
+CALL ABS_X;
+CALL ABS_Y;
+CALL SHIFT_XY;
+CALL TWOS_X_SHIFTED;
+JUMP ADD_XY;
+
+CASE5:
+SUB R3,01;
+JUMP NZ,CASE6;
+CALL SHIFT_XY;
+CALL TWOS_X_SHIFTED;
+JUMP ADD_XY;
+
+CASE6:
+SUB R3,01;
+JUMP NZ,CASE7;
+CALL ABS_X;
+CALL SHIFT_XY;
+JUMP ADD_XY;
+
+CASE7:
+SUB R3,01;
+JUMP NZ,CASE8;
+CALL ABS_Y;
+CALL SHIFT_XY;
+CALL TWOS_X_SHIFTED;
+CALL TWOS_Y_SHIFTED;
+JUMP ADD_XY;
+
+CASE8:
+CALL ABS_X;
+CALL ABS_Y;
+CALL SHIFT_XY;
+CALL TWOS_Y_SHIFTED;
+
+ADD_XY:
+; FROM X[K+1]
+FETCH A,YTMP_0;
+FETCH s1,X_0;
+ADD A,s1;
+STORE A,X_0;
 ;
+FETCH A,YTMP_1;
+FETCH s1,X_1;
+ADDCY A,s1;
+STORE A,X_1;
+; FROM Y[K+1]
+FETCH A,XTMP_0;
+FETCH s1,Y_0;
+ADD A,s1;
+STORE A,Y_0;
+;
+FETCH A,XTMP_1;
+FETCH s1,Y_1;
+ADDCY A,s1;
+STORE A,Y_1;
+; INCREMENT K AND TEST IF WE'VE LOOPED 14 TIMES YET
+FETCH A,K;
+ADD A,01;
+STORE A,K;
+ADD R1,01;
+FETCH A, E_00_LEN;
+COMPARE R1, A;
+JUMP NZ,LONG_JUMP;
+JUMP CORDIC_END;
 
-CORDIC_MAIN:
+LONG_JUMP:
+JUMP CORDIC_LOOP;
 
-LOAD X_HI,00; X = 155
-LOAD X_LO,9B;
-LOAD Y_HI,00; Y
-LOAD Y_LO,00;
+CORDIC_END:
+; IF THE COMPAREUTED ANSWER IS THE NEGATIVE OF THE TRUE ANSWER, TEST IF ANSWERS ARE NEGATIVE OR POSITIVE AND CHANGE SIGN.
+LOAD A,03; LEAVE SIGN OF ANSWERS POSITIVE IF THE ANGLE IS [0,PI/2) OR R2 = 0
+AND A,R2;
+JUMP Z,THE_END;
+; SKIP NEGATION OF COSINE IF ANGLE IS IN [3PI/2,2PI] OR R2 = 1
+LOAD A,02;
+AND A,R2;
+JUMP Z,TWOS_Y;
 
-LOAD TEMP_REG,00;
-STORE TEMP_REG,ANGLE_HI; angle = 0
-LOAD TEMP_REG,00;
-STORE TEMP_REG,ANGLE_LO;
-LOAD TEMP_REG,CURRENT_ANGLE_HI;
-STORE TEMP_REG,DESIRED_ANGLE_HI;
-LOAD TEMP_REG,CURRENT_ANGLE_LO;
-STORE TEMP_REG,DESIRED_ANGLE_LO;
+TWOS_X:
+FETCH A,X_0; FORM THE TWOS COMPARELEMENT OF THE COSINE FOR ANGLES IN [PI/2, 3PI/2) OR R2 = 2 OR 3.
+XOR A,FF;
+ADD A,01;
+STORE A,X_0;
+FETCH A,X_1;
+XOR A,FF;
+ADDCY A,00;
+STORE A,X_1;
 
-FETCH s3,DESIRED_ANGLE_HI; desiredAngle
-FETCH s2,DESIRED_ANGLE_LO;
-LOAD s1,C_90mul256_HI; 90 * 256
-LOAD s0,C_90mul256_LO;
-CALL compare_16;
-COMPARE COMPARE_REG,04; >
-JUMP NZ,aaa1;
+TWOS_Y:
+LOAD A,01; SKIP NEGATION OF SINE IF THE ANGLE IS IN [PI/2, PI)
+AND A,R2;
+JUMP Z,THE_END;
+FETCH A,Y_0; FORM THE TWOS COMPARELEMENT OF THE SINE FOR ANGLES IN [PI.2PI) OR EQUIVALENTLY, WHEN R2 = 1 OR 3.
+XOR A,FF;
+ADD A,01;
+STORE A,Y_0;
+FETCH A,Y_1;
+XOR A,FF;
+ADDCY A,00;
+STORE A,Y_1;
 
-LOAD s0,C_180mul256_HI;
-STORE s0,ANGLE_HI; angle = 180 * 256
-LOAD s0,C_180mul256_LO;
-STORE s0,ANGLE_LO;
+THE_END:
+JUMP THE_REAL_END;
 
-aaa1:
-LOAD INDEX, 00; i
-LOAD INDEX_MAX, 0e; 0...14
-
-loop:
-FETCH s3,DESIRED_ANGLE_HI;
-FETCH s2,DESIRED_ANGLE_LO;
-FETCH s1,ANGLE_HI; angle
-FETCH s0,ANGLE_LO;
-CALL compare_16;
-COMPARE COMPARE_REG,04; >
-JUMP NZ, l1;
-
-l0:
-
-LOAD TEMP_INDEX,INDEX; i
-LOAD TEMP_HI,Y_HI; temp Y
-LOAD TEMP_LO,Y_LO;
-ttt1:
-SR0 TEMP_HI; Y >> i
-SRA TEMP_LO;
-SUB TEMP_INDEX,01;
-JUMP NZ,ttt1;
-
-LOAD s3,TEMP_HI; Y >> i
-LOAD s2,TEMP_LO;
-LOAD s1,X_HI; X
-LOAD s0,X_LO;
-CALL subtract_16; Xnew = X - (Y>>i)
-STORE s1,X_NEW_HI; Xnew
-STORE s0,X_NEW_LO;
-
-LOAD TEMP_INDEX,INDEX; i
-LOAD TEMP_HI,X_HI; temp X
-LOAD TEMP_LO,X_LO;
-ttt2:
-SR0 TEMP_HI; X >> i
-SRA TEMP_LO;
-SUB TEMP_INDEX,01;
-JUMP NZ,ttt2;
-
-LOAD s3,TEMP_HI; X >> i
-LOAD s2,TEMP_LO;
-LOAD s1,Y_HI; Y
-LOAD s0,Y_LO;
-CALL adder_16; Ynew = Y + (X>>i)
-STORE s1,Y_NEW_HI; Ynew
-STORE s0,Y_NEW_LO;
-
-LOAD s3,INDEX;
-ADD s3,01;
-FETCH s3,(s3); atan(i+1)
-FETCH s2,(INDEX); atan(i)
-FETCH s1,ANGLE_HI;
-FETCH s0,ANGLE_LO;
-CALL adder_16; angle = angle + atan(i)
-STORE s1,ANGLE_HI;
-STORE s0,ANGLE_LO;
-
-l1:
-
-LOAD TEMP_INDEX,INDEX; i
-LOAD TEMP_HI,Y_HI; temp Y
-LOAD TEMP_LO,Y_LO;
-ttt3:
-SR0 TEMP_HI; Y >> i
-SRA TEMP_LO;
-SUB TEMP_INDEX,01;
-JUMP NZ,ttt3;
-
-LOAD s3,TEMP_HI; Y >> i
-LOAD s2,TEMP_LO;
-LOAD s1,X_HI; X
-LOAD s0,X_LO;
-CALL adder_16; Xnew = X + (Y>>i)
-STORE s1,21; Xnew
-STORE s0,20;
-
-LOAD TEMP_INDEX,INDEX; i
-LOAD TEMP_HI,X_HI; temp X
-LOAD TEMP_LO,X_LO;
-ttt4:
-SR0 TEMP_HI; X >> i
-SRA TEMP_LO;
-SUB TEMP_INDEX,01;
-JUMP NZ,ttt4;
-
-LOAD s3,TEMP_HI; X >> i
-LOAD s2,TEMP_LO;
-LOAD s1,Y_HI; Y
-LOAD s0,Y_LO;
-CALL subtract_16; Ynew = Y - (X>>i)
-STORE s1,23; Ynew
-STORE s0,22;
-
-LOAD s3,INDEX;
-ADD s3,01;
-FETCH s3,(s3); atan(i+1)
-FETCH s2,(INDEX); atan(i)
-FETCH s1,ANGLE_HI;
-FETCH s0,ANGLE_LO;
-CALL subtract_16; angle = angle - atan(i)
-STORE s1,ANGLE_HI;
-STORE s0,ANGLE_LO;
-
-FETCH X_HI,X_NEW_HI; X = Xnew
-FETCH X_LO,X_NEW_LO;
-FETCH Y_HI,Y_NEW_HI; Y = Ynew
-FETCH Y_LO,Y_NEW_LO;
-
-ADD INDEX,01; i = i + 1
-COMPARE INDEX,INDEX_MAX; i < 14
-JUMP C, loop;
-
-FETCH s3,DESIRED_ANGLE_HI; desiredAngle
-FETCH s2,DESIRED_ANGLE_LO;
-LOAD s1,C_90mul256_HI; 90 * 256
-LOAD s0,C_90mul256_LO;
-CALL compare_16;
-COMPARE COMPARE_REG,04; >
-JUMP NZ, aaa2;
-XOR X_HI,FF; X = -X
-XOR X_LO,FF;
-ADD X_LO,01;
-ADDCY X_HI,00;
-XOR Y_HI,FF; Y = -Y
-XOR Y_LO,FF;
-ADD Y_LO,01;
-ADDCY Y_HI,00;
-aaa2:
-STORE X_HI,33; X = Xnew
-STORE X_LO,32;
-STORE Y_HI,31; Y = Ynew
-STORE Y_LO,30;
-
-;FETCH sC,33; X = Xnew
-;FETCH sD,32;
-;FETCH sE,31; Y = Ynew
-;FETCH sF,30;
-;OUTPUT X_LO, PORT_1; DEBUG
-;OUTPUT X_HI, PORT_2; DEBUG
-;OUTPUT Y_LO, PORT_3; DEBUG
-;OUTPUT Y_HI, PORT_4; DEBUG
-
-FETCH s0, 30;
-FETCH s1, 31;
-FETCH s2, 32;
-FETCH s3, 33;
-FETCH COMPARE_REG, 34;
-FETCH TEMP_REG, 35;
-FETCH INDEX, 36;
-FETCH INDEX_MAX, 37;
-FETCH COLOR_REG, 38;
-FETCH TEMP_INDEX, 39;
-FETCH TEMP_LO, 3a;
-FETCH TEMP_HI, 3b;
-FETCH Y_LO, 3c;
-FETCH Y_HI, 3d;
-FETCH X_LO, 3e;
-FETCH X_HI, 3f;
-
+ABS_X:
+AND A,A;
+FETCH A,XTMP_0;
+SUBCY A,01;
+STORE A,XTMP_0;
+FETCH A,XTMP_1;
+SUBCY A,00;
+STORE A,XTMP_1;
 RETURN;
 
-;USER_CODE_END:
-;  JUMP END;
+ABS_Y:
+AND A,A;
+FETCH A,YTMP_0;
+SUBCY A,01;
+STORE A,YTMP_0;
+FETCH A,YTMP_1;
+SUBCY A,00;
+STORE A,YTMP_1;
+RETURN;
+
+SHIFT_XY:
+LOAD A,R0;
+JUMP Z,END_SHIFT_XY;
+SUB R0,01;
+AND A,A;
+FETCH A,XTMP_1;
+SRA A; ???
+STORE A,XTMP_1;
+FETCH A,XTMP_0;
+SRA A;
+STORE A,XTMP_0;
+AND A,A;
+FETCH A,YTMP_1;
+SRA A;
+STORE A,YTMP_1;
+FETCH A,YTMP_0;
+SRA A;
+STORE A,YTMP_0;
+JUMP SHIFT_XY;
+
+END_SHIFT_XY:
+RETURN;
+
+TWOS_X_SHIFTED:
+FETCH A,XTMP_0;
+XOR A,FF;
+ADD A,01;
+STORE A,XTMP_0;
+FETCH A,XTMP_1;
+XOR A,FF;
+ADDCY A,00;
+STORE A,XTMP_1;
+RETURN;
+
+TWOS_Y_SHIFTED:
+FETCH A,YTMP_0;
+XOR A,FF;
+ADD A,01;
+STORE A,YTMP_0;
+FETCH A,YTMP_1;
+XOR A,FF;
+ADDCY A,00;
+STORE A,YTMP_1;
+RETURN;
+
+THE_REAL_END:
+FETCH A,X_0;
+STORE A,COSINE_16_LO;
+FETCH A,X_1;
+STORE A,COSINE_16_HI;
+FETCH A,Y_0;
+STORE A,SINE_16_LO;
+FETCH A,Y_1;
+STORE A,SINE_16_HI;
+RETURN;
 
 compare_16:
 ; INPUT  :
@@ -401,54 +615,197 @@ _compare_16_equal_hi:                                   ;
                       JUMP    NZ , _compare_16_more     ;
                       JUMP         _compare_16_equal    ;
 _compare_16_less:                                       ; s3,s2 < s1,s0
-                      LOAD    COMPARE_REG , 01                   ;
+                      LOAD    R0 , 01                   ;
                       JUMP         _compare_16_end      ;
 _compare_16_equal:                                      ; s3,s2 = s1,s0
-                      LOAD    COMPARE_REG , 02                   ;
+                      LOAD    R0 , 02                   ;
                       JUMP         _compare_16_end      ;
 _compare_16_more:                                       ; s3,s2 > s1,s0
-                      LOAD    COMPARE_REG , 04                   ;
+                      LOAD    R0 , 04                   ;
 _compare_16_end:                                        ;
                       RETURN                            ;
 
-subtract_16:
-; Figure 3-9: 16-Bit Subtraction Using SUB and SUBCY Instructions
-;   ug129.pdf
+multiply_16:
 ; INPUT  :
-;   s3 = subtrahend (a) HI
-;   s2 = subtrahend (a) LO
-;   s1 = minuend (b) HI
-;   s0 = minuend (b) LO
+;   s3 = multiplicand (a) HI
+;   s2 = multiplicand (a) LO
+;   s1 = multipler    (b) HI
+;   s0 = multipler    (b) LO
 ; OUTPUT :
-;   s1 = difference MTEMP_HI
-;   s0 = difference LTEMP_HI
+;   s3 = product MSB HI
+;   s2 = product MSB LO
+;   s1 = product LSB HI
+;   s0 = product LSB LO
 ; INFO   :
+;   Used registers    : s4,s5,s6,s7
+;   Stored variables  : [07-06,05-04,03-02,01-00] = [a_hi*b_hi,a_lo*b_hi,a_hi*b_lo,a_lo*b_lo]
 ;
-_subtract_16_start:               ;
-                    SUB   s0 , s2 ;
-                    SUBCY s1 , s3 ;
-_subtract_16_end:                 ;
-                    RETURN        ;
+; Very simple algorithm:
+;                                                            [b_hi] [b_lo]
+;                                                          * [a_hi] [a_lo]
+;                                                          --------––––––-------
+;                                                              [b_lo*a_lo]
+;                                                   [b_hi*a_lo]
+;                                                   [b_lo*a_hi]
+;                                      + [b_hi*a_hi]
+;                                      -----------------------------------------
+;                                                              [b_lo*a_lo] << 0
+;                                     [b_lo*a_hi] + [b_hi*a_lo]            << 8
+;                        + [b_hi*a_hi]                                     << 16
+;                        -------------------------------------------------------
+;
+_multiply_16_store:
+                          LOAD  R0 , s0        ; b_lo
+                          LOAD  R1 , s1        ; b_hi
+                          LOAD  R2 , s2        ; a_lo
+                          LOAD  R3 , s3        ; a_hi
+_multiply_16_mult_8x8_1:                       ; a_lo_b_lo
+                          LOAD  s1 , R2        ;
+                          LOAD  s0 , R0        ;
+                          CALL       mult_8x8  ;
+                          STORE s1 , 01        ;
+                          STORE s0 , 00        ;
+_multiply_16_mult_8x8_2:                       ; a_hi_b_lo
+                          LOAD  s1 , R3        ;
+                          LOAD  s0 , R0        ;
+                          CALL       mult_8x8  ;
+                          STORE s1 , 03        ;
+                          STORE s0 , 02        ;
+_multiply_16_mult_8x8_3:                       ; a_lo_b_hi
+                          LOAD  s1 , R2        ;
+                          LOAD  s0 , R1        ;
+                          CALL       mult_8x8  ;
+                          STORE s1 , 05        ;
+                          STORE s0 , 04        ;
+_multiply_16_mult_8x8_4:                       ; a_hi_b_hi
+                          LOAD  s1 , R3        ;
+                          LOAD  s0 , R1        ;
+                          CALL       mult_8x8  ;
+                          STORE s1 , 07        ;
+                          STORE s0 , 06        ;
+_multiply_16_load_1:                           ; a_hi_b_lo<<8
+                          LOAD  R3 , ZERO      ;
+                          FETCH R2 , 03        ;
+                          FETCH R1 , 02        ;
+                          LOAD  R0 , ZERO      ;
+_multiply_16_load_2:                           ; a_lo_b_hi<<8
+                          LOAD  s3 , ZERO      ;
+                          FETCH s2 , 05        ;
+                          FETCH s1 , 04        ;
+                          LOAD  s0 , ZERO      ;
+_multiply_16_add_1:                            ; (a_hi_b_lo<<8)+(a_lo_b_hi<<8)=(a_hi_b_lo+a_lo_b_hi)<<8
+                          CALL       add32     ;
+_multiply_16_load_3:                           ;
+                          LOAD  R3 , ZERO      ;
+                          LOAD  R2 , ZERO      ;
+                          FETCH R1 , 01        ;
+                          FETCH R0 , 00        ;
+_multiply_16_add_2:                            ; (a_hi_b_lo+a_lo_b_hi)<<8+a_lo_b_lo
+                          CALL       add32     ;
+_multiply_16_load_4:                           ;
+                          FETCH R3 , 07        ;
+                          FETCH R2 , 06        ;
+                          LOAD  R1 , ZERO      ;
+                          LOAD  R0 , ZERO      ;
+_multiply_16_add_3:                            ; a_hi_b_hi<<16+(a_hi_b_lo+a_lo_b_hi)<<8+a_lo_b_lo
+                          CALL       add32     ;
+_multiply_16_end:                              ;
+                          RETURN               ;
 
-adder_16:
-; Figure 3-8: 16-Bit Addition Using ADD and ADDCY Instructions
+mult_8x8:
+; Figure 3-14: 8-bit by 8-bit Multiply Routine Produces a 16-bit Product
 ;   ug129.pdf
 ; INPUT  :
-;   s3 = addition (a) HI
-;   s2 = addition (a) LO
-;   s1 = addition (b) HI
-;   s0 = addition (b) LO
+;   s1 = multiplicand (a)
+;   s0 = multipler    (b)
 ; OUTPUT :
-;   s1 = product MTEMP_HI
-;   s0 = product LTEMP_HI
+;   s1 = product MSB
+;   s0 = product LSB
+; INFO   :
+;   Registers used : s2,s3,s4
+;
+_multiply_8_start:                                  ;
+                    STORE  s2 , 3f                  ;
+                    STORE  s3 , 3e                  ;
+                    STORE  R0 , 3d                  ;
+                    LOAD   s2 , 01                  ; start with LSB
+                    LOAD   s3 , 00                  ; clear product MSB
+                    LOAD   R0 , 00                  ; clear product LSB (not required)
+_multiply_8_loop:                                   ;
+                    TEST   s0 , s2                  ; check if bit is set
+                    JUMP    Z , _multiply_8_no_add  ; if bit is not set, skip addition
+                    ADD    s3 , s1                  ; addition only occurs in MSB
+_multiply_8_no_add:                                 ;
+                    SRA    s3                       ; MSB >>, CARRY into bit 7, LSB into CARRY
+                    SRA    R0                       ; LSB >>, LSB from mult_result_msb into bit 7
+                    SL0    s2                       ; s2 <<, next bit
+                    JUMP   NZ , _multiply_8_loop    ; if all bit, s2 = 0, else loop
+                    LOAD   s1 , s3                  ;
+                    LOAD   s0 , R0                  ;
+_multiply_8_fetch:                                  ;
+                    FETCH  s2 , 3f                  ;
+                    FETCH  s3 , 3e                  ;
+                    FETCH  R0 , 3d                  ;
+_multiply_8_end:                                    ;
+                    RETURN                          ;
+
+add32:
+; INPUT  :
+;   s7 = addition (a) 3
+;   s6 = addition (a) 2
+;   s5 = addition (a) 1
+;   s4 = addition (a) 0
+;   s3 = addition (b) 3
+;   s2 = addition (b) 2
+;   s1 = addition (b) 1
+;   s0 = addition (b) 0
+; OUTPUT :
+;   s3 = product 3
+;   s2 = product 2
+;   s1 = product 1
+;   s0 = product 0
 ; INFO   :
 ;
-_adder_16_start:                  ;
-                  ADD    s0 , s2  ; add LTEMP_HIs
-                  ADDCY  s1 , s3  ; add MTEMP_HIs
-_adder_16_end:                    ;
-                  RETURN          ; keep result in s1 and s0
+_adder_32_start:                  ;
+                  ADD    s0 , R0  ;
+                  ADDCY  s1 , R1  ;
+                  ADDCY  s2 , R2  ;
+                  ADDCY  s3 , R3  ;
+_adder_32_end:                    ;
+                  RETURN          ;
+
+divide_16:
+; https://en.wikipedia.org/wiki/Division_algorithm#Division_by_repeated_subtraction
+; INPUT  :
+;   s3,s2 - N
+;   s1,s0 - D
+; OUTPUT :
+;   s7,s6 - Q
+;   s5,s4 - R
+; INFO   :
+;
+_divide_16_start:                               ;
+                  LOAD    R1 , s3               ; R := N
+                  LOAD    R0 , s2               ;
+                  LOAD    R3 , 00               ; Q := 0
+                  LOAD    R2 , 00               ;
+_divide_16_loop:                                ;
+                  COMPARE R0 , s0               ; while R >= D do
+                  SUBCY   s1 , 00               ;
+                  COMPARE R1 , s1               ;
+                  JUMP     C , _divide_16_end   ; <
+                  SUB     R0 , s0               ; R := R − D
+                  SUBCY   R1 , s1               ;
+                  ADD     R2 , 01               ; Q := Q + 1
+                  ADDCY   R3 , 00               ;
+                  JUMP         _divide_16_loop  ;
+_divide_16_end:                                 ;
+                  RETURN                        ;
+
+USER_CODE_END:
+  JUMP END;
 
 END:
   JUMP END;
+
 
