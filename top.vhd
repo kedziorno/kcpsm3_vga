@@ -190,16 +190,16 @@ begin
   --synthesis translate_on
 
   --synthesis translate_off
-  p_report1 : process (i_cpu_clock) is
-    variable i : integer := 0;
-  begin
-    if (rising_edge (i_cpu_clock)) then
-      if (to_integer (unsigned (kcpsm3_address)) = 103) then
-        report integer'image (i) & " tick address " & integer'image (to_integer (unsigned (kcpsm3_address)));
-        i := i + 1;
-      end if;
-    end if;
-  end process p_report1;
+--  p_report1 : process (i_cpu_clock) is
+--    variable i : integer := 0;
+--  begin
+--    if (rising_edge (i_cpu_clock)) then
+--      if (to_integer (unsigned (kcpsm3_address)) = 103) then
+--        report integer'image (i) & " tick address " & integer'image (to_integer (unsigned (kcpsm3_address)));
+--        i := i + 1;
+--      end if;
+--    end if;
+--  end process p_report1;
   --synthesis translate_on
 
   inst_vga_clock_25mhz : vga_clock_25mhz

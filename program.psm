@@ -16,10 +16,11 @@ CONSTANT PORT_4, 04;
 NAMEREG s9, t0;
 NAMEREG sA, t1;
 NAMEREG sB, t2;
+
 NAMEREG sC, t3;
 NAMEREG sD, t4;
 NAMEREG sE, t5;
-NAMEREG sF, DPTR;
+NAMEREG sF, A;
 
 CONSTANT C_ITERS, 10;
 CONSTANT C_SCALE_LO, ff;
@@ -27,8 +28,8 @@ CONSTANT C_SCALE_HI, ff;
 CONSTANT C_K_INV_LO, 74;
 CONSTANT C_K_INV_HI, 9b;
 CONSTANT C_RADIUS, 50; 80
-CONSTANT C_THETA_LO, 00;
-CONSTANT C_THETA_HI, 00;
+CONSTANT C_THETA_LO, 01;
+CONSTANT C_THETA_HI, 01;
 
 ; MEMORY
 ; multiply_16 - 00-07
@@ -124,17 +125,15 @@ STORE s0,31;
 LOAD s0,   01;
 STORE s0,32;
 
-cordic_main:
-LOAD t0, 00;
-LOAD t1, C_ITERS;
-LOAD t2, C_ROM_ANGLES_START;
-
 initialize_k:
 LOAD t3, C_K_INV_HI;
-STORE t3, M_K_INV_HI;
+STORE t3, M_X_HI;
 LOAD t3, C_K_INV_LO;
-STORE t3, M_K_INV_LO;
+STORE t3, M_X_LO;
 LOAD t4, 00;
+STORE t4, M_Y_HI;
+LOAD t4, 00;
+STORE t4, M_Y_LO;
 
 initialize_theta:
 LOAD t5, C_THETA_HI;
@@ -150,10 +149,26 @@ ADD s0, 01;
 SR0 s0;
 STORE s0, M_ROM_ANGLES_LEN;
 
+cordic_main:
+LOAD t0, 00;
+LOAD t1, C_ITERS;
+LOAD t2, C_ROM_ANGLES_START;
+
+add_theta:
+AND t5, t5;
+FETCH t5, M_THETA_LO;
+ADD t5, 77;
+STORE t5, M_THETA_LO;
+FETCH t5, M_THETA_HI;
+ADDCY t5, 04;
+STORE t5, M_THETA_HI;
+
 cordic_loop:
 COMPARE t0, t1;
+STORE t0, 00;
 JUMP Z, cordic_end;
 
+x_shift:
 FETCH s1, M_X_LO;
 FETCH s2, M_X_HI;
 LOAD s3, t0;
@@ -165,9 +180,10 @@ SRA s1;
 SUB s3, 01;
 JUMP NZ, tttx;
 aaax:
-STORE s1, M_X_LO;
-STORE s2, M_X_HI;
+STORE s1, M_X_SHIFT_LO;
+STORE s2, M_X_SHIFT_HI;
 
+y_shift:
 FETCH s1, M_Y_LO;
 FETCH s2, M_Y_HI;
 LOAD s3, t0;
@@ -179,16 +195,18 @@ SRA s1;
 SUB s3, 01;
 JUMP NZ, ttty;
 aaay:
-STORE s1, M_Y_LO;
-STORE s2, M_Y_HI;
+STORE s1, M_Y_SHIFT_LO;
+STORE s2, M_Y_SHIFT_HI;
 
+load_rom_angle:
 LOAD s1, t2;
-FETCH s0, (s1);
-STORE s0, M_ANGLE_HI;
+FETCH A, (s1);
+STORE A, M_ANGLE_HI;
 ADD s1, 01;
-FETCH s0, (s1);
-STORE s0, M_ANGLE_LO;
+FETCH A, (s1);
+STORE A, M_ANGLE_LO;
 
+theta_ltz:
 LOAD s7, 00;
 LOAD s6, 00;
 FETCH s5, M_THETA_HI;
@@ -198,43 +216,47 @@ LOAD s2, 00;
 LOAD s1, 00;
 LOAD s0, 00;
 CALL compare_32;
-COMPARE s8, 04; <
+COMPARE s8, 01; >
 JUMP Z, sign_neg;
 
 sign_pos:
+
+x_min_y_shift_pos:
 FETCH s0, M_X_LO;
 FETCH s1, M_X_HI;
 LOAD s2, 00;
 LOAD s3, 00;
-LOAD s4, M_X_SHIFT_LO;
-LOAD s5, M_X_SHIFT_LO;
-FETCH s6, 00;
-FETCH s7, 00;
+FETCH s4, M_Y_SHIFT_LO;
+FETCH s5, M_Y_SHIFT_HI;
+LOAD s6, 00;
+LOAD s7, 00;
 CALL subtract_32;
 STORE s0, M_X_LO;
 STORE s1, M_X_HI;
 
+y_plus_x_shift_pos:
 FETCH s0, M_Y_LO;
 FETCH s1, M_Y_HI;
 LOAD s2, 00;
 LOAD s3, 00;
-LOAD s4, M_Y_SHIFT_LO;
-LOAD s5, M_Y_SHIFT_LO;
-FETCH s6, 00;
-FETCH s7, 00;
+FETCH s4, M_X_SHIFT_LO;
+FETCH s5, M_X_SHIFT_HI;
+LOAD s6, 00;
+LOAD s7, 00;
 CALL adder_32;
 STORE s0, M_Y_LO;
 STORE s1, M_Y_HI;
 
+theta_min_angle_pos:
 FETCH s0, M_THETA_LO;
 FETCH s1, M_THETA_HI;
 LOAD s2, 00;
 LOAD s3, 00;
-LOAD s4, M_ANGLE_LO;
-LOAD s5, M_ANGLE_HI;
-FETCH s6, 00;
-FETCH s7, 00;
-CALL adder_32;
+FETCH s4, M_ANGLE_LO;
+FETCH s5, M_ANGLE_HI;
+LOAD s6, 00;
+LOAD s7, 00;
+CALL subtract_32;
 STORE s0, M_THETA_LO;
 STORE s1, M_THETA_HI;
 
@@ -242,38 +264,41 @@ JUMP sign_end;
 
 sign_neg:
 
+x_plus_y_shift_neg:
 FETCH s0, M_X_LO;
 FETCH s1, M_X_HI;
 LOAD s2, 00;
 LOAD s3, 00;
-LOAD s4, M_X_SHIFT_LO;
-LOAD s5, M_X_SHIFT_LO;
-FETCH s6, 00;
-FETCH s7, 00;
+FETCH s4, M_Y_SHIFT_LO;
+FETCH s5, M_Y_SHIFT_HI;
+LOAD s6, 00;
+LOAD s7, 00;
 CALL adder_32;
 STORE s0, M_X_LO;
 STORE s1, M_X_HI;
 
+x_min_y_shift_neg:
 FETCH s0, M_Y_LO;
 FETCH s1, M_Y_HI;
 LOAD s2, 00;
 LOAD s3, 00;
-LOAD s4, M_Y_SHIFT_LO;
-LOAD s5, M_Y_SHIFT_LO;
-FETCH s6, 00;
-FETCH s7, 00;
+FETCH s4, M_X_SHIFT_LO;
+FETCH s5, M_X_SHIFT_HI;
+LOAD s6, 00;
+LOAD s7, 00;
 CALL subtract_32;
 STORE s0, M_Y_LO;
 STORE s1, M_Y_HI;
 
+theta_plus_angle_neg:
 FETCH s0, M_THETA_LO;
 FETCH s1, M_THETA_HI;
 LOAD s2, 00;
 LOAD s3, 00;
-LOAD s4, M_ANGLE_LO;
-LOAD s5, M_ANGLE_HI;
-FETCH s6, 00;
-FETCH s7, 00;
+FETCH s4, M_ANGLE_LO;
+FETCH s5, M_ANGLE_HI;
+LOAD s6, 00;
+LOAD s7, 00;
 CALL adder_32;
 STORE s0, M_THETA_LO;
 STORE s1, M_THETA_HI;
@@ -317,6 +342,7 @@ OUTPUT s2, PORT_3;
 LOAD s1, 03; FFFF/C_RADIUS
 LOAD s0, 33;
 CALL divide_16;
+;   s7,s6 - Q
 ;   s5,s4 - R
 LOAD s3, 00;
 LOAD s2, s6;
@@ -332,7 +358,7 @@ OUTPUT s0, Y_COL;
 LOAD s0, 3F;
 OUTPUT s0, COLOR; 
 
-JUMP cordic_loop;
+JUMP cordic_main;
 
 multiply_16:
 ; INPUT  :
