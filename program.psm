@@ -29,7 +29,7 @@ CONSTANT C_K_INV_LO, 74;
 CONSTANT C_K_INV_HI, 9b;
 CONSTANT C_RADIUS, 50; 80
 CONSTANT C_THETA_LO, 01;
-CONSTANT C_THETA_HI, 01;
+CONSTANT C_THETA_HI, 00;
 
 ; MEMORY
 ; multiply_16 - 00-07
@@ -157,11 +157,14 @@ LOAD t2, C_ROM_ANGLES_START;
 add_theta:
 AND t5, t5;
 FETCH t5, M_THETA_LO;
-ADD t5, 77;
+ADD t5, 00;
 STORE t5, M_THETA_LO;
 FETCH t5, M_THETA_HI;
-ADDCY t5, 04;
+ADDCY t5, ff;
 STORE t5, M_THETA_HI;
+
+compare_theta:
+; < 360
 
 cordic_loop:
 COMPARE t0, t1;
@@ -207,17 +210,21 @@ FETCH A, (s1);
 STORE A, M_ANGLE_LO;
 
 theta_ltz:
-LOAD s7, 00;
+LOAD s7, 00; A
 LOAD s6, 00;
 FETCH s5, M_THETA_HI;
 FETCH s4, M_THETA_LO;
-LOAD s3, 00;
+LOAD s3, 00; B
 LOAD s2, 00;
 LOAD s1, 00;
 LOAD s0, 00;
 CALL compare_32;
-COMPARE s8, 01; >
-JUMP Z, sign_neg;
+COMPARE s8, 01; A < B
+JUMP NZ, sign_neg; ???
+
+;FETCH s5, M_THETA_HI;
+;AND s5, 80;
+;JUMP NZ, sign_neg;
 
 sign_pos:
 
@@ -323,8 +330,8 @@ FETCH s3, M_COSINE_16_HI;
 FETCH s2, M_COSINE_16_LO;
 OUTPUT s3, PORT_2;
 OUTPUT s2, PORT_1;
-LOAD s1, 03; FFFF/C_RADIUS
-LOAD s0, 33;
+LOAD s1, 09; FFFF/X_ROW
+LOAD s0, d8;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
@@ -339,8 +346,8 @@ FETCH s3, M_SINE_16_HI;
 FETCH s2, M_SINE_16_LO;
 OUTPUT s3, PORT_4;
 OUTPUT s2, PORT_3;
-LOAD s1, 03; FFFF/C_RADIUS
-LOAD s0, 33;
+LOAD s1, 02; FFFF/Y_COL
+LOAD s0, 22;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
