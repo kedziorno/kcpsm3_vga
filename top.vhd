@@ -33,8 +33,6 @@ use ieee.math_real.all;
 library std;
 use ieee.std_logic_textio.all;
 use std.textio.all;
-library fphdl;
-use fphdl.float_pkg.all;
 
 use work.p_package1.all;
 
@@ -228,27 +226,53 @@ begin
     variable factor : real := 65536.0;
     variable ang_rad : real := 180.0 / 3.1415;
     variable rad_ang : real := 3.1415 / 180.0;
-    variable v_theta_r1, v_theta_r2 : real := 0.0;
+    variable v_theta_r, v_sin_r, v_cos_r, v_sin_o, v_cos_o : real := 0.0;
     variable v_theta_v, v_sin_v, v_cos_v : std_logic_vector (15 downto 0); -- use variables, signals appear on next clock (mistakes)
+    -- we can use one variable for all out ports, but can be problem when in psm code we mistake OUTPUT's order.
+    variable flag : boolean := false;
   begin
     if (falling_edge (kcpsm3_write_strobe)) then
       if (to_integer (unsigned (kcpsm3_port_id)) = 1) then
         v_sin_v := kcpsm3_out_port & v_sin_v (15 downto 8); -- LO first
-        s_sin_v <= v_sin_v;
-        s_sin_r <= real (to_integer (signed (v_sin_v))) / factor;
+        if (flag = true) then
+          v_sin_r := real (to_integer (signed (v_sin_v)));
+          s_sin_v <= v_sin_v;
+          v_sin_r := v_sin_r / factor;
+          report "sin_cordic " & real'image (v_sin_r);
+          s_sin_r <= v_sin_r;
+          flag := false;
+        else
+          flag := true;
+        end if;
       end if;
       if (to_integer (unsigned (kcpsm3_port_id)) = 2) then
         v_cos_v := kcpsm3_out_port & v_cos_v (15 downto 8); -- LO first
-        s_cos_v <= v_cos_v;
-        s_cos_r <= real (to_integer (signed (v_cos_v))) / factor;
+        if (flag = true) then
+          v_cos_r := real (to_integer (signed (v_cos_v)));
+          s_cos_v <= v_cos_v;
+          v_cos_r := v_cos_r / factor;
+          report "cos_cordic " & real'image (v_cos_r);
+          s_cos_r <= v_cos_r;
+        else
+          flag := true;
+        end if;
       end if;
-      if (to_integer (unsigned (kcpsm3_port_id)) = 3) then
+      if (to_integer (unsigned (kcpsm3_port_id)) = 3) then -- THETA
         v_theta_v := kcpsm3_out_port & v_theta_v (15 downto 8); -- LO first
-        v_theta_r1 := (real (to_integer (signed (v_theta_v)))); -- radians
-        v_theta_r1 := v_theta_r1 / factor; -- radians after normalize
-        s_theta_r <= v_theta_r1;
-        s_sin_f <= sin (v_theta_r1);
-        s_cos_f <= cos (v_theta_r1);
+        if (flag = true) then
+          v_theta_r := (real (to_integer (signed (v_theta_v)))); -- radians
+          v_theta_r := v_theta_r / factor; -- radians after normalize
+          s_theta_r <= v_theta_r;
+          v_sin_o := sin (v_theta_r);
+          report "sin_original " & real'image (v_sin_o);
+          s_sin_f <= v_sin_o;
+          v_cos_o := cos (v_theta_r);
+          report "cos_original " & real'image (v_cos_o);
+          s_cos_f <= v_cos_o;
+          flag := false;
+        else
+          flag := true;
+        end if;
       end if;
     end if;
   end process p_report2;
