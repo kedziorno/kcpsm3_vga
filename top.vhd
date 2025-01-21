@@ -223,23 +223,24 @@ begin
 --    end if;
 --  end process p_report1;
   p_report2 : process (kcpsm3_write_strobe) is
-    variable v_theta : std_logic_vector (15 downto 0);
-    variable theta_r : real := 0.0;
+    variable factor : real := 65536.0;
+    variable ang_rad : real := 180.0 / 3.1415;
+    variable rad_ang : real := 3.1415 / 180.0;
   begin
     if (falling_edge (kcpsm3_write_strobe)) then
       if (to_integer (unsigned (kcpsm3_port_id)) = 1) then
         s_sin_v <= kcpsm3_out_port & s_sin_v (15 downto 8); -- LO first
-        s_sin_r <= real (to_integer (unsigned (kcpsm3_out_port))) / 256.0;
+        s_sin_r <= real (to_integer (unsigned (s_sin_v))) / factor;
         --report real'image (o_sin);
       end if;
-      if (to_integer (unsigned (kcpsm3_port_id)) = 3) then
+      if (to_integer (unsigned (kcpsm3_port_id)) = 2) then
         s_cos_v <= kcpsm3_out_port & s_cos_v (15 downto 8); -- LO first
-        s_cos_r <= real (to_integer (unsigned (kcpsm3_out_port))) / 256.0;
+        s_cos_r <= real (to_integer (unsigned (s_sin_v))) / factor;
         --report real'image (o_cos);
       end if;
-      if (to_integer (unsigned (kcpsm3_port_id)) = 2) then
+      if (to_integer (unsigned (kcpsm3_port_id)) = 3) then
         s_theta_v <= kcpsm3_out_port & s_theta_v (15 downto 8); -- LO first
-        s_theta_r <= (real (to_integer (unsigned (s_theta_v)))) * (180.0 / 3.1415) / 65536.0;
+        s_theta_r <= (real (to_integer (unsigned (s_theta_v)))) * ang_rad / factor;
         s_sin_f <= sin (s_theta_r);
         s_cos_f <= cos (s_theta_r);
       end if;
