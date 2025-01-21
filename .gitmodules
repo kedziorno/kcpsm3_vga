@@ -2,3 +2,11 @@
 	path = Bitmap-VHDL-Package
 	url = https://github.com/jherkenhoff/Bitmap-VHDL-Package.git
 	branch = master
+[submodule "opensource_ieee_vasg"]
+	path = opensource_ieee_vasg
+	url = https://opensource.ieee.org/vasg/Packages.git
+	branch = release
+[submodule "fphdl"]
+	path = fphdl
+	url = https://github.com/FPHDL/fphdl.git
+	branch = master

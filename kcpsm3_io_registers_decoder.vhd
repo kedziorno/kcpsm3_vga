@@ -47,6 +47,12 @@ i_kcpsm3_write_strobe : in  std_logic;
 o_pixel_coordination  : out std_logic_vector (c_memory_address_bits - 1 downto 0);
 o_pixel_color         : out std_logic_vector (c_color_bits - 1 downto 0);
 o_pixel_write         : out std_logic_vector (0 downto 0);
+-- o_testX not used in synthesis
+o_test8               : out std_logic_vector (7 downto 0);
+o_test7               : out std_logic_vector (7 downto 0);
+o_test6               : out std_logic_vector (7 downto 0);
+o_test5               : out std_logic_vector (7 downto 0);
+o_test4               : out std_logic_vector (7 downto 0);
 o_test3               : out std_logic_vector (7 downto 0);
 o_test2               : out std_logic_vector (7 downto 0);
 o_test1               : out std_logic_vector (7 downto 0);
@@ -108,6 +114,7 @@ begin
     end if;
   end process p_io_registers_decoder;
 
+--synthesis translate_off
   p_io_registers_decoder_debug : process (i_clock, i_reset) is
   begin
     if (i_reset = '1') then
@@ -115,31 +122,58 @@ begin
       o_test1 <= (others => '0');
       o_test2 <= (others => '0');
       o_test3 <= (others => '0');
+      o_test4 <= (others => '0');
+      o_test5 <= (others => '0');
+      o_test6 <= (others => '0');
+      o_test7 <= (others => '0');
+      o_test8 <= (others => '0');
     elsif (rising_edge (i_clock)) then
       case (i_kcpsm3_port_id) is
         when x"01" =>
           if (i_kcpsm3_write_strobe = '1') then
-            o_test0 <= i_kcpsm3_out_port;
+            o_test1 <= i_kcpsm3_out_port;
           end if;
         when x"02" =>
           if (i_kcpsm3_write_strobe = '1') then
-            o_test1 <= i_kcpsm3_out_port;
+            o_test2 <= i_kcpsm3_out_port;
           end if;
         when x"03" =>
           if (i_kcpsm3_write_strobe = '1') then
-            o_test2 <= i_kcpsm3_out_port;
+            o_test3 <= i_kcpsm3_out_port;
           end if;
         when x"04" =>
           if (i_kcpsm3_write_strobe = '1') then
-            o_test3 <= i_kcpsm3_out_port;
+            o_test4 <= i_kcpsm3_out_port;
+          end if;
+        when x"05" =>
+          if (i_kcpsm3_write_strobe = '1') then
+            o_test5 <= i_kcpsm3_out_port;
+          end if;
+        when x"06" =>
+          if (i_kcpsm3_write_strobe = '1') then
+            o_test6 <= i_kcpsm3_out_port;
+          end if;
+        when x"07" =>
+          if (i_kcpsm3_write_strobe = '1') then
+            o_test7 <= i_kcpsm3_out_port;
+          end if;
+        when x"08" =>
+          if (i_kcpsm3_write_strobe = '1') then
+            o_test8 <= i_kcpsm3_out_port;
           end if;
         when others =>
           o_test0 <= (others => '0');
           o_test1 <= (others => '0');
           o_test2 <= (others => '0');
           o_test3 <= (others => '0');
+          o_test4 <= (others => '0');
+          o_test5 <= (others => '0');
+          o_test6 <= (others => '0');
+          o_test7 <= (others => '0');
+          o_test8 <= (others => '0');
       end case;
     end if;
   end process p_io_registers_decoder_debug;
+--synthesis translate_on
 
 end architecture behavioral;

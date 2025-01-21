@@ -17,8 +17,6 @@
 -- Additional Comments:
 --
 ----------------------------------------------------------------------------------
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -28,8 +26,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 -- any Xilinx primitives in this code.
 --library UNISIM;
 --use UNISIM.VComponents.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.math_real.all;
+library std;
+use ieee.std_logic_textio.all;
+use std.textio.all;
 
-use work.numeric_std.all; -- XXX ONLY FOR DISABLE WARNIGS (I am not worthy and I am unworthy to modify this saint file ;-P). Please copy and modify own file.
 use work.p_package1.all;
 
 entity top is
@@ -121,6 +125,12 @@ architecture behavioral of top is
   o_pixel_coordination  : out std_logic_vector (c_memory_address_bits - 1 downto 0);
   o_pixel_color         : out std_logic_vector (c_color_bits - 1 downto 0);
   o_pixel_write         : out std_logic_vector (0 downto 0);
+  -- o_testX not used in synthesis
+  o_test8               : out std_logic_vector (7 downto 0);
+  o_test7               : out std_logic_vector (7 downto 0);
+  o_test6               : out std_logic_vector (7 downto 0);
+  o_test5               : out std_logic_vector (7 downto 0);
+  o_test4               : out std_logic_vector (7 downto 0);
   o_test3               : out std_logic_vector (7 downto 0);
   o_test2               : out std_logic_vector (7 downto 0);
   o_test1               : out std_logic_vector (7 downto 0);
@@ -156,23 +166,35 @@ architecture behavioral of top is
   signal kcpsm3_interrupt     : std_logic := '0';
   signal kcpsm3_interrupt_ack : std_logic;
 
-  signal o_test3, o_test2, o_test1, o_test0 : std_logic_vector (7 downto 0);
+--synthesis translate_ff
+  signal o_test0 : std_logic_vector (7 downto 0);
+  signal o_test4, o_test3, o_test2, o_test1 : std_logic_vector (7 downto 0);
+  signal o_test8, o_test7, o_test6, o_test5 : std_logic_vector (7 downto 0);
 
-  signal test_concatenate_10 : std_logic_vector (15 downto 0);
   signal test_concatenate_21 : std_logic_vector (15 downto 0);
-  signal test_concatenate_32 : std_logic_vector (15 downto 0);
-  signal test_concatenate_210 : std_logic_vector (23 downto 0);
-  signal test_concatenate_321 : std_logic_vector (23 downto 0);
-  signal test_concatenate_3210 : std_logic_vector (31 downto 0);
+  signal test_concatenate_43 : std_logic_vector (15 downto 0);
+  signal test_concatenate_65 : std_logic_vector (15 downto 0);
+  signal test_concatenate_87 : std_logic_vector (15 downto 0);
+  signal test_concatenate_4321 : std_logic_vector (31 downto 0);
+  signal test_concatenate_8765 : std_logic_vector (31 downto 0);
+--synthesis translate_on
+
+--synthesis translate_off
+  signal s_sin_r, s_cos_r, s_theta_r : real := 0.0;
+  signal s_sin_f, s_cos_f : real := 0.0;
+  signal s_sin_v, s_cos_v, s_theta_v : std_logic_vector (15 downto 0);
+--synthesis translate_on
 
 begin
 
-  test_concatenate_3210 <= o_test3 & o_test2 & o_test1 & o_test0;
-  test_concatenate_10 <= o_test1 & o_test0;
+--synthesis translate_off
+  test_concatenate_4321 <= o_test4 & o_test3 & o_test2 & o_test1;
+  test_concatenate_8765 <= o_test8 & o_test7 & o_test6 & o_test5;
   test_concatenate_21 <= o_test2 & o_test1;
-  test_concatenate_32 <= o_test3 & o_test2;
-  test_concatenate_210 <= o_test2 & o_test1 & o_test0;
-  test_concatenate_321 <= o_test3 & o_test2 & o_test1;
+  test_concatenate_43 <= o_test4 & o_test3;
+  test_concatenate_65 <= o_test6 & o_test5;
+  test_concatenate_87 <= o_test8 & o_test7;
+--synthesis translate_on
 
   o_blank   <= vga_blank;
   o_h_blank <= vga_h_blank;
@@ -189,7 +211,7 @@ begin
 --  end process p_report_address_and_color;
   --synthesis translate_on
 
-  --synthesis translate_off
+--synthesis translate_off
 --  p_report1 : process (i_cpu_clock) is
 --    variable i : integer := 0;
 --  begin
@@ -200,7 +222,30 @@ begin
 --      end if;
 --    end if;
 --  end process p_report1;
-  --synthesis translate_on
+  p_report2 : process (kcpsm3_write_strobe) is
+    variable v_theta : std_logic_vector (15 downto 0);
+    variable theta_r : real := 0.0;
+  begin
+    if (falling_edge (kcpsm3_write_strobe)) then
+      if (to_integer (unsigned (kcpsm3_port_id)) = 1) then
+        s_sin_v <= kcpsm3_out_port & s_sin_v (15 downto 8); -- LO first
+        s_sin_r <= real (to_integer (unsigned (kcpsm3_out_port))) / 256.0;
+        --report real'image (o_sin);
+      end if;
+      if (to_integer (unsigned (kcpsm3_port_id)) = 3) then
+        s_cos_v <= kcpsm3_out_port & s_cos_v (15 downto 8); -- LO first
+        s_cos_r <= real (to_integer (unsigned (kcpsm3_out_port))) / 256.0;
+        --report real'image (o_cos);
+      end if;
+      if (to_integer (unsigned (kcpsm3_port_id)) = 2) then
+        s_theta_v <= kcpsm3_out_port & s_theta_v (15 downto 8); -- LO first
+        s_theta_r <= (real (to_integer (unsigned (s_theta_v)))) * (180.0 / 3.1415) / 65536.0;
+        s_sin_f <= sin (s_theta_r);
+        s_cos_f <= cos (s_theta_r);
+      end if;
+    end if;
+  end process p_report2;
+--synthesis translate_on
 
   inst_vga_clock_25mhz : vga_clock_25mhz
   port map (
