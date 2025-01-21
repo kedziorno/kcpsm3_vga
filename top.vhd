@@ -229,23 +229,23 @@ begin
     variable ang_rad : real := 180.0 / 3.1415;
     variable rad_ang : real := 3.1415 / 180.0;
     variable v_theta_r1, v_theta_r2 : real := 0.0;
-    variable v_theta_v : std_logic_vector (15 downto 0); -- use variables, signals appear on next clock (mistakes)
+    variable v_theta_v, v_sin_v, v_cos_v : std_logic_vector (15 downto 0); -- use variables, signals appear on next clock (mistakes)
   begin
     if (falling_edge (kcpsm3_write_strobe)) then
       if (to_integer (unsigned (kcpsm3_port_id)) = 1) then
-        s_sin_v <= kcpsm3_out_port & s_sin_v (15 downto 8); -- LO first
-        s_sin_r <= real (to_integer (unsigned (s_sin_v))) / factor;
-        --report real'image (o_sin);
+        v_sin_v := kcpsm3_out_port & v_sin_v (15 downto 8); -- LO first
+        s_sin_v <= v_sin_v;
+        s_sin_r <= real (to_integer (signed (v_sin_v))) / factor;
       end if;
       if (to_integer (unsigned (kcpsm3_port_id)) = 2) then
-        s_cos_v <= kcpsm3_out_port & s_cos_v (15 downto 8); -- LO first
-        s_cos_r <= real (to_integer (unsigned (s_sin_v))) / factor;
-        --report real'image (o_cos);
+        v_cos_v := kcpsm3_out_port & v_cos_v (15 downto 8); -- LO first
+        s_cos_v <= v_cos_v;
+        s_cos_r <= real (to_integer (signed (v_cos_v))) / factor;
       end if;
       if (to_integer (unsigned (kcpsm3_port_id)) = 3) then
         v_theta_v := kcpsm3_out_port & v_theta_v (15 downto 8); -- LO first
-        v_theta_r1 := (real (to_integer (unsigned (v_theta_v))));
-        v_theta_r1 := v_theta_r1 / factor;
+        v_theta_r1 := (real (to_integer (signed (v_theta_v)))); -- radians
+        v_theta_r1 := v_theta_r1 / factor; -- radians after normalize
         s_theta_r <= v_theta_r1;
         s_sin_f <= sin (v_theta_r1);
         s_cos_f <= cos (v_theta_r1);
