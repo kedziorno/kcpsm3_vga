@@ -225,7 +225,10 @@ begin
   p_report2 : process (kcpsm3_write_strobe) is
     variable factor : real := 65536.0;
     variable ang_rad : real := 180.0 / 3.1415;
+    variable ang_rad_m : real := 180.0 * 3.1415;
     variable rad_ang : real := 3.1415 / 180.0;
+    variable v_theta_r1 : real := 0.0;
+    variable v_theta_r2 : real := 0.0;
   begin
     if (falling_edge (kcpsm3_write_strobe)) then
       if (to_integer (unsigned (kcpsm3_port_id)) = 1) then
@@ -240,9 +243,15 @@ begin
       end if;
       if (to_integer (unsigned (kcpsm3_port_id)) = 3) then
         s_theta_v <= kcpsm3_out_port & s_theta_v (15 downto 8); -- LO first
-        s_theta_r <= (real (to_integer (unsigned (s_theta_v)))) * ang_rad / factor;
-        s_sin_f <= sin (s_theta_r);
-        s_cos_f <= cos (s_theta_r);
+        v_theta_r1 := (real (to_integer (signed (s_theta_v))));
+        --s_theta_r <= v_theta_r;
+        v_theta_r2 := v_theta_r1 / factor * ang_rad;
+        if (v_theta_r2 < 1144.0 and v_theta_r2 > 1142.0) then -- factoring theta 1
+          report "tick";
+        end if;
+        s_theta_r <= v_theta_r2;
+        s_sin_f <= sin (MATH_2_PI * v_theta_r2);
+        s_cos_f <= cos (MATH_2_PI * v_theta_r2);
       end if;
     end if;
   end process p_report2;
