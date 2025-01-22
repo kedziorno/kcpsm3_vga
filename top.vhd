@@ -223,7 +223,7 @@ begin
 --    end if;
 --  end process p_report1;
   p_report2 : process (kcpsm3_write_strobe) is
-    variable factor : real := 65536.0;
+    variable factor : real := 256.0;
     variable rad_2_ang : real := 180.0 / 3.1415;
     variable ang_2_rad : real := 3.1415 / 180.0;
     variable v_theta_r, v_sin_r, v_cos_r, v_sin_o, v_cos_o : real := 0.0;
@@ -238,7 +238,7 @@ begin
           v_sin_r := real (to_integer (signed (v_sin_v)));
           s_sin_v <= v_sin_v;
           v_sin_r := v_sin_r / factor;
-          report "sin_cordic " & real'image (v_sin_r);
+          --report "sin_cordic " & real'image (v_sin_r);
           s_sin_r <= v_sin_r;
           flag := false;
         else
@@ -251,7 +251,7 @@ begin
           v_cos_r := real (to_integer (signed (v_cos_v)));
           s_cos_v <= v_cos_v;
           v_cos_r := v_cos_r / factor;
-          report "cos_cordic " & real'image (v_cos_r);
+          --report "cos_cordic " & real'image (v_cos_r);
           s_cos_r <= v_cos_r;
         else
           flag := true;
@@ -265,10 +265,10 @@ begin
           s_theta_r_rad <= v_theta_r;
           s_theta_r_ang <= v_theta_r * rad_2_ang;
           v_sin_o := sin (v_theta_r);
-          report "sin_original " & real'image (v_sin_o);
+          --report "sin_original " & real'image (v_sin_o);
           s_sin_f <= v_sin_o;
           v_cos_o := cos (v_theta_r);
-          report "cos_original " & real'image (v_cos_o);
+          --report "cos_original " & real'image (v_cos_o);
           s_cos_f <= v_cos_o;
           flag := false;
         else

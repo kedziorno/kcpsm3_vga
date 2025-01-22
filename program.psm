@@ -1,751 +1,286 @@
-; cordic based on
-;   https://raw.githubusercontent.com/brodzik/arko-project-1/refs/heads/master/prototypes/cordic.asm
-;
-
-CONSTANT ZERO, 00;
-
 CONSTANT X_ROW, 16;
 CONSTANT Y_COL, 17;
 CONSTANT COLOR, 20;
 
-CONSTANT DEBUG_SIN, 01;
-CONSTANT DEBUG_COS, 02;
-CONSTANT DEBUG_THETA, 03;
-CONSTANT PING, 04;
-CONSTANT PORT_5, 05;
-CONSTANT PORT_6, 06;
-CONSTANT PORT_7, 07;
-CONSTANT PORT_8, 08;
+;Name the registers - alias
+NAMEREG s0, tmp
+NAMEREG s1, x_msb
+NAMEREG s2, x_lsb
+NAMEREG s3, y_msb
+NAMEREG s4, y_lsb
+NAMEREG s5, z_msb
+NAMEREG s6, z_lsb
+NAMEREG s7, LUT_pnt
+NAMEREG s8, tmp_H
+NAMEREG s9, tmp_L
+NAMEREG sA, tmp_H2
+NAMEREG sB, tmp_L2
+NAMEREG sC, i
+NAMEREG sD, k
 
-NAMEREG s9, t0;
-NAMEREG sA, t1;
-NAMEREG sB, t2;
+;Declare Constant
+;CONSTANT inPrt_H, 01
+;CONSTANT inPrt_L, 02
+;CONSTANT prtX_H, 04
+;CONSTANT prtX_L, 08
+;CONSTANT prtY_H, 10
+;CONSTANT prtY_L, 20
+CONSTANT DEBUG_SIN, 01
+CONSTANT DEBUG_COS, 02
+CONSTANT DEBUG_THETA, 03
 
-NAMEREG sC, t3;
-NAMEREG sD, t4;
-NAMEREG sE, t5;
-NAMEREG sF, A;
+CONSTANT testPort, 40
+CONSTANT NEG_SGN, 80
+CONSTANT EIGHT, 08
+CONSTANT NINE, 09
+CONSTANT ONE, 01
+CONSTANT ZERO, 00
 
-CONSTANT C_ITERS, 0f;
-CONSTANT C_SCALE_LO, ff;
-CONSTANT C_SCALE_HI, ff;
-CONSTANT C_K_INV_LO, 9b;
-CONSTANT C_K_INV_HI, 74;
-CONSTANT C_RADIUS, 50; 80
-CONSTANT C_THETA_LO, 00;
-CONSTANT C_THETA_HI, 00;
+; make_cordic_params.py `echo "(180/3.1415)*256" | bc -l` 16 1
+; make_cordic_params.py 58 8 1
+; 1rad ~ 57.324840 (180/3.14.15)
+; 1rad * 256
+;Scratchpad RAM initalize
+;use Reg tmp for load and store values
+LOAD tmp,  00 ;LUT: 0.605469_msb
+STORE tmp, 00 ;loc
+LOAD tmp,  9B ;LUT: 0.605469_lsb
+STORE tmp, 01 ;loc
 
-; MEMORY
-; multiply_16 - 00-07
-CONSTANT M_THETA_TEMP1_HI, 02;
-CONSTANT M_THETA_TEMP1_LO, 03;
-CONSTANT M_X_TEMP_HI, 04;
-CONSTANT M_X_TEMP_LO, 05;
-CONSTANT M_Y_TEMP_HI, 06;
-CONSTANT M_Y_TEMP_LO, 07;
-CONSTANT M_THETA_HI, 08;
-CONSTANT M_THETA_LO, 09;
-CONSTANT M_COSINE_16_HI, 0A;
-CONSTANT M_COSINE_16_LO, 0B;
-CONSTANT M_SINE_16_HI, 0C;
-CONSTANT M_SINE_16_LO, 0D;
-CONSTANT M_SCALE_LO, 0E;
-CONSTANT M_SCALE_HI, 0F;
-CONSTANT M_K_INV_LO, 10;
-CONSTANT M_K_INV_HI, 11;
-; 12
+LOAD tmp,  2D ;LUT: 45.000000 msb
+STORE tmp, 02 ;loc
+LOAD tmp,  00 ;LUT: 45.000000_lsb
+STORE tmp, 03 ;loc
 
-CONSTANT C_ROM_ANGLES_START, 13;
-CONSTANT C_ROM_ANGLES_END, 32;
-ROM_ANGLES:
-LOAD s0,   c9;
-STORE s0,13;
-LOAD s0,   0f;
-STORE s0,14;
-LOAD s0,   76;
-STORE s0,15;
-LOAD s0,   b1;
-STORE s0,16;
-LOAD s0,   3e;
-STORE s0,17;
-LOAD s0,   b6;
-STORE s0,18;
-LOAD s0,   1f;
-STORE s0,19;
-LOAD s0,   d5;
-STORE s0,1A;
-LOAD s0,   0f;
-STORE s0,1B;
-LOAD s0,   fa;
-STORE s0,1C;
-LOAD s0,   07;
-STORE s0,1D;
-LOAD s0,   ff;
-STORE s0,1E;
-LOAD s0,   03;
-STORE s0,1F;
-LOAD s0,   ff;
-STORE s0,20;
-LOAD s0,   01;
-STORE s0,21;
-LOAD s0,   ff;
-STORE s0,22;
-LOAD s0,   00;
-STORE s0,23;
-LOAD s0,   ff;
-STORE s0,24;
-LOAD s0,   00;
-STORE s0,25;
-LOAD s0,   7f;
-STORE s0,26;
-LOAD s0,   00;
-STORE s0,27;
-LOAD s0,   3f;
-STORE s0,28;
-LOAD s0,   00;
-STORE s0,29;
-LOAD s0,   1f;
-STORE s0,2A;
-LOAD s0,   00;
-STORE s0,2B;
-LOAD s0,   0f;
-STORE s0,2C;
-LOAD s0,   00;
-STORE s0,2D;
-LOAD s0,   07;
-STORE s0,2E;
-LOAD s0,   00;
-STORE s0,2F;
-LOAD s0,   03;
-STORE s0,30;
-LOAD s0,   00;
-STORE s0,31;
-LOAD s0,   01;
-STORE s0,32;
-CONSTANT M_ROM_ANGLES_LEN, 10;
+LOAD tmp,  1A ;LUT: 26.5625_msb
+STORE tmp, 04 ;loc
+LOAD tmp,  90 ;LUT: 26.5625_lsb
+STORE tmp, 05 ;loc
 
-CONSTANT M_X_SHIFT_LO, 33;
-CONSTANT M_X_SHIFT_HI, 34;
-CONSTANT M_Y_SHIFT_LO, 35;
-CONSTANT M_Y_SHIFT_HI, 36;
-CONSTANT M_X_LO, 37;
-CONSTANT M_X_HI, 38;
-CONSTANT M_Y_LO, 39;
-CONSTANT M_Y_HI, 3a;
-CONSTANT M_ANGLE_LO, 3b;
-CONSTANT M_ANGLE_HI, 3c;
-CONSTANT M_THETA_TEMP_LO, 3d;
-CONSTANT M_THETA_TEMP_HI, 3e;
+LOAD tmp,  0E ;LUT: 14.035156_msb
+STORE tmp, 06 ;loc
+LOAD tmp,  09 ;LUT: 14.035156_lsb
+STORE tmp, 07 ;loc
 
-initialize_k:
-LOAD t3, C_K_INV_HI;
-STORE t3, M_X_HI;
-LOAD t3, C_K_INV_LO;
-STORE t3, M_X_LO;
-LOAD t4, 00;
-STORE t4, M_Y_HI;
-LOAD t4, 00;
-STORE t4, M_Y_LO;
+LOAD tmp,  07 ;LUT: 7.125000_msb
+STORE tmp, 08 ;loc
+LOAD tmp,  20 ;LUT: 7.125000_lsb
+STORE tmp, 09 ;loc
 
-initialize_theta:
-LOAD t5, C_THETA_HI;
-STORE t5, M_THETA_TEMP_HI;
-LOAD t5, C_THETA_LO;
-STORE t5, M_THETA_TEMP_LO;
+LOAD tmp,  03 ;LUT: 3.574219_msb
+STORE tmp, 0A ;loc
+LOAD tmp,  93 ;LUT: 3.574219_lsb
+STORE tmp, 0B ;loc
 
-calculate_rom_angles_len:
-LOAD s0, C_ROM_ANGLES_END;
-LOAD s1, C_ROM_ANGLES_START;
-SUB s0, s1;
-ADD s0, 01;
-SR0 s0;
-STORE s0, M_ROM_ANGLES_LEN;
+LOAD tmp,  01 ;LUT: 1.792969_msb
+STORE tmp, 0C ;loc
+LOAD tmp,  CB ;LUT: 1.792969_lsb
+STORE tmp, 0D ;loc
 
-cordic_main:
-LOAD t0, 00;
-LOAD t1, C_ITERS;
-LOAD t2, C_ROM_ANGLES_START;
+LOAD tmp,  00 ;LUT: 0.894531_msb
+STORE tmp, 0E ;loc
+LOAD tmp,  E5 ;LUT: 0.894531_lsb
+STORE tmp, 0F ;loc
 
-add_theta_temp:
-FETCH t5, M_THETA_TEMP_LO;
-OUTPUT t5, DEBUG_THETA;
-ADD t5, 77;
-STORE t5, M_THETA_TEMP_LO;
-FETCH t5, M_THETA_TEMP_HI;
-OUTPUT t5, DEBUG_THETA;
-ADDCY t5, 04;
-STORE t5, M_THETA_TEMP_HI;
+LOAD tmp,  00 ;LUT: 0.445313_msb
+STORE tmp, 10 ;loc
+LOAD tmp,  72 ;LUT: 0.445313_lsb
+STORE tmp, 11 ;loc
 
-compare_theta:
-; < 360
-FETCH s3, M_THETA_TEMP_HI;
-FETCH s2, M_THETA_TEMP_LO;
-LOAD s1, 47; 360
-LOAD s0, 58;
-CALL compare_16;
-COMPARE s4, 04; >
-JUMP Z, END;
+LOAD tmp,  00 ;LUT: 0.226563_msb
+STORE tmp, 12 ;loc
+LOAD tmp,  3A ;LUT: 0.226563_lsb
+STORE tmp, 13 ;loc
 
-; lllllllllllllllllllllllll
-cordic_loop:
-COMPARE t0, t1;
-;STORE t0, 00;
-JUMP Z, cordic_end;
+LOAD z_msb, 00
+LOAD z_lsb, 00
 
-move_theta:
-FETCH A, M_THETA_TEMP_LO;
-STORE A, M_THETA_LO;
-FETCH A, M_THETA_TEMP_HI;
-STORE A, M_THETA_HI;
+loop:
+;Input the rotation value from FPGA MUXes
+ADD z_lsb, 00
+ADD z_msb, 01
 
-x_shift:
-FETCH s1, M_X_LO;
-FETCH s2, M_X_HI;
-LOAD s3, t0;
-COMPARE s3, ZERO;
-JUMP Z, aaax;
-tttx:
-SRX s2; X >> i
-SRA s1;
-SUB s3, 01;
-JUMP NZ, tttx;
-aaax:
-STORE s1, M_X_SHIFT_LO;
-STORE s2, M_X_SHIFT_HI;
+; error correction
+COMPARE z_msb, 5A
+JUMP Z, case_90
+COMPARE z_msb, 00;
+JUMP Z, case_0
 
-y_shift:
-FETCH s1, M_Y_LO;
-FETCH s2, M_Y_HI;
-LOAD s3, t0;
-COMPARE s3, ZERO;
-JUMP Z, aaay;
-ttty:
-SRX s2; Y >> i
-SRA s1;
-SUB s3, 01;
-JUMP NZ, ttty;
-aaay:
-STORE s1, M_Y_SHIFT_LO;
-STORE s2, M_Y_SHIFT_HI;
+init:
+;initialize registers
+LOAD LUT_pnt, 00
+FETCH x_msb, (LUT_pnt)
 
-load_rom_angle:
-LOAD s1, t2;
-FETCH A, (s1);
-STORE A, M_ANGLE_HI;
-ADD s1, 01;
-FETCH A, (s1);
-STORE A, M_ANGLE_LO;
+ADD LUT_pnt, 01
+FETCH x_lsb, (LUT_pnt)
 
-; =============================
-theta_ltz:
-;LOAD s7, 00; A
-;LOAD s6, 00;
-;FETCH s5, M_THETA_HI;
-;FETCH s4, M_THETA_LO;
-;LOAD s3, 00; B
-;LOAD s2, 00;
-;LOAD s1, 00;
-;LOAD s0, 00;
-;CALL compare_16;
-;COMPARE s4, 01; A < B
-;JUMP NZ, sign_neg; ???
+LOAD i, FF
 
-;TWOS:
-FETCH s2, M_THETA_LO;
-XOR s2,FF;
-ADD s2,01;
-FETCH s3, M_THETA_HI;
-XOR s3,FF;
-ADDCY s3,00;
-;FETCH s3, M_THETA_HI;
-AND s3, 80;
-COMPARE s3, 80;
-JUMP NZ, sign_neg;
+next1:
 
-; ++++++++++++++++++++++++++++++++++
-sign_pos:
+OUTPUT z_lsb, DEBUG_THETA
+OUTPUT z_msb, DEBUG_THETA
 
-x_min_y_shift_pos:
-FETCH s0, M_X_LO;
-FETCH s1, M_X_HI;
-LOAD s2, 00;
-LOAD s3, 00;
-FETCH s4, M_Y_SHIFT_LO;
-FETCH s5, M_Y_SHIFT_HI;
-LOAD s6, 00;
-LOAD s7, 00;
-CALL subtract_32;
-STORE s0, M_X_TEMP_LO;
-STORE s1, M_X_TEMP_HI;
+ADD i, 01
+;OUTPUT i, testPort
 
-y_plus_x_shift_pos:
-FETCH s0, M_Y_LO;
-FETCH s1, M_Y_HI;
-LOAD s2, 00;
-LOAD s3, 00;
-FETCH s4, M_X_SHIFT_LO;
-FETCH s5, M_X_SHIFT_HI;
-LOAD s6, 00;
-LOAD s7, 00;
-CALL adder_32;
-STORE s0, M_Y_TEMP_LO;
-STORE s1, M_Y_TEMP_HI;
+;prepare registers for subroutines
+LOAD tmp_H, x_msb
+LOAD tmp_L, x_lsb
+LOAD tmp_H2, y_msb
+LOAD tmp_L2, y_lsb
 
-theta_min_angle_pos:
-FETCH s0, M_THETA_LO;
-FETCH s1, M_THETA_HI;
-LOAD s2, 00;
-LOAD s3, 00;
-FETCH s4, M_ANGLE_LO;
-FETCH s5, M_ANGLE_HI;
-LOAD s6, 00;
-LOAD s7, 00;
-CALL subtract_32;
-;LOAD A, FF;
-;OUTPUT A, PING;
-STORE s0, M_THETA_TEMP1_LO;
-STORE s1, M_THETA_TEMP1_HI;
-;OUTPUT s0, DEBUG_THETA;
-;OUTPUT s1, DEBUG_THETA;
+LOAD k, i
 
-JUMP sign_end;
+shift:
+COMPARE k, ZERO
+JUMP  Z, next2
 
-; ---------------------------------
-sign_neg:
+;divide by 2 (shift one to the right)
+SRX tmp_H
+SRA tmp_L
+SRX tmp_H2
+SRA tmp_L2
 
-x_plus_y_shift_neg:
-FETCH s0, M_X_LO;
-FETCH s1, M_X_HI;
-LOAD s2, 00;
-LOAD s3, 00;
-FETCH s4, M_Y_SHIFT_LO;
-FETCH s5, M_Y_SHIFT_HI;
-LOAD s6, 00;
-LOAD s7, 00;
-CALL adder_32;
-STORE s0, M_X_TEMP_LO;
-STORE s1, M_X_TEMP_HI;
+SUB k, 01
+JUMP shift
 
-x_min_y_shift_neg:
-FETCH s0, M_Y_LO;
-FETCH s1, M_Y_HI;
-LOAD s2, 00;
-LOAD s3, 00;
-FETCH s4, M_X_SHIFT_LO;
-FETCH s5, M_X_SHIFT_HI;
-LOAD s6, 00;
-LOAD s7, 00;
-CALL subtract_32;
-STORE s0, M_Y_TEMP_LO;
-STORE s1, M_Y_TEMP_HI;
+next2:
+COMPARE i, NINE
+JUMP Z, out_rslt
 
-theta_plus_angle_neg:
-FETCH s0, M_THETA_LO;
-FETCH s1, M_THETA_HI;
-LOAD s2, 00;
-LOAD s3, 00;
-FETCH s4, M_ANGLE_LO;
-FETCH s5, M_ANGLE_HI;
-LOAD s6, 00;
-LOAD s7, 00;
-CALL adder_32;
-LOAD A, FF;
-OUTPUT A, PING;
-STORE s0, M_THETA_TEMP1_LO;
-STORE s1, M_THETA_TEMP1_HI;
-;OUTPUT s0, DEBUG_THETA;
-;OUTPUT s1, DEBUG_THETA;
+;check rotation sign
+LOAD tmp, z_msb
+AND tmp, NEG_SGN
 
-; eeeeeeeeeeeeeeeeeeeeeeeeeeeee
-sign_end:
-ADD t0, 01;
-ADD t2, 01;
-ADD t2, 01;
-FETCH A, M_X_TEMP_HI;
-STORE A, M_X_HI;
-FETCH A, M_X_TEMP_LO;
-STORE A, M_X_LO;
-FETCH A, M_Y_TEMP_HI;
-STORE A, M_Y_HI;
-FETCH A, M_Y_TEMP_LO;
-STORE A, M_Y_LO;
+;COMPARE z msb with NEG SGN- -
+COMPARE tmp, NEG_SGN
+JUMP NZ, neg_case
 
-FETCH A, M_THETA_TEMP1_LO;
-;OUTPUT A, DEBUG_THETA;
-STORE A, M_THETA_LO;
+;else Z_msb is positive--> continue
 
-FETCH A, M_THETA_TEMP1_HI;
-;OUTPUT A, DEBUG_THETA;
-STORE A, M_THETA_HI;
+pos_case:
+;X[i=O]
+SUB x_lsb, tmp_L2
+SUBCY x_msb, tmp_H2
 
-jump cordic_loop;
+;Y[i=O]
+ADD y_lsb, tmp_L
+ADDCY y_msb, tmp_H
 
-cordic_end:
-FETCH s0, M_X_LO;
-STORE s0, M_COSINE_16_LO;
-FETCH s0, M_X_HI;
-STORE s0, M_COSINE_16_HI;
-FETCH s0, M_Y_LO;
-STORE s0, M_SINE_16_LO;
-FETCH s0, M_Y_HI;
-STORE s0, M_SINE_16_HI;
+;Z[i+l]
+ADD LUT_pnt, 01
+FETCH tmp_H, (LUT_pnt)
+ADD LUT_pnt, 01
+FETCH tmp_L,(LUT_pnt)
+SUB z_lsb, tmp_L
+SUBCY z_msb, tmp_H
+JUMP next1
 
-FETCH s3, M_COSINE_16_HI;
-FETCH s2, M_COSINE_16_LO;
-OUTPUT s2, DEBUG_COS;
-OUTPUT s3, DEBUG_COS;
-LOAD s1, 03; FFFF/X_ROW
-LOAD s0, 33;
+neg_case:
+;X[i=O]
+ADD x_lsb, tmp_L2
+ADDCY x_msb, tmp_H2
+
+;Y[i=O]
+SUB y_lsb, tmp_L
+SUBCY y_msb, tmp_H
+
+;Z[i+l]
+ADD LUT_pnt, 01
+FETCH tmp_H, (LUT_pnt)
+ADD LUT_pnt, 01
+FETCH tmp_L,(LUT_pnt)
+ADD z_lsb, tmp_L
+ADDCY z_msb, tmp_H
+
+JUMP next1
+
+case_0:
+LOAD x_msb, 01
+LOAD x_lsb, 00
+LOAD y_msb, 00
+LOAD y_lsb, 00
+JUMP out_rslt
+
+case_90:
+LOAD x_msb, 00
+LOAD x_lsb, 00
+LOAD y_msb, 01
+LOAD y_lsb, 00
+JUMP out_rslt
+ 
+out_rslt:
+STORE x_lsb, 3f
+STORE x_msb, 3e
+STORE y_lsb, 3d
+STORE y_msb, 3c
+
+
+FETCH y_msb, 3e;
+FETCH x_lsb, 3f;
+OUTPUT x_lsb, DEBUG_COS;
+OUTPUT y_msb, DEBUG_COS;
+LOAD x_msb, 00; FFFF/X_ROW
+LOAD tmp, 03;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
-LOAD s3, 00;
-LOAD s2, s6;
-LOAD s1, 00;
-LOAD s0, 28;
+LOAD y_msb, 00;
+LOAD x_lsb, z_lsb;
+LOAD x_msb, 00;
+LOAD tmp, 28;
 CALL adder_16
-STORE s0, 3c;
+STORE tmp, 3c;
 
-FETCH s3, M_SINE_16_HI;
-FETCH s2, M_SINE_16_LO;
-OUTPUT s2, DEBUG_SIN;
-OUTPUT s3, DEBUG_SIN;
-LOAD s1, 03; FFFF/Y_COL
-LOAD s0, 33;
+FETCH y_msb, 3c;
+FETCH x_lsb, 3d;
+OUTPUT x_lsb, DEBUG_SIN;
+OUTPUT y_msb, DEBUG_SIN;
+LOAD x_msb, 00; FFFF/Y_COL
+LOAD tmp, 03;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
-LOAD s3, 00;
-LOAD s2, s6;
-LOAD s1, a9;
-LOAD s0, 28;
+LOAD y_msb, 00;
+LOAD x_lsb, z_lsb;
+LOAD x_msb, a9;
+LOAD tmp, 28;
 CALL adder_16
-STORE s0, 3b;
+STORE tmp, 3b;
 
-FETCH s0, 3c;
-OUTPUT s0, X_ROW; 
-FETCH s0, 3b;
-OUTPUT s0, Y_COL; 
-LOAD s0, 3F;
-OUTPUT s0, COLOR; 
+FETCH tmp, 3c;
+OUTPUT tmp, X_ROW; 
+FETCH tmp, 3b;
+OUTPUT tmp, Y_COL; 
+LOAD tmp, 3F;
+OUTPUT tmp, COLOR; 
 
-JUMP cordic_main;
+JUMP loop
 
-multiply_16:
-; INPUT  :
-;   s3 = multiplicand (a) HI
-;   s2 = multiplicand (a) LO
-;   s1 = multipler    (b) HI
-;   s0 = multipler    (b) LO
-; OUTPUT :
-;   s3 = product MSB HI
-;   s2 = product MSB LO
-;   s1 = product LSB HI
-;   s0 = product LSB LO
-; INFO   :
-;   Used registers    : s4,s5,s6,s7
-;   Stored variables  : [07-06,05-04,03-02,01-00] = [a_hi*b_hi,a_lo*b_hi,a_hi*b_lo,a_lo*b_lo]
-;
-; Very simple algorithm:
-;                                                            [b_hi] [b_lo]
-;                                                          * [a_hi] [a_lo]
-;                                                          --------––––––-------
-;                                                              [b_lo*a_lo]
-;                                                   [b_hi*a_lo]
-;                                                   [b_lo*a_hi]
-;                                      + [b_hi*a_hi]
-;                                      -----------------------------------------
-;                                                              [b_lo*a_lo] << 0
-;                                     [b_lo*a_hi] + [b_hi*a_lo]            << 8
-;                        + [b_hi*a_hi]                                     << 16
-;                        -------------------------------------------------------
-;
-_multiply_16_store:
-                          LOAD  s4 , s0        ; b_lo
-                          LOAD  s5 , s1        ; b_hi
-                          LOAD  s6 , s2        ; a_lo
-                          LOAD  s7 , s3        ; a_hi
-_multiply_16_mult_8x8_1:                       ; a_lo_b_lo
-                          LOAD  s1 , s6        ;
-                          LOAD  s0 , s4        ;
-                          CALL       mult_8x8  ;
-                          STORE s1 , 01        ;
-                          STORE s0 , 00        ;
-_multiply_16_mult_8x8_2:                       ; a_hi_b_lo
-                          LOAD  s1 , s7        ;
-                          LOAD  s0 , s4        ;
-                          CALL       mult_8x8  ;
-                          STORE s1 , 03        ;
-                          STORE s0 , 02        ;
-_multiply_16_mult_8x8_3:                       ; a_lo_b_hi
-                          LOAD  s1 , s6        ;
-                          LOAD  s0 , s5        ;
-                          CALL       mult_8x8  ;
-                          STORE s1 , 05        ;
-                          STORE s0 , 04        ;
-_multiply_16_mult_8x8_4:                       ; a_hi_b_hi
-                          LOAD  s1 , s7        ;
-                          LOAD  s0 , s5        ;
-                          CALL       mult_8x8  ;
-                          STORE s1 , 07        ;
-                          STORE s0 , 06        ;
-_multiply_16_load_1:                           ; a_hi_b_lo<<8
-                          LOAD  s7 , ZERO      ;
-                          FETCH s6 , 03        ;
-                          FETCH s5 , 02        ;
-                          LOAD  s4 , ZERO      ;
-_multiply_16_load_2:                           ; a_lo_b_hi<<8
-                          LOAD  s3 , ZERO      ;
-                          FETCH s2 , 05        ;
-                          FETCH s1 , 04        ;
-                          LOAD  s0 , ZERO      ;
-_multiply_16_add_1:                            ; (a_hi_b_lo<<8)+(a_lo_b_hi<<8)=(a_hi_b_lo+a_lo_b_hi)<<8
-                          CALL       add32     ;
-_multiply_16_load_3:                           ;
-                          LOAD  s7 , ZERO      ;
-                          LOAD  s6 , ZERO      ;
-                          FETCH s5 , 01        ;
-                          FETCH s4 , 00        ;
-_multiply_16_add_2:                            ; (a_hi_b_lo+a_lo_b_hi)<<8+a_lo_b_lo
-                          CALL       add32     ;
-_multiply_16_load_4:                           ;
-                          FETCH s7 , 07        ;
-                          FETCH s6 , 06        ;
-                          LOAD  s5 , ZERO      ;
-                          LOAD  s4 , ZERO      ;
-_multiply_16_add_3:                            ; a_hi_b_hi<<16+(a_hi_b_lo+a_lo_b_hi)<<8+a_lo_b_lo
-                          CALL       add32     ;
-_multiply_16_end:                              ;
-                          RETURN               ;
-
-mult_8x8:
-; Figure 3-14: 8-bit by 8-bit Multiply Routine Produces a 16-bit Product
-;   ug129.pdf
-; INPUT  :
-;   s1 = multiplicand (a)
-;   s0 = multipler    (b)
-; OUTPUT :
-;   s1 = product MSB
-;   s0 = product LSB
-; INFO   :
-;   Registers used : s2,s3,s4
-;
-_multiply_8_start:                                  ;
-                    STORE  s2 , 3f                  ;
-                    STORE  s3 , 3e                  ;
-                    STORE  s4 , 3d                  ;
-                    LOAD   s2 , 01                  ; start with LSB
-                    LOAD   s3 , 00                  ; clear product MSB
-                    LOAD   s4 , 00                  ; clear product LSB (not required)
-_multiply_8_loop:                                   ;
-                    TEST   s0 , s2                  ; check if bit is set
-                    JUMP    Z , _multiply_8_no_add  ; if bit is not set, skip addition
-                    ADD    s3 , s1                  ; addition only occurs in MSB
-_multiply_8_no_add:                                 ;
-                    SRA    s3                       ; MSB >>, CARRY into bit 7, LSB into CARRY
-                    SRA    s4                       ; LSB >>, LSB from mult_result_msb into bit 7
-                    SL0    s2                       ; s2 <<, next bit
-                    JUMP   NZ , _multiply_8_loop    ; if all bit, s2 = 0, else loop
-                    LOAD   s1 , s3                  ;
-                    LOAD   s0 , s4                  ;
-_multiply_8_fetch:                                  ;
-                    FETCH  s2 , 3f                  ;
-                    FETCH  s3 , 3e                  ;
-                    FETCH  s4 , 3d                  ;
-_multiply_8_end:                                    ;
-                    RETURN                          ;
+adder_16:
+_adder_16_start:                  ;
+                  ADD    tmp , x_lsb  ; add LSBs
+                  ADDCY  x_msb , y_msb  ; add MSBs
+_adder_16_end:                    ;
+                  RETURN          ; keep result in x_msb and tmp
 
 divide_16:
-; https://en.wikipedia.org/wiki/Division_algorithm#Division_by_repeated_subtraction
-; INPUT  :
-;   s3,s2 - N
-;   s1,s0 - D
-; OUTPUT :
-;   s7,s6 - Q
-;   s5,s4 - R
-; INFO   :
-;
 _divide_16_start:                               ;
-                  LOAD    s5 , s3               ; R := N
-                  LOAD    s4 , s2               ;
-                  LOAD    s7 , 00               ; Q := 0
-                  LOAD    s6 , 00               ;
-_divide_16_loop:                                ;
-                  COMPARE s4 , s0               ; while R >= D do
-                  SUBCY   s1 , 00               ;
-                  COMPARE s5 , s1               ;
+                  LOAD    z_msb , y_msb               ; R := N
+                  LOAD    y_lsb , x_lsb               ;
+                  LOAD    LUT_pnt , 00               ; Q := 0
+                  LOAD    z_lsb , 00               ;
+_divide_16_loop:
+                  COMPARE y_lsb , tmp               ; while R >= D do
+                  SUBCY   x_msb , 00               ;
+                  COMPARE z_msb , x_msb               ;
                   JUMP     C , _divide_16_end   ; <
-                  SUB     s4 , s0               ; R := R − D
-                  SUBCY   s5 , s1               ;
-                  ADD     s6 , 01               ; Q := Q + 1
-                  ADDCY   s7 , 00               ;
+                  SUB     y_lsb , tmp               ; R := R − D
+                  SUBCY   z_msb , x_msb               ;
+                  ADD     z_lsb , 01               ; Q := Q + 1
+                  ADDCY   LUT_pnt , 00               ;
                   JUMP         _divide_16_loop  ;
 _divide_16_end:                                 ;
                   RETURN                        ;
-
-compare_32:
-; INPUT  :
-;   - A [s7,s6,s5,s4]
-;   - B [s3,s2,s1,s0]
-; OUTPUT :
-;   - A < B - s8 = 01
-;   - A = B - s8 = 0x02
-;   - A > B - s8 = 0x04
-; INFO   :
-;   Not optimal, but more readable.
-;
-_compare_32_equal_start:                                      ;
-                          COMPARE s7 , s3                     ;
-                          JUMP     C , _compare_32_less_a7b3  ;
-                          JUMP     Z , _compare_32_equal_a7b3 ;
-                          JUMP         _compare_32_more_a7b3  ;
-_compare_32_equal_a7b3:                                       ;
-                          COMPARE s6 , s2                     ;
-                          JUMP     C , _compare_32_less_a6b2  ;
-                          JUMP     Z , _compare_32_equal_a6b2 ;
-                          JUMP         _compare_32_more_a6b2  ;
-_compare_32_equal_a6b2:                                       ;
-                          COMPARE s5 , s1                     ;
-                          JUMP     C , _compare_32_less_a5b1  ;
-                          JUMP     Z , _compare_32_equal_a5b1 ;
-                          JUMP         _compare_32_more_a5b1  ;
-_compare_32_equal_a5b1:                                       ;
-                          COMPARE s4 , s0                     ;
-                          JUMP     C , _compare_32_less_a4b0  ;
-                          JUMP     Z , _compare_32_equal_a4b0 ;
-                          JUMP         _compare_32_more_a4b0  ;
-_compare_32_equal_a4b0:                                       ; =
-                          LOAD    s8 , 02                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_less_a4b0:                                        ; <
-                          LOAD    s8 , 01                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_more_a4b0:                                        ; >
-                          LOAD    s8 , 04                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_less_a5b1:                                        ; <
-                          LOAD    s8 , 01                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_more_a5b1:                                        ; >
-                          LOAD    s8 , 04                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_less_a7b3:                                        ; <
-                          LOAD    s8 , 01                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_more_a7b3:                                        ; >
-                          LOAD    s8 , 04                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_less_a6b2:                                        ; <
-                          LOAD    s8 , 01                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_more_a6b2:                                        ; >
-                          LOAD    s8 , 04                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_end:                                              ;
-                          RETURN                              ;
-
-subtract_32:
-; INPUT  :
-;   s7 = subtrahend (a) HI
-;   s6 = subtrahend (a) LO
-;   s5 = subtrahend (a) HI
-;   s4 = subtrahend (a) LO
-;   s3 = minuend (b) HI
-;   s2 = minuend (b) LO
-;   s1 = minuend (b) HI
-;   s0 = minuend (b) LO
-; OUTPUT :
-;   s3 = difference MSB HI
-;   s2 = difference MSB LO
-;   s1 = difference LSB HI
-;   s0 = difference LSB LO
-; INFO   :
-;
-_subtract_32_start:                 ;
-                    SUB    s0 , s4  ;
-                    SUBCY  s1 , s5  ;
-                    SUBCY  s2 , s6  ;
-                    SUBCY  s3 , s7  ;
-_subtract_32_end:                   ;
-                    RETURN          ;
-
-adder_32:
-add32:
-; INPUT  :
-;   s7 = addition (a) 3
-;   s6 = addition (a) 2
-;   s5 = addition (a) 1
-;   s4 = addition (a) 0
-;   s3 = addition (b) 3
-;   s2 = addition (b) 2
-;   s1 = addition (b) 1
-;   s0 = addition (b) 0
-; OUTPUT :
-;   s3 = product 3
-;   s2 = product 2
-;   s1 = product 1
-;   s0 = product 0
-; INFO   :
-;
-_adder_32_start:                  ;
-                  ADD    s0 , s4  ;
-                  ADDCY  s1 , s5  ;
-                  ADDCY  s2 , s6  ;
-                  ADDCY  s3 , s7  ;
-_adder_32_end:                    ;
-                  RETURN          ;
-
-adder_16:
-; Figure 3-8: 16-Bit Addition Using ADD and ADDCY Instructions
-;   ug129.pdf
-; INPUT  :
-;   s3 = addition (a) HI
-;   s2 = addition (a) LO
-;   s1 = addition (b) HI
-;   s0 = addition (b) LO
-; OUTPUT :
-;   s1 = product MSB
-;   s0 = product LSB
-; INFO   :
-;
-_adder_16_start:                  ;
-                  ADD    s0 , s2  ; add LSBs
-                  ADDCY  s1 , s3  ; add MSBs
-_adder_16_end:                    ;
-                  RETURN          ; keep result in s1 and s0
-
-compare_16:
-; INPUT  :
-;   - A [s3,s2]
-;   - B [s1,s0]
-; OUTPUT :
-;   - A < B - s4 = 0x01
-;   - A = B - s4 = 0x02
-;   - A > B - s4 = 0x04
-; INFO   :
-;
-_compare_16_start:                                      ;
-                      COMPARE s3 , s1                   ;
-                      JUMP     C , _compare_16_less     ;
-                      JUMP     Z , _compare_16_equal_hi ;
-                      JUMP         _compare_16_more     ;
-_compare_16_equal_hi:                                   ;
-                      COMPARE s2 , s0                   ;
-                      JUMP     C , _compare_16_less     ;
-                      JUMP    NZ , _compare_16_more     ;
-                      JUMP         _compare_16_equal    ;
-_compare_16_less:                                       ; s3,s2 < s1,s0
-                      LOAD    s4 , 01                   ;
-                      JUMP         _compare_16_end      ;
-_compare_16_equal:                                      ; s3,s2 = s1,s0
-                      LOAD    s4 , 02                   ;
-                      JUMP         _compare_16_end      ;
-_compare_16_more:                                       ; s3,s2 > s1,s0
-                      LOAD    s4 , 04                   ;
-_compare_16_end:                                        ;
-                      RETURN                            ;
-
-END:
-  JUMP END;
-
 
