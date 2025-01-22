@@ -194,7 +194,7 @@ LOAD s3, t0;
 COMPARE s3, ZERO;
 JUMP Z, aaax;
 tttx:
-SR0 s2; X >> i
+SRX s2; X >> i
 SRA s1;
 SUB s3, 01;
 JUMP NZ, tttx;
@@ -209,7 +209,7 @@ LOAD s3, t0;
 COMPARE s3, ZERO;
 JUMP Z, aaay;
 ttty:
-SR0 s2; Y >> i
+SRX s2; Y >> i
 SRA s1;
 SUB s3, 01;
 JUMP NZ, ttty;
