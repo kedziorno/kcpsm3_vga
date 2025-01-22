@@ -6,9 +6,6 @@
       <db_ref path="/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/tb_top_isim_beh.wdb" id="1" type="auto">
          <top_modules>
             <top_module name="bmp_pkg" />
-            <top_module name="fixed_float_types" />
-            <top_module name="fixed_pkg" />
-            <top_module name="float_pkg" />
             <top_module name="math_real" />
             <top_module name="numeric_std" />
             <top_module name="p_package1" />
@@ -25,7 +22,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="32" />
+   <WVObjectSize size="34" />
    <wave_markers>
       <marker time="33728140000000" label="" />
       <marker time="33600060000000" label="" />
@@ -107,11 +104,25 @@
       <obj_property name="ElementShortName">s_cos_r</obj_property>
       <obj_property name="ObjectShortName">s_cos_r</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_theta_r" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_theta_r</obj_property>
-      <obj_property name="ObjectShortName">s_theta_r</obj_property>
+   <wvobject fp_name="/tb_top/uut/s_theta_r_rad" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_theta_r_rad</obj_property>
+      <obj_property name="ObjectShortName">s_theta_r_rad</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_theta_r_ang" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_theta_r_ang</obj_property>
+      <obj_property name="ObjectShortName">s_theta_r_ang</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test4" type="array" db_ref_id="1">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">o_test4[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_test4[7:0]</obj_property>
+      <obj_property name="label">PING</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff0000</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/s_sin_f" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">s_sin_f</obj_property>

@@ -11,7 +11,7 @@ CONSTANT COLOR, 20;
 CONSTANT DEBUG_SIN, 01;
 CONSTANT DEBUG_COS, 02;
 CONSTANT DEBUG_THETA, 03;
-CONSTANT PORT_4, 04;
+CONSTANT PING, 04;
 CONSTANT PORT_5, 05;
 CONSTANT PORT_6, 06;
 CONSTANT PORT_7, 07;
@@ -37,6 +37,12 @@ CONSTANT C_THETA_HI, 00;
 
 ; MEMORY
 ; multiply_16 - 00-07
+CONSTANT M_THETA_TEMP1_HI, 02;
+CONSTANT M_THETA_TEMP1_LO, 03;
+CONSTANT M_X_TEMP_HI, 04;
+CONSTANT M_X_TEMP_LO, 05;
+CONSTANT M_Y_TEMP_HI, 06;
+CONSTANT M_Y_TEMP_LO, 07;
 CONSTANT M_THETA_HI, 08;
 CONSTANT M_THETA_LO, 09;
 CONSTANT M_COSINE_16_HI, 0A;
@@ -164,22 +170,24 @@ add_theta_temp:
 AND t5, t5;
 FETCH t5, M_THETA_TEMP_LO;
 OUTPUT t5, DEBUG_THETA;
-ADD t5, 77;
+ADD t5, 39;
 STORE t5, M_THETA_TEMP_LO;
 FETCH t5, M_THETA_TEMP_HI;
 OUTPUT t5, DEBUG_THETA;
-ADDCY t5, 04;
+ADDCY t5, 00;
 STORE t5, M_THETA_TEMP_HI;
 
 compare_theta:
 ; < 360
 
+; lllllllllllllllllllllllll
 cordic_loop:
 COMPARE t0, t1;
 ;STORE t0, 00;
 JUMP Z, cordic_end;
 
 x_shift:
+AND A, A;
 FETCH s1, M_X_LO;
 FETCH s2, M_X_HI;
 LOAD s3, t0;
@@ -223,18 +231,19 @@ STORE A, M_THETA_LO;
 FETCH A, M_THETA_TEMP_HI;
 STORE A, M_THETA_HI;
 
+; =============================
 theta_ltz:
-LOAD s7, 00; A
-LOAD s6, 00;
-FETCH s5, M_THETA_HI;
-FETCH s4, M_THETA_LO;
-LOAD s3, 00; B
-LOAD s2, 00;
-LOAD s1, 00;
-LOAD s0, 00;
-CALL compare_16;
-COMPARE s4, 01; A < B
-JUMP NZ, sign_neg; ???
+;LOAD s7, 00; A
+;LOAD s6, 00;
+;FETCH s5, M_THETA_HI;
+;FETCH s4, M_THETA_LO;
+;LOAD s3, 00; B
+;LOAD s2, 00;
+;LOAD s1, 00;
+;LOAD s0, 00;
+;CALL compare_16;
+;COMPARE s4, 01; A < B
+;JUMP NZ, sign_neg; ???
 
 ;TWOS:
 ;FETCH s2, M_THETA_LO;
@@ -243,9 +252,12 @@ JUMP NZ, sign_neg; ???
 ;FETCH s3, M_THETA_HI;
 ;XOR s3,FF;
 ;ADDCY s3,00;
-;AND s3, 80;
-;JUMP NZ, sign_neg;
+FETCH s3, M_THETA_HI;
+AND s3, 80;
+COMPARE s3, 80;
+JUMP NZ, sign_neg;
 
+; ++++++++++++++++++++++++++++++++++
 sign_pos:
 
 x_min_y_shift_pos:
@@ -258,8 +270,8 @@ FETCH s5, M_Y_SHIFT_HI;
 LOAD s6, 00;
 LOAD s7, 00;
 CALL subtract_32;
-STORE s0, M_X_LO;
-STORE s1, M_X_HI;
+STORE s0, M_X_TEMP_LO;
+STORE s1, M_X_TEMP_HI;
 
 y_plus_x_shift_pos:
 FETCH s0, M_Y_LO;
@@ -271,8 +283,8 @@ FETCH s5, M_X_SHIFT_HI;
 LOAD s6, 00;
 LOAD s7, 00;
 CALL adder_32;
-STORE s0, M_Y_LO;
-STORE s1, M_Y_HI;
+STORE s0, M_Y_TEMP_LO;
+STORE s1, M_Y_TEMP_HI;
 
 theta_min_angle_pos:
 FETCH s0, M_THETA_LO;
@@ -284,13 +296,16 @@ FETCH s5, M_ANGLE_HI;
 LOAD s6, 00;
 LOAD s7, 00;
 CALL subtract_32;
-STORE s0, M_THETA_LO;
-STORE s1, M_THETA_HI;
+;LOAD A, FF;
+;OUTPUT A, PING;
+STORE s0, M_THETA_TEMP1_LO;
+STORE s1, M_THETA_TEMP1_HI;
 ;OUTPUT s0, DEBUG_THETA;
 ;OUTPUT s1, DEBUG_THETA;
 
 JUMP sign_end;
 
+; ---------------------------------
 sign_neg:
 
 x_plus_y_shift_neg:
@@ -303,8 +318,8 @@ FETCH s5, M_Y_SHIFT_HI;
 LOAD s6, 00;
 LOAD s7, 00;
 CALL adder_32;
-STORE s0, M_X_LO;
-STORE s1, M_X_HI;
+STORE s0, M_X_TEMP_LO;
+STORE s1, M_X_TEMP_HI;
 
 x_min_y_shift_neg:
 FETCH s0, M_Y_LO;
@@ -316,8 +331,8 @@ FETCH s5, M_X_SHIFT_HI;
 LOAD s6, 00;
 LOAD s7, 00;
 CALL subtract_32;
-STORE s0, M_Y_LO;
-STORE s1, M_Y_HI;
+STORE s0, M_Y_TEMP_LO;
+STORE s1, M_Y_TEMP_HI;
 
 theta_plus_angle_neg:
 FETCH s0, M_THETA_LO;
@@ -329,15 +344,35 @@ FETCH s5, M_ANGLE_HI;
 LOAD s6, 00;
 LOAD s7, 00;
 CALL adder_32;
-STORE s0, M_THETA_LO;
-STORE s1, M_THETA_HI;
+LOAD A, FF;
+OUTPUT A, PING;
+STORE s0, M_THETA_TEMP1_LO;
+STORE s1, M_THETA_TEMP1_HI;
 ;OUTPUT s0, DEBUG_THETA;
 ;OUTPUT s1, DEBUG_THETA;
 
+; eeeeeeeeeeeeeeeeeeeeeeeeeeeee
 sign_end:
 ADD t0, 01;
 ADD t2, 01;
 ADD t2, 01;
+FETCH A, M_X_TEMP_HI;
+STORE A, M_X_HI;
+FETCH A, M_X_TEMP_LO;
+STORE A, M_X_LO;
+FETCH A, M_Y_TEMP_HI;
+STORE A, M_Y_HI;
+FETCH A, M_Y_TEMP_LO;
+STORE A, M_Y_LO;
+
+FETCH A, M_THETA_TEMP1_LO;
+;OUTPUT A, DEBUG_THETA;
+STORE A, M_THETA_LO;
+
+FETCH A, M_THETA_TEMP1_HI;
+;OUTPUT A, DEBUG_THETA;
+STORE A, M_THETA_HI;
+
 jump cordic_loop;
 
 cordic_end:
