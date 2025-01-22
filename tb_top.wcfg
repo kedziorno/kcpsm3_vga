@@ -22,7 +22,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="33" />
+   <WVObjectSize size="34" />
    <wave_markers>
       <marker time="64060000000" label="" />
       <marker time="96060000000" label="" />
@@ -109,9 +109,23 @@
       <obj_property name="ElementShortName">s_cos_r</obj_property>
       <obj_property name="ObjectShortName">s_cos_r</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_theta_r" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_theta_r</obj_property>
-      <obj_property name="ObjectShortName">s_theta_r</obj_property>
+   <wvobject fp_name="/tb_top/uut/s_theta_r_rad" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_theta_r_rad</obj_property>
+      <obj_property name="ObjectShortName">s_theta_r_rad</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_theta_r_ang" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_theta_r_ang</obj_property>
+      <obj_property name="ObjectShortName">s_theta_r_ang</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_theta_v" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">s_theta_v[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s_theta_v[15:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/s_sin_f" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">s_sin_f</obj_property>
@@ -122,16 +136,16 @@
       <obj_property name="ObjectShortName">s_cos_f</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/s_sin_v" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_sin_v[15:0]</obj_property>
-      <obj_property name="ObjectShortName">s_sin_v[15:0]</obj_property>
+      <obj_property name="ElementShortName">s_sin_v[7:0]</obj_property>
+      <obj_property name="ObjectShortName">s_sin_v[7:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/s_cos_v" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_cos_v[15:0]</obj_property>
-      <obj_property name="ObjectShortName">s_cos_v[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_theta_v" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_theta_v[15:0]</obj_property>
-      <obj_property name="ObjectShortName">s_theta_v[15:0]</obj_property>
+      <obj_property name="ElementShortName">s_cos_v[7:0]</obj_property>
+      <obj_property name="ObjectShortName">s_cos_v[7:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/i_cpu_clock" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">i_cpu_clock</obj_property>
