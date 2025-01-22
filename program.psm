@@ -167,18 +167,24 @@ LOAD t1, C_ITERS;
 LOAD t2, C_ROM_ANGLES_START;
 
 add_theta_temp:
-AND t5, t5;
 FETCH t5, M_THETA_TEMP_LO;
 OUTPUT t5, DEBUG_THETA;
-ADD t5, 39;
+ADD t5, 77;
 STORE t5, M_THETA_TEMP_LO;
 FETCH t5, M_THETA_TEMP_HI;
 OUTPUT t5, DEBUG_THETA;
-ADDCY t5, 00;
+ADDCY t5, 04;
 STORE t5, M_THETA_TEMP_HI;
 
 compare_theta:
 ; < 360
+FETCH s3, M_THETA_TEMP_HI;
+FETCH s2, M_THETA_TEMP_LO;
+LOAD s1, 47; 360
+LOAD s0, 58;
+CALL compare_16;
+COMPARE s4, 04; >
+JUMP Z, END;
 
 ; lllllllllllllllllllllllll
 cordic_loop:
@@ -186,8 +192,13 @@ COMPARE t0, t1;
 ;STORE t0, 00;
 JUMP Z, cordic_end;
 
+move_theta:
+FETCH A, M_THETA_TEMP_LO;
+STORE A, M_THETA_LO;
+FETCH A, M_THETA_TEMP_HI;
+STORE A, M_THETA_HI;
+
 x_shift:
-AND A, A;
 FETCH s1, M_X_LO;
 FETCH s2, M_X_HI;
 LOAD s3, t0;
@@ -225,12 +236,6 @@ ADD s1, 01;
 FETCH A, (s1);
 STORE A, M_ANGLE_LO;
 
-move_theta:
-FETCH A, M_THETA_TEMP_LO;
-STORE A, M_THETA_LO;
-FETCH A, M_THETA_TEMP_HI;
-STORE A, M_THETA_HI;
-
 ; =============================
 theta_ltz:
 ;LOAD s7, 00; A
@@ -246,13 +251,13 @@ theta_ltz:
 ;JUMP NZ, sign_neg; ???
 
 ;TWOS:
-;FETCH s2, M_THETA_LO;
-;XOR s2,FF;
-;ADD s2,01;
-;FETCH s3, M_THETA_HI;
-;XOR s3,FF;
-;ADDCY s3,00;
+FETCH s2, M_THETA_LO;
+XOR s2,FF;
+ADD s2,01;
 FETCH s3, M_THETA_HI;
+XOR s3,FF;
+ADDCY s3,00;
+;FETCH s3, M_THETA_HI;
 AND s3, 80;
 COMPARE s3, 80;
 JUMP NZ, sign_neg;
@@ -389,8 +394,8 @@ FETCH s3, M_COSINE_16_HI;
 FETCH s2, M_COSINE_16_LO;
 OUTPUT s2, DEBUG_COS;
 OUTPUT s3, DEBUG_COS;
-LOAD s1, 09; FFFF/X_ROW
-LOAD s0, d8;
+LOAD s1, 03; FFFF/X_ROW
+LOAD s0, 33;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
@@ -405,8 +410,8 @@ FETCH s3, M_SINE_16_HI;
 FETCH s2, M_SINE_16_LO;
 OUTPUT s2, DEBUG_SIN;
 OUTPUT s3, DEBUG_SIN;
-LOAD s1, 02; FFFF/Y_COL
-LOAD s0, 22;
+LOAD s1, 03; FFFF/Y_COL
+LOAD s0, 33;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
