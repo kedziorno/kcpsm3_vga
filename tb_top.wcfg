@@ -22,7 +22,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="47" />
+   <WVObjectSize size="49" />
    <wave_markers>
       <marker time="33728140000000" label="" />
       <marker time="33600060000000" label="" />
@@ -185,13 +185,21 @@
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_sin_f" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_sin_f</obj_property>
-      <obj_property name="ObjectShortName">s_sin_f</obj_property>
+   <wvobject fp_name="/tb_top/uut/s_sin_fu" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_sin_fu</obj_property>
+      <obj_property name="ObjectShortName">s_sin_fu</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_cos_f" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_cos_f</obj_property>
-      <obj_property name="ObjectShortName">s_cos_f</obj_property>
+   <wvobject fp_name="/tb_top/uut/s_cos_fu" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_cos_fu</obj_property>
+      <obj_property name="ObjectShortName">s_cos_fu</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_sin_fs" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_sin_fs</obj_property>
+      <obj_property name="ObjectShortName">s_sin_fs</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_cos_fs" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_cos_fs</obj_property>
+      <obj_property name="ObjectShortName">s_cos_fs</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/s_theta_r_radu" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">s_theta_r_radu</obj_property>

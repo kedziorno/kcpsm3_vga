@@ -184,7 +184,8 @@ architecture behavioral of top is
   signal s_theta_r_rads, s_theta_r_angs : real := 0.0;
   signal s_sin_r1u, s_cos_r1u, s_sin_r2u, s_cos_r2u : real := 0.0;
   signal s_sin_r1s, s_cos_r1s, s_sin_r2s, s_cos_r2s : real := 0.0;
-  signal s_sin_f, s_cos_f : real := 0.0;
+  signal s_sin_fu, s_cos_fu : real := 0.0;
+  signal s_sin_fs, s_cos_fs : real := 0.0;
   signal s_sin_v, s_cos_v, s_theta_v : std_logic_vector (15 downto 0);
 --synthesis translate_on
 
@@ -315,18 +316,22 @@ begin
           s_theta_v <= v_theta_v;
           v_theta_r := (real (to_integer (unsigned (v_theta_v)))); -- radians
           v_theta_r := v_theta_r / factor_theta; -- radians after normalize
+          v_sin_o := sin (v_theta_r);
+          v_cos_o := cos (v_theta_r);
           s_theta_r_radu <= v_theta_r;
           s_theta_r_angu <= v_theta_r * rad_2_ang;
-          v_sin_o := sin (v_theta_r);
-          s_sin_f <= v_sin_o;
-          v_cos_o := cos (v_theta_r);
-          s_cos_f <= v_cos_o;
-          --report "sin_original " & real'image (v_sin_o);
-          --report "cos_original " & real'image (v_cos_o);
+          s_sin_fu <= v_sin_o;
+          s_cos_fu <= v_cos_o;
           v_theta_r := (real (to_integer (signed (v_theta_v)))); -- radians
           v_theta_r := v_theta_r / factor_theta; -- radians after normalize
+          v_sin_o := sin (v_theta_r);
+          v_cos_o := cos (v_theta_r);
           s_theta_r_rads <= v_theta_r;
           s_theta_r_angs <= v_theta_r * rad_2_ang;
+          s_sin_fs <= v_sin_o;
+          s_cos_fs <= v_cos_o;
+          --report "sin_original " & real'image (v_sin_o);
+          --report "cos_original " & real'image (v_cos_o);
           flag := false;
         else
           flag := true;
