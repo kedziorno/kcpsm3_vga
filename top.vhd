@@ -180,7 +180,9 @@ architecture behavioral of top is
 --synthesis translate_on
 
 --synthesis translate_off
-  signal s_sin_r1, s_cos_r1, s_sin_r2, s_cos_r2, s_theta_r_rad, s_theta_r_ang : real := 0.0;
+  signal s_theta_r_rad, s_theta_r_ang : real := 0.0;
+  signal s_sin_r1u, s_cos_r1u, s_sin_r2u, s_cos_r2u : real := 0.0;
+  signal s_sin_r1s, s_cos_r1s, s_sin_r2s, s_cos_r2s : real := 0.0;
   signal s_sin_f, s_cos_f : real := 0.0;
   signal s_sin_v, s_cos_v, s_theta_v : std_logic_vector (15 downto 0);
 --synthesis translate_on
@@ -242,12 +244,15 @@ begin
         v_sin_v := kcpsm3_out_port & v_sin_v (15 downto 8); -- LO first
         --v_sin_v := kcpsm3_out_port; -- LO first
         if (flag = true) then
-          v_sin_r := real (to_integer (unsigned (v_sin_v)));
           s_sin_v <= v_sin_v;
+          v_sin_r := real (to_integer (unsigned (v_sin_v)));
           v_sin_r := v_sin_r / factor;
-          --report "sin_cordic " & real'image (v_sin_r);
-          s_sin_r1 <= v_sin_r;
+          s_sin_r1u <= v_sin_r;
+          v_sin_r := real (to_integer (signed (v_sin_v)));
+          v_sin_r := v_sin_r / factor;
+          s_sin_r1s <= v_sin_r;
           flag := false;
+          --report "sin_cordic " & real'image (v_sin_r);
         else
           flag := true;
         end if;
@@ -256,12 +261,15 @@ begin
         v_cos_v := kcpsm3_out_port & v_cos_v (15 downto 8); -- LO first
         --v_cos_v := kcpsm3_out_port; -- LO first
         if (flag = true) then
-          v_cos_r := real (to_integer (unsigned (v_cos_v)));
           s_cos_v <= v_cos_v;
+          v_cos_r := real (to_integer (unsigned (v_cos_v)));
           v_cos_r := v_cos_r / factor;
-          --report "cos_cordic " & real'image (v_cos_r);
-          s_cos_r1 <= v_cos_r;
+          s_cos_r1u <= v_cos_r;
+          v_cos_r := real (to_integer (signed(v_cos_v)));
+          v_cos_r := v_cos_r / factor;
+          s_cos_r1s <= v_cos_r;
           flag := false;
+          --report "cos_cordic " & real'image (v_cos_r);
         else
           flag := true;
         end if;
@@ -270,12 +278,15 @@ begin
         v_sin_v := kcpsm3_out_port & v_sin_v (15 downto 8); -- LO first
         --v_sin_v := kcpsm3_out_port; -- LO first
         if (flag = true) then
-          v_sin_r := real (to_integer (unsigned (v_sin_v)));
           s_sin_v <= v_sin_v;
+          v_sin_r := real (to_integer (unsigned (v_sin_v)));
           v_sin_r := v_sin_r / factor;
-          --report "sin_cordic " & real'image (v_sin_r);
-          s_sin_r2 <= v_sin_r;
+          s_sin_r2u <= v_sin_r;
+          v_sin_r := real (to_integer (signed (v_sin_v)));
+          v_sin_r := v_sin_r / factor;
+          s_sin_r2s <= v_sin_r;
           flag := false;
+          --report "sin_cordic " & real'image (v_sin_r);
         else
           flag := true;
         end if;
@@ -284,12 +295,15 @@ begin
         v_cos_v := kcpsm3_out_port & v_cos_v (15 downto 8); -- LO first
         --v_cos_v := kcpsm3_out_port; -- LO first
         if (flag = true) then
-          v_cos_r := real (to_integer (unsigned (v_cos_v)));
           s_cos_v <= v_cos_v;
+          v_cos_r := real (to_integer (unsigned (v_cos_v)));
           v_cos_r := v_cos_r / factor;
-          --report "cos_cordic " & real'image (v_cos_r);
-          s_cos_r2 <= v_cos_r;
+          s_cos_r2u <= v_cos_r;
+          v_cos_r := real (to_integer (signed (v_cos_v)));
+          v_cos_r := v_cos_r / factor;
+          s_cos_r2s <= v_cos_r;
           flag := false;
+          --report "cos_cordic " & real'image (v_cos_r);
         else
           flag := true;
         end if;

@@ -22,7 +22,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="40" />
+   <WVObjectSize size="44" />
    <wave_markers>
       <marker time="33728140000000" label="" />
       <marker time="33600060000000" label="" />
@@ -134,21 +134,45 @@
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_sin_r1" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_sin_r1</obj_property>
-      <obj_property name="ObjectShortName">s_sin_r1</obj_property>
+   <wvobject fp_name="/tb_top/uut/s_sin_r1u" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_sin_r1u</obj_property>
+      <obj_property name="ObjectShortName">s_sin_r1u</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_cos_r1" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_cos_r1</obj_property>
-      <obj_property name="ObjectShortName">s_cos_r1</obj_property>
+   <wvobject fp_name="/tb_top/uut/s_cos_r1u" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_cos_r1u</obj_property>
+      <obj_property name="ObjectShortName">s_cos_r1u</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_sin_r2" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_sin_r2</obj_property>
-      <obj_property name="ObjectShortName">s_sin_r2</obj_property>
+   <wvobject fp_name="/tb_top/uut/s_sin_r2u" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_sin_r2u</obj_property>
+      <obj_property name="ObjectShortName">s_sin_r2u</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_cos_r2" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_cos_r2</obj_property>
-      <obj_property name="ObjectShortName">s_cos_r2</obj_property>
+   <wvobject fp_name="/tb_top/uut/s_cos_r2u" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_cos_r2u</obj_property>
+      <obj_property name="ObjectShortName">s_cos_r2u</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_sin_r1s" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_sin_r1s</obj_property>
+      <obj_property name="ObjectShortName">s_sin_r1s</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_cos_r1s" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_cos_r1s</obj_property>
+      <obj_property name="ObjectShortName">s_cos_r1s</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_sin_r2s" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_sin_r2s</obj_property>
+      <obj_property name="ObjectShortName">s_sin_r2s</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_cos_r2s" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_cos_r2s</obj_property>
+      <obj_property name="ObjectShortName">s_cos_r2s</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/s_theta_v" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">s_theta_v[15:0]</obj_property>
