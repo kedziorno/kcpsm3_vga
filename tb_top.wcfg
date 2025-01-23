@@ -22,7 +22,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="44" />
+   <WVObjectSize size="47" />
    <wave_markers>
       <marker time="33728140000000" label="" />
       <marker time="33600060000000" label="" />
@@ -134,6 +134,10 @@
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
+   <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test6" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_test6[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_test6[7:0]</obj_property>
+   </wvobject>
    <wvobject fp_name="/tb_top/uut/s_sin_r1u" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">s_sin_r1u</obj_property>
       <obj_property name="ObjectShortName">s_sin_r1u</obj_property>
@@ -189,17 +193,21 @@
       <obj_property name="ElementShortName">s_cos_f</obj_property>
       <obj_property name="ObjectShortName">s_cos_f</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_theta_r_rad" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_theta_r_rad</obj_property>
-      <obj_property name="ObjectShortName">s_theta_r_rad</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   <wvobject fp_name="/tb_top/uut/s_theta_r_radu" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_theta_r_radu</obj_property>
+      <obj_property name="ObjectShortName">s_theta_r_radu</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_theta_r_ang" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_theta_r_ang</obj_property>
-      <obj_property name="ObjectShortName">s_theta_r_ang</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   <wvobject fp_name="/tb_top/uut/s_theta_r_angu" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_theta_r_angu</obj_property>
+      <obj_property name="ObjectShortName">s_theta_r_angu</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_theta_r_rads" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_theta_r_rads</obj_property>
+      <obj_property name="ObjectShortName">s_theta_r_rads</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_theta_r_angs" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">s_theta_r_angs</obj_property>
+      <obj_property name="ObjectShortName">s_theta_r_angs</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/i_cpu_clock" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">i_cpu_clock</obj_property>
