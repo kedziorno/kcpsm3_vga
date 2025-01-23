@@ -31,6 +31,7 @@
       <marker time="16800075000000" label="" />
       <marker time="2284776667000" label="" />
       <marker time="4937083333000" label="" />
+      <marker time="128115100000" label="" />
    </wave_markers>
    <wvobject fp_name="group64" type="group">
       <obj_property name="label">vga_bmp</obj_property>
