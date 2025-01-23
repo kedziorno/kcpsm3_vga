@@ -312,7 +312,7 @@ begin
       end if;
       if (to_integer (unsigned (kcpsm3_port_id)) = 5) then -- THETA
         v_theta_v := kcpsm3_out_port & v_theta_v (15 downto 8); -- LO first
-        if (flag = true) then
+        --if (flag = true) then
           s_theta_v <= v_theta_v;
           v_theta_r := (real (to_integer (unsigned (v_theta_v)))); -- radians
           v_theta_r := v_theta_r / factor_theta; -- radians after normalize
@@ -332,10 +332,10 @@ begin
           s_cos_fs <= v_cos_o;
           --report "sin_original " & real'image (v_sin_o);
           --report "cos_original " & real'image (v_cos_o);
-          flag := false;
-        else
-          flag := true;
-        end if;
+          --flag := false;
+        --else
+          --flag := true;
+        --end if;
       end if;
     end if;
   end process p_report2;
