@@ -232,7 +232,6 @@ begin
     variable flag : boolean := false;
     variable factor : real := 65536.0;
     variable factor_theta : real := 65536.0 / 8.0;
---    variable factor_theta : real := 65536.0 / 95.828389;
   begin
     if (falling_edge (kcpsm3_write_strobe)) then
       if (to_integer (unsigned (kcpsm3_port_id)) = 1) then -- SIN1
