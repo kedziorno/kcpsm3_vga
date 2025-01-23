@@ -32,8 +32,8 @@ NAMEREG s6, R1;
 NAMEREG s5, R2;
 NAMEREG s4, R3;
 
-CONSTANT E_00_START,13;
-CONSTANT E_00_END,2E;
+CONSTANT E_00_START, 13;
+CONSTANT E_00_END, 2E;
 CONSTANT E_00_LEN, 2f;
 
 E_00:
@@ -107,6 +107,9 @@ STORE A,2D;
 LOAD A,00;
 STORE A,2E;
 
+CONSTANT TEMP_ANGLE_16_LO, 30;
+CONSTANT TEMP_ANGLE_16_HI, 31;
+
 ANGLE_16:
 LOAD A,6F; INITIALIZE X[0]
 STORE A,X_0;
@@ -124,11 +127,34 @@ ADD A, 01;
 SR0 A;
 STORE A, E_00_LEN;
 
+LOAD A, 01;
+STORE A, TEMP_ANGLE_16_LO;
+LOAD A, 00;
+STORE A, TEMP_ANGLE_16_HI;
+
+main:
+FETCH A, TEMP_ANGLE_16_LO;
+ADD A, 01;
+STORE A, TEMP_ANGLE_16_LO;
+FETCH A, TEMP_ANGLE_16_HI;
+ADDCY A, 00;
+STORE A, TEMP_ANGLE_16_HI;
+
+FETCH s3, TEMP_ANGLE_16_HI;
+FETCH s2, TEMP_ANGLE_16_LO;
+LOAD s1, 01;
+LOAD A, 68;
+CALL compare_16;
+COMPARE R3, 04; >
+JUMP Z, USER_CODE_END;
+
 ; 30
-LOAD A, 00;
-STORE A, ANGLE_16_HI;
-LOAD A, 00;
+FETCH A, TEMP_ANGLE_16_LO;
 STORE A, ANGLE_16_LO;
+OUTPUT A, DEBUG_THETA;
+FETCH A, TEMP_ANGLE_16_HI;
+STORE A, ANGLE_16_HI;
+OUTPUT A, DEBUG_THETA;
 
 LOAD R2,00; INITIALIZE SIGN INDICATOR REGISTER AS POSITIVE FOR BOTH SINE AND COSINE.
 
@@ -242,6 +268,7 @@ ADD R3,01; THIS STEP REQUIRED FOR LATER DJNZ INSTRUCTIONS
 ; COMPAREUTE Z[K+1]
 FETCH A,Z_1;
 AND A,80;
+COMPARE A,80;
 JUMP NZ,ADD_Z; TEST FOR NEGATIVE
 
 FETCH A,E_0; FORM TWOS COMPARELEMENT OF E[K] IF Z[K] IS POSITIVE, SINCE THEN A SUBTRACTION IS REQUIRED
@@ -414,9 +441,9 @@ STORE A,YTMP_1;
 RETURN;
 
 SHIFT_XY:
-;LOAD A,R0;
-;COMPARE A,R0;
-LOAD A, R0;
+LOAD A,R0;
+COMPARE A,R0;
+;LOAD A, R0;
 JUMP Z,END_SHIFT_XY;
 SUB R0,01;
 AND A,A;
@@ -463,19 +490,23 @@ RETURN;
 THE_REAL_END:
 FETCH A,X_0;
 STORE A,COSINE_16_LO;
+OUTPUT A, DEBUG_COS;
 FETCH A,X_1;
 STORE A,COSINE_16_HI;
+OUTPUT A, DEBUG_COS;
 FETCH A,Y_0;
 STORE A,SINE_16_LO;
+OUTPUT A, DEBUG_SIN;
 FETCH A,Y_1;
 STORE A,SINE_16_HI;
+OUTPUT A, DEBUG_SIN;
 
 FETCH s3, COSINE_16_HI;
 FETCH s2, COSINE_16_LO;
 OUTPUT s2, DEBUG_COS;
 OUTPUT s3, DEBUG_COS;
-LOAD s1, 00; FFFF/X_ROW
-LOAD A, 03;
+LOAD s1, 03; FFFF/X_ROW
+LOAD A, 33;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
@@ -490,14 +521,14 @@ FETCH s3, SINE_16_HI;
 FETCH s2, SINE_16_LO;
 OUTPUT s2, DEBUG_SIN;
 OUTPUT s3, DEBUG_SIN;
-LOAD s1, 00; FFFF/Y_COL
-LOAD A, 03;
+LOAD s1, 03; FFFF/Y_COL
+LOAD A, 33;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
 LOAD s3, 00;
 LOAD s2, R1;
-LOAD s1, a9;
+LOAD s1, 00;
 LOAD A, 28;
 CALL adder_16
 STORE A, 3b;
@@ -509,7 +540,7 @@ OUTPUT A, Y_COL;
 LOAD A, 3F;
 OUTPUT A, COLOR; 
 
-JUMP CORDIC_LOOP
+JUMP main
 
 USER_CODE_END:
 JUMP USER_CODE_END;
@@ -546,4 +577,26 @@ _divide_16_loop:                                ;
                   JUMP         _divide_16_loop  ;
 _divide_16_end:                                 ;
                   RETURN                        ;
+
+compare_16:
+_compare_16_start:                                      ;
+                      COMPARE s3 , s1                   ;
+                      JUMP     C , _compare_16_less     ;
+                      JUMP     Z , _compare_16_equal_hi ;
+                      JUMP         _compare_16_more     ;
+_compare_16_equal_hi:                                   ;
+                      COMPARE s2 , A                   ;
+                      JUMP     C , _compare_16_less     ;
+                      JUMP    NZ , _compare_16_more     ;
+                      JUMP         _compare_16_equal    ;
+_compare_16_less:                                       ; s3,s2 < s1,s0
+                      LOAD    R3 , 01                   ;
+                      JUMP         _compare_16_end      ;
+_compare_16_equal:                                      ; s3,s2 = s1,s0
+                      LOAD    R3 , 02                   ;
+                      JUMP         _compare_16_end      ;
+_compare_16_more:                                       ; s3,s2 > s1,s0
+                      LOAD    R3 , 04                   ;
+_compare_16_end:                                        ;
+                      RETURN                            ;
 

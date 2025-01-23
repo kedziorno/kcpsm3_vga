@@ -22,7 +22,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="34" />
+   <WVObjectSize size="35" />
    <wave_markers>
       <marker time="33728140000000" label="" />
       <marker time="33600060000000" label="" />
@@ -115,6 +115,13 @@
       <obj_property name="ObjectShortName">s_theta_r_ang</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_theta_v" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">s_theta_v[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s_theta_v[15:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test4" type="array" db_ref_id="1">
       <obj_property name="DisplayName">label</obj_property>
