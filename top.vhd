@@ -231,7 +231,8 @@ begin
     -- we can use one variable for all out ports, but can be problem when in psm code we mistake OUTPUT's order.
     variable flag : boolean := false;
     variable factor : real := 65536.0;
-    variable factor_theta : real := 1.0 * rad_2_ang;
+    variable factor_theta : real := 65536.0 / 8.0;
+--    variable factor_theta : real := 65536.0 / 95.828389;
   begin
     if (falling_edge (kcpsm3_write_strobe)) then
       if (to_integer (unsigned (kcpsm3_port_id)) = 1) then -- SIN1
@@ -294,7 +295,7 @@ begin
         v_theta_v := kcpsm3_out_port & v_theta_v (15 downto 8); -- LO first
         if (flag = true) then
           s_theta_v <= v_theta_v;
-          v_theta_r := (real (to_integer (signed (v_theta_v)))); -- radians
+          v_theta_r := (real (to_integer (unsigned (v_theta_v)))); -- radians
           v_theta_r := v_theta_r / factor_theta; -- radians after normalize
           s_theta_r_rad <= v_theta_r;
           s_theta_r_ang <= v_theta_r * rad_2_ang;
