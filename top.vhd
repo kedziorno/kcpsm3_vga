@@ -180,7 +180,7 @@ architecture behavioral of top is
 --synthesis translate_on
 
 --synthesis translate_off
-  signal s_sin_r, s_cos_r, s_theta_r_rad, s_theta_r_ang : real := 0.0;
+  signal s_sin_r1, s_cos_r1, s_sin_r2, s_cos_r2, s_theta_r_rad, s_theta_r_ang : real := 0.0;
   signal s_sin_f, s_cos_f : real := 0.0;
   signal s_sin_v, s_cos_v, s_theta_v : std_logic_vector (15 downto 0);
 --synthesis translate_on
@@ -234,7 +234,7 @@ begin
     variable factor_theta : real := 1.0 * rad_2_ang;
   begin
     if (falling_edge (kcpsm3_write_strobe)) then
-      if (to_integer (unsigned (kcpsm3_port_id)) = 1) then -- SIN
+      if (to_integer (unsigned (kcpsm3_port_id)) = 1) then -- SIN1
         v_sin_v := kcpsm3_out_port & v_sin_v (15 downto 8); -- LO first
         --v_sin_v := kcpsm3_out_port; -- LO first
         if (flag = true) then
@@ -242,13 +242,13 @@ begin
           s_sin_v <= v_sin_v;
           v_sin_r := v_sin_r / factor;
           --report "sin_cordic " & real'image (v_sin_r);
-          s_sin_r <= v_sin_r;
+          s_sin_r1 <= v_sin_r;
           flag := false;
         else
           flag := true;
         end if;
       end if;
-      if (to_integer (unsigned (kcpsm3_port_id)) = 2) then -- COS
+      if (to_integer (unsigned (kcpsm3_port_id)) = 2) then -- COS1
         v_cos_v := kcpsm3_out_port & v_cos_v (15 downto 8); -- LO first
         --v_cos_v := kcpsm3_out_port; -- LO first
         if (flag = true) then
@@ -256,13 +256,41 @@ begin
           s_cos_v <= v_cos_v;
           v_cos_r := v_cos_r / factor;
           --report "cos_cordic " & real'image (v_cos_r);
-          s_cos_r <= v_cos_r;
+          s_cos_r1 <= v_cos_r;
           flag := false;
         else
           flag := true;
         end if;
       end if;
-      if (to_integer (unsigned (kcpsm3_port_id)) = 3) then -- THETA
+      if (to_integer (unsigned (kcpsm3_port_id)) = 3) then -- SIN1
+        v_sin_v := kcpsm3_out_port & v_sin_v (15 downto 8); -- LO first
+        --v_sin_v := kcpsm3_out_port; -- LO first
+        if (flag = true) then
+          v_sin_r := real (to_integer (signed (v_sin_v)));
+          s_sin_v <= v_sin_v;
+          v_sin_r := v_sin_r / factor;
+          --report "sin_cordic " & real'image (v_sin_r);
+          s_sin_r2 <= v_sin_r;
+          flag := false;
+        else
+          flag := true;
+        end if;
+      end if;
+      if (to_integer (unsigned (kcpsm3_port_id)) = 4) then -- COS1
+        v_cos_v := kcpsm3_out_port & v_cos_v (15 downto 8); -- LO first
+        --v_cos_v := kcpsm3_out_port; -- LO first
+        if (flag = true) then
+          v_cos_r := real (to_integer (signed (v_cos_v)));
+          s_cos_v <= v_cos_v;
+          v_cos_r := v_cos_r / factor;
+          --report "cos_cordic " & real'image (v_cos_r);
+          s_cos_r2 <= v_cos_r;
+          flag := false;
+        else
+          flag := true;
+        end if;
+      end if;
+      if (to_integer (unsigned (kcpsm3_port_id)) = 5) then -- THETA
         v_theta_v := kcpsm3_out_port & v_theta_v (15 downto 8); -- LO first
         if (flag = true) then
           s_theta_v <= v_theta_v;
