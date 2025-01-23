@@ -1,285 +1,548 @@
 CONSTANT X_ROW, 16;
 CONSTANT Y_COL, 17;
 CONSTANT COLOR, 20;
+CONSTANT DEBUG_SIN, 01;
+CONSTANT DEBUG_COS, 02;
+CONSTANT DEBUG_THETA, 03;
 
-;Name the registers - alias
-NAMEREG s0, tmp
-NAMEREG s1, x_msb
-NAMEREG s2, x_lsb
-NAMEREG s3, y_msb
-NAMEREG s4, y_lsb
-NAMEREG s5, z_msb
-NAMEREG s6, z_lsb
-NAMEREG s7, LUT_pnt
-NAMEREG s8, tmp_H
-NAMEREG s9, tmp_L
-NAMEREG sA, tmp_H2
-NAMEREG sB, tmp_L2
-NAMEREG sC, i
-NAMEREG sD, k
+CONSTANT ANGLE_16_HI,00;
+CONSTANT ANGLE_16_LO,01;
+CONSTANT COSINE_16_HI,02;
+CONSTANT COSINE_16_LO,03;
+CONSTANT SINE_16_HI,04;
+CONSTANT SINE_16_LO,05;
+CONSTANT K,06;
+CONSTANT XTMP_0,07;
+CONSTANT XTMP_1,08;
+CONSTANT YTMP_0,09;
+CONSTANT YTMP_1,0A;
+CONSTANT X_0,0B;
+CONSTANT X_1,0C;
+CONSTANT Y_0,0D;
+CONSTANT Y_1,0E;
+CONSTANT Z_0,0F;
+CONSTANT Z_1,10;
+CONSTANT E_0,11;
+CONSTANT E_1,12;
 
-;Declare Constant
-;CONSTANT inPrt_H, 01
-;CONSTANT inPrt_L, 02
-;CONSTANT prtX_H, 04
-;CONSTANT prtX_L, 08
-;CONSTANT prtY_H, 10
-;CONSTANT prtY_L, 20
-CONSTANT DEBUG_SIN, 01
-CONSTANT DEBUG_COS, 02
-CONSTANT DEBUG_THETA, 03
+NAMEREG s0, A;
+NAMEREG s8, DPTR;
+NAMEREG s7, R0;
+NAMEREG s6, R1;
+NAMEREG s5, R2;
+NAMEREG s4, R3;
 
-CONSTANT testPort, 40
-CONSTANT NEG_SGN, 80
-CONSTANT EIGHT, 08
-CONSTANT NINE, 09
-CONSTANT ONE, 01
-CONSTANT ZERO, 00
+CONSTANT E_00_START,13;
+CONSTANT E_00_END,2E;
+CONSTANT E_00_LEN, 2f;
 
-; make_cordic_params.py `echo "(180/3.1415)*256" | bc -l` 16 1
-; make_cordic_params.py 58 8 1
-; 1rad ~ 57.324840 (180/3.14.15)
-; 1rad * 256
-;Scratchpad RAM initalize
-;use Reg tmp for load and store values
-LOAD tmp,  00 ;LUT: 0.605469_msb
-STORE tmp, 00 ;loc
-LOAD tmp,  9B ;LUT: 0.605469_lsb
-STORE tmp, 01 ;loc
+E_00:
+LOAD A,22;
+STORE A,13;
+LOAD A,19;
+STORE A,14;
 
-LOAD tmp,  2D ;LUT: 45.000000 msb
-STORE tmp, 02 ;loc
-LOAD tmp,  00 ;LUT: 45.000000_lsb
-STORE tmp, 03 ;loc
+LOAD A,D6;
+STORE A,15;
+LOAD A,0E;
+STORE A,16;
 
-LOAD tmp,  1A ;LUT: 26.5625_msb
-STORE tmp, 04 ;loc
-LOAD tmp,  90 ;LUT: 26.5625_lsb
-STORE tmp, 05 ;loc
+LOAD A,D7;
+STORE A,17;
+LOAD A,07;
+STORE A,18;
 
-LOAD tmp,  0E ;LUT: 14.035156_msb
-STORE tmp, 06 ;loc
-LOAD tmp,  09 ;LUT: 14.035156_lsb
-STORE tmp, 07 ;loc
+LOAD A,FB;
+STORE A,19;
+LOAD A,03;
+STORE A,1A;
 
-LOAD tmp,  07 ;LUT: 7.125000_msb
-STORE tmp, 08 ;loc
-LOAD tmp,  20 ;LUT: 7.125000_lsb
-STORE tmp, 09 ;loc
+LOAD A,FF;
+STORE A,1B;
+LOAD A,01;
+STORE A,1C;
 
-LOAD tmp,  03 ;LUT: 3.574219_msb
-STORE tmp, 0A ;loc
-LOAD tmp,  93 ;LUT: 3.574219_lsb
-STORE tmp, 0B ;loc
+LOAD A,00;
+STORE A,1D;
+LOAD A,01;
+STORE A,1E;
 
-LOAD tmp,  01 ;LUT: 1.792969_msb
-STORE tmp, 0C ;loc
-LOAD tmp,  CB ;LUT: 1.792969_lsb
-STORE tmp, 0D ;loc
+LOAD A,80;
+STORE A,1F;
+LOAD A,00;
+STORE A,20;
 
-LOAD tmp,  00 ;LUT: 0.894531_msb
-STORE tmp, 0E ;loc
-LOAD tmp,  E5 ;LUT: 0.894531_lsb
-STORE tmp, 0F ;loc
+LOAD A,40;
+STORE A,21;
+LOAD A,00;
+STORE A,22;
 
-LOAD tmp,  00 ;LUT: 0.445313_msb
-STORE tmp, 10 ;loc
-LOAD tmp,  72 ;LUT: 0.445313_lsb
-STORE tmp, 11 ;loc
+LOAD A,20;
+STORE A,23;
+LOAD A,00;
+STORE A,24;
 
-LOAD tmp,  00 ;LUT: 0.226563_msb
-STORE tmp, 12 ;loc
-LOAD tmp,  3A ;LUT: 0.226563_lsb
-STORE tmp, 13 ;loc
+LOAD A,10;
+STORE A,25;
+LOAD A,00;
+STORE A,26;
 
-LOAD z_msb, 00
-LOAD z_lsb, 00
+LOAD A,08;
+STORE A,27;
+LOAD A,00;
+STORE A,28;
 
-loop:
-;Input the rotation value from FPGA MUXes
-ADD z_lsb, 00
-ADD z_msb, 01
+LOAD A,04;
+STORE A,29;
+LOAD A,00;
+STORE A,2A;
 
-; error correction
-COMPARE z_msb, 5A
-JUMP Z, case_90
-COMPARE z_msb, 00;
-JUMP Z, case_0
+LOAD A,02;
+STORE A,2B;
+LOAD A,00;
+STORE A,2C;
 
-init:
-;initialize registers
-LOAD LUT_pnt, 00
-FETCH x_msb, (LUT_pnt)
+LOAD A,01;
+STORE A,2D;
+LOAD A,00;
+STORE A,2E;
 
-ADD LUT_pnt, 01
-FETCH x_lsb, (LUT_pnt)
+ANGLE_16:
+LOAD A,6F; INITIALIZE X[0]
+STORE A,X_0;
+LOAD A,13;
+STORE A,X_1;
+LOAD A,00; INITIALIZE Y[0]
+STORE A,Y_0;
+LOAD A,00;
+STORE A,Y_1;
 
-LOAD i, FF
+LOAD A, E_00_END;
+LOAD s1, E_00_START;
+SUB A, s1;
+ADD A, 01;
+SR0 A;
+STORE A, E_00_LEN;
 
-next1:
+; 30
+LOAD A, 00;
+STORE A, ANGLE_16_HI;
+LOAD A, 00;
+STORE A, ANGLE_16_LO;
 
-OUTPUT z_lsb, DEBUG_THETA
-OUTPUT z_msb, DEBUG_THETA
+LOAD R2,00; INITIALIZE SIGN INDICATOR REGISTER AS POSITIVE FOR BOTH SINE AND COSINE.
 
-ADD i, 01
-;OUTPUT i, testPort
+AND A,A; CLEAR THE BORROW (CARRY)
 
-;prepare registers for subroutines
-LOAD tmp_H, x_msb
-LOAD tmp_L, x_lsb
-LOAD tmp_H2, y_msb
-LOAD tmp_L2, y_lsb
+FETCH A, ANGLE_16_LO; PLACE LOWER BYTE OF ANGLE IN A
+SUBCY A, 44; SUBTRACT LOWER BYTE BY PI/2
+STORE A, ANGLE_16_LO; PLACE RESULT IN LOWER BYTE OF Z[0]
+FETCH A, Z_0; PLACE UPPER BYTE OF ANGLE IN ACCUM
+SUBCY A, 32; SUBT (WITH BORROW) UPPER BYTE OF PI
+STORE A, Z_1; PLACE RESULT IN UPPER BYTE OF Z[0]
+JUMP C,ADD_PIDIV2; IF BORROW SET, ANGLE WAS [0,PI/2]
 
-LOAD k, i
+; NOW CHECK IF THE ANGLE IS IN [PI/2,PI], IF NOT CONTINUE
+LOAD R2,02; ;INITIALIZE SIGN INDICATOR REGISTER POSITIVE FOR SINE NEGATIVE FOR COSINE.
+FETCH A,Z_0; PLACE LOWER BYTE OF ANGLE IN ACCUMULATOR
+SUBCY A, 44; SUBTRACT LOWER BYTE BY PI/2
+STORE A, Z_0; PLACE RESULT IN LOWER BYTE OF Z[0]
+FETCH A, Z_1; PLACE UPPER BYTE OF ANGLE IN ACCUM.
+SUBCY A, 32; SUBT WITH BORROW UPPER BYTE BY PI/2
+STORE A, Z_1; PLACE RESULT IN UPPER BYTE OF Z[0]
+JUMP C,TWOS; IF BORROW SET, ANGLE WAS IN [PI/2,PI)
 
-shift:
-COMPARE k, ZERO
-JUMP  Z, next2
+;NOW CHECK IF THE ANGLE IS BETWEEN PI AND 3PI/2, IF NOT CONTINUE
+LOAD R2,03; INITIALIZE SIGN INDICATOR REGISTER NEGATIVE FOR BOTH SINE AND COSINE
+FETCH A, Z_0; PLACE LOWER BYTE OF ANGLE IN ACCUM.
+SUBCY A, 44; SUBTRACT LOWER BYTE BY PI/2
+STORE A, Z_0; PLACE RESULT IN LOWER BYTE OF Z[0]
+FETCH A, Z_1; PLACE UPPER BYTE OF ANGLE IN ACCUM
+SUBCY A, 32; SUBT (WITH BORROW) UPPER BYTE OF PI
+STORE A, Z_1; PLACE RESULT IN UPPER BYTE OF Z[0]
+JUMP C, ADD_PIDIV2; IF BORROW SET, ANGLE WAS IN [PI,3PI/2)
 
-;divide by 2 (shift one to the right)
-SRX tmp_H
-SRA tmp_L
-SRX tmp_H2
-SRA tmp_L2
+; IF WE GET THIS FAR, THE ANGLE IS BETWEEN 3PI/2 AND 2PI.
+LOAD R2,01; INITIALIZE SIGN INDICATOR REGISTER POSITIVE FOR COSINE AND NEGATIVE FOR SINE
+FETCH A,Z_0; PLACE LOWER BYTE OF ANGLE IN ACCUM
+SUBCY A, 44; SUBTRACT LOWER BYTE BY PI/2
+STORE A, Z_0; PLACE RESULT IN LOWER BYTE OF Z[0]
+FETCH A, Z_1; PLACE UPPER BYTE OF ANGLE IN ACCUM
+SUBCY A, 32; SUBT WITH BORROW UPPER BYTE BY PI/2
+STORE A, Z_1; PLACE RESULT IN UPPER BYTE OF Z[0]
 
-SUB k, 01
-JUMP shift
+TWOS:
+FETCH A, Z_0; FORM THE TWOS COMPARELEMENT OF Z[0]
+XOR A, FF;
+ADD A, 01;
+STORE A, Z_0;
+FETCH A, Z_1;
+XOR A, FF;
+ADDCY A, 00;
+STORE A, Z_1;
+JUMP CORDIC_ALGO;
 
-next2:
-COMPARE i, NINE
-JUMP Z, out_rslt
+ADD_PIDIV2: ; ADD BACK PI/2
+FETCH A, Z_0;
+ADD A, 44;
+STORE A, Z_0;
+FETCH A, Z_1;
+ADDCY A, 32;
+STORE A, Z_1;
 
-;check rotation sign
-LOAD tmp, z_msb
-AND tmp, NEG_SGN
+; IT IS AT THIS POINT THAT THE CORDIC ALGORIYHM BEGINS
+CORDIC_ALGO:
+LOAD DPTR, E_00_START; INIT DATA POINTER AT CORDIC
+LOAD R1, 00;
+LOAD A, 00;
+STORE A, K;
 
-;COMPARE z msb with NEG SGN- -
-COMPARE tmp, NEG_SGN
-JUMP NZ, neg_case
+; BELOW IS THE CORDIC LOOP
+CORDIC_LOOP:
+FETCH R0,K; Temporarily store K for Shift_XY
+FETCH A,X_0;
+STORE A,XTMP_0; Temporarily store X[K]
+FETCH A,X_1;
+STORE A,XTMP_1;
+FETCH A,Y_0;
+STORE A,YTMP_0; Temporarily store Y[K]
+FETCH A,Y_1;
+STORE A,YTMP_1;
 
-;else Z_msb is positive--> continue
+FETCH A,(DPTR); Temporarily store E[K]
+STORE A,E_0;
+ADD DPTR,01;
+FETCH A,(DPTR);
+STORE A,E_1;
+ADD DPTR,01;
+;ADD DPTR,01;
 
-pos_case:
-;X[i=O]
-SUB x_lsb, tmp_L2
-SUBCY x_msb, tmp_H2
+; SET UP THE CONTSR0 REGISTER, R3, THAT WILL CONTAIN INFO ON THE NEGATIVITY OF X[K], Y[K], AND Z[K]
+LOAD R3,00;
+FETCH A,X_1;
+AND A,80;
+SRX A;
+OR A,R3;
+LOAD R3,A;
+FETCH A,Y_1;
+AND A,80;
+SRX A;
+SRX A;
+OR A,R3;
+LOAD R3,A;
+FETCH A,Z_1;
+AND A,80;
+SRX A;
+SRX A;
+SRX A;
+OR A,R3;
+LOAD R3,A;
+ADD R3,01; THIS STEP REQUIRED FOR LATER DJNZ INSTRUCTIONS
 
-;Y[i=O]
-ADD y_lsb, tmp_L
-ADDCY y_msb, tmp_H
+; COMPAREUTE Z[K+1]
+FETCH A,Z_1;
+AND A,80;
+JUMP NZ,ADD_Z; TEST FOR NEGATIVE
 
-;Z[i+l]
-ADD LUT_pnt, 01
-FETCH tmp_H, (LUT_pnt)
-ADD LUT_pnt, 01
-FETCH tmp_L,(LUT_pnt)
-SUB z_lsb, tmp_L
-SUBCY z_msb, tmp_H
-JUMP next1
+FETCH A,E_0; FORM TWOS COMPARELEMENT OF E[K] IF Z[K] IS POSITIVE, SINCE THEN A SUBTRACTION IS REQUIRED
+XOR A,FF;
+ADD A,01;
+STORE A,E_0;
+FETCH A,E_1;
+XOR A,FF;
+ADDCY A,00;
+STORE A,E_1;
 
-neg_case:
-;X[i=O]
-ADD x_lsb, tmp_L2
-ADDCY x_msb, tmp_H2
+ADD_Z:
+FETCH A,E_0;
+FETCH s1,Z_0;
+ADD A,s1;
+STORE A,Z_0;
+FETCH A,E_1;
+FETCH s1,Z_1;
+ADDCY A,s1;
+STORE A,Z_1;
 
-;Y[i=O]
-SUB y_lsb, tmp_L
-SUBCY y_msb, tmp_H
+; COMPAREUTE X[K+1] AND Y[K+1]
+CASE1:
+SUB R3,01;
+JUMP NZ,CASE2;
+CALL SHIFT_XY;
+CALL TWOS_Y_SHIFTED;
+JUMP ADD_XY;
 
-;Z[i+l]
-ADD LUT_pnt, 01
-FETCH tmp_H, (LUT_pnt)
-ADD LUT_pnt, 01
-FETCH tmp_L,(LUT_pnt)
-ADD z_lsb, tmp_L
-ADDCY z_msb, tmp_H
+CASE2:
+SUB R3,01;
+JUMP NZ, CASE3;
+CALL ABS_X;
+CALL SHIFT_XY;
+CALL TWOS_X_SHIFTED;
+CALL TWOS_Y_SHIFTED
+JUMP ADD_XY;
 
-JUMP next1
+CASE3:
+SUB R3,01;
+JUMP NZ, CASE4;
+CALL ABS_Y;
+CALL SHIFT_XY;
+JUMP ADD_XY;
 
-case_0:
-LOAD x_msb, 01
-LOAD x_lsb, 00
-LOAD y_msb, 00
-LOAD y_lsb, 00
-JUMP out_rslt
+CASE4:
+SUB R3,01;
+JUMP NZ,CASE5;
+CALL ABS_X;
+CALL ABS_Y;
+CALL SHIFT_XY;
+CALL TWOS_X_SHIFTED;
+JUMP ADD_XY;
 
-case_90:
-LOAD x_msb, 00
-LOAD x_lsb, 00
-LOAD y_msb, 01
-LOAD y_lsb, 00
-JUMP out_rslt
- 
-out_rslt:
-STORE x_lsb, 3f
-STORE x_msb, 3e
-STORE y_lsb, 3d
-STORE y_msb, 3c
+CASE5:
+SUB R3,01;
+JUMP NZ,CASE6;
+CALL SHIFT_XY;
+CALL TWOS_X_SHIFTED;
+JUMP ADD_XY;
 
+CASE6:
+SUB R3,01;
+JUMP NZ,CASE7;
+CALL ABS_X;
+CALL SHIFT_XY;
+JUMP ADD_XY;
 
-FETCH y_msb, 3e;
-FETCH x_lsb, 3f;
-OUTPUT x_lsb, DEBUG_COS;
-OUTPUT y_msb, DEBUG_COS;
-LOAD x_msb, 00; FFFF/X_ROW
-LOAD tmp, 03;
+CASE7:
+SUB R3,01;
+JUMP NZ,CASE8;
+CALL ABS_Y;
+CALL SHIFT_XY;
+CALL TWOS_X_SHIFTED;
+CALL TWOS_Y_SHIFTED;
+JUMP ADD_XY;
+
+CASE8:
+CALL ABS_X;
+CALL ABS_Y;
+CALL SHIFT_XY;
+CALL TWOS_Y_SHIFTED;
+
+ADD_XY:
+; FROM X[K+1]
+FETCH A,YTMP_0;
+FETCH s1,X_0;
+ADD A,s1;
+STORE A,X_0;
+FETCH A,YTMP_1;
+FETCH s1,X_1;
+ADDCY A,s1;
+STORE A,X_1;
+; FROM Y[K+1]
+FETCH A,XTMP_0;
+FETCH s1,Y_0;
+ADD A,s1;
+STORE A,Y_0;
+FETCH A,XTMP_1;
+FETCH s1,Y_1;
+ADDCY A,s1;
+STORE A,Y_1;
+; INCREMENT K AND TEST IF WE'VE LOOPED 14 TIMES YET
+FETCH A,K;
+ADD A,01;
+STORE A,K;
+ADD R1,01;
+FETCH sF, E_00_LEN;
+COMPARE R1, sF;
+JUMP NZ,LONG_JUMP;
+JUMP CORDIC_END;
+
+LONG_JUMP:
+JUMP CORDIC_LOOP;
+
+CORDIC_END:
+; IF THE COMPAREUTED ANSWER IS THE NEGATIVE OF THE TRUE ANSWER, TEST IF ANSWERS ARE NEGATIVE OR POSITIVE AND CHANGE SIGN.
+LOAD A,03; LEAVE SIGN OF ANSWERS POSITIVE IF THE ANGLE IS [0,PI/2) OR R2 = 0
+AND A,R2;
+JUMP Z,THE_END;
+; SKIP NEGATION OF COSINE IF ANGLE IS IN [3PI/2,2PI] OR R2 = 1
+LOAD A,02;
+AND A,R2;
+JUMP Z,TWOS_Y;
+
+TWOS_X:
+FETCH A,X_0; FORM THE TWOS COMPARELEMENT OF THE COSINE FOR ANGLES IN [PI/2, 3PI/2) OR R2 = 2 OR 3.
+XOR A,FF;
+ADD A,01;
+STORE A,X_0;
+FETCH A,X_1;
+XOR A,FF;
+ADDCY A,00;
+STORE A,X_1;
+
+TWOS_Y:
+LOAD A,01; SKIP NEGATION OF SINE IF THE ANGLE IS IN [PI/2, PI)
+AND A,R2;
+JUMP Z,THE_END;
+FETCH A,Y_0; FORM THE TWOS COMPARELEMENT OF THE SINE FOR ANGLES IN [PI.2PI) OR EQUIVALENTLY, WHEN R2 = 1 OR 3.
+XOR A,FF;
+ADD A,01;
+STORE A,Y_0;
+FETCH A,Y_1;
+XOR A,FF;
+ADDCY A,00;
+STORE A,Y_1;
+
+THE_END:
+JUMP THE_REAL_END;
+
+ABS_X:
+AND A,A;
+FETCH A,XTMP_0;
+SUBCY A,01;
+STORE A,XTMP_0;
+FETCH A,XTMP_1;
+SUBCY A,00;
+STORE A,XTMP_1;
+RETURN;
+
+ABS_Y:
+AND A,A;
+FETCH A,YTMP_0;
+SUBCY A,01;
+STORE A,YTMP_0;
+FETCH A,YTMP_1;
+SUBCY A,00;
+STORE A,YTMP_1;
+RETURN;
+
+SHIFT_XY:
+;LOAD A,R0;
+;COMPARE A,R0;
+LOAD A, R0;
+JUMP Z,END_SHIFT_XY;
+SUB R0,01;
+AND A,A;
+FETCH A,XTMP_1;
+SRX A; ???
+STORE A,XTMP_1;
+FETCH A,XTMP_0;
+SRX A;
+STORE A,XTMP_0;
+AND A,A;
+FETCH A,YTMP_1;
+SRX A;
+STORE A,YTMP_1;
+FETCH A,YTMP_0;
+SRX A;
+STORE A,YTMP_0;
+JUMP SHIFT_XY;
+
+END_SHIFT_XY:
+RETURN;
+
+TWOS_X_SHIFTED:
+FETCH A,XTMP_0;
+XOR A,FF;
+ADD A,01;
+STORE A,XTMP_0;
+FETCH A,XTMP_1;
+XOR A,FF;
+ADDCY A,00;
+STORE A,XTMP_1;
+RETURN;
+
+TWOS_Y_SHIFTED:
+FETCH A,YTMP_0;
+XOR A,FF;
+ADD A,01;
+STORE A,YTMP_0;
+FETCH A,YTMP_1;
+XOR A,FF;
+ADDCY A,00;
+STORE A,YTMP_1;
+RETURN;
+
+THE_REAL_END:
+FETCH A,X_0;
+STORE A,COSINE_16_LO;
+FETCH A,X_1;
+STORE A,COSINE_16_HI;
+FETCH A,Y_0;
+STORE A,SINE_16_LO;
+FETCH A,Y_1;
+STORE A,SINE_16_HI;
+
+FETCH s3, COSINE_16_HI;
+FETCH s2, COSINE_16_LO;
+OUTPUT s2, DEBUG_COS;
+OUTPUT s3, DEBUG_COS;
+LOAD s1, 00; FFFF/X_ROW
+LOAD A, 03;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
-LOAD y_msb, 00;
-LOAD x_lsb, z_lsb;
-LOAD x_msb, 00;
-LOAD tmp, 28;
+LOAD s3, 00;
+LOAD s2, R1;
+LOAD s1, 00;
+LOAD A, 28;
 CALL adder_16
-STORE tmp, 3c;
+STORE A, 3c;
 
-FETCH y_msb, 3c;
-FETCH x_lsb, 3d;
-OUTPUT x_lsb, DEBUG_SIN;
-OUTPUT y_msb, DEBUG_SIN;
-LOAD x_msb, 00; FFFF/Y_COL
-LOAD tmp, 03;
+FETCH s3, SINE_16_HI;
+FETCH s2, SINE_16_LO;
+OUTPUT s2, DEBUG_SIN;
+OUTPUT s3, DEBUG_SIN;
+LOAD s1, 00; FFFF/Y_COL
+LOAD A, 03;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
-LOAD y_msb, 00;
-LOAD x_lsb, z_lsb;
-LOAD x_msb, a9;
-LOAD tmp, 28;
+LOAD s3, 00;
+LOAD s2, R1;
+LOAD s1, a9;
+LOAD A, 28;
 CALL adder_16
-STORE tmp, 3b;
+STORE A, 3b;
 
-FETCH tmp, 3c;
-OUTPUT tmp, X_ROW; 
-FETCH tmp, 3b;
-OUTPUT tmp, Y_COL; 
-LOAD tmp, 3F;
-OUTPUT tmp, COLOR; 
+FETCH A, 3c;
+OUTPUT A, X_ROW; 
+FETCH A, 3b;
+OUTPUT A, Y_COL; 
+LOAD A, 3F;
+OUTPUT A, COLOR; 
 
-JUMP loop
+JUMP CORDIC_LOOP
+
+USER_CODE_END:
+JUMP USER_CODE_END;
+
+subtract_16:
+_subtract_16_start:               ;
+                    SUB   A , s2 ;
+                    SUBCY s1 , s3 ;
+_subtract_16_end:                 ;
+                    RETURN        ; 
 
 adder_16:
 _adder_16_start:                  ;
-                  ADD    tmp , x_lsb  ; add LSBs
-                  ADDCY  x_msb , y_msb  ; add MSBs
+                  ADD    A , s2  ; add LSBs
+                  ADDCY  s1 , s3  ; add MSBs
 _adder_16_end:                    ;
                   RETURN          ; keep result in x_msb and tmp
 
 divide_16:
 _divide_16_start:                               ;
-                  LOAD    z_msb , y_msb               ; R := N
-                  LOAD    y_lsb , x_lsb               ;
-                  LOAD    LUT_pnt , 00               ; Q := 0
-                  LOAD    z_lsb , 00               ;
-_divide_16_loop:
-                  COMPARE y_lsb , tmp               ; while R >= D do
-                  SUBCY   x_msb , 00               ;
-                  COMPARE z_msb , x_msb               ;
+                  LOAD    R2 , s3               ; R := N
+                  LOAD    R3 , s2               ;
+                  LOAD    R0 , 00               ; Q := 0
+                  LOAD    R1 , 00               ;
+_divide_16_loop:                                ;
+                  COMPARE R3 , A               ; while R >= D do
+                  SUBCY   s1 , 00               ;
+                  COMPARE R2 , s1               ;
                   JUMP     C , _divide_16_end   ; <
-                  SUB     y_lsb , tmp               ; R := R − D
-                  SUBCY   z_msb , x_msb               ;
-                  ADD     z_lsb , 01               ; Q := Q + 1
-                  ADDCY   LUT_pnt , 00               ;
+                  SUB     R3 , A               ; R := R − D
+                  SUBCY   R2 , s1               ;
+                  ADD     R1 , 01               ; Q := Q + 1
+                  ADDCY   R0 , 00               ;
                   JUMP         _divide_16_loop  ;
 _divide_16_end:                                 ;
                   RETURN                        ;
