@@ -185,6 +185,9 @@ architecture behavioral of top is
   signal s_sin_v, s_cos_v, s_theta_v : std_logic_vector (15 downto 0);
 --synthesis translate_on
 
+constant c_cos : std_logic_vector (20 downto 0) := "111101001011000101010";
+constant c_sin : std_logic_vector (20 downto 0) := "010010110011111001001";
+
 begin
 
 --synthesis translate_off
@@ -267,7 +270,7 @@ begin
         v_sin_v := kcpsm3_out_port & v_sin_v (15 downto 8); -- LO first
         --v_sin_v := kcpsm3_out_port; -- LO first
         if (flag = true) then
-          v_sin_r := real (to_integer (signed (v_sin_v)));
+          v_sin_r := real (to_integer (unsigned (v_sin_v)));
           s_sin_v <= v_sin_v;
           v_sin_r := v_sin_r / factor;
           --report "sin_cordic " & real'image (v_sin_r);
@@ -281,7 +284,7 @@ begin
         v_cos_v := kcpsm3_out_port & v_cos_v (15 downto 8); -- LO first
         --v_cos_v := kcpsm3_out_port; -- LO first
         if (flag = true) then
-          v_cos_r := real (to_integer (signed (v_cos_v)));
+          v_cos_r := real (to_integer (unsigned (v_cos_v)));
           s_cos_v <= v_cos_v;
           v_cos_r := v_cos_r / factor;
           --report "cos_cordic " & real'image (v_cos_r);
