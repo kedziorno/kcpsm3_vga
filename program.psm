@@ -29,6 +29,11 @@ CONSTANT DEBUG_SIN, 01
 CONSTANT DEBUG_COS, 02
 CONSTANT DEBUG_THETA, 03
 
+CONSTANT c_x_lsb, 3f
+CONSTANT c_x_msb, 3e
+CONSTANT c_y_lsb, 3d
+CONSTANT c_y_msb, 3c
+
 CONSTANT testPort, 40
 CONSTANT NEG_SGN, 80
 CONSTANT EIGHT, 08
@@ -98,13 +103,14 @@ LOAD z_lsb, 00
 loop:
 ;Input the rotation value from FPGA MUXes
 ADD z_lsb, 00
-ADD z_msb, 01
+ADDCY z_msb, 01
 
 ; error correction
-COMPARE z_msb, 5A
-JUMP Z, case_90
-COMPARE z_msb, 00;
-JUMP Z, case_0
+;COMPARE z_msb, 5A
+;JUMP Z, case_90
+
+;COMPARE z_msb, 00
+;JUMP Z, case_0
 
 init:
 ;initialize registers
@@ -118,8 +124,8 @@ LOAD i, FF
 
 next1:
 
-OUTPUT z_lsb, DEBUG_THETA
-OUTPUT z_msb, DEBUG_THETA
+;OUTPUT z_lsb, DEBUG_THETA
+;OUTPUT z_msb, DEBUG_THETA
 
 ADD i, 01
 ;OUTPUT i, testPort
@@ -154,7 +160,7 @@ LOAD tmp, z_msb
 AND tmp, NEG_SGN
 
 ;COMPARE z msb with NEG SGN- -
-COMPARE tmp, NEG_SGN
+;TEST tmp, NEG_SGN
 JUMP NZ, neg_case
 
 ;else Z_msb is positive--> continue
@@ -175,9 +181,11 @@ ADD LUT_pnt, 01
 FETCH tmp_L,(LUT_pnt)
 SUB z_lsb, tmp_L
 SUBCY z_msb, tmp_H
+
 JUMP next1
 
 neg_case:
+
 ;X[i=O]
 ADD x_lsb, tmp_L2
 ADDCY x_msb, tmp_H2
@@ -211,18 +219,17 @@ LOAD y_lsb, 00
 JUMP out_rslt
  
 out_rslt:
-STORE x_lsb, 3f
-STORE x_msb, 3e
-STORE y_lsb, 3d
-STORE y_msb, 3c
+STORE x_lsb, c_x_lsb
+STORE x_msb, c_x_msb
+STORE y_lsb, c_y_lsb
+STORE y_msb, c_y_msb
 
-
-FETCH y_msb, 3e;
-FETCH x_lsb, 3f;
+FETCH y_msb, c_x_msb;
+FETCH x_lsb, c_x_lsb;
 OUTPUT x_lsb, DEBUG_COS;
 OUTPUT y_msb, DEBUG_COS;
-LOAD x_msb, 00; FFFF/X_ROW
-LOAD tmp, 03;
+LOAD x_msb, 03; FFFF/X_ROW
+LOAD tmp, 33;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
@@ -233,18 +240,27 @@ LOAD tmp, 28;
 CALL adder_16
 STORE tmp, 3c;
 
-FETCH y_msb, 3c;
-FETCH x_lsb, 3d;
+;NAMEREG s0, tmp
+;NAMEREG s1, x_msb
+;NAMEREG s2, x_lsb
+;NAMEREG s3, y_msb
+
+;NAMEREG s4, y_lsb
+;NAMEREG s5, z_msb
+;NAMEREG s6, z_lsb
+
+FETCH y_msb, c_y_msb;
+FETCH x_lsb, c_y_lsb;
 OUTPUT x_lsb, DEBUG_SIN;
 OUTPUT y_msb, DEBUG_SIN;
-LOAD x_msb, 00; FFFF/Y_COL
-LOAD tmp, 03;
+LOAD x_msb, 03; FFFF/Y_COL
+LOAD tmp, 33;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
 LOAD y_msb, 00;
 LOAD x_lsb, z_lsb;
-LOAD x_msb, a9;
+LOAD x_msb, 00;
 LOAD tmp, 28;
 CALL adder_16
 STORE tmp, 3b;
