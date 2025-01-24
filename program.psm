@@ -174,7 +174,7 @@ LOAD x_lsb, temp_z_lsb
 CALL compare_32
 COMPARE LUT_pnt, 04; >
 JUMP Z, QUAD3
-LOAD tmp, 01
+LOAD tmp, 02
 STORE tmp, M_QUADRANT
 LOAD tmp, 00
 LOAD z_msb1, 00
@@ -203,7 +203,7 @@ LOAD x_lsb, temp_z_lsb
 CALL compare_32
 COMPARE LUT_pnt, 04; >
 JUMP Z, QUAD4
-LOAD tmp, 01
+LOAD tmp, 03
 STORE tmp, M_QUADRANT
 LOAD tmp, 00
 LOAD z_msb1, temp_z_msb1
