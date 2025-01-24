@@ -30,6 +30,11 @@ NAMEREG sF, temp_z_msb1
 CONSTANT DEBUG_SIN, 01
 CONSTANT DEBUG_COS, 02
 CONSTANT DEBUG_THETA, 03
+CONSTANT DEBUG, 04
+CONSTANT DEBUG1, 05
+CONSTANT DEBUG2, 06
+CONSTANT DEBUG3, 07
+CONSTANT DEBUG4, 08
 
 CONSTANT m_x_lsb, 3f
 CONSTANT m_x_msb, 3e
@@ -113,21 +118,28 @@ ADD temp_z_lsb, ff
 ADDCY temp_z_msb, 00
 ADDCY temp_z_msb1, 00
 
-;LOAD tmp, 00
-;LOAD z_msb1, 01
-;LOAD z_msb, 68
-;LOAD z_lsb, 00
-;LOAD y_msb, 00
-;LOAD y_lsb, temp_z_msb1
-;LOAD x_msb, temp_z_msb
-;LOAD x_lsb, temp_z_lsb
-;CALL compare_32
-;COMPARE LUT_pnt, 01; >
-;JUMP NZ, END
-
 OUTPUT temp_z_lsb, DEBUG_THETA
 OUTPUT temp_z_msb, DEBUG_THETA
 OUTPUT temp_z_msb1, DEBUG_THETA
+
+OUTPUT x_msb, DEBUG1
+
+LOAD tmp, 00
+LOAD z_msb1, 01
+LOAD z_msb, 68
+LOAD z_lsb, 00
+LOAD y_msb, 00
+LOAD y_lsb, temp_z_msb1
+LOAD x_msb, temp_z_msb
+LOAD x_lsb, temp_z_lsb
+CALL compare_32
+COMPARE LUT_pnt, 01; >
+;JUMP Z, END
+
+OUTPUT x_msb, DEBUG2
+
+LOAD tmp, 01
+OUTPUT tmp, DEBUG
 
 ; error correction
 ;COMPARE z_msb, 5A
@@ -161,6 +173,8 @@ LOAD z_msb, temp_z_msb
 LOAD z_msb1, temp_z_msb1
 
 ;JUMP init
+LOAD tmp, 02
+OUTPUT tmp, DEBUG
 
 QUAD2:
 LOAD tmp, 00
@@ -190,6 +204,8 @@ LOAD z_msb, temp_z_msb
 LOAD z_msb1, temp_z_msb1
 
 ;JUMP init
+LOAD tmp, 03
+OUTPUT tmp, DEBUG
 
 QUAD3:
 LOAD tmp, 00
@@ -211,14 +227,16 @@ LOAD z_msb, temp_z_msb
 LOAD z_lsb, temp_z_lsb
 LOAD y_msb, 00
 LOAD y_lsb, 00
-LOAD x_msb, Quad3Boundary_HI
-LOAD x_lsb, Quad3Boundary_LO
+LOAD x_msb, Quad2Boundary_HI
+LOAD x_lsb, Quad2Boundary_LO
 CALL subtract_32
 LOAD z_lsb, temp_z_lsb
 LOAD z_msb, temp_z_msb
 LOAD z_msb1, temp_z_msb1
 
 ;JUMP init
+LOAD tmp, 04
+OUTPUT tmp, DEBUG
 
 QUAD4:
 LOAD tmp, 04
@@ -238,6 +256,9 @@ LOAD temp_z_msb1, tmp
 
 init:
 
+LOAD tmp, 05
+OUTPUT tmp, DEBUG
+
 LOAD z_lsb, temp_z_lsb
 LOAD z_msb, temp_z_msb
 LOAD z_msb1, temp_z_msb1
@@ -252,7 +273,13 @@ FETCH x_lsb, (LUT_pnt)
 LOAD tmp, FF
 STORE tmp, I
 
+LOAD tmp, 06
+OUTPUT tmp, DEBUG
+
 next1:
+
+LOAD tmp, 07
+OUTPUT tmp, DEBUG
 
 ;OUTPUT z_lsb, DEBUG_THETA
 ;OUTPUT z_msb, DEBUG_THETA
@@ -315,6 +342,9 @@ SUB z_lsb, tmp_L
 SUBCY z_msb, tmp_H
 SUBCY z_msb1, 00
 
+LOAD tmp, ee
+OUTPUT tmp, DEBUG
+
 JUMP next1
 
 neg_case:
@@ -335,6 +365,9 @@ FETCH tmp_L,(LUT_pnt)
 ADD z_lsb, tmp_L
 ADDCY z_msb, tmp_H
 ADDCY z_msb1, 00
+
+LOAD tmp, ff
+OUTPUT tmp, DEBUG
 
 JUMP next1
 
@@ -425,7 +458,7 @@ SRX tmp_H
 SRA tmp_L
 SRX tmp_H
 SRA tmp_L
-ADD tmp_L, 28
+;ADD tmp_L, 28
 STORE tmp_L, M_X_ROW;
 
 ;FETCH y_msb, m_y_msb;

@@ -22,7 +22,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="34" />
+   <WVObjectSize size="38" />
    <wave_markers>
       <marker time="33728140000000" label="" />
       <marker time="33600060000000" label="" />
@@ -32,70 +32,6 @@
       <marker time="2284776667000" label="" />
       <marker time="4937083333000" label="" />
    </wave_markers>
-   <wvobject fp_name="group64" type="group">
-      <obj_property name="label">vga_bmp</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/clk_i" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">clk_i</obj_property>
-         <obj_property name="ObjectShortName">clk_i</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/rst_i" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">rst_i</obj_property>
-         <obj_property name="ObjectShortName">rst_i</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/dat_i" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">dat_i[23:0]</obj_property>
-         <obj_property name="ObjectShortName">dat_i[23:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/active_vid_i" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">active_vid_i</obj_property>
-         <obj_property name="ObjectShortName">active_vid_i</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/h_sync_i" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">h_sync_i</obj_property>
-         <obj_property name="ObjectShortName">h_sync_i</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/v_sync_i" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">v_sync_i</obj_property>
-         <obj_property name="ObjectShortName">v_sync_i</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/h_sync_dly" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">h_sync_dly</obj_property>
-         <obj_property name="ObjectShortName">h_sync_dly</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/v_sync_dly" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">v_sync_dly</obj_property>
-         <obj_property name="ObjectShortName">v_sync_dly</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/eol" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">eol</obj_property>
-         <obj_property name="ObjectShortName">eol</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/eof" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">eof</obj_property>
-         <obj_property name="ObjectShortName">eof</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/x" type="other" db_ref_id="1">
-         <obj_property name="ElementShortName">x</obj_property>
-         <obj_property name="ObjectShortName">x</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/y" type="other" db_ref_id="1">
-         <obj_property name="ElementShortName">y</obj_property>
-         <obj_property name="ObjectShortName">y</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/is_active_line" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">is_active_line</obj_property>
-         <obj_property name="ObjectShortName">is_active_line</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/is_active_frame" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">is_active_frame</obj_property>
-         <obj_property name="ObjectShortName">is_active_frame</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/filename" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">filename[1:7]</obj_property>
-         <obj_property name="ObjectShortName">filename[1:7]</obj_property>
-      </wvobject>
-   </wvobject>
    <wvobject fp_name="/tb_top/uut/s_sin_r" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">s_sin_r</obj_property>
       <obj_property name="ObjectShortName">s_sin_r</obj_property>
@@ -117,8 +53,8 @@
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/s_theta_v" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_theta_v[15:0]</obj_property>
-      <obj_property name="ObjectShortName">s_theta_v[15:0]</obj_property>
+      <obj_property name="ElementShortName">s_theta_v[23:0]</obj_property>
+      <obj_property name="ObjectShortName">s_theta_v[23:0]</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ff0000</obj_property>
    </wvobject>
@@ -141,6 +77,26 @@
       <obj_property name="ObjectShortName">s_cos_v[15:0]</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test4" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_test4[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_test4[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test5" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_test5[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_test5[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test6" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_test6[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_test6[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test7" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_test7[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_test7[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test8" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_test8[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_test8[7:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/i_cpu_clock" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">i_cpu_clock</obj_property>
