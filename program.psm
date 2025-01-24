@@ -227,17 +227,20 @@ LOAD y_lsb, 00
 JUMP out_rslt
  
 out_rslt:
+; todo compensate ? K (0.60725*256 ~ 155.45)
 STORE x_lsb, c_x_lsb
 STORE x_msb, c_x_msb
 STORE y_lsb, c_y_lsb
 STORE y_msb, c_y_msb
 
+CONSTANT SCALER, 04; approximate x4-x20
+
 FETCH y_msb, c_x_msb;
 FETCH x_lsb, c_x_lsb;
 OUTPUT x_lsb, DEBUG_COS;
 OUTPUT y_msb, DEBUG_COS;
-LOAD x_msb, 00; FFFF/X_ROW
-LOAD tmp, 04;
+LOAD x_msb, 00;
+LOAD tmp, SCALER;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
@@ -252,8 +255,8 @@ FETCH y_msb, c_y_msb;
 FETCH x_lsb, c_y_lsb;
 OUTPUT x_lsb, DEBUG_SIN;
 OUTPUT y_msb, DEBUG_SIN;
-LOAD x_msb, 00; FFFF/Y_COL
-LOAD tmp, 04;
+LOAD x_msb, 00;
+LOAD tmp, SCALER;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
