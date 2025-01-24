@@ -223,9 +223,10 @@ begin
 --    end if;
 --  end process p_report1;
   p_report2 : process (kcpsm3_write_strobe) is
-    variable factor : real := 256.0;
-    variable rad_2_ang : real := 180.0 / 3.1415;
-    variable ang_2_rad : real := 3.1415 / 180.0;
+    constant rad_2_ang : real := 180.0 / 3.1415;
+    constant ang_2_rad : real := 3.1415 / 180.0;
+    constant factor : real := 65536.0;
+    constant factor_theta : real := 256.0 * rad_2_ang;
     variable v_theta_r, v_sin_r, v_cos_r, v_sin_o, v_cos_o : real := 0.0;
     variable v_theta_v, v_sin_v, v_cos_v : std_logic_vector (15 downto 0); -- use variables, signals appear on next clock (mistakes)
     -- we can use one variable for all out ports, but can be problem when in psm code we mistake OUTPUT's order.
@@ -253,6 +254,7 @@ begin
           v_cos_r := v_cos_r / factor;
           --report "cos_cordic " & real'image (v_cos_r);
           s_cos_r <= v_cos_r;
+          flag := false;
         else
           flag := true;
         end if;
@@ -260,8 +262,9 @@ begin
       if (to_integer (unsigned (kcpsm3_port_id)) = 3) then -- THETA
         v_theta_v := kcpsm3_out_port & v_theta_v (15 downto 8); -- LO first
         if (flag = true) then
-          v_theta_r := (real (to_integer (signed (v_theta_v)))); -- radians
-          v_theta_r := v_theta_r / factor; -- radians after normalize
+          s_theta_v <= v_theta_v;
+          v_theta_r := (real (to_integer (unsigned (v_theta_v)))); -- radians
+          v_theta_r := v_theta_r / factor_theta; -- radians after normalize
           s_theta_r_rad <= v_theta_r;
           s_theta_r_ang <= v_theta_r * rad_2_ang;
           v_sin_o := sin (v_theta_r);

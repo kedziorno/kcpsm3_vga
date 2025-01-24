@@ -116,11 +116,9 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test4" type="array" db_ref_id="1">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">o_test4[7:0]</obj_property>
-      <obj_property name="ObjectShortName">o_test4[7:0]</obj_property>
-      <obj_property name="label">PING</obj_property>
+   <wvobject fp_name="/tb_top/uut/s_theta_v" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">s_theta_v[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s_theta_v[15:0]</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ff0000</obj_property>
    </wvobject>

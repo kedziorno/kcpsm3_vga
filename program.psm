@@ -17,6 +17,8 @@ NAMEREG sA, tmp_H2
 NAMEREG sB, tmp_L2
 NAMEREG sC, i
 NAMEREG sD, k
+NAMEREG sE, temp_z_lsb
+NAMEREG sF, temp_z_msb
 
 ;Declare Constant
 ;CONSTANT inPrt_H, 01
@@ -97,20 +99,23 @@ STORE tmp, 12 ;loc
 LOAD tmp,  3A ;LUT: 0.226563_lsb
 STORE tmp, 13 ;loc
 
-LOAD z_msb, 00
-LOAD z_lsb, 00
+LOAD temp_z_msb, 00
+LOAD temp_z_lsb, 00
 
 loop:
 ;Input the rotation value from FPGA MUXes
-ADD z_lsb, 00
-ADDCY z_msb, 01
+ADD temp_z_lsb, 00
+ADDCY temp_z_msb, 01
+
+OUTPUT temp_z_lsb, DEBUG_THETA
+OUTPUT temp_z_msb, DEBUG_THETA
 
 ; error correction
-;COMPARE z_msb, 5A
-;JUMP Z, case_90
+COMPARE z_msb, 5A
+JUMP Z, case_90
 
-;COMPARE z_msb, 00
-;JUMP Z, case_0
+COMPARE z_msb, 00
+JUMP Z, case_0
 
 init:
 ;initialize registers
@@ -121,6 +126,9 @@ ADD LUT_pnt, 01
 FETCH x_lsb, (LUT_pnt)
 
 LOAD i, FF
+
+LOAD z_lsb, temp_z_lsb
+LOAD z_msb, temp_z_msb
 
 next1:
 
@@ -228,8 +236,8 @@ FETCH y_msb, c_x_msb;
 FETCH x_lsb, c_x_lsb;
 OUTPUT x_lsb, DEBUG_COS;
 OUTPUT y_msb, DEBUG_COS;
-LOAD x_msb, 03; FFFF/X_ROW
-LOAD tmp, 33;
+LOAD x_msb, 00; FFFF/X_ROW
+LOAD tmp, 03;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
@@ -253,8 +261,8 @@ FETCH y_msb, c_y_msb;
 FETCH x_lsb, c_y_lsb;
 OUTPUT x_lsb, DEBUG_SIN;
 OUTPUT y_msb, DEBUG_SIN;
-LOAD x_msb, 03; FFFF/Y_COL
-LOAD tmp, 33;
+LOAD x_msb, 00; FFFF/Y_COL
+LOAD tmp, 03;
 CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
