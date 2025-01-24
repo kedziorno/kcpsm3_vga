@@ -104,18 +104,18 @@ LOAD temp_z_lsb, 00
 
 loop:
 ;Input the rotation value from FPGA MUXes
-ADD temp_z_lsb, 00
-ADDCY temp_z_msb, 01
+ADD temp_z_lsb, ff
+ADDCY temp_z_msb, 00
 
 OUTPUT temp_z_lsb, DEBUG_THETA
 OUTPUT temp_z_msb, DEBUG_THETA
 
 ; error correction
-COMPARE z_msb, 5A
-JUMP Z, case_90
+;COMPARE z_msb, 5A
+;JUMP Z, case_90
 
-COMPARE z_msb, 00
-JUMP Z, case_0
+;COMPARE z_msb, 00
+;JUMP Z, case_0
 
 init:
 ;initialize registers
