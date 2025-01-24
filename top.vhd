@@ -182,7 +182,8 @@ architecture behavioral of top is
 --synthesis translate_off
   signal s_sin_r, s_cos_r, s_theta_r_rad, s_theta_r_ang : real := 0.0;
   signal s_sin_f, s_cos_f : real := 0.0;
-  signal s_sin_v, s_cos_v, s_theta_v : std_logic_vector (15 downto 0);
+  signal s_sin_v, s_cos_v : std_logic_vector (15 downto 0);
+  signal s_theta_v : std_logic_vector (23 downto 0);
 --synthesis translate_on
 
 begin
@@ -226,9 +227,10 @@ begin
     constant rad_2_ang : real := 180.0 / 3.1415;
     constant ang_2_rad : real := 3.1415 / 180.0;
     constant factor : real := 65536.0;
-    constant factor_theta : real := 256.0 * rad_2_ang;
+    constant factor_theta : real := 2.0 * 256.0 * 256.0 * rad_2_ang;
     variable v_theta_r, v_sin_r, v_cos_r, v_sin_o, v_cos_o : real := 0.0;
-    variable v_theta_v, v_sin_v, v_cos_v : std_logic_vector (15 downto 0); -- use variables, signals appear on next clock (mistakes)
+    variable v_sin_v, v_cos_v : std_logic_vector (15 downto 0); -- use variables, signals appear on next clock (mistakes)
+    variable v_theta_v : std_logic_vector (23 downto 0); -- use variables, signals appear on next clock (mistakes)
     -- we can use one variable for all out ports, but can be problem when in psm code we mistake OUTPUT's order.
     variable flag : boolean := false;
   begin
@@ -260,8 +262,8 @@ begin
         end if;
       end if;
       if (to_integer (unsigned (kcpsm3_port_id)) = 3) then -- THETA
-        v_theta_v := kcpsm3_out_port & v_theta_v (15 downto 8); -- LO first
-        if (flag = true) then
+        v_theta_v := kcpsm3_out_port & v_theta_v (23 downto 8); -- LO first
+--        if (flag = true) then
           s_theta_v <= v_theta_v;
           v_theta_r := (real (to_integer (unsigned (v_theta_v)))); -- radians
           v_theta_r := v_theta_r / factor_theta; -- radians after normalize
@@ -273,10 +275,10 @@ begin
           v_cos_o := cos (v_theta_r);
           --report "cos_original " & real'image (v_cos_o);
           s_cos_f <= v_cos_o;
-          flag := false;
-        else
-          flag := true;
-        end if;
+--          flag := false;
+--        else
+--          flag := true;
+--        end if;
       end if;
     end if;
   end process p_report2;

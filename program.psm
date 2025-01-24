@@ -3,22 +3,22 @@ CONSTANT Y_COL, 17;
 CONSTANT COLOR, 20;
 
 ;Name the registers - alias
-NAMEREG s0, tmp
+NAMEREG s0, x_lsb
 NAMEREG s1, x_msb
-NAMEREG s2, x_lsb
+NAMEREG s2, y_lsb
 NAMEREG s3, y_msb
-NAMEREG s4, y_lsb
+NAMEREG s4, z_lsb
 NAMEREG s5, z_msb
-NAMEREG s6, z_lsb
-NAMEREG s7, LUT_pnt
-NAMEREG s8, tmp_H
-NAMEREG s9, tmp_L
-NAMEREG sA, tmp_H2
-NAMEREG sB, tmp_L2
-NAMEREG sC, i
-NAMEREG sD, k
-NAMEREG sE, temp_z_lsb
-NAMEREG sF, temp_z_msb
+NAMEREG s6, z_msb1
+NAMEREG s7, tmp
+NAMEREG s8, LUT_pnt
+NAMEREG s9, tmp_H
+NAMEREG sA, tmp_L
+NAMEREG sB, tmp_H2
+NAMEREG sC, tmp_L2
+NAMEREG sD, temp_z_lsb
+NAMEREG sE, temp_z_msb
+NAMEREG sF, temp_z_msb1
 
 ;Declare Constant
 ;CONSTANT inPrt_H, 01
@@ -38,6 +38,7 @@ CONSTANT m_y_msb, 3c
 CONSTANT M_X_ROW, 3b
 CONSTANT M_Y_COL, 3a
 CONSTANT M_QUADRANT, 39
+CONSTANT I, 38
 
 CONSTANT testPort, 40
 CONSTANT NEG_SGN, 80
@@ -102,6 +103,7 @@ STORE tmp, 12 ;loc
 LOAD tmp,  3A ;LUT: 0.226563_lsb
 STORE tmp, 13 ;loc
 
+LOAD temp_z_msb1, 00
 LOAD temp_z_msb, 00
 LOAD temp_z_lsb, 00
 
@@ -109,9 +111,23 @@ loop:
 ;Input the rotation value from FPGA MUXes
 ADD temp_z_lsb, ff
 ADDCY temp_z_msb, 00
+ADDCY temp_z_msb1, 00
+
+;LOAD tmp, 00
+;LOAD z_msb1, 01
+;LOAD z_msb, 68
+;LOAD z_lsb, 00
+;LOAD y_msb, 00
+;LOAD y_lsb, temp_z_msb1
+;LOAD x_msb, temp_z_msb
+;LOAD x_lsb, temp_z_lsb
+;CALL compare_32
+;COMPARE LUT_pnt, 01; >
+;JUMP NZ, END
 
 OUTPUT temp_z_lsb, DEBUG_THETA
 OUTPUT temp_z_msb, DEBUG_THETA
+OUTPUT temp_z_msb1, DEBUG_THETA
 
 ; error correction
 ;COMPARE z_msb, 5A
@@ -127,53 +143,82 @@ CONSTANT Quad3Boundary_LO, 00;
 CONSTANT Quad3Boundary_HI, 03;
 
 QUAD1:
-LOAD y_msb, CORDIC_BASE_HI
-LOAD x_lsb, CORDIC_BASE_LO
+LOAD tmp, 00
+LOAD z_msb1, 00
+LOAD z_msb, CORDIC_BASE_HI
+LOAD z_lsb, CORDIC_BASE_LO
+LOAD y_msb, 00
+LOAD y_lsb, temp_z_msb1
 LOAD x_msb, temp_z_msb
-LOAD tmp, temp_z_lsb
-CALL compare_16
-COMPARE y_lsb, 04; >
+LOAD x_lsb, temp_z_lsb
+CALL compare_32
+COMPARE LUT_pnt, 04; >
 JUMP Z, QUAD2
 LOAD tmp, 01
 STORE tmp, M_QUADRANT
 LOAD z_lsb, temp_z_lsb
 LOAD z_msb, temp_z_msb
+LOAD z_msb1, temp_z_msb1
+
+;JUMP init
 
 QUAD2:
-LOAD y_msb, Quad2Boundary_HI
-LOAD x_lsb, Quad2Boundary_LO
+LOAD tmp, 00
+LOAD z_msb1, 00
+LOAD z_msb, Quad2Boundary_HI
+LOAD z_lsb, Quad2Boundary_LO
+LOAD y_msb, 00
+LOAD y_lsb, temp_z_msb1
 LOAD x_msb, temp_z_msb
-LOAD tmp, temp_z_lsb
-CALL compare_16
-COMPARE y_lsb, 04; >
+LOAD x_lsb, temp_z_lsb
+CALL compare_32
+COMPARE LUT_pnt, 04; >
 JUMP Z, QUAD3
-LOAD tmp, 02
+LOAD tmp, 01
 STORE tmp, M_QUADRANT
-LOAD y_msb, Quad2Boundary_HI
-LOAD x_lsb, Quad2Boundary_LO
+LOAD tmp, 00
+LOAD z_msb1, 00
+LOAD z_msb, Quad2Boundary_HI
+LOAD z_lsb, Quad2Boundary_LO
+LOAD y_msb, 00
+LOAD y_lsb, temp_z_msb1
 LOAD x_msb, temp_z_msb
-LOAD tmp, temp_z_lsb
-CALL subtract_16
-LOAD z_lsb, tmp
-LOAD z_msb, x_msb
+LOAD x_lsb, temp_z_lsb
+CALL subtract_32
+LOAD z_lsb, temp_z_lsb
+LOAD z_msb, temp_z_msb
+LOAD z_msb1, temp_z_msb1
+
+;JUMP init
 
 QUAD3:
-LOAD y_msb, Quad3Boundary_HI
-LOAD x_lsb, Quad3Boundary_LO
+LOAD tmp, 00
+LOAD z_msb1, 00
+LOAD z_msb, Quad3Boundary_HI
+LOAD z_lsb, Quad3Boundary_LO
+LOAD y_msb, 00
+LOAD y_lsb, temp_z_msb1
 LOAD x_msb, temp_z_msb
-LOAD tmp, temp_z_lsb
-CALL compare_16
-COMPARE y_lsb, 04; >
-JUMP Z, QUAD4
-LOAD tmp, 03
-STORE tmp, M_QUADRANT
-LOAD y_msb, temp_z_msb
 LOAD x_lsb, temp_z_lsb
+CALL compare_32
+COMPARE LUT_pnt, 04; >
+JUMP Z, QUAD4
+LOAD tmp, 01
+STORE tmp, M_QUADRANT
+LOAD tmp, 00
+LOAD z_msb1, temp_z_msb1
+LOAD z_msb, temp_z_msb
+LOAD z_lsb, temp_z_lsb
+LOAD y_msb, 00
+LOAD y_lsb, 00
 LOAD x_msb, Quad3Boundary_HI
-LOAD tmp, Quad3Boundary_LO
-CALL subtract_16
-LOAD z_lsb, tmp
-LOAD z_msb, x_msb
+LOAD x_lsb, Quad3Boundary_LO
+CALL subtract_32
+LOAD z_lsb, temp_z_lsb
+LOAD z_msb, temp_z_msb
+LOAD z_msb1, temp_z_msb1
+
+;JUMP init
 
 QUAD4:
 LOAD tmp, 04
@@ -186,11 +231,17 @@ LOAD tmp, temp_z_msb
 XOR tmp, FF
 ADDCY tmp, 00
 LOAD temp_z_msb, tmp
-LOAD z_lsb, temp_z_lsb
-LOAD z_msb, temp_z_msb
-
+LOAD tmp, temp_z_msb1
+XOR tmp, FF
+ADDCY tmp, 00
+LOAD temp_z_msb1, tmp
 
 init:
+
+LOAD z_lsb, temp_z_lsb
+LOAD z_msb, temp_z_msb
+LOAD z_msb1, temp_z_msb1
+
 ;initialize registers
 LOAD LUT_pnt, 00
 FETCH x_msb, (LUT_pnt)
@@ -198,15 +249,17 @@ FETCH x_msb, (LUT_pnt)
 ADD LUT_pnt, 01
 FETCH x_lsb, (LUT_pnt)
 
-LOAD i, FF
+LOAD tmp, FF
+STORE tmp, I
 
 next1:
 
 ;OUTPUT z_lsb, DEBUG_THETA
 ;OUTPUT z_msb, DEBUG_THETA
 
-ADD i, 01
-;OUTPUT i, testPort
+FETCH tmp, I
+ADD tmp, 01
+STORE tmp, I
 
 ;prepare registers for subroutines
 LOAD tmp_H, x_msb
@@ -214,10 +267,10 @@ LOAD tmp_L, x_lsb
 LOAD tmp_H2, y_msb
 LOAD tmp_L2, y_lsb
 
-LOAD k, i
+FETCH tmp, I
 
 shift:
-COMPARE k, ZERO
+COMPARE tmp, ZERO
 JUMP  Z, next2
 
 ;divide by 2 (shift one to the right)
@@ -226,15 +279,16 @@ SRA tmp_L
 SRX tmp_H2
 SRA tmp_L2
 
-SUB k, 01
+SUB tmp, 01
 JUMP shift
 
 next2:
-COMPARE i, NINE
+FETCH tmp, I
+COMPARE tmp, NINE
 JUMP Z, out_rslt
 
 ;check rotation sign
-LOAD tmp, z_msb
+LOAD tmp, z_msb1
 AND tmp, NEG_SGN
 
 ;COMPARE z msb with NEG SGN- -
@@ -259,6 +313,7 @@ ADD LUT_pnt, 01
 FETCH tmp_L,(LUT_pnt)
 SUB z_lsb, tmp_L
 SUBCY z_msb, tmp_H
+SUBCY z_msb1, 00
 
 JUMP next1
 
@@ -279,6 +334,7 @@ ADD LUT_pnt, 01
 FETCH tmp_L,(LUT_pnt)
 ADD z_lsb, tmp_L
 ADDCY z_msb, tmp_H
+ADDCY z_msb1, 00
 
 JUMP next1
 
@@ -302,21 +358,11 @@ out_rslt:
 QUADR1C:
 FETCH tmp, M_QUADRANT
 COMPARE tmp, 01
-JUMP NZ, QUADR4C
-LOAD tmp, x_lsb
-XOR tmp, FF
-ADD tmp, 01
-LOAD x_lsb, tmp
-LOAD tmp, x_msb
-XOR tmp, FF
-ADDCY tmp, 00
-LOAD x_msb, tmp
-JUMP DRAW
-
-QUADR4C:
-FETCH tmp, M_QUADRANT
+JUMP Z, aaa1
 COMPARE tmp, 04
-JUMP NZ, QUADR1S
+JUMP Z, aaa1
+JUMP QUADR1S
+aaa1:
 LOAD tmp, x_lsb
 XOR tmp, FF
 ADD tmp, 01
@@ -330,21 +376,11 @@ JUMP DRAW
 QUADR1S:
 FETCH tmp, M_QUADRANT
 COMPARE tmp, 01
-JUMP NZ, QUADR4S
-LOAD tmp, y_lsb
-XOR tmp, FF
-ADD tmp, 01
-LOAD y_lsb, tmp
-LOAD tmp, y_msb
-XOR tmp, FF
-ADDCY tmp, 00
-LOAD y_msb, tmp
+JUMP Z, aaa2
+COMPARE tmp, 02
+JUMP Z, aaa2
 JUMP DRAW
-
-QUADR4S:
-FETCH tmp, M_QUADRANT
-COMPARE tmp, 04
-JUMP NZ, DRAW
+aaa2:
 LOAD tmp, y_lsb
 XOR tmp, FF
 ADD tmp, 01
@@ -363,37 +399,63 @@ STORE y_msb, m_y_msb
 
 CONSTANT SCALER, 04; approximate x4-x20
 
-FETCH y_msb, m_x_msb;
-FETCH x_lsb, m_x_lsb;
-OUTPUT x_lsb, DEBUG_COS;
-OUTPUT y_msb, DEBUG_COS;
-LOAD x_msb, 00;
-LOAD tmp, SCALER;
-CALL divide_16;
+;FETCH y_msb, m_x_msb;
+;FETCH x_lsb, m_x_lsb;
+;LOAD x_msb, 00;
+;LOAD tmp, SCALER;
+;CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
-LOAD y_msb, 00;
-LOAD x_lsb, z_lsb;
-LOAD x_msb, 00;
-LOAD tmp, 28;
-CALL adder_16
-STORE tmp, M_X_ROW;
+;LOAD y_msb, 00;
+;LOAD x_lsb, z_lsb;
+;LOAD x_msb, 00;
+;LOAD tmp, 28;
+;CALL adder_16
+FETCH tmp_H, m_x_msb;
+FETCH tmp_L, m_x_lsb;
+OUTPUT tmp_L, DEBUG_COS;
+OUTPUT tmp_H, DEBUG_COS;
+SRX tmp_H
+SRA tmp_L
+SRX tmp_H
+SRA tmp_L
+SRX tmp_H
+SRA tmp_L
+SRX tmp_H
+SRA tmp_L
+SRX tmp_H
+SRA tmp_L
+ADD tmp_L, 28
+STORE tmp_L, M_X_ROW;
 
-FETCH y_msb, m_y_msb;
-FETCH x_lsb, m_y_lsb;
-OUTPUT x_lsb, DEBUG_SIN;
-OUTPUT y_msb, DEBUG_SIN;
-LOAD x_msb, 00;
-LOAD tmp, SCALER;
-CALL divide_16;
+;FETCH y_msb, m_y_msb;
+;FETCH x_lsb, m_y_lsb;
+;LOAD x_msb, 00;
+;LOAD tmp, SCALER;
+;CALL divide_16;
 ;   s7,s6 - Q
 ;   s5,s4 - R
-LOAD y_msb, 00;
-LOAD x_lsb, z_lsb;
-LOAD x_msb, 00;
-LOAD tmp, 28;
-CALL adder_16
-STORE tmp, M_Y_COL;
+;LOAD y_msb, 00;
+;LOAD x_lsb, z_lsb;
+;LOAD x_msb, 00;
+;LOAD tmp, 28;
+;CALL adder_16
+FETCH tmp_H, m_y_msb;
+FETCH tmp_L, m_y_lsb;
+OUTPUT tmp_L, DEBUG_SIN;
+OUTPUT tmp_H, DEBUG_SIN;
+SRX tmp_H
+SRA tmp_L
+SRX tmp_H
+SRA tmp_L
+SRX tmp_H
+SRA tmp_L
+SRX tmp_H
+SRA tmp_L
+SRX tmp_H
+SRA tmp_L
+ADD tmp_L, 28
+STORE tmp_L, M_Y_COL;
 
 FETCH tmp, M_X_ROW;
 OUTPUT tmp, X_ROW; 
@@ -430,33 +492,65 @@ _divide_16_loop:
 _divide_16_end:                                 ;
                   RETURN                        ;
 
-compare_16:
-_compare_16_start:                                      ;
-                      COMPARE y_msb , x_msb                   ;
-                      JUMP     C , _compare_16_less     ;
-                      JUMP     Z , _compare_16_equal_hi ;
-                      JUMP         _compare_16_more     ;
-_compare_16_equal_hi:                                   ;
-                      COMPARE x_lsb , tmp                   ;
-                      JUMP     C , _compare_16_less     ;
-                      JUMP    NZ , _compare_16_more     ;
-                      JUMP         _compare_16_equal    ;
-_compare_16_less:                                       ; s3,s2 < s1,s0
-                      LOAD    y_lsb , 01                   ;
-                      JUMP         _compare_16_end      ;
-_compare_16_equal:                                      ; s3,s2 = s1,s0
-                      LOAD    y_lsb , 02                   ;
-                      JUMP         _compare_16_end      ;
-_compare_16_more:                                       ; s3,s2 > s1,s0
-                      LOAD    y_lsb , 04                   ;
-_compare_16_end:                                        ;
-                      RETURN                            ;
+compare_32:
+_compare_32_equal_start:                                      ;
+                          COMPARE tmp , y_msb                     ;
+                          JUMP     C , _compare_32_less_a7b3  ;
+                          JUMP     Z , _compare_32_equal_a7b3 ;
+                          JUMP         _compare_32_more_a7b3  ;
+_compare_32_equal_a7b3:                                       ;
+                          COMPARE z_msb1 , y_lsb                     ;
+                          JUMP     C , _compare_32_less_a6b2  ;
+                          JUMP     Z , _compare_32_equal_a6b2 ;
+                          JUMP         _compare_32_more_a6b2  ;
+_compare_32_equal_a6b2:                                       ;
+                          COMPARE z_msb , x_msb                     ;
+                          JUMP     C , _compare_32_less_a5b1  ;
+                          JUMP     Z , _compare_32_equal_a5b1 ;
+                          JUMP         _compare_32_more_a5b1  ;
+_compare_32_equal_a5b1:                                       ;
+                          COMPARE z_lsb , x_lsb                     ;
+                          JUMP     C , _compare_32_less_a4b0  ;
+                          JUMP     Z , _compare_32_equal_a4b0 ;
+                          JUMP         _compare_32_more_a4b0  ;
+_compare_32_equal_a4b0:                                       ; =
+                          LOAD    LUT_pnt , 02                     ;
+                          JUMP         _compare_32_end        ;
+_compare_32_less_a4b0:                                        ; <
+                          LOAD    LUT_pnt , 01                     ;
+                          JUMP         _compare_32_end        ;
+_compare_32_more_a4b0:                                        ; >
+                          LOAD    LUT_pnt , 04                     ;
+                          JUMP         _compare_32_end        ;
+_compare_32_less_a5b1:                                        ; <
+                          LOAD    LUT_pnt , 01                     ;
+                          JUMP         _compare_32_end        ;
+_compare_32_more_a5b1:                                        ; >
+                          LOAD    LUT_pnt , 04                     ;
+                          JUMP         _compare_32_end        ;
+_compare_32_less_a7b3:                                        ; <
+                          LOAD    LUT_pnt , 01                     ;
+                          JUMP         _compare_32_end        ;
+_compare_32_more_a7b3:                                        ; >
+                          LOAD    LUT_pnt , 04                     ;
+                          JUMP         _compare_32_end        ;
+_compare_32_less_a6b2:                                        ; <
+                          LOAD    LUT_pnt , 01                     ;
+                          JUMP         _compare_32_end        ;
+_compare_32_more_a6b2:                                        ; >
+                          LOAD    LUT_pnt , 04                     ;
+                          JUMP         _compare_32_end        ;
+_compare_32_end:                                              ;
+                          RETURN                              ;
 
-subtract_16:
-_subtract_16_start:               ;
-                    SUB   tmp , x_lsb ;
-                    SUBCY x_msb , y_msb ;
-_subtract_16_end:                 ;
-                    RETURN        ;
+subtract_32:
+_subtract_32_start:                 ;
+                    SUB    x_lsb , z_lsb  ; lsb
+                    SUBCY  x_msb , z_msb  ;
+                    SUBCY  y_lsb , z_msb1  ;
+                    SUBCY  y_msb , tmp  ; msb
+_subtract_32_end:                   ;
+                    RETURN          ;
 
+END: JUMP END
 
