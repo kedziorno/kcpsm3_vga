@@ -22,7 +22,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="34" />
+   <WVObjectSize size="36" />
    <wave_markers>
       <marker time="64060000000" label="" />
       <marker time="96060000000" label="" />
@@ -126,6 +126,20 @@
       <obj_property name="ObjectShortName">s_theta_v[15:0]</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_theta_v" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">s_theta_v[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s_theta_v[15:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/s_theta_v" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">s_theta_v[15:0]</obj_property>
+      <obj_property name="ObjectShortName">s_theta_v[15:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/s_sin_f" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">s_sin_f</obj_property>
