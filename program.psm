@@ -375,8 +375,8 @@ FETCH s0, M_SINE;
 OUTPUT s0, DEBUG_SIN;
 SRX s0;
 SRX s0;
-;SR0 s0;
-;SR0 s0;
+SRX s0;
+;SRX s0;
 ADD s0, 28;
 STORE s0, M_X_ROW;
 
@@ -384,8 +384,8 @@ FETCH s0, M_COSINE;
 OUTPUT s0, DEBUG_COS;
 SRX s0;
 SRX s0;
-;SR0 s0;
-;SR0 s0;
+SRX s0;
+;SRX s0;
 ADD s0, 28;
 STORE s0, M_Y_COL;
 
