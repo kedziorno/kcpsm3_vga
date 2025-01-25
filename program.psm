@@ -117,15 +117,15 @@ OUTPUT t5, DEBUG_THETA;
 ADDCY t5, 00;
 STORE t5, M_THETA_TEMP_HI;
 
-;compare_theta_360:
-;FETCH s2, M_THETA_TEMP_LO;
-;COMPARE s2, 68;
-;JUMP Z, ang360;
-;JUMP check_q;
-;ang360:
-;FETCH s2, M_THETA_TEMP_HI;
-;COMPARE s2, 01;
-;JUMP Z, END; > 360
+compare_theta_360:
+FETCH s2, M_THETA_TEMP_LO;
+COMPARE s2, 68;
+JUMP Z, ang360;
+JUMP check_q;
+ang360:
+FETCH s2, M_THETA_TEMP_HI;
+COMPARE s2, 01;
+JUMP Z, END; > 360
 
 check_q:
 
@@ -160,6 +160,7 @@ FETCH A, M_THETA_TEMP_LO;
 STORE A, M_THETA_LO;
 FETCH A, M_THETA_TEMP_HI;
 STORE A, M_THETA_HI;
+;CALL invers_z;
 JUMP cordic_loop;
 
 Q2:
@@ -186,6 +187,7 @@ STORE s0, M_THETA_LO;
 ;STORE A, M_THETA_LO;
 ;FETCH A, M_THETA_TEMP_HI;
 ;STORE A, M_THETA_HI;
+;CALL invers_z;
 JUMP cordic_loop;
 
 Q3:
@@ -212,6 +214,7 @@ STORE s0, M_THETA_LO;
 ;STORE A, M_THETA_LO;
 ;FETCH A, M_THETA_TEMP_HI;
 ;STORE A, M_THETA_HI;
+;CALL invers_z;
 JUMP cordic_loop;
 
 Q4:
@@ -230,16 +233,19 @@ STORE s2, M_THETA_HI;
 ;STORE A, M_THETA_LO;
 ;FETCH A, M_THETA_TEMP_HI;
 ;STORE A, M_THETA_HI;
+;CALL invers_z;
+JUMP cordic_loop;
 
-; -z
-;FETCH A, M_THETA_LO;
-;XOR A, FF;
-;ADD A, 01;
-;STORE A, M_THETA_LO;
-;FETCH A, M_THETA_HI;
-;XOR A, FF;
-;ADD A, 01;
-;STORE A, M_THETA_HI;
+invers_z:
+FETCH A, M_THETA_LO;
+XOR A, FF;
+ADD A, 01;
+STORE A, M_THETA_LO;
+FETCH A, M_THETA_HI;
+XOR A, FF;
+ADD A, 01;
+STORE A, M_THETA_HI;
+RETURN;
 
 cordic_loop:
 COMPARE t0, t1;
