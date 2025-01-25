@@ -82,12 +82,6 @@ CONSTANT M_THETA_TEMP_HI, 3e;
 CONSTANT M_X_ROW, 22
 CONSTANT M_Y_COL, 23
 
-initialize_k:
-LOAD t3, C_K_INV;
-STORE t3, M_X;
-LOAD t4, 00;
-STORE t4, M_Y;
-
 initialize_theta:
 LOAD t5, C_THETA_HI;
 STORE t5, M_THETA_TEMP_HI;
@@ -103,6 +97,13 @@ SR0 s0;
 STORE s0, M_ROM_ANGLES_LEN;
 
 cordic_main:
+
+initialize_k:
+LOAD t3, C_K_INV;
+STORE t3, M_X;
+LOAD t4, 00;
+STORE t4, M_Y;
+
 LOAD t0, 00;
 LOAD t1, C_ITERS;
 LOAD t2, C_ROM_ANGLES_START;
@@ -160,7 +161,7 @@ STORE A, M_ANGLE;
 theta_ltz:
 FETCH s4, M_THETA_LO;
 AND s4, 80;
-TEST s4, 80;
+COMPARE s4, 80;
 JUMP Z, sign_neg;
 
 sign_pos:
@@ -227,21 +228,21 @@ STORE s0, M_COSINE;
 FETCH s0, M_Y;
 STORE s0, M_SINE;
 
-FETCH s0, M_SINE;
-OUTPUT s0, DEBUG_SIN;
-SR0 s0;
-SR0 s0;
-SR0 s0;
-SR0 s0;
+FETCH s0, M_COSINE;
+OUTPUT s0, DEBUG_COS;
+SRX s0;
+;SR0 s0;
+;SR0 s0;
+;SR0 s0;
 ADD s0, 28;
 STORE s0, M_X_ROW;
 
-FETCH s0, M_COSINE;
-OUTPUT s0, DEBUG_COS;
-SR0 s0;
-SR0 s0;
-SR0 s0;
-SR0 s0;
+FETCH s0, M_SINE;
+OUTPUT s0, DEBUG_SIN;
+SRX s0;
+;SR0 s0;
+;SR0 s0;
+;SR0 s0;
 ADD s0, 28;
 STORE s0, M_Y_COL;
 
