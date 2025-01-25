@@ -2,6 +2,7 @@
 ;   https://raw.githubusercontent.com/brodzik/arko-project-1/refs/heads/master/prototypes/cordic.asm
 ; Check and compare code with helper master thesis https://scholarworks.calstate.edu/downloads/7d278z14r (Author : Sara Nazemzadeh).
 ; The first mistake I missed was is instruction SR0 must be SRX (Extended) - when negate numbers is divided.
+; The second mistake, X must be initialized K in each cordic start.
 ;
 ; Based on https://remcycles.net/blog/cordic.html
 ;
@@ -41,9 +42,7 @@ CONSTANT C_THETA_HI, 00;
 ; multiply_16 - 00-07
 CONSTANT M_THETA_HI, 08;
 CONSTANT M_THETA_LO, 09;
-CONSTANT M_COSINE_16_HI, 0A;
 CONSTANT M_COSINE, 0B;
-CONSTANT M_SINE_16_HI, 0C;
 CONSTANT M_SINE, 0D;
 CONSTANT M_SCALE_LO, 0E;
 CONSTANT M_SCALE_HI, 0F;
@@ -111,18 +110,31 @@ LOAD t2, C_ROM_ANGLES_START;
 add_theta_temp:
 FETCH t5, M_THETA_TEMP_LO;
 OUTPUT t5, DEBUG_THETA;
-OUTPUT t0, DEBUG_THETA;
 ADD t5, 01;
 STORE t5, M_THETA_TEMP_LO;
+FETCH t5, M_THETA_TEMP_HI;
+OUTPUT t5, DEBUG_THETA;
+ADDCY t5, 00;
+STORE t5, M_THETA_TEMP_HI;
 
 compare_theta:
 FETCH s2, M_THETA_TEMP_LO;
-COMPARE s2, 5b;
-JUMP NC, END; >= 90
+COMPARE s2, 68;
+JUMP Z, vvv1;
+;JUMP C, move_theta;
+JUMP move_theta;
+vvv1:
+FETCH s2, M_THETA_TEMP_HI;
+COMPARE s2, 01;
+JUMP Z, END;
+
+;JUMP NC, END; >= 90
 
 move_theta:
 FETCH A, M_THETA_TEMP_LO;
 STORE A, M_THETA_LO;
+FETCH A, M_THETA_TEMP_HI;
+STORE A, M_THETA_HI;
 
 cordic_loop:
 COMPARE t0, t1;
@@ -159,7 +171,7 @@ STORE A, M_ANGLE;
 
 ; ttttttttttttttttttttttttttttttttttttttt
 theta_ltz:
-FETCH s4, M_THETA_LO;
+FETCH s4, M_THETA_HI;
 AND s4, 80;
 COMPARE s4, 80;
 JUMP Z, sign_neg;
@@ -180,9 +192,12 @@ STORE s0, M_Y;
 
 theta_min_angle_pos:
 FETCH s0, M_THETA_LO;
-FETCH s1, M_ANGLE;
-SUB s0, s1;
+FETCH s1, M_THETA_HI;
+FETCH s2, M_ANGLE;
+SUB s0, s2;
+SUBCY s1, 00;
 STORE s0, M_THETA_LO;
+STORE s1, M_THETA_HI;
 
 JUMP sign_end;
 
@@ -202,16 +217,12 @@ STORE s0, M_Y;
 
 theta_plus_angle_neg:
 FETCH s0, M_THETA_LO;
-FETCH s1, M_ANGLE;
-;LOAD s2, s0;
-;AND s2, 80;
-;COMPARE s2, 80;
-;JUMP NZ, qqq2;
-;XOR s0, FF;
-;ADD s0, 01;
-;qqq2:
-ADD s0, s1;
+FETCH s1, M_THETA_HI;
+FETCH s2, M_ANGLE;
+ADD s0, s2;
+ADDCY s1, 00;
 STORE s0, M_THETA_LO;
+STORE s1, M_THETA_HI;
 
 sign_end:
 ADD t0, 01;
@@ -219,10 +230,6 @@ ADD t2, 01;
 jump cordic_loop;
 
 cordic_end:
-;FETCH  s0, M_X;
-;XOR s0, FF;
-;ADD s0, 01;
-;STORE s0, M_X;
 FETCH s0, M_X;
 STORE s0, M_COSINE;
 FETCH s0, M_Y;
