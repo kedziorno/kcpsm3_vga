@@ -121,11 +121,13 @@ compare_theta_360:
 FETCH s2, M_THETA_TEMP_LO;
 COMPARE s2, 68;
 JUMP Z, ang360;
-JUMP move_theta;
+JUMP check_q;
 ang360:
 FETCH s2, M_THETA_TEMP_HI;
 COMPARE s2, 01;
 JUMP Z, END; > 360
+
+check_q:
 
 CONSTANT C_CORDIC_BASE_LO, 5a;
 CONSTANT C_CORDIC_BASE_HI, 00;
