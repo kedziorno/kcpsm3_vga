@@ -117,7 +117,7 @@ OUTPUT t5, DEBUG_THETA;
 ADDCY t5, 00;
 STORE t5, M_THETA_TEMP_HI;
 
-compare_theta:
+compare_theta_360:
 FETCH s2, M_THETA_TEMP_LO;
 COMPARE s2, 68;
 JUMP Z, ang360;
@@ -126,6 +126,72 @@ ang360:
 FETCH s2, M_THETA_TEMP_HI;
 COMPARE s2, 01;
 JUMP Z, END; > 360
+
+CONSTANT C_CORDIC_BASE_LO, 5a;
+CONSTANT C_CORDIC_BASE_HI, 00;
+CONSTANT C_Q2B_LO, b4;
+CONSTANT C_Q2B_HI, 00;
+CONSTANT C_Q3B_LO, 0e;
+CONSTANT C_Q3B_HI, 01;
+CONSTANT M_QUADRANT, 24;
+
+Q1:
+FETCH s0, M_THETA_TEMP_LO;
+COMPARE s0, C_CORDIC_BASE_LO;
+JUMP NZ, Q2; >=
+LOAD s0, 01;
+STORE s0, M_QUADRANT;
+JUMP move_theta;
+
+Q2:
+FETCH s3, M_THETA_TEMP_HI;
+FETCH s2, M_THETA_TEMP_LO;
+LOAD s1, C_Q2B_HI;
+LOAD s0, C_Q2B_LO;
+CALL compare_16;
+COMPARE s4, 01; <
+JUMP NZ, Q3;
+LOAD s0, 02;
+STORE s0, M_QUADRANT;
+LOAD s3, C_Q2B_HI;
+LOAD s2, C_Q2B_LO;
+FETCH s1, M_THETA_TEMP_HI;
+FETCH s0, M_THETA_TEMP_LO;
+CALL subtract_16;
+STORE s1, M_THETA_TEMP_HI;
+STORE s0, M_THETA_TEMP_LO;
+JUMP move_theta;
+
+Q3:
+FETCH s3, M_THETA_TEMP_HI;
+FETCH s2, M_THETA_TEMP_LO;
+LOAD s1, C_Q3B_HI;
+LOAD s0, C_Q3B_LO;
+CALL compare_16;
+COMPARE s4, 01; <
+JUMP NZ, Q4;
+LOAD s0, 03;
+STORE s0, M_QUADRANT;
+LOAD s3, M_THETA_TEMP_HI;
+LOAD s2, M_THETA_TEMP_LO;
+LOAD s1, C_Q2B_HI;
+LOAD s0, C_Q2B_LO;
+CALL subtract_16;
+STORE s1, M_THETA_TEMP_HI;
+STORE s0, M_THETA_TEMP_LO;
+JUMP move_theta;
+
+Q4:
+LOAD s0, 04;
+STORE s0, M_QUADRANT;
+FETCH s2, M_THETA_TEMP_LO;
+XOR s2, FF;
+ADD s2, 01;
+STORE s2, M_THETA_TEMP_LO;
+FETCH s2, M_THETA_TEMP_HI;
+XOR s2, FF;
+ADDCY s2, 00;
+STORE s2, M_THETA_TEMP_HI;
 
 move_theta:
 FETCH A, M_THETA_TEMP_LO;
@@ -227,6 +293,37 @@ ADD t2, 01;
 jump cordic_loop;
 
 cordic_end:
+
+QR14:
+FETCH s0, M_QUADRANT;
+COMPARE s0, 01;
+JUMP Z, _QR14;
+COMPARE s0, 04;
+JUMP Z, _QR14;
+JUMP QR12;
+_QR14:
+FETCH s0, M_X;
+XOR s0, FF;
+ADD s0, 01;
+STORE s0, M_X;
+JUMP DRAW;
+
+QR12:
+FETCH s0, M_QUADRANT;
+COMPARE s0, 01;
+JUMP Z, _QR12;
+COMPARE s0, 02;
+JUMP Z, _QR12;
+JUMP DRAW;
+_QR12:
+FETCH s0, M_Y;
+XOR s0, FF;
+ADD s0, 01;
+STORE s0, M_Y;
+JUMP DRAW;
+
+DRAW:
+
 FETCH s0, M_X;
 STORE s0, M_COSINE;
 FETCH s0, M_Y;
@@ -382,6 +479,26 @@ _multiply_8_fetch:                                  ;
                     FETCH  s4 , 3d                  ;
 _multiply_8_end:                                    ;
                     RETURN                          ;
+
+subtract_16:
+; Figure 3-9: 16-Bit Subtraction Using SUB and SUBCY Instructions
+;   ug129.pdf
+; INPUT  :
+;   s3 = subtrahend (a) HI
+;   s2 = subtrahend (a) LO
+;   s1 = minuend (b) HI
+;   s0 = minuend (b) LO
+; OUTPUT :
+;   s1 = difference MSB
+;   s0 = difference LSB
+; INFO   :
+;
+_subtract_16_start:               ;
+                    SUB   s0 , s2 ;
+                    SUBCY s1 , s3 ;
+_subtract_16_end:                 ;
+                    RETURN        ;
+
 
 divide_16:
 ; https://en.wikipedia.org/wiki/Division_algorithm#Division_by_repeated_subtraction
