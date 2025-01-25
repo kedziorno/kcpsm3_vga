@@ -458,7 +458,7 @@ SRX tmp_H
 SRA tmp_L
 SRX tmp_H
 SRA tmp_L
-;ADD tmp_L, 28
+ADD tmp_L, 28
 STORE tmp_L, M_X_ROW;
 
 ;FETCH y_msb, m_y_msb;
