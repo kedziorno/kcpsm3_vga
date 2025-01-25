@@ -3,6 +3,8 @@
 ; Check and compare code with helper master thesis https://scholarworks.calstate.edu/downloads/7d278z14r (Author : Sara Nazemzadeh).
 ; The first mistake I missed was is instruction SR0 must be SRX (Extended) - when negate numbers is divided.
 ;
+; Based on https://remcycles.net/blog/cordic.html
+;
 
 CONSTANT ZERO, 00;
 
@@ -30,7 +32,7 @@ NAMEREG sF, A;
 
 CONSTANT C_ITERS, 08;
 CONSTANT C_SCALE, ff;
-CONSTANT C_K_INV, 9b;
+CONSTANT C_K_INV, 4D; 78 - 1
 CONSTANT C_RADIUS, 50; 80
 CONSTANT C_THETA_LO, 00;
 CONSTANT C_THETA_HI, 00;
@@ -52,21 +54,21 @@ CONSTANT M_K_INV_HI, 11;
 CONSTANT C_ROM_ANGLES_START, 13;
 CONSTANT C_ROM_ANGLES_END, 1a;
 ROM_ANGLES_8_BIT_8_ITERS:
-LOAD s0,    c9;
+LOAD s0,    20;
 STORE s0, 13;
-LOAD s0,    76;
+LOAD s0,    13;
 STORE s0, 14;
-LOAD s0,    3e;
+LOAD s0,    0a;
 STORE s0, 15;
-LOAD s0,    1f;
+LOAD s0,    05;
 STORE s0, 16;
-LOAD s0,    0f;
-STORE s0, 17;
-LOAD s0,    07;
-STORE s0, 18;
 LOAD s0,    03;
-STORE s0, 19;
+STORE s0, 17;
 LOAD s0,    01;
+STORE s0, 18;
+LOAD s0,    01;
+STORE s0, 19;
+LOAD s0,    00;
 STORE s0, 1a;
 CONSTANT M_ROM_ANGLES_LEN, 10;
 
@@ -75,9 +77,10 @@ CONSTANT M_Y_SHIFT, 35;
 CONSTANT M_X, 37;
 CONSTANT M_Y, 39;
 CONSTANT M_ANGLE, 3b;
-
 CONSTANT M_THETA_TEMP_LO, 3d;
 CONSTANT M_THETA_TEMP_HI, 3e;
+CONSTANT M_X_ROW, 22
+CONSTANT M_Y_COL, 23
 
 initialize_k:
 LOAD t3, C_K_INV;
@@ -107,28 +110,18 @@ LOAD t2, C_ROM_ANGLES_START;
 add_theta_temp:
 FETCH t5, M_THETA_TEMP_LO;
 OUTPUT t5, DEBUG_THETA;
-ADD t5, 04;
+OUTPUT t0, DEBUG_THETA;
+ADD t5, 01;
 STORE t5, M_THETA_TEMP_LO;
-FETCH t5, M_THETA_TEMP_HI;
-OUTPUT t5, DEBUG_THETA;
-ADDCY t5, 00;
-STORE t5, M_THETA_TEMP_HI;
 
 compare_theta:
-; < 360
-FETCH s3, M_THETA_TEMP_HI;
 FETCH s2, M_THETA_TEMP_LO;
-LOAD s1, 06; 360
-LOAD s0, 48;
-CALL compare_16;
-COMPARE s4, 04; >
-JUMP Z, END;
+COMPARE s2, 5b;
+JUMP NC, END; >= 90
 
 move_theta:
 FETCH A, M_THETA_TEMP_LO;
 STORE A, M_THETA_LO;
-FETCH A, M_THETA_TEMP_HI;
-STORE A, M_THETA_HI;
 
 cordic_loop:
 COMPARE t0, t1;
@@ -163,26 +156,11 @@ LOAD s1, t2;
 FETCH A, (s1);
 STORE A, M_ANGLE;
 
+; ttttttttttttttttttttttttttttttttttttttt
 theta_ltz:
-;LOAD s7, 00; A
-;LOAD s6, 00;
-;FETCH s3, M_THETA_HI;
-;FETCH s2, M_THETA_LO;
-;LOAD s3, 00; B
-;LOAD s2, 00;
-;LOAD s1, 00;
-;LOAD s0, 00;
-;CALL compare_16;
-;COMPARE s4, 01; A < B
-;JUMP NZ, sign_neg; ???
 FETCH s4, M_THETA_LO;
-FETCH s5, M_THETA_HI;
-;XOR s4, FF;
-;ADD s4, 01;
-;XOR s5, FF;
-;ADDCY s5, 00;
-AND s5, 80;
-COMPARE s5, 80;
+AND s4, 80;
+COMPARE s4, 80;
 JUMP Z, sign_neg;
 
 sign_pos:
@@ -200,12 +178,9 @@ ADD s0, s4;
 STORE s0, M_Y;
 
 theta_min_angle_pos:
-FETCH s1, M_THETA_HI;
 FETCH s0, M_THETA_LO;
-FETCH s4, M_ANGLE;
-SUB s0, s4;
-SUBCY s1, 00;
-STORE s1, M_THETA_HI;
+FETCH s1, M_ANGLE;
+SUB s0, s1;
 STORE s0, M_THETA_LO;
 
 JUMP sign_end;
@@ -225,12 +200,9 @@ SUB s0, s4;
 STORE s0, M_Y;
 
 theta_plus_angle_neg:
-FETCH s1, M_THETA_HI;
 FETCH s0, M_THETA_LO;
-FETCH s4, M_ANGLE;
-ADD s0, s4;
-ADDCY s1, 00;
-STORE s1, M_THETA_HI;
+FETCH s1, M_ANGLE;
+ADD s0, s1;
 STORE s0, M_THETA_LO;
 
 sign_end:
@@ -244,43 +216,23 @@ STORE s0, M_COSINE;
 FETCH s0, M_Y;
 STORE s0, M_SINE;
 
-LOAD s3, 00;
-FETCH s2, M_COSINE;
-OUTPUT s2, DEBUG_COS;
-LOAD s1, 00; FFFF/C_RADIUS
-LOAD s0, 03;
-CALL divide_16;
-;   s7,s6 - Q
-;   s5,s4 - R
-LOAD s3, 00;
-LOAD s2, s6;
-LOAD s1, 00;
-LOAD s0, 28;
-CALL adder_16
-;SR0 s2;
-;ADD s2, 28
-STORE s0, 3c;
+FETCH s0, M_COSINE;
+OUTPUT s0, DEBUG_COS;
+SRX s0;
+SRX s0;
+ADD s0, 28;
+STORE s0, M_X_ROW;
 
-LOAD s3, 00;
-FETCH s2, M_SINE;
-OUTPUT s2, DEBUG_SIN ;
-LOAD s1, 00; FFFF/C_RADIUS
-LOAD s0, 03;
-CALL divide_16;
-;   s7,s6 - Q
-;   s5,s4 - R
-LOAD s3, 00;
-LOAD s2, s6;
-LOAD s1, 00;
-LOAD s0, 28;
-CALL adder_16
-;SR0 s2;
-;ADD s2, 28;
-STORE s0, 3b;
+FETCH s0, M_SINE;
+OUTPUT s0, DEBUG_SIN ;
+SRX s0;
+SRX s0;
+ADD s0, 28;
+STORE s0, M_Y_COL;
 
-FETCH s0, 3c;
+FETCH s0, M_X_ROW;
 OUTPUT s0, X_ROW; 
-FETCH s0, 3b;
+FETCH s0, M_Y_COL;
 OUTPUT s0, Y_COL; 
 LOAD s0, 3F;
 OUTPUT s0, COLOR; 

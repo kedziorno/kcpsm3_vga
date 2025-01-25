@@ -225,7 +225,7 @@ begin
 --  end process p_report1;
   p_report2 : process (kcpsm3_write_strobe) is
     variable factor : real := 256.0;
-    variable factor_theta : real := 256.0;
+    variable factor_theta : real := 256.0 / 4.0;
     variable rad_2_ang : real := 180.0 / 3.1415;
     variable ang_2_rad : real := 3.1415 / 180.0;
     variable v_theta_r, v_sin_r, v_cos_r, v_sin_o, v_cos_o : real := 0.0;
