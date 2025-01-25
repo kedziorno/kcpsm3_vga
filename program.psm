@@ -120,15 +120,12 @@ STORE t5, M_THETA_TEMP_HI;
 compare_theta:
 FETCH s2, M_THETA_TEMP_LO;
 COMPARE s2, 68;
-JUMP Z, vvv1;
-;JUMP C, move_theta;
+JUMP Z, ang360;
 JUMP move_theta;
-vvv1:
+ang360:
 FETCH s2, M_THETA_TEMP_HI;
 COMPARE s2, 01;
-JUMP Z, END;
-
-;JUMP NC, END; >= 90
+JUMP Z, END; > 360
 
 move_theta:
 FETCH A, M_THETA_TEMP_LO;
