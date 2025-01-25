@@ -160,7 +160,7 @@ STORE A, M_ANGLE;
 theta_ltz:
 FETCH s4, M_THETA_LO;
 AND s4, 80;
-COMPARE s4, 80;
+TEST s4, 80;
 JUMP Z, sign_neg;
 
 sign_pos:
@@ -202,6 +202,13 @@ STORE s0, M_Y;
 theta_plus_angle_neg:
 FETCH s0, M_THETA_LO;
 FETCH s1, M_ANGLE;
+;LOAD s2, s0;
+;AND s2, 80;
+;COMPARE s2, 80;
+;JUMP NZ, qqq2;
+;XOR s0, FF;
+;ADD s0, 01;
+;qqq2:
 ADD s0, s1;
 STORE s0, M_THETA_LO;
 
@@ -211,22 +218,30 @@ ADD t2, 01;
 jump cordic_loop;
 
 cordic_end:
+;FETCH  s0, M_X;
+;XOR s0, FF;
+;ADD s0, 01;
+;STORE s0, M_X;
 FETCH s0, M_X;
 STORE s0, M_COSINE;
 FETCH s0, M_Y;
 STORE s0, M_SINE;
 
-FETCH s0, M_COSINE;
-OUTPUT s0, DEBUG_COS;
-SRX s0;
-SRX s0;
+FETCH s0, M_SINE;
+OUTPUT s0, DEBUG_SIN;
+SR0 s0;
+SR0 s0;
+SR0 s0;
+SR0 s0;
 ADD s0, 28;
 STORE s0, M_X_ROW;
 
-FETCH s0, M_SINE;
-OUTPUT s0, DEBUG_SIN ;
-SRX s0;
-SRX s0;
+FETCH s0, M_COSINE;
+OUTPUT s0, DEBUG_COS;
+SR0 s0;
+SR0 s0;
+SR0 s0;
+SR0 s0;
 ADD s0, 28;
 STORE s0, M_Y_COL;
 
