@@ -159,12 +159,6 @@ JUMP Z, END;
 
 check_quadrants:
 
-;move_theta:
-;FETCH A, M_THETA_TEMP_LO;
-;STORE A, M_THETA_LO;
-;FETCH A, M_THETA_TEMP_HI;
-;STORE A, M_THETA_HI;
-
 Q1:
 FETCH s3, M_THETA_TEMP_HI;
 FETCH s2, M_THETA_TEMP_LO;
@@ -315,11 +309,11 @@ ADD A, t3;
 STORE A, M_Y;
 
 theta_minus_angle_pos:
-FETCH s0, M_THETA_LO;
-FETCH s1, M_THETA_HI;
+LOAD s3, ZERO;
 FETCH s2, M_ANGLE;
-SUB s0, s2;
-SUBCY s1, 00;
+FETCH s1, M_THETA_HI;
+FETCH s0, M_THETA_LO;
+CALL subtract_16;
 STORE s0, M_THETA_LO;
 STORE s1, M_THETA_HI;
 
@@ -340,11 +334,11 @@ SUB A, t3;
 STORE A, M_Y;
 
 theta_plus_angle_neg:
-FETCH s0, M_THETA_LO;
-FETCH s1, M_THETA_HI;
+LOAD s3, ZERO;
 FETCH s2, M_ANGLE;
-ADD s0, s2;
-ADDCY s1, 00;
+FETCH s1, M_THETA_HI;
+FETCH s0, M_THETA_LO;
+CALL adder_16;
 STORE s0, M_THETA_LO;
 STORE s1, M_THETA_HI;
 
@@ -410,11 +404,6 @@ JUMP DRAW;
 
 DRAW:
 
-;FETCH A, M_X;
-;STORE A, M_COSINE;
-;FETCH A, M_Y;
-;STORE A, M_SINE;
-
 FETCH A, M_Y;
 OUTPUT A, DEBUG_SIN;
 SRX A;
@@ -433,12 +422,16 @@ SRX A;
 ADD A, 28;
 LOAD t1, A;
 
+CALL draw_pixel;
+
+JUMP cordic_main;
+
+draw_pixel:
 OUTPUT t0, X_ROW; 
 OUTPUT t1, Y_COL; 
 LOAD A, 3F;
 OUTPUT A, COLOR; 
-
-JUMP cordic_main;
+RETURN;
 
 multiply_16:
 ; INPUT  :
