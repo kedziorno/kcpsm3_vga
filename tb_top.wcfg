@@ -22,13 +22,17 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="44" />
+   <WVObjectSize size="46" />
    <wave_markers>
       <marker time="1119335100000" label="" />
       <marker time="2284435100000" label="" />
       <marker time="3486675100000" label="" />
       <marker time="4644755100000" label="" />
       <marker time="0" label="" />
+      <marker time="16338755000000" label="" />
+      <marker time="5372415000000" label="" />
+      <marker time="10836135000000" label="" />
+      <marker time="21840295100000" label="" />
    </wave_markers>
    <wvobject fp_name="group64" type="group">
       <obj_property name="label">vga_bmp</obj_property>
@@ -155,8 +159,8 @@
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/s_cos_v" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_cos_v[15:0]</obj_property>
-      <obj_property name="ObjectShortName">s_cos_v[15:0]</obj_property>
+      <obj_property name="ElementShortName">s_cos_v[7:0]</obj_property>
+      <obj_property name="ObjectShortName">s_cos_v[7:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/s_theta_v" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">s_theta_v[15:0]</obj_property>
