@@ -1,18 +1,23 @@
 ; cordic based on
 ;   https://raw.githubusercontent.com/brodzik/arko-project-1/refs/heads/master/prototypes/cordic.asm
-; Check and compare code with helper master thesis https://scholarworks.calstate.edu/downloads/7d278z14r (Author : Sara Nazemzadeh).
-; The first mistake I missed was is instruction SR0 must be SRX (Extended) - when negate numbers is divided.
-; The second mistake, X must be initialized K in each cordic start.
-;
-; Based on https://remcycles.net/blog/cordic.html
+;   https://scholarworks.calstate.edu/downloads/7d278z14r (Author : Sara Nazemzadeh).
+;   https://remcycles.net/blog/cordic.html
 ;
 
-CONSTANT ZERO, 00;
+NAMEREG s9, t0;
+NAMEREG sA, t1;
+NAMEREG sB, t2;
+NAMEREG sC, t3;
+NAMEREG sD, t4;
+NAMEREG sE, t5;
+NAMEREG sF, A;
 
+; OUTPUT VGA
 CONSTANT X_ROW, 16;
 CONSTANT Y_COL, 17;
 CONSTANT COLOR, 20;
 
+; OUTPUT DEBUG
 CONSTANT DEBUG_SIN, 01;
 CONSTANT DEBUG_COS, 02;
 CONSTANT DEBUG_THETA, 03;
@@ -22,46 +27,45 @@ CONSTANT PORT_6, 06;
 CONSTANT PORT_7, 07;
 CONSTANT PORT_8, 08;
 
-NAMEREG s9, t0;
-NAMEREG sA, t1;
-NAMEREG sB, t2;
-
-NAMEREG sC, t3;
-NAMEREG sD, t4;
-NAMEREG sE, t5;
-NAMEREG sF, A;
-
-CONSTANT C_ITERS, 08;
-CONSTANT C_SCALE, ff;
-CONSTANT C_K_INV, 4D; 78 - 1
-CONSTANT C_RADIUS, 50; 80
+; CONSTANTS
+CONSTANT ZERO, 00;
+CONSTANT C_K_INV, 4D;
+CONSTANT C_SIGN_NEG, 80
+CONSTANT C_QUAD1, 01;
+CONSTANT C_QUAD2, 02;
+CONSTANT C_QUAD3, 03;
+CONSTANT C_QUAD4, 04;
 CONSTANT C_THETA_LO, 00;
 CONSTANT C_THETA_HI, 00;
-
-; MEMORY
-; multiply_16 - 00-07
-CONSTANT M_THETA_HI, 08;
-CONSTANT M_THETA_LO, 09;
-CONSTANT M_COSINE, 0B;
-CONSTANT M_SINE, 0D;
-CONSTANT M_SCALE_LO, 0E;
-CONSTANT M_SCALE_HI, 0F;
-CONSTANT M_K_INV_LO, 10;
-CONSTANT M_K_INV_HI, 11;
-; 12
-
 CONSTANT C_CORDIC_BASE_LO, 5a;
 CONSTANT C_CORDIC_BASE_HI, 00;
 CONSTANT C_Q2B_LO, b4;
 CONSTANT C_Q2B_HI, 00;
 CONSTANT C_Q3B_LO, 0e;
 CONSTANT C_Q3B_HI, 01;
-CONSTANT M_QUADRANT, 24;
-
-CONSTANT C_ROM_ANGLES_START, 13;
-;CONSTANT C_ROM_ANGLES_END, 1a;
+CONSTANT C_THETA_STEP_LO, 01;
+CONSTANT C_THETA_STEP_HI, 00;
+CONSTANT C_ANGLE_360_LO, 68;
+CONSTANT C_ANGLE_360_HI, 01;
 CONSTANT C_ROM_ANGLES_STEP, 01;
+CONSTANT C_ROM_ANGLES_START, 13;
+
+; MEMORY ADDRESSESS
+CONSTANT M_THETA_LO, 09;
+CONSTANT M_THETA_HI, 08;
+CONSTANT M_THETA_TEMP_LO, 3d;
+CONSTANT M_THETA_TEMP_HI, 3e;
 CONSTANT M_ROM_ANGLES_LEN, 10;
+CONSTANT M_QUADRANT, 24;
+CONSTANT M_ANGLE, 3b;
+CONSTANT M_X_SHIFT, 33;
+CONSTANT M_Y_SHIFT, 35;
+CONSTANT M_X, 37;
+CONSTANT M_Y, 39;
+CONSTANT M_COSINE, 0B;
+CONSTANT M_SINE, 0D;
+CONSTANT M_X_ROW, 22
+CONSTANT M_Y_COL, 23
 
 rom_angles_8_bit:
 _rom_angles_8_bit_start:
@@ -91,30 +95,6 @@ RETURN;
 _rom_angles_8_bit_end:
 SUB A, C_ROM_ANGLES_START;
 STORE A, M_ROM_ANGLES_LEN;
-
-
-CONSTANT M_X_SHIFT, 33;
-CONSTANT M_Y_SHIFT, 35;
-CONSTANT M_X, 37;
-CONSTANT M_Y, 39;
-CONSTANT M_ANGLE, 3b;
-CONSTANT M_THETA_TEMP_LO, 3d;
-CONSTANT M_THETA_TEMP_HI, 3e;
-CONSTANT M_X_ROW, 22
-CONSTANT M_Y_COL, 23
-
-CONSTANT C_SIGN_NEG, 80
-
-CONSTANT C_ANGLE_360_LO, 68;
-CONSTANT C_ANGLE_360_HI, 01;
-
-CONSTANT C_QUAD1, 01;
-CONSTANT C_QUAD2, 02;
-CONSTANT C_QUAD3, 03;
-CONSTANT C_QUAD4, 04;
-
-CONSTANT C_THETA_STEP_LO, 01;
-CONSTANT C_THETA_STEP_HI, 00;
 
 initialize_theta:
 LOAD A, C_THETA_HI;
@@ -238,7 +218,6 @@ OUTPUT A, PORT_8;
 JUMP cordic_loop;
 
 Q4:
-
 LOAD A, C_QUAD4;
 STORE A, M_QUADRANT;
 OUTPUT A, PORT_4;
@@ -292,9 +271,9 @@ theta_less_than_zero:
 FETCH A, M_THETA_HI;
 AND A, C_SIGN_NEG;
 COMPARE A, C_SIGN_NEG;
-JUMP Z, sign_neg;
+JUMP Z, sign_negative;
 
-sign_pos:
+sign_positive:
 
 x_minus_y_shift_pos:
 FETCH A, M_X;
@@ -319,7 +298,7 @@ STORE s1, M_THETA_HI;
 
 JUMP sign_end;
 
-sign_neg:
+sign_negative:
 
 x_plus_y_shift_neg:
 FETCH A, M_X;
@@ -345,16 +324,6 @@ STORE s1, M_THETA_HI;
 sign_end:
 ADD t0, 01;
 ADD t1, 01;
-
-;FETCH t5, M_THETA_LO;
-;OUTPUT t5, DEBUG_THETA;
-;FETCH t5, M_THETA_HI;
-;OUTPUT t5, DEBUG_THETA;
-
-;FETCH s0, M_X;
-;OUTPUT s0, PORT_5;
-;FETCH s0, M_Y;
-;OUTPUT s0, PORT_6;
 
 jump cordic_loop;
 
@@ -408,8 +377,6 @@ FETCH A, M_Y;
 OUTPUT A, DEBUG_SIN;
 SRX A;
 SRX A;
-;SRX A;
-;SRX A;
 ADD A, 28;
 LOAD t0, A;
 
@@ -417,8 +384,6 @@ FETCH A, M_X;
 OUTPUT A, DEBUG_COS;
 SRX A;
 SRX A;
-;SRX A;
-;SRX A;
 ADD A, 28;
 LOAD t1, A;
 
@@ -432,130 +397,6 @@ OUTPUT t1, Y_COL;
 LOAD A, 3F;
 OUTPUT A, COLOR; 
 RETURN;
-
-multiply_16:
-; INPUT  :
-;   s3 = multiplicand (a) HI
-;   s2 = multiplicand (a) LO
-;   s1 = multipler    (b) HI
-;   s0 = multipler    (b) LO
-; OUTPUT :
-;   s3 = product MSB HI
-;   s2 = product MSB LO
-;   s1 = product LSB HI
-;   s0 = product LSB LO
-; INFO   :
-;   Used registers    : s4,s5,s6,s7
-;   Stored variables  : [07-06,05-04,03-02,01-00] = [a_hi*b_hi,a_lo*b_hi,a_hi*b_lo,a_lo*b_lo]
-;
-; Very simple algorithm:
-;                                                            [b_hi] [b_lo]
-;                                                          * [a_hi] [a_lo]
-;                                                          --------––––––-------
-;                                                              [b_lo*a_lo]
-;                                                   [b_hi*a_lo]
-;                                                   [b_lo*a_hi]
-;                                      + [b_hi*a_hi]
-;                                      -----------------------------------------
-;                                                              [b_lo*a_lo] << 0
-;                                     [b_lo*a_hi] + [b_hi*a_lo]            << 8
-;                        + [b_hi*a_hi]                                     << 16
-;                        -------------------------------------------------------
-;
-_multiply_16_store:
-                          LOAD  s4 , s0        ; b_lo
-                          LOAD  s5 , s1        ; b_hi
-                          LOAD  s6 , s2        ; a_lo
-                          LOAD  s7 , s3        ; a_hi
-_multiply_16_mult_8x8_1:                       ; a_lo_b_lo
-                          LOAD  s1 , s6        ;
-                          LOAD  s0 , s4        ;
-                          CALL       mult_8x8  ;
-                          STORE s1 , 01        ;
-                          STORE s0 , 00        ;
-_multiply_16_mult_8x8_2:                       ; a_hi_b_lo
-                          LOAD  s1 , s7        ;
-                          LOAD  s0 , s4        ;
-                          CALL       mult_8x8  ;
-                          STORE s1 , 03        ;
-                          STORE s0 , 02        ;
-_multiply_16_mult_8x8_3:                       ; a_lo_b_hi
-                          LOAD  s1 , s6        ;
-                          LOAD  s0 , s5        ;
-                          CALL       mult_8x8  ;
-                          STORE s1 , 05        ;
-                          STORE s0 , 04        ;
-_multiply_16_mult_8x8_4:                       ; a_hi_b_hi
-                          LOAD  s1 , s7        ;
-                          LOAD  s0 , s5        ;
-                          CALL       mult_8x8  ;
-                          STORE s1 , 07        ;
-                          STORE s0 , 06        ;
-_multiply_16_load_1:                           ; a_hi_b_lo<<8
-                          LOAD  s7 , ZERO      ;
-                          FETCH s6 , 03        ;
-                          FETCH s5 , 02        ;
-                          LOAD  s4 , ZERO      ;
-_multiply_16_load_2:                           ; a_lo_b_hi<<8
-                          LOAD  s3 , ZERO      ;
-                          FETCH s2 , 05        ;
-                          FETCH s1 , 04        ;
-                          LOAD  s0 , ZERO      ;
-_multiply_16_add_1:                            ; (a_hi_b_lo<<8)+(a_lo_b_hi<<8)=(a_hi_b_lo+a_lo_b_hi)<<8
-                          CALL       add32     ;
-_multiply_16_load_3:                           ;
-                          LOAD  s7 , ZERO      ;
-                          LOAD  s6 , ZERO      ;
-                          FETCH s5 , 01        ;
-                          FETCH s4 , 00        ;
-_multiply_16_add_2:                            ; (a_hi_b_lo+a_lo_b_hi)<<8+a_lo_b_lo
-                          CALL       add32     ;
-_multiply_16_load_4:                           ;
-                          FETCH s7 , 07        ;
-                          FETCH s6 , 06        ;
-                          LOAD  s5 , ZERO      ;
-                          LOAD  s4 , ZERO      ;
-_multiply_16_add_3:                            ; a_hi_b_hi<<16+(a_hi_b_lo+a_lo_b_hi)<<8+a_lo_b_lo
-                          CALL       add32     ;
-_multiply_16_end:                              ;
-                          RETURN               ;
-
-mult_8x8:
-; Figure 3-14: 8-bit by 8-bit Multiply Routine Produces a 16-bit Product
-;   ug129.pdf
-; INPUT  :
-;   s1 = multiplicand (a)
-;   s0 = multipler    (b)
-; OUTPUT :
-;   s1 = product MSB
-;   s0 = product LSB
-; INFO   :
-;   Registers used : s2,s3,s4
-;
-_multiply_8_start:                                  ;
-                    STORE  s2 , 3f                  ;
-                    STORE  s3 , 3e                  ;
-                    STORE  s4 , 3d                  ;
-                    LOAD   s2 , 01                  ; start with LSB
-                    LOAD   s3 , 00                  ; clear product MSB
-                    LOAD   s4 , 00                  ; clear product LSB (not required)
-_multiply_8_loop:                                   ;
-                    TEST   s0 , s2                  ; check if bit is set
-                    JUMP    Z , _multiply_8_no_add  ; if bit is not set, skip addition
-                    ADD    s3 , s1                  ; addition only occurs in MSB
-_multiply_8_no_add:                                 ;
-                    SRA    s3                       ; MSB >>, CARRY into bit 7, LSB into CARRY
-                    SRA    s4                       ; LSB >>, LSB from mult_result_msb into bit 7
-                    SL0    s2                       ; s2 <<, next bit
-                    JUMP   NZ , _multiply_8_loop    ; if all bit, s2 = 0, else loop
-                    LOAD   s1 , s3                  ;
-                    LOAD   s0 , s4                  ;
-_multiply_8_fetch:                                  ;
-                    FETCH  s2 , 3f                  ;
-                    FETCH  s3 , 3e                  ;
-                    FETCH  s4 , 3d                  ;
-_multiply_8_end:                                    ;
-                    RETURN                          ;
 
 subtract_16:
 ; Figure 3-9: 16-Bit Subtraction Using SUB and SUBCY Instructions
@@ -575,147 +416,6 @@ _subtract_16_start:               ;
                     SUBCY s1 , s3 ;
 _subtract_16_end:                 ;
                     RETURN        ;
-
-
-divide_16:
-; https://en.wikipedia.org/wiki/Division_algorithm#Division_by_repeated_subtraction
-; INPUT  :
-;   s3,s2 - N
-;   s1,s0 - D
-; OUTPUT :
-;   s7,s6 - Q
-;   s5,s4 - R
-; INFO   :
-;
-_divide_16_start:                               ;
-                  LOAD    s5 , s3               ; R := N
-                  LOAD    s4 , s2               ;
-                  LOAD    s7 , 00               ; Q := 0
-                  LOAD    s6 , 00               ;
-_divide_16_loop:                                ;
-                  COMPARE s4 , s0               ; while R >= D do
-                  SUBCY   s1 , 00               ;
-                  COMPARE s5 , s1               ;
-                  JUMP     C , _divide_16_end   ; <
-                  SUB     s4 , s0               ; R := R − D
-                  SUBCY   s5 , s1               ;
-                  ADD     s6 , 01               ; Q := Q + 1
-                  ADDCY   s7 , 00               ;
-                  JUMP         _divide_16_loop  ;
-_divide_16_end:                                 ;
-                  RETURN                        ;
-
-compare_32:
-; INPUT  :
-;   - A [s7,s6,s5,s4]
-;   - B [s3,s2,s1,s0]
-; OUTPUT :
-;   - A < B - s8 = 01
-;   - A = B - s8 = 0x02
-;   - A > B - s8 = 0x04
-; INFO   :
-;   Not optimal, but more readable.
-;
-_compare_32_equal_start:                                      ;
-                          COMPARE s7 , s3                     ;
-                          JUMP     C , _compare_32_less_a7b3  ;
-                          JUMP     Z , _compare_32_equal_a7b3 ;
-                          JUMP         _compare_32_more_a7b3  ;
-_compare_32_equal_a7b3:                                       ;
-                          COMPARE s6 , s2                     ;
-                          JUMP     C , _compare_32_less_a6b2  ;
-                          JUMP     Z , _compare_32_equal_a6b2 ;
-                          JUMP         _compare_32_more_a6b2  ;
-_compare_32_equal_a6b2:                                       ;
-                          COMPARE s5 , s1                     ;
-                          JUMP     C , _compare_32_less_a5b1  ;
-                          JUMP     Z , _compare_32_equal_a5b1 ;
-                          JUMP         _compare_32_more_a5b1  ;
-_compare_32_equal_a5b1:                                       ;
-                          COMPARE s4 , s0                     ;
-                          JUMP     C , _compare_32_less_a4b0  ;
-                          JUMP     Z , _compare_32_equal_a4b0 ;
-                          JUMP         _compare_32_more_a4b0  ;
-_compare_32_equal_a4b0:                                       ; =
-                          LOAD    s8 , 02                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_less_a4b0:                                        ; <
-                          LOAD    s8 , 01                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_more_a4b0:                                        ; >
-                          LOAD    s8 , 04                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_less_a5b1:                                        ; <
-                          LOAD    s8 , 01                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_more_a5b1:                                        ; >
-                          LOAD    s8 , 04                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_less_a7b3:                                        ; <
-                          LOAD    s8 , 01                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_more_a7b3:                                        ; >
-                          LOAD    s8 , 04                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_less_a6b2:                                        ; <
-                          LOAD    s8 , 01                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_more_a6b2:                                        ; >
-                          LOAD    s8 , 04                     ;
-                          JUMP         _compare_32_end        ;
-_compare_32_end:                                              ;
-                          RETURN                              ;
-
-subtract_32:
-; INPUT  :
-;   s7 = subtrahend (a) HI
-;   s6 = subtrahend (a) LO
-;   s5 = subtrahend (a) HI
-;   s4 = subtrahend (a) LO
-;   s3 = minuend (b) HI
-;   s2 = minuend (b) LO
-;   s1 = minuend (b) HI
-;   s0 = minuend (b) LO
-; OUTPUT :
-;   s3 = difference MSB HI
-;   s2 = difference MSB LO
-;   s1 = difference LSB HI
-;   s0 = difference LSB LO
-; INFO   :
-;
-_subtract_32_start:                 ;
-                    SUB    s0 , s4  ;
-                    SUBCY  s1 , s5  ;
-                    SUBCY  s2 , s6  ;
-                    SUBCY  s3 , s7  ;
-_subtract_32_end:                   ;
-                    RETURN          ;
-
-adder_32:
-add32:
-; INPUT  :
-;   s7 = addition (a) 3
-;   s6 = addition (a) 2
-;   s5 = addition (a) 1
-;   s4 = addition (a) 0
-;   s3 = addition (b) 3
-;   s2 = addition (b) 2
-;   s1 = addition (b) 1
-;   s0 = addition (b) 0
-; OUTPUT :
-;   s3 = product 3
-;   s2 = product 2
-;   s1 = product 1
-;   s0 = product 0
-; INFO   :
-;
-_adder_32_start:                  ;
-                  ADD    s0 , s4  ;
-                  ADDCY  s1 , s5  ;
-                  ADDCY  s2 , s6  ;
-                  ADDCY  s3 , s7  ;
-_adder_32_end:                    ;
-                  RETURN          ;
 
 adder_16:
 ; Figure 3-8: 16-Bit Addition Using ADD and ADDCY Instructions
