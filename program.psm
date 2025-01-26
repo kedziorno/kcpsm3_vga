@@ -113,19 +113,14 @@ CONSTANT C_QUAD2, 02;
 CONSTANT C_QUAD3, 03;
 CONSTANT C_QUAD4, 04;
 
+CONSTANT C_THETA_STEP_LO, 01;
+CONSTANT C_THETA_STEP_HI, 00;
+
 initialize_theta:
 LOAD A, C_THETA_HI;
 STORE A, M_THETA_TEMP_HI;
 LOAD A, C_THETA_LO;
 STORE A, M_THETA_TEMP_LO;
-
-;calculate_rom_angles_len:
-;LOAD s0, C_ROM_ANGLES_END;
-;LOAD s1, C_ROM_ANGLES_START;
-;SUB s0, s1;
-;ADD s0, 01;
-;SR0 s0;
-;STORE s0, M_ROM_ANGLES_LEN;
 
 cordic_main:
 
@@ -137,18 +132,19 @@ STORE A, M_Y_SHIFT;
 LOAD A, C_K_INV;
 STORE A, M_X;
 
+cordic_initialize:
 LOAD t0, ZERO;
 LOAD t1, C_ROM_ANGLES_START;
 FETCH t2, M_ROM_ANGLES_LEN;
 
-add_theta_temp_1:
+add_theta_step:
 FETCH A, M_THETA_TEMP_LO;
 OUTPUT A, DEBUG_THETA;
-ADD A, 01;
+ADD A, C_THETA_STEP_LO;
 STORE A, M_THETA_TEMP_LO;
 FETCH A, M_THETA_TEMP_HI;
 OUTPUT A, DEBUG_THETA;
-ADDCY A, 00;
+ADDCY A, C_THETA_STEP_HI;
 STORE A, M_THETA_TEMP_HI;
 
 compare_theta_360:
@@ -159,7 +155,7 @@ JUMP check_quadrants;
 _compare_theta_360_lo_equal:
 FETCH A, M_THETA_TEMP_HI;
 COMPARE A, C_ANGLE_360_HI;
-JUMP Z, END; > 360
+JUMP Z, END;
 
 check_quadrants:
 
@@ -265,19 +261,6 @@ OUTPUT A, PORT_7;
 FETCH A, M_THETA_HI;
 OUTPUT A, PORT_8;
 
-JUMP cordic_loop;
-
-;invers_z:
-;FETCH A, M_THETA_LO;
-;XOR A, FF;
-;ADD A, 01;
-;STORE A, M_THETA_LO;
-;FETCH A, M_THETA_HI;
-;XOR A, FF;
-;ADD A, 01;
-;STORE A, M_THETA_HI;
-;RETURN;
-
 cordic_loop:
 COMPARE t0, t2;
 JUMP Z, cordic_end;
@@ -311,8 +294,7 @@ LOAD A, t1;
 FETCH A, (A);
 STORE A, M_ANGLE;
 
-; ttttttttttttttttttttttttttttttttttttttt
-theta_ltz:
+theta_less_than_zero:
 FETCH A, M_THETA_HI;
 AND A, C_SIGN_NEG;
 COMPARE A, C_SIGN_NEG;
@@ -320,19 +302,19 @@ JUMP Z, sign_neg;
 
 sign_pos:
 
-x_min_y_shift_pos:
-FETCH s0, M_X;
-FETCH s4, M_Y_SHIFT;
-SUB s0, s4;
-STORE s0, M_X;
+x_minus_y_shift_pos:
+FETCH A, M_X;
+FETCH t3, M_Y_SHIFT;
+SUB A, t3;
+STORE A, M_X;
 
 y_plus_x_shift_pos:
-FETCH s0, M_Y;
-FETCH s4, M_X_SHIFT;
-ADD s0, s4;
-STORE s0, M_Y;
+FETCH A, M_Y;
+FETCH t3, M_X_SHIFT;
+ADD A, t3;
+STORE A, M_Y;
 
-theta_min_angle_pos:
+theta_minus_angle_pos:
 FETCH s0, M_THETA_LO;
 FETCH s1, M_THETA_HI;
 FETCH s2, M_ANGLE;
@@ -346,16 +328,16 @@ JUMP sign_end;
 sign_neg:
 
 x_plus_y_shift_neg:
-FETCH s0, M_X;
-FETCH s4, M_Y_SHIFT;
-ADD s0, s4;
-STORE s0, M_X;
+FETCH A, M_X;
+FETCH t3, M_Y_SHIFT;
+ADD A, t3;
+STORE A, M_X;
 
-x_min_y_shift_neg:
-FETCH s0, M_Y;
-FETCH s4, M_X_SHIFT;
-SUB s0, s4;
-STORE s0, M_Y;
+y_minus_x_shift_neg:
+FETCH A, M_Y;
+FETCH t3, M_X_SHIFT;
+SUB A, t3;
+STORE A, M_Y;
 
 theta_plus_angle_neg:
 FETCH s0, M_THETA_LO;
@@ -428,33 +410,31 @@ JUMP DRAW;
 
 DRAW:
 
-FETCH A, M_X;
-STORE A, M_COSINE;
-FETCH A, M_Y;
-STORE A, M_SINE;
+;FETCH A, M_X;
+;STORE A, M_COSINE;
+;FETCH A, M_Y;
+;STORE A, M_SINE;
 
-FETCH A, M_SINE;
+FETCH A, M_Y;
 OUTPUT A, DEBUG_SIN;
 SRX A;
 SRX A;
 ;SRX A;
 ;SRX A;
 ADD A, 28;
-STORE A, M_X_ROW;
+LOAD t0, A;
 
-FETCH A, M_COSINE;
+FETCH A, M_X;
 OUTPUT A, DEBUG_COS;
 SRX A;
 SRX A;
 ;SRX A;
 ;SRX A;
 ADD A, 28;
-STORE A, M_Y_COL;
+LOAD t1, A;
 
-FETCH A, M_X_ROW;
-OUTPUT A, X_ROW; 
-FETCH A, M_Y_COL;
-OUTPUT A, Y_COL; 
+OUTPUT t0, X_ROW; 
+OUTPUT t1, Y_COL; 
 LOAD A, 3F;
 OUTPUT A, COLOR; 
 
