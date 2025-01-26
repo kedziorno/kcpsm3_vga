@@ -51,25 +51,52 @@ CONSTANT M_K_INV_HI, 11;
 ; 12
 
 CONSTANT C_ROM_ANGLES_START, 13;
-CONSTANT C_ROM_ANGLES_END, 1a;
-ROM_ANGLES_8_BIT:
-LOAD s0,    20;
-STORE s0, 13;
-LOAD s0,    13;
-STORE s0, 14;
-LOAD s0,    0a;
-STORE s0, 15;
-LOAD s0,    05;
-STORE s0, 16;
-LOAD s0,    03;
-STORE s0, 17;
-LOAD s0,    01;
-STORE s0, 18;
-LOAD s0,    01;
-STORE s0, 19;
-LOAD s0,    00;
-STORE s0, 1a;
+;CONSTANT C_ROM_ANGLES_END, 1a;
+CONSTANT C_ROM_ANGLES_STEP, 01;
 CONSTANT M_ROM_ANGLES_LEN, 10;
+
+rom_angles_8_bit:
+_rom_angles_8_bit_start:
+LOAD A, C_ROM_ANGLES_START;
+
+_rom_angles_8_bit_variables:
+LOAD t0,    20;
+STORE t0, (A);
+ADD A, C_ROM_ANGLES_STEP;
+
+LOAD t0,    13;
+STORE t0, (A);
+ADD A, C_ROM_ANGLES_STEP;
+
+LOAD t0,    0a;
+STORE t0, (A);
+ADD A, C_ROM_ANGLES_STEP;
+
+LOAD t0,    05;
+STORE t0, (A);
+ADD A, C_ROM_ANGLES_STEP;
+
+LOAD t0,    03;
+STORE t0, (A);
+ADD A, C_ROM_ANGLES_STEP;
+
+LOAD t0,    01;
+STORE t0, (A);
+ADD A, C_ROM_ANGLES_STEP;
+
+LOAD t0,    01;
+STORE t0, (A);
+ADD A, C_ROM_ANGLES_STEP;
+
+_rom_angles_8_bit_variables_last:
+LOAD t0,    00;
+STORE t0, (A);
+;ADD A, C_ROM_ANGLES_STEP;
+
+_rom_angles_8_bit_end:
+;SUB A, C_ROM_ANGLES_STEP;
+STORE A, M_ROM_ANGLES_LEN;
+
 
 CONSTANT M_X_SHIFT, 33;
 CONSTANT M_Y_SHIFT, 35;
@@ -87,13 +114,13 @@ STORE t5, M_THETA_TEMP_HI;
 LOAD t5, C_THETA_LO;
 STORE t5, M_THETA_TEMP_LO;
 
-calculate_rom_angles_len:
-LOAD s0, C_ROM_ANGLES_END;
-LOAD s1, C_ROM_ANGLES_START;
-SUB s0, s1;
-ADD s0, 01;
+;calculate_rom_angles_len:
+;LOAD s0, C_ROM_ANGLES_END;
+;LOAD s1, C_ROM_ANGLES_START;
+;SUB s0, s1;
+;ADD s0, 01;
 ;SR0 s0;
-STORE s0, M_ROM_ANGLES_LEN;
+;STORE s0, M_ROM_ANGLES_LEN;
 
 cordic_main:
 
@@ -113,12 +140,11 @@ LOAD t2, C_ROM_ANGLES_START;
 
 add_theta_temp:
 FETCH t5, M_THETA_TEMP_LO;
-;OUTPUT t5, DEBUG_THETA;
-;OUTPUT t0, DEBUG_THETA;
+OUTPUT t5, DEBUG_THETA;
 ADD t5, 01;
 STORE t5, M_THETA_TEMP_LO;
 FETCH t5, M_THETA_TEMP_HI;
-;OUTPUT t5, DEBUG_THETA;
+OUTPUT t5, DEBUG_THETA;
 ADDCY t5, 00;
 STORE t5, M_THETA_TEMP_HI;
 
@@ -160,16 +186,16 @@ JUMP Q2; >=
 _Q1:
 LOAD s0, 01;
 STORE s0, M_QUADRANT;
-;OUTPUT s0, PORT_4;
+OUTPUT s0, PORT_4;
 FETCH A, M_THETA_TEMP_LO;
 STORE A, M_THETA_LO;
 FETCH A, M_THETA_TEMP_HI;
 STORE A, M_THETA_HI;
 
 FETCH t5, M_THETA_LO;
-;OUTPUT t5, PORT_7;
+OUTPUT t5, PORT_7;
 FETCH t5, M_THETA_HI;
-;OUTPUT t5, PORT_8;
+OUTPUT t5, PORT_8;
 JUMP cordic_loop;
 
 Q2:
@@ -184,7 +210,7 @@ JUMP Q3; >=
 _Q2:
 LOAD s0, 02;
 STORE s0, M_QUADRANT;
-;OUTPUT s0, PORT_4;
+OUTPUT s0, PORT_4;
 FETCH s3, M_THETA_TEMP_HI;
 FETCH s2, M_THETA_TEMP_LO;
 LOAD s1, C_Q2B_HI;
@@ -194,9 +220,9 @@ STORE s1, M_THETA_HI;
 STORE s0, M_THETA_LO;
 
 FETCH t5, M_THETA_LO;
-;OUTPUT t5, PORT_7;
+OUTPUT t5, PORT_7;
 FETCH t5, M_THETA_HI;
-;OUTPUT t5, PORT_8;
+OUTPUT t5, PORT_8;
 JUMP cordic_loop;
 
 Q3:
@@ -211,7 +237,7 @@ JUMP Q4; >=
 _Q3:
 LOAD s0, 03;
 STORE s0, M_QUADRANT;
-;OUTPUT s0, PORT_4;
+OUTPUT s0, PORT_4;
 LOAD s3, C_Q2B_HI;
 LOAD s2, C_Q2B_LO;
 FETCH s1, M_THETA_TEMP_HI;
@@ -221,16 +247,16 @@ STORE s1, M_THETA_HI;
 STORE s0, M_THETA_LO;
 
 FETCH t5, M_THETA_LO;
-;OUTPUT t5, PORT_7;
+OUTPUT t5, PORT_7;
 FETCH t5, M_THETA_HI;
-;OUTPUT t5, PORT_8;
+OUTPUT t5, PORT_8;
 JUMP cordic_loop;
 
 Q4:
 
 LOAD s0, 04;
 STORE s0, M_QUADRANT;
-;OUTPUT s0, PORT_4;
+OUTPUT s0, PORT_4;
 LOAD s3, C_Q3B_HI;
 LOAD s2, C_Q3B_LO;
 FETCH s1, M_THETA_TEMP_HI;
@@ -240,9 +266,9 @@ STORE s1, M_THETA_HI;
 STORE s0, M_THETA_LO;
 
 FETCH t5, M_THETA_LO;
-;OUTPUT t5, PORT_7;
+OUTPUT t5, PORT_7;
 FETCH t5, M_THETA_HI;
-;OUTPUT t5, PORT_8;
+OUTPUT t5, PORT_8;
 
 JUMP cordic_loop;
 
@@ -349,14 +375,14 @@ sign_end:
 ADD t0, 01;
 ADD t2, 01;
 
-FETCH t5, M_THETA_LO;
+;FETCH t5, M_THETA_LO;
 ;OUTPUT t5, DEBUG_THETA;
-FETCH t5, M_THETA_HI;
+;FETCH t5, M_THETA_HI;
 ;OUTPUT t5, DEBUG_THETA;
 
-FETCH s0, M_X;
+;FETCH s0, M_X;
 ;OUTPUT s0, PORT_5;
-FETCH s0, M_Y;
+;FETCH s0, M_Y;
 ;OUTPUT s0, PORT_6;
 
 jump cordic_loop;
@@ -413,7 +439,7 @@ FETCH s0, M_Y;
 STORE s0, M_SINE;
 
 FETCH s0, M_SINE;
-;OUTPUT s0, DEBUG_SIN;
+OUTPUT s0, DEBUG_SIN;
 SRX s0;
 SRX s0;
 ;SRX s0;
@@ -422,7 +448,7 @@ ADD s0, 28;
 STORE s0, M_X_ROW;
 
 FETCH s0, M_COSINE;
-;OUTPUT s0, DEBUG_COS;
+OUTPUT s0, DEBUG_COS;
 SRX s0;
 SRX s0;
 ;SRX s0;
@@ -445,7 +471,7 @@ multiply_16:
 ;   s2 = multiplicand (a) LO
 ;   s1 = multipler    (b) HI
 ;   s0 = multipler    (b) LO
-; ;OUTPUT :
+; OUTPUT :
 ;   s3 = product MSB HI
 ;   s2 = product MSB LO
 ;   s1 = product LSB HI
@@ -532,7 +558,7 @@ mult_8x8:
 ; INPUT  :
 ;   s1 = multiplicand (a)
 ;   s0 = multipler    (b)
-; ;OUTPUT :
+; OUTPUT :
 ;   s1 = product MSB
 ;   s0 = product LSB
 ; INFO   :
@@ -571,7 +597,7 @@ subtract_16:
 ;   s2 = subtrahend (a) LO
 ;   s1 = minuend (b) HI
 ;   s0 = minuend (b) LO
-; ;OUTPUT :
+; OUTPUT :
 ;   s1 = difference MSB
 ;   s0 = difference LSB
 ; INFO   :
@@ -588,7 +614,7 @@ divide_16:
 ; INPUT  :
 ;   s3,s2 - N
 ;   s1,s0 - D
-; ;OUTPUT :
+; OUTPUT :
 ;   s7,s6 - Q
 ;   s5,s4 - R
 ; INFO   :
@@ -615,7 +641,7 @@ compare_32:
 ; INPUT  :
 ;   - A [s7,s6,s5,s4]
 ;   - B [s3,s2,s1,s0]
-; ;OUTPUT :
+; OUTPUT :
 ;   - A < B - s8 = 01
 ;   - A = B - s8 = 0x02
 ;   - A > B - s8 = 0x04
@@ -682,7 +708,7 @@ subtract_32:
 ;   s2 = minuend (b) LO
 ;   s1 = minuend (b) HI
 ;   s0 = minuend (b) LO
-; ;OUTPUT :
+; OUTPUT :
 ;   s3 = difference MSB HI
 ;   s2 = difference MSB LO
 ;   s1 = difference LSB HI
@@ -708,7 +734,7 @@ add32:
 ;   s2 = addition (b) 2
 ;   s1 = addition (b) 1
 ;   s0 = addition (b) 0
-; ;OUTPUT :
+; OUTPUT :
 ;   s3 = product 3
 ;   s2 = product 2
 ;   s1 = product 1
@@ -731,7 +757,7 @@ adder_16:
 ;   s2 = addition (a) LO
 ;   s1 = addition (b) HI
 ;   s0 = addition (b) LO
-; ;OUTPUT :
+; OUTPUT :
 ;   s1 = product MSB
 ;   s0 = product LSB
 ; INFO   :
@@ -746,7 +772,7 @@ compare_16:
 ; INPUT  :
 ;   - A [s3,s2]
 ;   - B [s1,s0]
-; ;OUTPUT :
+; OUTPUT :
 ;   - A < B - s4 = 0x01
 ;   - A = B - s4 = 0x02
 ;   - A > B - s4 = 0x04
