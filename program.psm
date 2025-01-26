@@ -58,43 +58,34 @@ CONSTANT M_ROM_ANGLES_LEN, 10;
 rom_angles_8_bit:
 _rom_angles_8_bit_start:
 LOAD A, C_ROM_ANGLES_START;
-
 _rom_angles_8_bit_variables:
 LOAD t0,    20;
 STORE t0, (A);
 ADD A, C_ROM_ANGLES_STEP;
-
 LOAD t0,    13;
 STORE t0, (A);
 ADD A, C_ROM_ANGLES_STEP;
-
 LOAD t0,    0a;
 STORE t0, (A);
 ADD A, C_ROM_ANGLES_STEP;
-
 LOAD t0,    05;
 STORE t0, (A);
 ADD A, C_ROM_ANGLES_STEP;
-
 LOAD t0,    03;
 STORE t0, (A);
 ADD A, C_ROM_ANGLES_STEP;
-
 LOAD t0,    01;
 STORE t0, (A);
 ADD A, C_ROM_ANGLES_STEP;
-
 LOAD t0,    01;
 STORE t0, (A);
 ADD A, C_ROM_ANGLES_STEP;
-
 _rom_angles_8_bit_variables_last:
 LOAD t0,    00;
 STORE t0, (A);
-;ADD A, C_ROM_ANGLES_STEP;
-
+ADD A, C_ROM_ANGLES_STEP;
 _rom_angles_8_bit_end:
-;SUB A, C_ROM_ANGLES_STEP;
+SUB A, C_ROM_ANGLES_START;
 STORE A, M_ROM_ANGLES_LEN;
 
 
