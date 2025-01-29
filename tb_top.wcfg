@@ -22,345 +22,882 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="44" />
+   <WVObjectSize size="3" />
    <wave_markers>
-      <marker time="1119335100000" label="" />
-      <marker time="2284435100000" label="" />
-      <marker time="3486675100000" label="" />
-      <marker time="4644755100000" label="" />
-      <marker time="0" label="" />
+      <marker time="31700000000" label="" />
+      <marker time="16683215000000" label="" />
    </wave_markers>
-   <wvobject fp_name="group64" type="group">
-      <obj_property name="label">vga_bmp</obj_property>
+   <wvobject fp_name="group181" type="group">
+      <obj_property name="label">kcpsm3</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/clk_i" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">clk_i</obj_property>
-         <obj_property name="ObjectShortName">clk_i</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/address" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">address[9:0]</obj_property>
+         <obj_property name="ObjectShortName">address[9:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/rst_i" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">rst_i</obj_property>
-         <obj_property name="ObjectShortName">rst_i</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/instruction" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">instruction[17:0]</obj_property>
+         <obj_property name="ObjectShortName">instruction[17:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/dat_i" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">dat_i[23:0]</obj_property>
-         <obj_property name="ObjectShortName">dat_i[23:0]</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/port_id" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">port_id[7:0]</obj_property>
+         <obj_property name="ObjectShortName">port_id[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/active_vid_i" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">active_vid_i</obj_property>
-         <obj_property name="ObjectShortName">active_vid_i</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/write_strobe" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">write_strobe</obj_property>
+         <obj_property name="ObjectShortName">write_strobe</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/h_sync_i" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">h_sync_i</obj_property>
-         <obj_property name="ObjectShortName">h_sync_i</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/out_port" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">out_port[7:0]</obj_property>
+         <obj_property name="ObjectShortName">out_port[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/v_sync_i" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">v_sync_i</obj_property>
-         <obj_property name="ObjectShortName">v_sync_i</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/read_strobe" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">read_strobe</obj_property>
+         <obj_property name="ObjectShortName">read_strobe</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/h_sync_dly" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">h_sync_dly</obj_property>
-         <obj_property name="ObjectShortName">h_sync_dly</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/in_port" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">in_port[7:0]</obj_property>
+         <obj_property name="ObjectShortName">in_port[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/v_sync_dly" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">v_sync_dly</obj_property>
-         <obj_property name="ObjectShortName">v_sync_dly</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/interrupt" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">interrupt</obj_property>
+         <obj_property name="ObjectShortName">interrupt</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/eol" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">eol</obj_property>
-         <obj_property name="ObjectShortName">eol</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/interrupt_ack" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">interrupt_ack</obj_property>
+         <obj_property name="ObjectShortName">interrupt_ack</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/eof" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">eof</obj_property>
-         <obj_property name="ObjectShortName">eof</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/reset" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/x" type="other" db_ref_id="1">
-         <obj_property name="ElementShortName">x</obj_property>
-         <obj_property name="ObjectShortName">x</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/y" type="other" db_ref_id="1">
-         <obj_property name="ElementShortName">y</obj_property>
-         <obj_property name="ObjectShortName">y</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/t_state" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">t_state</obj_property>
+         <obj_property name="ObjectShortName">t_state</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/is_active_line" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">is_active_line</obj_property>
-         <obj_property name="ObjectShortName">is_active_line</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/not_t_state" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">not_t_state</obj_property>
+         <obj_property name="ObjectShortName">not_t_state</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/is_active_frame" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">is_active_frame</obj_property>
-         <obj_property name="ObjectShortName">is_active_frame</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/internal_reset" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">internal_reset</obj_property>
+         <obj_property name="ObjectShortName">internal_reset</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/inst_vga_bmp_sink/filename" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">filename[1:7]</obj_property>
-         <obj_property name="ObjectShortName">filename[1:7]</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/reset_delay" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">reset_delay</obj_property>
+         <obj_property name="ObjectShortName">reset_delay</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/move_group" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">move_group</obj_property>
+         <obj_property name="ObjectShortName">move_group</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/condition_met" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">condition_met</obj_property>
+         <obj_property name="ObjectShortName">condition_met</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/normal_count" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">normal_count</obj_property>
+         <obj_property name="ObjectShortName">normal_count</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/call_type" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">call_type</obj_property>
+         <obj_property name="ObjectShortName">call_type</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/push_or_pop_type" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">push_or_pop_type</obj_property>
+         <obj_property name="ObjectShortName">push_or_pop_type</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/valid_to_move" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">valid_to_move</obj_property>
+         <obj_property name="ObjectShortName">valid_to_move</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/flag_type" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">flag_type</obj_property>
+         <obj_property name="ObjectShortName">flag_type</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/flag_write" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">flag_write</obj_property>
+         <obj_property name="ObjectShortName">flag_write</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/flag_enable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">flag_enable</obj_property>
+         <obj_property name="ObjectShortName">flag_enable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/zero_flag" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">zero_flag</obj_property>
+         <obj_property name="ObjectShortName">zero_flag</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/sel_shadow_zero" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sel_shadow_zero</obj_property>
+         <obj_property name="ObjectShortName">sel_shadow_zero</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/low_zero" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">low_zero</obj_property>
+         <obj_property name="ObjectShortName">low_zero</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/high_zero" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">high_zero</obj_property>
+         <obj_property name="ObjectShortName">high_zero</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/low_zero_carry" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">low_zero_carry</obj_property>
+         <obj_property name="ObjectShortName">low_zero_carry</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/high_zero_carry" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">high_zero_carry</obj_property>
+         <obj_property name="ObjectShortName">high_zero_carry</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/zero_carry" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">zero_carry</obj_property>
+         <obj_property name="ObjectShortName">zero_carry</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/zero_fast_route" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">zero_fast_route</obj_property>
+         <obj_property name="ObjectShortName">zero_fast_route</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/low_parity" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">low_parity</obj_property>
+         <obj_property name="ObjectShortName">low_parity</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/high_parity" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">high_parity</obj_property>
+         <obj_property name="ObjectShortName">high_parity</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/parity_carry" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">parity_carry</obj_property>
+         <obj_property name="ObjectShortName">parity_carry</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/parity" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">parity</obj_property>
+         <obj_property name="ObjectShortName">parity</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/carry_flag" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">carry_flag</obj_property>
+         <obj_property name="ObjectShortName">carry_flag</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/sel_parity" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sel_parity</obj_property>
+         <obj_property name="ObjectShortName">sel_parity</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/sel_arith_carry" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sel_arith_carry</obj_property>
+         <obj_property name="ObjectShortName">sel_arith_carry</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/sel_shift_carry" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sel_shift_carry</obj_property>
+         <obj_property name="ObjectShortName">sel_shift_carry</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/sel_shadow_carry" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sel_shadow_carry</obj_property>
+         <obj_property name="ObjectShortName">sel_shadow_carry</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/sel_carry" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">sel_carry[3:0]</obj_property>
+         <obj_property name="ObjectShortName">sel_carry[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/carry_fast_route" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">carry_fast_route</obj_property>
+         <obj_property name="ObjectShortName">carry_fast_route</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/active_interrupt" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">active_interrupt</obj_property>
+         <obj_property name="ObjectShortName">active_interrupt</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/int_pulse" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">int_pulse</obj_property>
+         <obj_property name="ObjectShortName">int_pulse</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/clean_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clean_int</obj_property>
+         <obj_property name="ObjectShortName">clean_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/shadow_carry" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">shadow_carry</obj_property>
+         <obj_property name="ObjectShortName">shadow_carry</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/shadow_zero" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">shadow_zero</obj_property>
+         <obj_property name="ObjectShortName">shadow_zero</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/int_enable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">int_enable</obj_property>
+         <obj_property name="ObjectShortName">int_enable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/int_update_enable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">int_update_enable</obj_property>
+         <obj_property name="ObjectShortName">int_update_enable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/int_enable_value" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">int_enable_value</obj_property>
+         <obj_property name="ObjectShortName">int_enable_value</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/interrupt_ack_internal" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">interrupt_ack_internal</obj_property>
+         <obj_property name="ObjectShortName">interrupt_ack_internal</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/pc" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">pc[9:0]</obj_property>
+         <obj_property name="ObjectShortName">pc[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/pc_vector" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">pc_vector[9:0]</obj_property>
+         <obj_property name="ObjectShortName">pc_vector[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/pc_vector_carry" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">pc_vector_carry[8:0]</obj_property>
+         <obj_property name="ObjectShortName">pc_vector_carry[8:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/inc_pc_vector" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">inc_pc_vector[9:0]</obj_property>
+         <obj_property name="ObjectShortName">inc_pc_vector[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/pc_value" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">pc_value[9:0]</obj_property>
+         <obj_property name="ObjectShortName">pc_value[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/pc_value_carry" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">pc_value_carry[8:0]</obj_property>
+         <obj_property name="ObjectShortName">pc_value_carry[8:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/inc_pc_value" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">inc_pc_value[9:0]</obj_property>
+         <obj_property name="ObjectShortName">inc_pc_value[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/pc_enable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">pc_enable</obj_property>
+         <obj_property name="ObjectShortName">pc_enable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/sx" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">sx[7:0]</obj_property>
+         <obj_property name="ObjectShortName">sx[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/sy" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">sy[7:0]</obj_property>
+         <obj_property name="ObjectShortName">sy[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/register_type" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">register_type</obj_property>
+         <obj_property name="ObjectShortName">register_type</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/register_write" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">register_write</obj_property>
+         <obj_property name="ObjectShortName">register_write</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/register_enable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">register_enable</obj_property>
+         <obj_property name="ObjectShortName">register_enable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/second_operand" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">second_operand[7:0]</obj_property>
+         <obj_property name="ObjectShortName">second_operand[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/memory_data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">memory_data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">memory_data[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/store_data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">store_data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">store_data[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/memory_type" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">memory_type</obj_property>
+         <obj_property name="ObjectShortName">memory_type</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/memory_write" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">memory_write</obj_property>
+         <obj_property name="ObjectShortName">memory_write</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/memory_enable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">memory_enable</obj_property>
+         <obj_property name="ObjectShortName">memory_enable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/stack_pop_data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">stack_pop_data[9:0]</obj_property>
+         <obj_property name="ObjectShortName">stack_pop_data[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/stack_ram_data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">stack_ram_data[9:0]</obj_property>
+         <obj_property name="ObjectShortName">stack_ram_data[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/stack_address" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">stack_address[4:0]</obj_property>
+         <obj_property name="ObjectShortName">stack_address[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/half_stack_address" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">half_stack_address[4:0]</obj_property>
+         <obj_property name="ObjectShortName">half_stack_address[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/stack_address_carry" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">stack_address_carry[3:0]</obj_property>
+         <obj_property name="ObjectShortName">stack_address_carry[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/next_stack_address" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">next_stack_address[4:0]</obj_property>
+         <obj_property name="ObjectShortName">next_stack_address[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/stack_write_enable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">stack_write_enable</obj_property>
+         <obj_property name="ObjectShortName">stack_write_enable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/not_active_interrupt" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">not_active_interrupt</obj_property>
+         <obj_property name="ObjectShortName">not_active_interrupt</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/logical_result" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">logical_result[7:0]</obj_property>
+         <obj_property name="ObjectShortName">logical_result[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/logical_value" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">logical_value[7:0]</obj_property>
+         <obj_property name="ObjectShortName">logical_value[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/sel_logical" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sel_logical</obj_property>
+         <obj_property name="ObjectShortName">sel_logical</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/shift_result" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">shift_result[7:0]</obj_property>
+         <obj_property name="ObjectShortName">shift_result[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/shift_value" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">shift_value[7:0]</obj_property>
+         <obj_property name="ObjectShortName">shift_value[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/sel_shift" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sel_shift</obj_property>
+         <obj_property name="ObjectShortName">sel_shift</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/high_shift_in" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">high_shift_in</obj_property>
+         <obj_property name="ObjectShortName">high_shift_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/low_shift_in" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">low_shift_in</obj_property>
+         <obj_property name="ObjectShortName">low_shift_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/shift_in" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">shift_in</obj_property>
+         <obj_property name="ObjectShortName">shift_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/shift_carry" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">shift_carry</obj_property>
+         <obj_property name="ObjectShortName">shift_carry</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/shift_carry_value" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">shift_carry_value</obj_property>
+         <obj_property name="ObjectShortName">shift_carry_value</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/arith_result" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">arith_result[7:0]</obj_property>
+         <obj_property name="ObjectShortName">arith_result[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/arith_value" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">arith_value[7:0]</obj_property>
+         <obj_property name="ObjectShortName">arith_value[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/half_arith" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">half_arith[7:0]</obj_property>
+         <obj_property name="ObjectShortName">half_arith[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/arith_internal_carry" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">arith_internal_carry[7:0]</obj_property>
+         <obj_property name="ObjectShortName">arith_internal_carry[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/sel_arith_carry_in" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sel_arith_carry_in</obj_property>
+         <obj_property name="ObjectShortName">sel_arith_carry_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/arith_carry_in" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">arith_carry_in</obj_property>
+         <obj_property name="ObjectShortName">arith_carry_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/invert_arith_carry" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">invert_arith_carry</obj_property>
+         <obj_property name="ObjectShortName">invert_arith_carry</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/arith_carry_out" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">arith_carry_out</obj_property>
+         <obj_property name="ObjectShortName">arith_carry_out</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/sel_arith" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sel_arith</obj_property>
+         <obj_property name="ObjectShortName">sel_arith</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/arith_carry" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">arith_carry</obj_property>
+         <obj_property name="ObjectShortName">arith_carry</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/input_fetch_type" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">input_fetch_type</obj_property>
+         <obj_property name="ObjectShortName">input_fetch_type</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/sel_group" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sel_group</obj_property>
+         <obj_property name="ObjectShortName">sel_group</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/alu_group" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">alu_group[7:0]</obj_property>
+         <obj_property name="ObjectShortName">alu_group[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/input_group" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">input_group[7:0]</obj_property>
+         <obj_property name="ObjectShortName">input_group[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/alu_result" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">alu_result[7:0]</obj_property>
+         <obj_property name="ObjectShortName">alu_result[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/io_initial_decode" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">io_initial_decode</obj_property>
+         <obj_property name="ObjectShortName">io_initial_decode</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/write_active" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">write_active</obj_property>
+         <obj_property name="ObjectShortName">write_active</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3/read_active" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">read_active</obj_property>
+         <obj_property name="ObjectShortName">read_active</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_sin_r" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_sin_r</obj_property>
-      <obj_property name="ObjectShortName">s_sin_r</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_cos_r" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_cos_r</obj_property>
-      <obj_property name="ObjectShortName">s_cos_r</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_theta_r_rad" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_theta_r_rad</obj_property>
-      <obj_property name="ObjectShortName">s_theta_r_rad</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_theta_r_ang" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_theta_r_ang</obj_property>
-      <obj_property name="ObjectShortName">s_theta_r_ang</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_theta_v" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_theta_v[15:0]</obj_property>
-      <obj_property name="ObjectShortName">s_theta_v[15:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_theta_v" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_theta_v[15:0]</obj_property>
-      <obj_property name="ObjectShortName">s_theta_v[15:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_theta_v" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_theta_v[15:0]</obj_property>
-      <obj_property name="ObjectShortName">s_theta_v[15:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_sin_f" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_sin_f</obj_property>
-      <obj_property name="ObjectShortName">s_sin_f</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_cos_f" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">s_cos_f</obj_property>
-      <obj_property name="ObjectShortName">s_cos_f</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_sin_v" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_sin_v[7:0]</obj_property>
-      <obj_property name="ObjectShortName">s_sin_v[7:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_cos_v" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_cos_v[7:0]</obj_property>
-      <obj_property name="ObjectShortName">s_cos_v[7:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_cos_v" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_cos_v[15:0]</obj_property>
-      <obj_property name="ObjectShortName">s_cos_v[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/s_theta_v" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">s_theta_v[15:0]</obj_property>
-      <obj_property name="ObjectShortName">s_theta_v[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_cpu_clock" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">i_cpu_clock</obj_property>
-      <obj_property name="ObjectShortName">i_cpu_clock</obj_property>
-   </wvobject>
-   <wvobject fp_name="vbus66" type="vbus" db_ref_id="1">
-      <obj_property name="label">quad</obj_property>
+   <wvobject fp_name="group235" type="group">
+      <obj_property name="label">io</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffffff</obj_property>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/i_clock" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">i_clock</obj_property>
+         <obj_property name="ObjectShortName">i_clock</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/i_reset" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">i_reset</obj_property>
+         <obj_property name="ObjectShortName">i_reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/i_kcpsm3_port_id" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">i_kcpsm3_port_id[7:0]</obj_property>
+         <obj_property name="ObjectShortName">i_kcpsm3_port_id[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/i_kcpsm3_out_port" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">i_kcpsm3_out_port[7:0]</obj_property>
+         <obj_property name="ObjectShortName">i_kcpsm3_out_port[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_kcpsm3_in_port" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_kcpsm3_in_port[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_kcpsm3_in_port[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/i_kcpsm3_write_strobe" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">i_kcpsm3_write_strobe</obj_property>
+         <obj_property name="ObjectShortName">i_kcpsm3_write_strobe</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/i_kcpsm3_read_strobe" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">i_kcpsm3_read_strobe</obj_property>
+         <obj_property name="ObjectShortName">i_kcpsm3_read_strobe</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_kcpsm3_interrupt" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">o_kcpsm3_interrupt</obj_property>
+         <obj_property name="ObjectShortName">o_kcpsm3_interrupt</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/i_kcpsm3_interrupt_ack" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">i_kcpsm3_interrupt_ack</obj_property>
+         <obj_property name="ObjectShortName">i_kcpsm3_interrupt_ack</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_pixel_coordination" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_pixel_coordination[14:0]</obj_property>
+         <obj_property name="ObjectShortName">o_pixel_coordination[14:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_pixel_color" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_pixel_color[5:0]</obj_property>
+         <obj_property name="ObjectShortName">o_pixel_color[5:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_pixel_write" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_pixel_write[0:0]</obj_property>
+         <obj_property name="ObjectShortName">o_pixel_write[0:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/tr0_timer" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tr0_timer</obj_property>
+         <obj_property name="ObjectShortName">tr0_timer</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/tf0_timer" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tf0_timer</obj_property>
+         <obj_property name="ObjectShortName">tf0_timer</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/tc0_timer" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">tc0_timer[7:0]</obj_property>
+         <obj_property name="ObjectShortName">tc0_timer[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/tr1_timer" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tr1_timer</obj_property>
+         <obj_property name="ObjectShortName">tr1_timer</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/tf1_timer" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tf1_timer</obj_property>
+         <obj_property name="ObjectShortName">tf1_timer</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/tc1_timer" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">tc1_timer[15:0]</obj_property>
+         <obj_property name="ObjectShortName">tc1_timer[15:0]</obj_property>
+      </wvobject>
       <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test8" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">o_test8[7:0]</obj_property>
          <obj_property name="ObjectShortName">o_test8[7:0]</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="CustomSignalColor">#ff00ff</obj_property>
       </wvobject>
       <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test7" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">o_test7[7:0]</obj_property>
          <obj_property name="ObjectShortName">o_test7[7:0]</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test6" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_test6[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test6[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test5" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_test5[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test5[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test4" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_test4[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test4[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test3" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_test3[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test3[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test2" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_test2[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test2[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_test1[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test1[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test0" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_test0[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test0[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/data_in_io" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">data_in_io[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_in_io[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/data_out_io" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">data_out_io[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_out_io[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/id_io" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">id_io[7:0]</obj_property>
+         <obj_property name="ObjectShortName">id_io[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/we_io" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">we_io</obj_property>
+         <obj_property name="ObjectShortName">we_io</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/re_io" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">re_io</obj_property>
+         <obj_property name="ObjectShortName">re_io</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/interrupt_io" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">interrupt_io</obj_property>
+         <obj_property name="ObjectShortName">interrupt_io</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/interrupt_ack_io" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">interrupt_ack_io</obj_property>
+         <obj_property name="ObjectShortName">interrupt_ack_io</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/ea_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ea_int</obj_property>
+         <obj_property name="ObjectShortName">ea_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/et1_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">et1_int</obj_property>
+         <obj_property name="ObjectShortName">et1_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/et0_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">et0_int</obj_property>
+         <obj_property name="ObjectShortName">et0_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/ex2_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ex2_int</obj_property>
+         <obj_property name="ObjectShortName">ex2_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/ex1_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ex1_int</obj_property>
+         <obj_property name="ObjectShortName">ex1_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/ex0_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ex0_int</obj_property>
+         <obj_property name="ObjectShortName">ex0_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/es0_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">es0_int</obj_property>
+         <obj_property name="ObjectShortName">es0_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/ic0_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ic0_int</obj_property>
+         <obj_property name="ObjectShortName">ic0_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/is0_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">is0_int</obj_property>
+         <obj_property name="ObjectShortName">is0_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/it2_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">it2_int</obj_property>
+         <obj_property name="ObjectShortName">it2_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/it1_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">it1_int</obj_property>
+         <obj_property name="ObjectShortName">it1_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/it0_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">it0_int</obj_property>
+         <obj_property name="ObjectShortName">it0_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/ix2_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ix2_int</obj_property>
+         <obj_property name="ObjectShortName">ix2_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/ix1_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ix1_int</obj_property>
+         <obj_property name="ObjectShortName">ix1_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/ix0_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">ix0_int</obj_property>
+         <obj_property name="ObjectShortName">ix0_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/x0_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">x0_int</obj_property>
+         <obj_property name="ObjectShortName">x0_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/x1_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">x1_int</obj_property>
+         <obj_property name="ObjectShortName">x1_int</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/x2_int" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">x2_int</obj_property>
+         <obj_property name="ObjectShortName">x2_int</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject fp_name="vbus66" type="vbus" db_ref_id="1">
-      <obj_property name="label">quad</obj_property>
+   <wvobject fp_name="group289" type="group">
+      <obj_property name="label">uut</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffffff</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test8" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">o_test8[7:0]</obj_property>
-         <obj_property name="ObjectShortName">o_test8[7:0]</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+      <wvobject fp_name="/tb_top/uut/i_cpu_clock" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">i_cpu_clock</obj_property>
+         <obj_property name="ObjectShortName">i_cpu_clock</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test7" type="array" db_ref_id="1">
+      <wvobject fp_name="/tb_top/uut/i_vga_clock" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">i_vga_clock</obj_property>
+         <obj_property name="ObjectShortName">i_vga_clock</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/i_reset" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">i_reset</obj_property>
+         <obj_property name="ObjectShortName">i_reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="group457" type="group">
+         <obj_property name="label">vga</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/tb_top/uut/o_hsync" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">o_hsync</obj_property>
+            <obj_property name="ObjectShortName">o_hsync</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/o_vsync" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">o_vsync</obj_property>
+            <obj_property name="ObjectShortName">o_vsync</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/o_blank" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">o_blank</obj_property>
+            <obj_property name="ObjectShortName">o_blank</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/o_h_blank" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">o_h_blank</obj_property>
+            <obj_property name="ObjectShortName">o_h_blank</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/o_v_blank" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">o_v_blank</obj_property>
+            <obj_property name="ObjectShortName">o_v_blank</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/o_r" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">o_r[1:0]</obj_property>
+            <obj_property name="ObjectShortName">o_r[1:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/o_g" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">o_g[1:0]</obj_property>
+            <obj_property name="ObjectShortName">o_g[1:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/o_b" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">o_b[1:0]</obj_property>
+            <obj_property name="ObjectShortName">o_b[1:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/vga_clock" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">vga_clock</obj_property>
+            <obj_property name="ObjectShortName">vga_clock</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/vga_blank" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">vga_blank</obj_property>
+            <obj_property name="ObjectShortName">vga_blank</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/vga_h_blank" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">vga_h_blank</obj_property>
+            <obj_property name="ObjectShortName">vga_h_blank</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/vga_v_blank" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">vga_v_blank</obj_property>
+            <obj_property name="ObjectShortName">vga_v_blank</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/pixel_coordination" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">pixel_coordination[14:0]</obj_property>
+            <obj_property name="ObjectShortName">pixel_coordination[14:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/vga_address" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">vga_address[14:0]</obj_property>
+            <obj_property name="ObjectShortName">vga_address[14:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/pixel_color" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">pixel_color[5:0]</obj_property>
+            <obj_property name="ObjectShortName">pixel_color[5:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/vga_color" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">vga_color[5:0]</obj_property>
+            <obj_property name="ObjectShortName">vga_color[5:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_top/uut/pixel_write" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">pixel_write[0:0]</obj_property>
+            <obj_property name="ObjectShortName">pixel_write[0:0]</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/kcpsm3_address" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">kcpsm3_address[9:0]</obj_property>
+         <obj_property name="ObjectShortName">kcpsm3_address[9:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/kcpsm3_instruction" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">kcpsm3_instruction[17:0]</obj_property>
+         <obj_property name="ObjectShortName">kcpsm3_instruction[17:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/kcpsm3_port_id" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">kcpsm3_port_id[7:0]</obj_property>
+         <obj_property name="ObjectShortName">kcpsm3_port_id[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/kcpsm3_out_port" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">kcpsm3_out_port[7:0]</obj_property>
+         <obj_property name="ObjectShortName">kcpsm3_out_port[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/kcpsm3_in_port" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">kcpsm3_in_port[7:0]</obj_property>
+         <obj_property name="ObjectShortName">kcpsm3_in_port[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/kcpsm3_write_strobe" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">kcpsm3_write_strobe</obj_property>
+         <obj_property name="ObjectShortName">kcpsm3_write_strobe</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/kcpsm3_read_strobe" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">kcpsm3_read_strobe</obj_property>
+         <obj_property name="ObjectShortName">kcpsm3_read_strobe</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/kcpsm3_interrupt" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">kcpsm3_interrupt</obj_property>
+         <obj_property name="ObjectShortName">kcpsm3_interrupt</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/kcpsm3_interrupt_ack" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">kcpsm3_interrupt_ack</obj_property>
+         <obj_property name="ObjectShortName">kcpsm3_interrupt_ack</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/o_test1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_test1[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test1[7:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/o_test2" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_test2[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test2[7:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/o_test3" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_test3[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test3[7:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/o_test4" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_test4[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test4[7:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/o_test5" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_test5[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test5[7:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/o_test6" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_test6[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_test6[7:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/o_test7" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">o_test7[7:0]</obj_property>
          <obj_property name="ObjectShortName">o_test7[7:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
       </wvobject>
-   </wvobject>
-   <wvobject fp_name="vbus66" type="vbus" db_ref_id="1">
-      <obj_property name="label">quad</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffffff</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test8" type="array" db_ref_id="1">
+      <wvobject fp_name="/tb_top/uut/o_test8" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">o_test8[7:0]</obj_property>
          <obj_property name="ObjectShortName">o_test8[7:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+         <obj_property name="CustomSignalColor">#ff0000</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test7" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">o_test7[7:0]</obj_property>
-         <obj_property name="ObjectShortName">o_test7[7:0]</obj_property>
+      <wvobject fp_name="/tb_top/uut/tc0" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">tc0[7:0]</obj_property>
+         <obj_property name="ObjectShortName">tc0[7:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+         <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test8" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_test8[7:0]</obj_property>
-      <obj_property name="ObjectShortName">o_test8[7:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test7" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_test7[7:0]</obj_property>
-      <obj_property name="ObjectShortName">o_test7[7:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test6" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_test6[7:0]</obj_property>
-      <obj_property name="ObjectShortName">o_test6[7:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test5" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_test5[7:0]</obj_property>
-      <obj_property name="ObjectShortName">o_test5[7:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/inst_kcpsm3_io_registers_decoder/o_test4" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_test4[7:0]</obj_property>
-      <obj_property name="ObjectShortName">o_test4[7:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_vga_clock" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">i_vga_clock</obj_property>
-      <obj_property name="ObjectShortName">i_vga_clock</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_reset" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">i_reset</obj_property>
-      <obj_property name="ObjectShortName">i_reset</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_hsync" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_hsync</obj_property>
-      <obj_property name="ObjectShortName">o_hsync</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_vsync" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_vsync</obj_property>
-      <obj_property name="ObjectShortName">o_vsync</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_blank" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_blank</obj_property>
-      <obj_property name="ObjectShortName">o_blank</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_h_blank" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_h_blank</obj_property>
-      <obj_property name="ObjectShortName">o_h_blank</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_v_blank" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_v_blank</obj_property>
-      <obj_property name="ObjectShortName">o_v_blank</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_r" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_r[1:0]</obj_property>
-      <obj_property name="ObjectShortName">o_r[1:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_g" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_g[1:0]</obj_property>
-      <obj_property name="ObjectShortName">o_g[1:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_b" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_b[1:0]</obj_property>
-      <obj_property name="ObjectShortName">o_b[1:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_clock" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_clock</obj_property>
-      <obj_property name="ObjectShortName">vga_clock</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_blank" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_blank</obj_property>
-      <obj_property name="ObjectShortName">vga_blank</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_h_blank" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_h_blank</obj_property>
-      <obj_property name="ObjectShortName">vga_h_blank</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_v_blank" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_v_blank</obj_property>
-      <obj_property name="ObjectShortName">vga_v_blank</obj_property>
-   </wvobject>
-   <wvobject fp_name="vbus98" type="vbus">
-      <obj_property name="label">vap_0_7</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-   </wvobject>
-   <wvobject fp_name="vbus107" type="vbus">
-      <obj_property name="label">vap_14_8</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_color" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_color[5:0]</obj_property>
-      <obj_property name="ObjectShortName">vga_color[5:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_address" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_address[14:0]</obj_property>
-      <obj_property name="ObjectShortName">vga_address[14:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/kcpsm3_address" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">kcpsm3_address[9:0]</obj_property>
-      <obj_property name="ObjectShortName">kcpsm3_address[9:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/kcpsm3_instruction" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">kcpsm3_instruction[17:0]</obj_property>
-      <obj_property name="ObjectShortName">kcpsm3_instruction[17:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/kcpsm3_port_id" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">kcpsm3_port_id[7:0]</obj_property>
-      <obj_property name="ObjectShortName">kcpsm3_port_id[7:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/kcpsm3_out_port" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">kcpsm3_out_port[7:0]</obj_property>
-      <obj_property name="ObjectShortName">kcpsm3_out_port[7:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/kcpsm3_write_strobe" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">kcpsm3_write_strobe</obj_property>
-      <obj_property name="ObjectShortName">kcpsm3_write_strobe</obj_property>
+      <wvobject fp_name="/tb_top/uut/tr0" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tr0</obj_property>
+         <obj_property name="ObjectShortName">tr0</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ffff00</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/timer0" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">timer0[7:0]</obj_property>
+         <obj_property name="ObjectShortName">timer0[7:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ffff00</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/tf0" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tf0</obj_property>
+         <obj_property name="ObjectShortName">tf0</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ffff00</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/tc1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">tc1[15:0]</obj_property>
+         <obj_property name="ObjectShortName">tc1[15:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#00ffff</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/tr1" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tr1</obj_property>
+         <obj_property name="ObjectShortName">tr1</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#00ffff</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/timer1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">timer1[15:0]</obj_property>
+         <obj_property name="ObjectShortName">timer1[15:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#00ffff</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_top/uut/tf1" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">tf1</obj_property>
+         <obj_property name="ObjectShortName">tf1</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#00ffff</obj_property>
+      </wvobject>
    </wvobject>
 </wave_config>

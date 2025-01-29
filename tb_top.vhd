@@ -123,17 +123,17 @@ i_cpu_clock <= not i_cpu_clock;
 wait for i_cpu_clock_period/2;
 end process i_cpu_clock_process;
 
-i_vga_clock_for_vga_sink_process : process
-  variable first_wait : time := 0 ns;
-  variable first_wait_flag : boolean := false;
-begin
-if (first_wait_flag = false) then
-  wait for first_wait;
-  first_wait_flag := true;
-end if;
-i_vga_clock <= not i_vga_clock;
-wait for i_vga_clock_period/2;
-end process i_vga_clock_for_vga_sink_process;
+--i_vga_clock_for_vga_sink_process : process
+--  variable first_wait : time := 0 ns;
+--  variable first_wait_flag : boolean := false;
+--begin
+--if (first_wait_flag = false) then
+--  wait for first_wait;
+--  first_wait_flag := true;
+--end if;
+--i_vga_clock <= not i_vga_clock;
+--wait for i_vga_clock_period/2;
+--end process i_vga_clock_for_vga_sink_process;
 
 -- Stimulus process
 stim_proc : process

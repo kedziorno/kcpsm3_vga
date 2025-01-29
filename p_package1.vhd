@@ -16,6 +16,14 @@ package p_package1 is
   constant c_kcpsm3_pixel_address_high  : std_logic_vector (7 downto 0) := x"17";
   constant c_kcpsm3_pixel_address_color : std_logic_vector (7 downto 0) := x"20";
 
+  constant c_tc0 : std_logic_vector (7 downto 0) := x"10";
+  constant c_tcl1 : std_logic_vector (7 downto 0) := x"11";
+  constant c_tch1 : std_logic_vector (7 downto 0) := x"12";
+  constant c_ien0 : std_logic_vector (7 downto 0) := x"0c";
+  constant c_ien1 : std_logic_vector (7 downto 0) := x"0d";
+  constant c_isc : std_logic_vector (7 downto 0) := x"0e";
+  constant c_tcon : std_logic_vector (7 downto 0) := x"0f";
+
   type t_color_array is array (63 downto 0) of std_logic_vector (5 downto 0);
   constant c_color : t_color_array := (
     std_logic_vector (to_unsigned (63, 6)), -- white

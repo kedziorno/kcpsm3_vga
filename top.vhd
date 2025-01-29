@@ -2,7 +2,7 @@
 -- Company:
 -- Engineer:
 --
--- Create Date:    12/25/2024
+-- Create Date:    01/29/2025
 -- Design Name:
 -- Module Name:    top
 -- Project Name:
@@ -54,43 +54,43 @@ end entity top;
 
 architecture behavioral of top is
 
-  component vga_clock_25mhz is
-  port (
-  i_clock, i_reset : in  std_logic;
-  o_vga_clock      : out std_logic
-  );
-  end component vga_clock_25mhz;
+--  component vga_clock_25mhz is
+--  port (
+--  i_clock, i_reset : in  std_logic;
+--  o_vga_clock      : out std_logic
+--  );
+--  end component vga_clock_25mhz;
 
-  component vga_timing is
-  port (
-  i_clock, i_reset : in  std_logic;
-  o_hsync          : out std_logic;
-  o_vsync          : out std_logic;
-  o_blank          : out std_logic;
-  o_h_blank        : out std_logic;
-  o_v_blank        : out std_logic
-  );
-  end component vga_timing;
+--  component vga_timing is
+--  port (
+--  i_clock, i_reset : in  std_logic;
+--  o_hsync          : out std_logic;
+--  o_vsync          : out std_logic;
+--  o_blank          : out std_logic;
+--  o_h_blank        : out std_logic;
+--  o_v_blank        : out std_logic
+--  );
+--  end component vga_timing;
 
-  component vga_address_generator is
-  port (
-  i_clock, i_reset : in  std_logic;
-  i_vga_blank      : in  std_logic;
-  i_vga_v_blank    : in  std_logic;
-  o_vga_address    : out std_logic_vector (c_memory_address_bits - 1 downto 0)
-  );
-  end component vga_address_generator;
+--  component vga_address_generator is
+--  port (
+--  i_clock, i_reset : in  std_logic;
+--  i_vga_blank      : in  std_logic;
+--  i_vga_v_blank    : in  std_logic;
+--  o_vga_address    : out std_logic_vector (c_memory_address_bits - 1 downto 0)
+--  );
+--  end component vga_address_generator;
 
-  component vga_rgb is
-  port (
-  i_clock, i_reset : in  std_logic;
-  i_color          : in  std_logic_vector (5 downto 0);
-  i_blank          : in  std_logic;
-  o_r              : out std_logic_vector (1 downto 0);
-  o_g              : out std_logic_vector (1 downto 0);
-  o_b              : out std_logic_vector (1 downto 0)
-  );
-  end component vga_rgb;
+--  component vga_rgb is
+--  port (
+--  i_clock, i_reset : in  std_logic;
+--  i_color          : in  std_logic_vector (5 downto 0);
+--  i_blank          : in  std_logic;
+--  o_r              : out std_logic_vector (1 downto 0);
+--  o_g              : out std_logic_vector (1 downto 0);
+--  o_b              : out std_logic_vector (1 downto 0)
+--  );
+--  end component vga_rgb;
 
   component kcpsm3 -- PicoBlaze 8-bit CPU
   port (
@@ -118,37 +118,35 @@ architecture behavioral of top is
 
   component kcpsm3_io_registers_decoder is
   port (
-  i_clock, i_reset      : in  std_logic;
-  i_kcpsm3_port_id      : in  std_logic_vector (7 downto 0);
-  i_kcpsm3_out_port     : in  std_logic_vector (7 downto 0);
-  i_kcpsm3_write_strobe : in  std_logic;
-  o_pixel_coordination  : out std_logic_vector (c_memory_address_bits - 1 downto 0);
-  o_pixel_color         : out std_logic_vector (c_color_bits - 1 downto 0);
-  o_pixel_write         : out std_logic_vector (0 downto 0);
+  i_clock, i_reset       : in  std_logic;
+  i_kcpsm3_port_id       : in  std_logic_vector (7 downto 0);
+  i_kcpsm3_out_port      : in  std_logic_vector (7 downto 0);
+  o_kcpsm3_in_port       : out  std_logic_vector (7 downto 0);
+  i_kcpsm3_write_strobe  : in  std_logic;
+  i_kcpsm3_read_strobe   : in  std_logic;
+  o_kcpsm3_interrupt     : out std_logic;
+  i_kcpsm3_interrupt_ack : in  std_logic;
+  o_pixel_coordination   : out std_logic_vector (c_memory_address_bits - 1 downto 0);
+  o_pixel_color          : out std_logic_vector (c_color_bits - 1 downto 0);
+  o_pixel_write          : out std_logic_vector (0 downto 0);
+  TR0_timer              : inout std_logic := '0';
+  TF0_timer              : in std_logic := '0';
+  TC0_timer              : out unsigned (7 downto 0) := (others => '0');
+  TR1_timer              : inout std_logic := '0';
+  TF1_timer              : in std_logic := '0';
+  TC1_timer              : out unsigned (15 downto 0) := (others => '0');
   -- o_testX not used in synthesis
-  o_test8               : out std_logic_vector (7 downto 0);
-  o_test7               : out std_logic_vector (7 downto 0);
-  o_test6               : out std_logic_vector (7 downto 0);
-  o_test5               : out std_logic_vector (7 downto 0);
-  o_test4               : out std_logic_vector (7 downto 0);
-  o_test3               : out std_logic_vector (7 downto 0);
-  o_test2               : out std_logic_vector (7 downto 0);
-  o_test1               : out std_logic_vector (7 downto 0);
-  o_test0               : out std_logic_vector (7 downto 0)
+  o_test8                : out std_logic_vector (7 downto 0);
+  o_test7                : out std_logic_vector (7 downto 0);
+  o_test6                : out std_logic_vector (7 downto 0);
+  o_test5                : out std_logic_vector (7 downto 0);
+  o_test4                : out std_logic_vector (7 downto 0);
+  o_test3                : out std_logic_vector (7 downto 0);
+  o_test2                : out std_logic_vector (7 downto 0);
+  o_test1                : out std_logic_vector (7 downto 0);
+  o_test0                : out std_logic_vector (7 downto 0)
   );
   end component kcpsm3_io_registers_decoder;
-
-  COMPONENT ipcore_vga_ramb16_dp
-  PORT (
-  clka  : IN  STD_LOGIC;
-  wea   : IN  STD_LOGIC_VECTOR (0 DOWNTO 0);
-  addra : IN  STD_LOGIC_VECTOR (14 DOWNTO 0);
-  dina  : IN  STD_LOGIC_VECTOR (5 DOWNTO 0);
-  clkb  : IN  STD_LOGIC;
-  addrb : IN  STD_LOGIC_VECTOR (14 DOWNTO 0);
-  doutb : OUT STD_LOGIC_VECTOR (5 DOWNTO 0)
-  );
-  END COMPONENT ipcore_vga_ramb16_dp;
 
   signal vga_clock                           : std_logic;
   signal vga_blank, vga_h_blank, vga_v_blank : std_logic;
@@ -180,26 +178,29 @@ architecture behavioral of top is
 --synthesis translate_on
 
 --synthesis translate_off
-  signal s_sin_r, s_cos_r, s_theta_r_rad, s_theta_r_ang : real := 0.0;
-  signal s_sin_f, s_cos_f : real := 0.0;
-  signal s_theta_v : std_logic_vector (15 downto 0);
-  signal s_sin_v, s_cos_v : std_logic_vector (7 downto 0);
+  signal s_counter : std_logic_vector (31 downto 0);
 --synthesis translate_on
+
+--------------------------------------------------------------------------
+-- Timer0 control
+--------------------------------------------------------------------------
+signal Timer0 : unsigned (7 downto 0) := X"00";
+signal TR0 : std_logic := '0';
+signal TF0 : std_logic := '0';
+signal TC0 : unsigned (7 downto 0) := (others => '0'); 
+--------------------------------------------------------------------------
+-- Timer1 control
+--------------------------------------------------------------------------
+signal Timer1 : unsigned (15 downto 0) := X"0000";
+signal TR1 : std_logic := '0';
+signal TF1 : std_logic := '0';
+signal TC1 : unsigned (15 downto 0) := (others => '0'); 
 
 begin
 
---synthesis translate_off
-  test_concatenate_4321 <= o_test4 & o_test3 & o_test2 & o_test1;
-  test_concatenate_8765 <= o_test8 & o_test7 & o_test6 & o_test5;
-  test_concatenate_21 <= o_test2 & o_test1;
-  test_concatenate_43 <= o_test4 & o_test3;
-  test_concatenate_65 <= o_test6 & o_test5;
-  test_concatenate_87 <= o_test8 & o_test7;
---synthesis translate_on
-
-  o_blank   <= vga_blank;
-  o_h_blank <= vga_h_blank;
-  o_v_blank <= vga_v_blank;
+--  o_blank   <= vga_blank;
+--  o_h_blank <= vga_h_blank;
+--  o_v_blank <= vga_v_blank;
 
   --synthesis translate_off
 --  p_report_address_and_color : process (pixel_write(0)) is
@@ -224,104 +225,62 @@ begin
 --    end if;
 --  end process p_report1;
   p_report2 : process (kcpsm3_write_strobe) is
-    variable factor : real := 256.0;
-    variable factor_theta : real := 256.0 / 4.0;
-    variable rad_2_ang : real := 180.0 / 3.1415;
-    variable ang_2_rad : real := 3.1415 / 180.0;
-    variable v_theta_r, v_sin_r, v_cos_r, v_sin_o, v_cos_o : real := 0.0;
-    variable v_sin_v, v_cos_v : std_logic_vector (7 downto 0); -- use variables, signals appear on next clock (mistakes)
-    variable v_theta_v : std_logic_vector (15 downto 0); -- use variables, signals appear on next clock (mistakes)
-    -- we can use one variable for all out ports, but can be problem when in psm code we mistake OUTPUT's order.
-    variable flag : boolean := false;
+    constant c_index : integer := 3;
+    variable v_counter : std_logic_vector (c_index * 8 - 1 downto 0) := (others => '0');
+    variable index : integer range 0 to c_index - 1 := 0;
   begin
     if (falling_edge (kcpsm3_write_strobe)) then
-      if (to_integer (unsigned (kcpsm3_port_id)) = 1) then -- SIN
---        v_sin_v := kcpsm3_out_port & v_sin_v (15 downto 8); -- LO first
-        v_sin_v := kcpsm3_out_port; -- LO first
---        if (flag = true) then
-          v_sin_r := real (to_integer (signed (v_sin_v)));
-          s_sin_v <= v_sin_v;
-          v_sin_r := v_sin_r / factor;
-          --report "sin_cordic " & real'image (v_sin_r);
-          s_sin_r <= v_sin_r;
---          flag := false;
---        else
---          flag := true;
---        end if;
-      end if;
-      if (to_integer (unsigned (kcpsm3_port_id)) = 2) then -- COS
---        v_cos_v := kcpsm3_out_port & v_cos_v (15 downto 8); -- LO first
-        v_cos_v := kcpsm3_out_port; -- LO first
---        if (flag = true) then
-          v_cos_r := real (to_integer (signed (v_cos_v)));
-          s_cos_v <= v_cos_v;
-          v_cos_r := v_cos_r / factor;
-          --report "cos_cordic " & real'image (v_cos_r);
-          s_cos_r <= v_cos_r;
---        else
---          flag := true;
---        end if;
-      end if;
-      if (to_integer (unsigned (kcpsm3_port_id)) = 3) then -- THETA
-        v_theta_v := kcpsm3_out_port & v_theta_v (15 downto 8); -- LO first
-        if (flag = true) then
-          s_theta_v <= v_theta_v;
-          v_theta_r := (real (to_integer (unsigned (v_theta_v)))); -- radians
-          v_theta_r := v_theta_r / factor_theta; -- radians after normalize
-          s_theta_r_rad <= v_theta_r;
-          s_theta_r_ang <= v_theta_r * rad_2_ang;
-          v_sin_o := sin (v_theta_r);
-          --report "sin_original " & real'image (v_sin_o);
-          s_sin_f <= v_sin_o;
-          v_cos_o := cos (v_theta_r);
-          --report "cos_original " & real'image (v_cos_o);
-          s_cos_f <= v_cos_o;
-          flag := false;
+      if (to_integer (unsigned (kcpsm3_port_id)) = 1) then
+        v_counter := kcpsm3_out_port & v_counter (c_index * 8 - 1 downto 8); -- LO first
+        if (index = c_index - 1) then
+          s_counter <= v_counter;
+          index := 0;
         else
-          flag := true;
+          --s_counter <= (others => '0');
+          index := index + 1;
         end if;
       end if;
     end if;
   end process p_report2;
 --synthesis translate_on
 
-  inst_vga_clock_25mhz : vga_clock_25mhz
-  port map (
-  i_clock     => i_cpu_clock,
-  i_reset     => i_reset,
-  o_vga_clock => vga_clock
-  );
+--  inst_vga_clock_25mhz : vga_clock_25mhz
+--  port map (
+--  i_clock     => i_cpu_clock,
+--  i_reset     => i_reset,
+--  o_vga_clock => vga_clock
+--  );
 
-  inst_vga_timing : vga_timing
-  port map (
-  i_clock   => vga_clock,
-  i_reset   => i_reset,
-  o_hsync   => o_hsync,
-  o_vsync   => o_vsync,
-  o_blank   => vga_blank,
-  o_h_blank => vga_h_blank,
-  o_v_blank => vga_v_blank
-  );
+--  inst_vga_timing : vga_timing
+--  port map (
+--  i_clock   => vga_clock,
+--  i_reset   => i_reset,
+--  o_hsync   => o_hsync,
+--  o_vsync   => o_vsync,
+--  o_blank   => vga_blank,
+--  o_h_blank => vga_h_blank,
+--  o_v_blank => vga_v_blank
+--  );
 
-  inst_vga_address_generator : vga_address_generator
-  port map (
-  i_clock       => vga_clock,
-  i_reset       => i_reset,
-  i_vga_blank   => vga_blank,
-  i_vga_v_blank => vga_v_blank,
-  o_vga_address => vga_address
-  );
+--  inst_vga_address_generator : vga_address_generator
+--  port map (
+--  i_clock       => vga_clock,
+--  i_reset       => i_reset,
+--  i_vga_blank   => vga_blank,
+--  i_vga_v_blank => vga_v_blank,
+--  o_vga_address => vga_address
+--  );
 
-  inst_vga_rgb : vga_rgb
-  port map (
-  i_clock => vga_clock,
-  i_reset => i_reset,
-  i_color => vga_color,
-  i_blank => vga_blank,
-  o_r     => o_r,
-  o_g     => o_g,
-  o_b     => o_b
-  );
+--  inst_vga_rgb : vga_rgb
+--  port map (
+--  i_clock => vga_clock,
+--  i_reset => i_reset,
+--  i_color => vga_color,
+--  i_blank => vga_blank,
+--  o_r     => o_r,
+--  o_g     => o_g,
+--  o_b     => o_b
+--  );
 
   inst_kcpsm3 : kcpsm3
   port map (
@@ -347,29 +306,65 @@ begin
 
   inst_kcpsm3_io_registers_decoder : kcpsm3_io_registers_decoder
   port map (
-  i_clock               => i_cpu_clock,
-  i_reset               => i_reset,
-  i_kcpsm3_port_id      => kcpsm3_port_id,
-  i_kcpsm3_out_port     => kcpsm3_out_port,
-  i_kcpsm3_write_strobe => kcpsm3_write_strobe,
-  o_pixel_coordination  => pixel_coordination,
-  o_pixel_color         => pixel_color,
-  o_pixel_write         => pixel_write,
-  o_test3               => o_test3,
-  o_test2               => o_test2,
-  o_test1               => o_test1,
-  o_test0               => o_test0
+  i_clock                => i_cpu_clock,
+  i_reset                => i_reset,
+  i_kcpsm3_port_id       => kcpsm3_port_id,
+  i_kcpsm3_out_port      => kcpsm3_out_port,
+  o_kcpsm3_in_port       => kcpsm3_in_port,
+  i_kcpsm3_write_strobe  => kcpsm3_write_strobe,
+  i_kcpsm3_read_strobe   => kcpsm3_read_strobe,
+  o_kcpsm3_interrupt     => kcpsm3_interrupt,
+  i_kcpsm3_interrupt_ack => kcpsm3_interrupt_ack,
+  o_pixel_coordination   => pixel_coordination,
+  o_pixel_color          => pixel_color,
+  o_pixel_write          => pixel_write,
+  TR0_timer              => TR0,
+  TF0_timer              => TF0,
+  TC0_timer              => TC0,
+  TR1_timer              => TR1,
+  TF1_timer              => TF1,
+  TC1_timer              => TC1,
+  o_test8                => o_test8,
+  o_test7                => o_test7,
+  o_test6                => o_test6,
+  o_test5                => o_test5,
+  o_test4                => o_test4,
+  o_test3                => o_test3,
+  o_test2                => o_test2,
+  o_test1                => o_test1,
+  o_test0                => o_test0
   );
 
-  inst_ipcore_vga_ramb16_dp : ipcore_vga_ramb16_dp
-  port map (
-  clka  => i_cpu_clock,
-  wea   => pixel_write,
-  addra => pixel_coordination,
-  dina  => pixel_color,
-  clkb  => vga_clock,
-  addrb => vga_address,
-  doutb => vga_color
-  );
+-------------------------------------------------------------------------------
+--  TIMER COUNTS SYSTEM:
+--  This system controls the timer and set the timer flag when the timer is 
+--  run out. 
+-------------------------------------------------------------------------------
+
+  Timer0_control : process (i_cpu_clock)
+  begin 
+    if (rising_edge (i_cpu_clock) and TR0 = '1') then -- Wait for a clock event and
+      if (Timer0 = TC0) then -- TR0 is set active to run
+        Timer0 <= X"00"; -- Compare the Timer 0 with the TC0 value
+        TF0 <= '1'; -- If this is true will the timer count be set
+      else -- to zero and enable the Timer flag with a one.
+        Timer0 <= Timer0 + 1; -- If this not are true the counter will
+        TF0 <= '0'; -- add one and the Timer flag will be
+      end if; -- disable.
+    end if;
+  end process Timer0_control;
+
+  Timer1_control : process (i_cpu_clock)
+  begin
+    if (rising_edge (i_cpu_clock) and TR1 = '1') then -- Wait for a clock event and
+      if (Timer1 = TC1) then -- TR1 is set active to run
+        Timer1 <= X"0000"; -- Compare the Timer 1 with the TC1 value
+        TF1 <= '1'; -- If this is true will the timer count be set
+      else -- to zero and enable the Timer flag with a one.
+        Timer1 <= Timer1 + 1; -- If this not are true the counter will
+        TF1 <= '0'; -- add one and the Timer flag will be
+      end if; -- disable.
+    end if;
+  end process Timer1_control;
 
 end architecture behavioral;
