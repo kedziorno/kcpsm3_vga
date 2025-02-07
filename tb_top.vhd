@@ -38,6 +38,16 @@ END tb_top;
 
 ARCHITECTURE behavior OF tb_top IS
 
+constant c_PS2_Clk_phase : std_logic := '1';
+-- Clock period definitions
+--constant i_ps2_mclk_period : time := 100 us; -- 10 kHz
+constant i_ps2_mclk_period : time := 60 us; -- 16.7 kHz
+constant i_cpu_clock_period : time := 10 ns;
+--constant i_vga_clock_period : time := 39.720 ns;
+--constant i_vga_clock_period : time := 39.722 ns;
+--constant i_vga_clock_period : time := 39.965 ns;
+constant i_vga_clock_period : time := 40 ns;
+
 -- Component Declaration for the Unit Under Test (UUT)
 COMPONENT top
 PORT(
@@ -51,7 +61,9 @@ o_h_blank   : OUT std_logic;
 o_v_blank   : OUT std_logic;
 o_r         : OUT std_logic_vector (1 downto 0);
 o_g         : OUT std_logic_vector (1 downto 0);
-o_b         : OUT std_logic_vector (1 downto 0)
+o_b         : OUT std_logic_vector (1 downto 0);
+i_ps2_mdata : IN  std_logic;
+i_ps2_mclk  : IN  std_logic
 );
 END COMPONENT;
 
@@ -59,6 +71,8 @@ END COMPONENT;
 signal i_cpu_clock : std_logic := '1';
 signal i_vga_clock : std_logic := '1';
 signal i_reset     : std_logic := '0';
+signal i_ps2_mdata : std_logic := '1';
+signal i_ps2_mclk  : std_logic := c_PS2_Clk_phase;
 
 --Outputs
 signal o_hsync   : std_logic;
@@ -69,13 +83,6 @@ signal o_v_blank : std_logic;
 signal o_r       : std_logic_vector (1 downto 0);
 signal o_g       : std_logic_vector (1 downto 0);
 signal o_b       : std_logic_vector (1 downto 0);
-
--- Clock period definitions
-constant i_cpu_clock_period : time := 10 ns;
---constant i_vga_clock_period : time := 39.720 ns;
---constant i_vga_clock_period : time := 39.722 ns;
---constant i_vga_clock_period : time := 39.965 ns;
-constant i_vga_clock_period : time := 40 ns;
 
 signal blank : std_logic_vector (1 downto 0);
 
@@ -107,7 +114,9 @@ o_h_blank   => o_h_blank,
 o_v_blank   => o_v_blank,
 o_r         => o_r,
 o_g         => o_g,
-o_b         => o_b
+o_b         => o_b,
+i_ps2_mdata => i_ps2_mdata,
+i_ps2_mclk  => i_ps2_mclk
 );
 
 -- Clock process definitions
@@ -134,6 +143,79 @@ end if;
 i_vga_clock <= not i_vga_clock;
 wait for i_vga_clock_period/2;
 end process i_vga_clock_for_vga_sink_process;
+
+ps2_mouse_stim_proc : process
+procedure ps2_tick (one_bit : std_logic; X : boolean := false) is
+variable temp_clk : std_logic;
+begin
+temp_clk := i_ps2_mclk;
+if (X = false) then
+i_ps2_mdata <= one_bit;
+i_ps2_mclk <= not i_ps2_mclk;
+wait for i_ps2_mclk_period/2;
+i_ps2_mdata <= one_bit;
+i_ps2_mclk <= i_ps2_mclk;
+wait for i_ps2_mclk_period/2;
+i_ps2_mdata <= one_bit;
+i_ps2_mclk <= not i_ps2_mclk;
+wait for i_ps2_mclk_period/2;
+i_ps2_mdata <= one_bit;
+i_ps2_mclk <= i_ps2_mclk;
+wait for i_ps2_mclk_period/2;
+else
+i_ps2_mdata <= 'X';
+i_ps2_mclk <= 'X';
+wait for i_ps2_mclk_period/2;
+i_ps2_mdata <= 'X';
+i_ps2_mclk <= 'X';
+wait for i_ps2_mclk_period/2;
+i_ps2_mdata <= 'X';
+i_ps2_mclk <= 'X';
+wait for i_ps2_mclk_period/2;
+i_ps2_mdata <= 'X';
+i_ps2_mclk <= 'X';
+wait for i_ps2_mclk_period/2;
+end if;
+i_ps2_mclk <= temp_clk;
+wait for 1 fs;
+end procedure ps2_tick;
+procedure ps2_byte (byte : std_logic_vector (7 downto 0); parity : std_logic; X : boolean := false) is
+begin
+ps2_tick ('0', X); -- start
+ps2_tick (byte (0), X); -- LSB first
+ps2_tick (byte (1), X);
+ps2_tick (byte (2), X);
+ps2_tick (byte (3), X);
+ps2_tick (byte (4), X);
+ps2_tick (byte (5), X);
+ps2_tick (byte (6), X);
+ps2_tick (byte (7), X);
+ps2_tick (parity, X); -- parity (odd)
+ps2_tick ('1', X); -- stop
+end procedure ps2_byte;
+begin
+-- hold reset state for 100 ns.
+wait for 100 ns;
+wait for 100 ns;
+-- insert stimulus here
+-- idle 00
+ps2_byte (x"00", '1');
+-- frame f0
+ps2_byte (x"f0", '1');
+-- frame 81
+ps2_byte (x"81", '1');
+-- frame 85
+ps2_byte (x"85", '1'); -- parity error
+-- frame aa
+ps2_byte (x"aa", '1');
+-- idle frame
+ps2_byte (x"ff", '1');
+-- X frame 00
+ps2_byte (x"00", '1', true);
+-- X frame ff
+ps2_byte (x"ff", '1', true);
+wait;
+end process ps2_mouse_stim_proc;
 
 -- Stimulus process
 stim_proc : process

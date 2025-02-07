@@ -12,9 +12,12 @@ package p_package1 is
   constant c_memory_address_bits        : integer := 15;
   constant c_color_bits                 : integer := 6;
   constant c_vga_clock_divider_25mhz    : integer := 2;
-  constant c_kcpsm3_pixel_address_low   : std_logic_vector (7 downto 0) := x"16";
-  constant c_kcpsm3_pixel_address_high  : std_logic_vector (7 downto 0) := x"17";
-  constant c_kcpsm3_pixel_address_color : std_logic_vector (7 downto 0) := x"20";
+  constant c_kcpsm3_port_id_pixel_row   : std_logic_vector (7 downto 0) := x"16";
+  constant c_kcpsm3_port_id_pixel_col   : std_logic_vector (7 downto 0) := x"17";
+  constant c_kcpsm3_port_id_pixel_color : std_logic_vector (7 downto 0) := x"20";
+  constant c_kcpsm3_port_id_mouse_x     : std_logic_vector (7 downto 0) := x"21";
+  constant c_kcpsm3_port_id_mouse_y     : std_logic_vector (7 downto 0) := x"22";
+  constant c_kcpsm3_port_id_mouse_flags : std_logic_vector (7 downto 0) := x"23";
 
   type t_color_array is array (63 downto 0) of std_logic_vector (5 downto 0);
   constant c_color : t_color_array := (

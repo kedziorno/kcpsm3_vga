@@ -48,7 +48,9 @@ o_h_blank   : out std_logic;
 o_v_blank   : out std_logic;
 o_r         : out std_logic_vector (1 downto 0);
 o_g         : out std_logic_vector (1 downto 0);
-o_b         : out std_logic_vector (1 downto 0)
+o_b         : out std_logic_vector (1 downto 0);
+i_ps2_mdata : in  std_logic;
+i_ps2_mclk  : in  std_logic
 );
 end entity top;
 
@@ -121,10 +123,15 @@ architecture behavioral of top is
   i_clock, i_reset      : in  std_logic;
   i_kcpsm3_port_id      : in  std_logic_vector (7 downto 0);
   i_kcpsm3_out_port     : in  std_logic_vector (7 downto 0);
+  o_kcpsm3_in_port      : out std_logic_vector (7 downto 0);
   i_kcpsm3_write_strobe : in  std_logic;
+  i_kcpsm3_read_strobe  : in  std_logic;
   o_pixel_coordination  : out std_logic_vector (c_memory_address_bits - 1 downto 0);
   o_pixel_color         : out std_logic_vector (c_color_bits - 1 downto 0);
   o_pixel_write         : out std_logic_vector (0 downto 0);
+  i_mouse_x             : in  std_logic_vector (7 downto 0);
+  i_mouse_y             : in  std_logic_vector (7 downto 0);
+  i_mouse_flags         : in  std_logic_vector (7 downto 0);
   -- o_testX not used in synthesis
   o_test8               : out std_logic_vector (7 downto 0);
   o_test7               : out std_logic_vector (7 downto 0);
@@ -137,6 +144,28 @@ architecture behavioral of top is
   o_test0               : out std_logic_vector (7 downto 0)
   );
   end component kcpsm3_io_registers_decoder;
+
+  component ps2_mouse
+  port (
+  i_clock         : in  std_logic;
+  i_reset         : in  std_logic;
+  i_PS2_Clk       : in  std_logic;
+  i_PS2_Data      : in  std_logic;
+  i_do_read       : in  std_logic;
+  o_scan_ready    : out std_logic;
+  o_trigger       : out std_logic;
+  o_parity_error  : out std_logic;
+  o_x_movement    : out std_logic_vector (7 downto 0);
+  o_y_movement    : out std_logic_vector (7 downto 0);
+  o_x_overflow    : out std_logic;
+  o_y_overflow    : out std_logic;
+  o_x_sign        : out std_logic;
+  o_y_sign        : out std_logic;
+  o_button_middle : out std_logic;
+  o_button_right  : out std_logic;
+  o_button_left   : out std_logic
+  );
+  end component ps2_mouse;
 
   COMPONENT ipcore_vga_ramb16_dp
   PORT (
@@ -165,6 +194,21 @@ architecture behavioral of top is
   signal kcpsm3_read_strobe   : std_logic;
   signal kcpsm3_interrupt     : std_logic := '0';
   signal kcpsm3_interrupt_ack : std_logic;
+
+  signal ps2_mouse_scan_ready     : std_logic;
+  signal ps2_mouse_trigger        : std_logic;
+  signal ps2_mouse_trigger_prev   : std_logic;
+  signal ps2_mouse_parity_error   : std_logic;
+  signal ps2_mouse_x_movement     : std_logic_vector (7 downto 0);
+  signal ps2_mouse_y_movement     : std_logic_vector (7 downto 0);
+  signal ps2_mouse_x_overflow     : std_logic;
+  signal ps2_mouse_y_overflow     : std_logic;
+  signal ps2_mouse_x_sign         : std_logic;
+  signal ps2_mouse_y_sign         : std_logic;
+  signal ps2_mouse_button_middle  : std_logic;
+  signal ps2_mouse_button_right   : std_logic;
+  signal ps2_mouse_button_left    : std_logic;
+  signal ps2_mouse_do_read        : std_logic;
 
 --synthesis translate_ff
   signal o_test0 : std_logic_vector (7 downto 0);
@@ -200,6 +244,30 @@ begin
   o_blank   <= vga_blank;
   o_h_blank <= vga_h_blank;
   o_v_blank <= vga_v_blank;
+
+  p0 : process (i_cpu_clock, i_reset) is
+    type states is (a,b);
+    variable state : states;
+  begin
+    if (i_reset = '1') then
+      state := a;
+    elsif (rising_edge (i_cpu_clock)) then
+      ps2_mouse_trigger_prev <= ps2_mouse_trigger;
+      case (state) is
+        when a =>
+          if (ps2_mouse_trigger_prev = '1' and ps2_mouse_trigger = '0') then
+            state := b;
+            kcpsm3_interrupt <= '1';
+            ps2_mouse_do_read <= kcpsm3_interrupt_ack;
+          end if;
+        when b =>
+          if (kcpsm3_interrupt_ack = '1') then
+            state := a;
+            kcpsm3_interrupt <= '0';
+          end if;
+      end case;
+    end if;
+  end process p0;
 
   --synthesis translate_off
 --  p_report_address_and_color : process (pixel_write(0)) is
@@ -351,14 +419,19 @@ begin
   i_reset               => i_reset,
   i_kcpsm3_port_id      => kcpsm3_port_id,
   i_kcpsm3_out_port     => kcpsm3_out_port,
+  o_kcpsm3_in_port      => kcpsm3_in_port,
   i_kcpsm3_write_strobe => kcpsm3_write_strobe,
+  i_kcpsm3_read_strobe  => kcpsm3_read_strobe,
   o_pixel_coordination  => pixel_coordination,
   o_pixel_color         => pixel_color,
   o_pixel_write         => pixel_write,
   o_test3               => o_test3,
   o_test2               => o_test2,
   o_test1               => o_test1,
-  o_test0               => o_test0
+  o_test0               => o_test0,
+  i_mouse_x             => ps2_mouse_x_movement,
+  i_mouse_y             => ps2_mouse_y_movement,
+  i_mouse_flags         => "0000000" & ps2_mouse_button_left
   );
 
   inst_ipcore_vga_ramb16_dp : ipcore_vga_ramb16_dp
@@ -370,6 +443,27 @@ begin
   clkb  => vga_clock,
   addrb => vga_address,
   doutb => vga_color
+  );
+
+  inst_ps2_mouse : ps2_mouse
+  port map (
+  i_clock         => i_cpu_clock,
+  i_reset         => i_reset,
+  i_PS2_Clk       => i_ps2_mclk,
+  i_PS2_Data      => i_ps2_mdata,
+  i_do_read       => '1',
+  o_scan_ready    => ps2_mouse_scan_ready,
+  o_trigger       => ps2_mouse_trigger,
+  o_parity_error  => ps2_mouse_parity_error,
+  o_x_movement    => ps2_mouse_x_movement,
+  o_y_movement    => ps2_mouse_y_movement,
+  o_x_overflow    => ps2_mouse_x_overflow,
+  o_y_overflow    => ps2_mouse_y_overflow,
+  o_x_sign        => ps2_mouse_x_sign,
+  o_y_sign        => ps2_mouse_y_sign,
+  o_button_middle => ps2_mouse_button_middle,
+  o_button_right  => ps2_mouse_button_right,
+  o_button_left   => ps2_mouse_button_left
   );
 
 end architecture behavioral;
