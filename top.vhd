@@ -94,6 +94,42 @@ architecture behavioral of top is
   );
   end component vga_rgb;
 
+  -- KCPSM3 LUT CONSTANTS:
+  -- - LUT1_1      - NOT I0
+  -- - LUT2_3      - NOT I1
+  -- - LUT2_8      - AND2
+  -- - LUT2_C      - BUF I1
+  -- - LUT2_D      - OR2B
+  -- - LUT3_04     - I2=0 - AND2B  , I2=1 - GND
+  -- - LUT3_1F     - I2=0 - VCC    , I2=1 - NAND2
+  -- - LUT3_2F     - I3=0 - VCC    , I3=1 - NOR2B
+  -- - LUT3_3F     - I2=0 - VCC    , I1=1 - NAND2
+  -- - LUT3_6C     - I2=0 - BUF I1 , I2=1 - XOR
+  -- - LUT3_96     - I2=0 - XOR2   , I2=1 - XNOR2
+  -- - LUT3_E4     - MUX2X1
+  -- - LUT3_F3     - I2=0 - NOT I1 , I2=1 - VCC
+  -- - LUT3_FE     - I2=0 - OR     , I1=1 - VCC
+  -- - LUT4_0001   - NAND4
+  -- - LUT4_0002   - I3/I2 (00 - NOR2B     , 01/10/11 - GND)
+  -- - LUT4_0010   - I3/I2 (00/10/11 - GND , 01 - NAND)
+  -- - LUT4_0080   - I3/i2 (00/10/11 - GND , 01 - AND)
+  -- - LUT4_0100   - I3/I2 (00/01/11 - GND , 10 - NAND)
+  -- - LUT4_0145   - I3/I2 (00 - NOT I0, 01 - AND2B, 10 - NOR, 11 - GND)
+  -- - LUT4_0400   - 1 when 1010
+  -- - LUT4_1000   - 1 when 1100
+  -- - LUT4_4000   - I3/I2 (00/01/10 - GND    , 11 - AND2B)
+  -- - LUT4_41FC   - I3/I2 (11 - AND2B        , 10 - NAND2  , 01 - VCC    , 00 - BUF I1)
+  -- - LUT4_5400   - I3/I2 (11 - NOT I0       , 10 - AND2B  , 01 - GND    , 00 - GND)
+  -- - LUT4_5A3C   - I3/I2 (11 - NOT I0       , 10 - BUF I0 , 01 - NOT I1 , 00 - BUF I1)
+  -- - LUT4_6555   - I3/I2 (00/01/10 - NOT I0 , 11 - XOR)
+  -- - LUT4_6996   - I3/I2 ( 00 - XOR         , 01 - XNOR   , 10 - XNOR   , 11 - XOR)
+  -- - LUT4_6E8A   - I3/I2 (00 - BUF I0       , 01 - AND    , 10 - OR     , 11 - XOR)
+  -- - LUT4_7400   - I3/I2 (00/01 - GND       , 10 - AND2B  , 11 - NAND)
+  -- - LUT4_8000   - AND4
+  -- - LUT4_A999   - I3/I2 (00/01/10 - XNOR   , 11 - BUF I0)
+  -- - LUT4_EAAA   - I3/I2 (00/01/10 - BUF I0 , 11 - OR)
+  -- - LUT4_F3FF   - I3/I2 (00/01/11 - VCC    , 10 - NOT I1)
+  -- - LUT4_FFE2   - I3/I2 (00 - NOR2B        , 01 - OR    , 10/11 - VCC)
   component kcpsm3 -- PicoBlaze 8-bit CPU
   port (
   address       : out std_logic_vector (9 downto 0);
