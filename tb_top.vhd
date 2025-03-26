@@ -199,21 +199,22 @@ wait for 100 ns;
 wait for 100 ns;
 -- insert stimulus here
 -- idle 00
-ps2_byte (x"00", '1');
+ps2_byte (x"10", '1');
 -- frame f0
-ps2_byte (x"f0", '1');
+ps2_byte (x"12", '1');
 -- frame 81
-ps2_byte (x"81", '1');
+ps2_byte (x"14", '1');
 -- frame 85
-ps2_byte (x"85", '1'); -- parity error
+ps2_byte (x"26", '1'); -- parity error
 -- frame aa
-ps2_byte (x"aa", '1');
+ps2_byte (x"28", '1');
 -- idle frame
-ps2_byte (x"ff", '1');
+ps2_byte (x"2a", '1');
 -- X frame 00
-ps2_byte (x"00", '1', true);
+ps2_byte (x"3c", '1', true);
 -- X frame ff
-ps2_byte (x"ff", '1', true);
+ps2_byte (x"3f", '1', true);
+ps2_byte (x"30", '1', true);
 wait;
 end process ps2_mouse_stim_proc;
 
