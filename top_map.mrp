@@ -9,22 +9,22 @@ Target Device  : xc3s1200e
 Target Package : fg320
 Target Speed   : -4
 Mapper Version : spartan3e -- $Revision: 1.55 $
-Mapped Date    : Sun Jan  5 16:44:59 2025
+Mapped Date    : Tue Dec  2 15:56:31 2025
 
 Design Summary
 --------------
 Number of errors:      0
 Number of warnings:    0
 Logic Utilization:
-  Number of Slice Flip Flops:           168 out of  17,344    1%
-  Number of 4 input LUTs:               381 out of  17,344    2%
+  Number of Slice Flip Flops:           229 out of  17,344    1%
+  Number of 4 input LUTs:               446 out of  17,344    2%
 Logic Distribution:
-  Number of occupied Slices:            227 out of   8,672    2%
-    Number of Slices containing only related logic:     227 out of     227 100%
-    Number of Slices containing unrelated logic:          0 out of     227   0%
+  Number of occupied Slices:            282 out of   8,672    3%
+    Number of Slices containing only related logic:     282 out of     282 100%
+    Number of Slices containing unrelated logic:          0 out of     282   0%
       *See NOTES below for an explanation of the effects of unrelated logic.
-  Total Number of 4 input LUTs:         415 out of  17,344    2%
-    Number used as logic:               313
+  Total Number of 4 input LUTs:         480 out of  17,344    2%
+    Number used as logic:               378
     Number used as a route-thru:         34
     Number used for Dual Port RAMs:      16
       (Two LUTs used per Dual Port RAM)
@@ -34,16 +34,16 @@ Logic Distribution:
   The Slice Logic Distribution report is not meaningful if the design is
   over-mapped for a non-slice resource or if Placement fails.
 
-  Number of bonded IOBs:                 13 out of     250    5%
+  Number of bonded IOBs:                 23 out of     250    9%
   Number of RAMB16s:                      9 out of      28   32%
-  Number of BUFGMUXs:                     2 out of      24    8%
+  Number of BUFGMUXs:                     3 out of      24   12%
   Number of MULT18X18SIOs:                1 out of      28    3%
 
-Average Fanout of Non-Clock Nets:                3.66
+Average Fanout of Non-Clock Nets:                3.69
 
-Peak Memory Usage:  584 MB
-Total REAL time to MAP completion:  3 secs 
-Total CPU time to MAP completion:   3 secs 
+Peak Memory Usage:  581 MB
+Total REAL time to MAP completion:  1 secs 
+Total CPU time to MAP completion:   1 secs 
 
 NOTES:
 
@@ -95,9 +95,8 @@ INFO:LIT:244 - All of the single ended outputs in this design are using slew
 
 Section 4 - Removed Logic Summary
 ---------------------------------
-   7 block(s) removed
-  11 block(s) optimized away
-   9 signal(s) removed
+   4 block(s) optimized away
+   1 signal(s) removed
 
 Section 5 - Removed Logic
 -------------------------
@@ -112,28 +111,7 @@ To quickly locate the original cause for the removal of a chain of logic, look
 above the place where that logic is listed in the trimming report, then locate
 the lines that are least indented (begin at the leftmost edge).
 
-Loadless block "inst_kcpsm3/read_strobe_flop" (SFF) removed.
- The signal "inst_kcpsm3/read_active" is loadless and has been removed.
-  Loadless block "inst_kcpsm3/read_active_lut" (ROM) removed.
 The signal "inst_ipcore_vga_ramb16_dp/N0" is sourceless and has been removed.
-
-The trimmed logic reported below is either:
-   1. part of a cycle
-   2. part of disabled logic
-   3. a side-effect of other trimmed logic
-
-The signal "inst_kcpsm3/int_enable" is unused and has been removed.
- Unused block "inst_kcpsm3/int_enable_flop" (SFF) removed.
-  The signal "inst_kcpsm3/int_update_enable" is unused and has been removed.
-   Unused block "inst_kcpsm3/int_update_lut" (ROM) removed.
-  The signal "inst_kcpsm3/int_enable_value" is unused and has been removed.
-   Unused block "inst_kcpsm3/int_value_lut" (ROM) removed.
-    The signal "inst_kcpsm3/interrupt_ack_internal" is unused and has been removed.
-     Unused block "inst_kcpsm3/ack_flop" (FF) removed.
-The signal "inst_kcpsm3/int_pulse" is unused and has been removed.
-The signal "inst_kcpsm3/not_active_interrupt" is unused and has been removed.
-The signal "inst_kcpsm3/sel_shadow_carry" is unused and has been removed.
- Unused block "inst_kcpsm3/sel_shadow_carry_lut" (ROM) removed.
 
 Optimized Block(s):
 TYPE 		BLOCK
@@ -141,18 +119,6 @@ GND 		XST_GND
 VCC 		XST_VCC
 GND 		inst_ipcore_vga_ramb16_dp/XST_GND
 VCC 		inst_ipcore_vga_ramb16_dp/XST_VCC
-FDR 		inst_kcpsm3/int_capture_flop
-   optimized to 0
-FDR 		inst_kcpsm3/int_flop
-   optimized to 0
-LUT4 		inst_kcpsm3/int_pulse_lut
-   optimized to 0
-FDE 		inst_kcpsm3/shadow_carry_flop
-   optimized to 0
-FDE 		inst_kcpsm3/shadow_zero_flop
-   optimized to 0
-INV 		inst_kcpsm3/stack_count_inv
-MUXCY 		inst_kcpsm3/sel_shadow_muxcy
 
 To enable printing of redundant blocks removed and signals merged, set the
 detailed map report option and rerun map.
@@ -165,16 +131,26 @@ Section 6 - IOB Properties
 |                                    |                  |           |                      | Term  | Strength | Rate |              |          | Delay    |
 +---------------------------------------------------------------------------------------------------------------------------------------------------------+
 | i_cpu_clock                        | IBUF             | INPUT     | LVCMOS25             |       |          |      |              |          | 0 / 0    |
+| i_ps2_mclk                         | IBUF             | INPUT     | LVCMOS25             |       |          |      |              |          | 0 / 0    |
+| i_ps2_mdata                        | IBUF             | INPUT     | LVCMOS25             |       |          |      |              |          | 0 / 0    |
 | i_reset                            | IBUF             | INPUT     | LVCMOS25             |       |          |      |              |          | 0 / 0    |
-| o_b<0>                             | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
-| o_b<1>                             | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_b<2>                             | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_b<3>                             | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
 | o_blank                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
-| o_g<0>                             | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
-| o_g<1>                             | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_g<2>                             | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_g<3>                             | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
 | o_h_blank                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
 | o_hsync                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
-| o_r<0>                             | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
-| o_r<1>                             | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_led<0>                           | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_led<1>                           | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_led<2>                           | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_led<3>                           | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_led<4>                           | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_led<5>                           | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_led<6>                           | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_led<7>                           | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_r<2>                             | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
+| o_r<3>                             | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
 | o_v_blank                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
 | o_vsync                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          | 0 / 0    |
 +---------------------------------------------------------------------------------------------------------------------------------------------------------+

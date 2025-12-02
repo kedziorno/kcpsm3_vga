@@ -3,7 +3,7 @@ Release 14.7 Trace  (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 /home/user/.local/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/trce -intstyle ise
--v 3 -s 4 -n 3 -fastpaths -xml top.twx top.ncd -o top.twr top.pcf
+-v 3 -s 4 -n 3 -fastpaths -xml top.twx top.ncd -o top.twr top.pcf -ucf top.ucf
 
 Design file:              top.ncd
 Physical constraint file: top.pcf
@@ -44,7 +44,7 @@ Setup/Hold to clock i_cpu_clock
             |Max Setup to|Max Hold to |                  | Clock  |
 Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------------+--------+
-i_reset     |    5.894(R)|   -2.144(R)|i_cpu_clock_BUFGP |   0.000|
+i_ps2_mclk  |    3.698(R)|    0.113(R)|i_cpu_clock_BUFGP |   0.000|
 ------------+------------+------------+------------------+--------+
 
 Clock to Setup on destination clock i_cpu_clock
@@ -52,31 +52,18 @@ Clock to Setup on destination clock i_cpu_clock
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-i_cpu_clock    |   10.250|         |         |         |
+i_cpu_clock    |   16.276|         |         |         |
 ---------------+---------+---------+---------+---------+
 
-Pad to Pad
----------------+---------------+---------+
-Source Pad     |Destination Pad|  Delay  |
----------------+---------------+---------+
-i_reset        |o_b<0>         |   10.387|
-i_reset        |o_b<1>         |   10.376|
-i_reset        |o_blank        |    9.257|
-i_reset        |o_g<0>         |   10.558|
-i_reset        |o_g<1>         |   10.493|
-i_reset        |o_r<0>         |   10.398|
-i_reset        |o_r<1>         |   10.705|
----------------+---------------+---------+
 
-
-Analysis completed Sun Jan  5 16:45:43 2025 
+Analysis completed Tue Dec  2 15:56:43 2025 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 358 MB
+Peak Memory Usage: 356 MB
 
 
 

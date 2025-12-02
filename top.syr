@@ -5,14 +5,14 @@ Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.06 secs
+Total CPU time to Xst completion: 0.03 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.06 secs
+Total CPU time to Xst completion: 0.03 secs
  
 --> 
 Reading design: top.prj
@@ -111,32 +111,25 @@ Cores Search Directories           : {"ipcore_dir"  }
 *                          HDL Compilation                              *
 =========================================================================
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/p_package1.vhd" in Library work.
-Package <p_package1> compiled.
-Package body <p_package1> compiled.
-Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" in Library work.
-WARNING:HDLParsers:3350 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" Line 878. Null range: 0 downto 1
-WARNING:HDLParsers:3350 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/numeric_std.vhd" Line 879. Null range: 0 downto 1
-Architecture numeric_std of Entity numeric_std is up to date.
+Architecture p_package1 of Entity p_package1 is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_clock_25mhz.vhd" in Library work.
-Entity <vga_clock_25mhz> compiled.
-Entity <vga_clock_25mhz> (Architecture <behavioral>) compiled.
+Architecture behavioral of Entity vga_clock_25mhz is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_timing.vhd" in Library work.
 Architecture industry_standard_640x480_timing of Entity vga_timing is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_address_generator.vhd" in Library work.
-Entity <vga_address_generator> compiled.
-Entity <vga_address_generator> (Architecture <behavioral>) compiled.
+Architecture behavioral of Entity vga_address_generator is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/vga_rgb.vhd" in Library work.
 Architecture behavioral of Entity vga_rgb is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" in Library work.
 Architecture low_level_definition of Entity kcpsm3 is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" in Library work.
-Entity <program> compiled.
-Entity <program> (Architecture <low_level_definition>) compiled.
+Architecture low_level_definition of Entity program is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3_io_registers_decoder.vhd" in Library work.
-Entity <kcpsm3_io_registers_decoder> compiled.
-Entity <kcpsm3_io_registers_decoder> (Architecture <behavioral>) compiled.
+Architecture behavioral of Entity kcpsm3_io_registers_decoder is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ipcore_dir/ipcore_vga_ramb16_dp.vhd" in Library work.
 Architecture ipcore_vga_ramb16_dp_a of Entity ipcore_vga_ramb16_dp is up to date.
+Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ps2_mouse.vhd" in Library work.
+Architecture behavioral of Entity ps2_mouse is up to date.
 Compiling vhdl file "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" in Library work.
 Entity <top> compiled.
 Entity <top> (Architecture <behavioral>) compiled.
@@ -159,6 +152,8 @@ Analyzing hierarchy for entity <kcpsm3> in library <work> (architecture <low_lev
 Analyzing hierarchy for entity <program> in library <work> (architecture <low_level_definition>).
 
 Analyzing hierarchy for entity <kcpsm3_io_registers_decoder> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <ps2_mouse> in library <work> (architecture <behavioral>).
 
 WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 289: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
 WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3.vhd" line 1200: attribute on instance <INIT> overrides generic/parameter on component. It is possible that simulator will not take this attribute into account.
@@ -276,7 +271,12 @@ WARNING:Xst:2591 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/PROGRAM.VHD" lin
 *                            HDL Analysis                               *
 =========================================================================
 Analyzing Entity <top> in library <work> (Architecture <behavioral>).
-WARNING:Xst:2211 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" line 244: Instantiating black box module <ipcore_vga_ramb16_dp>.
+WARNING:Xst:753 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" line 454: Unconnected output port 'o_test8' of component 'kcpsm3_io_registers_decoder'.
+WARNING:Xst:753 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" line 454: Unconnected output port 'o_test7' of component 'kcpsm3_io_registers_decoder'.
+WARNING:Xst:753 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" line 454: Unconnected output port 'o_test6' of component 'kcpsm3_io_registers_decoder'.
+WARNING:Xst:753 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" line 454: Unconnected output port 'o_test5' of component 'kcpsm3_io_registers_decoder'.
+WARNING:Xst:753 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" line 454: Unconnected output port 'o_test4' of component 'kcpsm3_io_registers_decoder'.
+WARNING:Xst:2211 - "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd" line 476: Instantiating black box module <ipcore_vga_ramb16_dp>.
 Entity <top> analyzed. Unit <top> generated.
 
 Analyzing Entity <vga_clock_25mhz> in library <work> (Architecture <behavioral>).
@@ -510,41 +510,41 @@ Entity <kcpsm3> analyzed. Unit <kcpsm3> generated.
 
 Analyzing Entity <program> in library <work> (Architecture <low_level_definition>).
     Set user-defined property "INIT =  00000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INITP_00 =  000000000000000000000EAA7775374DDD377774DDD37777477743C0C0C0C0C0" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INITP_01 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INITP_02 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INITP_03 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_00 =  A388AC028F700E22B00A3DC038888A3DC02234F4989A008888A508888888888F" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_01 =  6A22390F4E4243D390F4E222169409090E9409090D082DB42DB4369090E22B00" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_02 =  CCCCCCCCCFDFDFDFDB55D50096003A9D02AB00C030000AC2B0AC2B000E2226A2" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_03 =  0000000000000000000000000000000000000000000000E2238CCFDFD9655956" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INITP_04 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INITP_05 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INITP_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INITP_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_00 =  0015020C01000012001502300100000C00150222010000060015023F01000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_01 =  8F011E008E0100518E0100518E0100518E011F101E0040550015020301000018" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_02 =  00518E0200518E0200518F011E0000518E0100518E0100518E0100518E010051" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_03 =  00518E0200518F011E0000518E0100518E0100518E0100518E0100518F011E00" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_04 =  8E0100518E0100518E0100518E018F011E0000518E0400518F011E0000518E02" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_05 =  00000000000000000000000000000000000000004055A000C220CF17CE16A000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_06 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_07 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_08 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_09 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_0A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_0B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_0C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_0D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_0E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_0F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_10 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_11 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_12 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_13 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_14 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_15 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_16 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_17 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_18 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_19 =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_1A =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INITP_07 =  C000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_00 =  E0190001E0180001E0170003E0160005E015000AE0140013E01300204001C001" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_01 =  E9390900E937094DE010000E8001D0100113001AEE3D0E00EE3E0E00E01A0000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_02 =  EE3EAE00CE036E3EEE3D8E01C903CE036E3D0B130A080900E9350900E9330900" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_03 =  018E005A0100623D633EEF086F3EEF096F3D519C4201623E403750344268623D" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_04 =  633E4095CE086E08CE076E09EF086F3EEF096F3DC004E0240001404F50434401" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_05 =  E108014D00B40100623D633EC004E0240002406650574401018E00B40100623D" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_06 =  E0240003407D506E4401018E000E0101623D633E4095CE086E08CE076E09E009" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_07 =  C004E02400044095CE086E08CE076E09E009E108014D603D613E02B40300C004" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_08 =  EF098F01EFFF6F094095CE086E08CE076E09E009E108014D603D613E020E0301" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_09 =  6139E133549BC301010A509E43001390613750D859A0A000EF088F01EFFF6F08" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_0A =  6435603750BE4480A4806408EF3B7F1011B0E13554A3C301010A50A643001390" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_0B =  6435603740CDE108E009E100D020623B61086009E039904064336039E037D040" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_0C =  6E098B018901E108E009A1009020623B61086009E039D04064336039E0379040" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_0D =  E0378001E0FF603740E150DC400260244095C0066039C0056037CE036E08CE03" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_0E =  4004602440F7E0398001E0FF6039E0378001E0FF603740EE50E54003602440F7" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_0F =  8028000A000AC001600DE00D6039E00B603740F7E0398001E0FF603940F750F2" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_10 =  15101400401CC020003FC0176023C0166022E0238028000A000AC002600BE022" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_11 =  E105013A10501160E002E103013A10401170E000E101013A1040116017301620" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_12 =  0700018600006104620503000400650266030700E006E107013A10501170E004" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_13 =  040003000201E43DE33EE23FA000018604000500660667070186640065010600" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_14 =  A000F130D020A000643D633E623F104011305540020604080308931051433020" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_15 =  59785730A0004154A7008601F510D400595D5510E10054000600070014201530" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_16 =  418008024172516E597054004176516A59745510417E5166597C5620417A5162" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_17 =  4180080441800801418008044180080141800804418008014180080441800801" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_18 =  59965310A000B1309020A000B370B260B1509040A000F370F260F150D040A000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_19 =  4022C0164021419CA0000404419B0402419B04014198559A59965200419A5192" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_1A =  0000000000000000000000000000000000000000000000008001C020003FC017" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INIT_1B =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INIT_1C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INIT_1D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
@@ -581,13 +581,16 @@ Analyzing Entity <program> in library <work> (Architecture <low_level_definition
     Set user-defined property "INIT_3C =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INIT_3D =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "INIT_3E =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
-    Set user-defined property "INIT_3F =  0000000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
+    Set user-defined property "INIT_3F =  419D000000000000000000000000000000000000000000000000000000000000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "SRVAL =  00000" for instance <ram_1024_x_18> in unit <program>.
     Set user-defined property "WRITE_MODE =  WRITE_FIRST" for instance <ram_1024_x_18> in unit <program>.
 Entity <program> analyzed. Unit <program> generated.
 
 Analyzing Entity <kcpsm3_io_registers_decoder> in library <work> (Architecture <behavioral>).
 Entity <kcpsm3_io_registers_decoder> analyzed. Unit <kcpsm3_io_registers_decoder> generated.
+
+Analyzing Entity <ps2_mouse> in library <work> (Architecture <behavioral>).
+Entity <ps2_mouse> analyzed. Unit <ps2_mouse> generated.
 
 
 =========================================================================
@@ -650,18 +653,66 @@ Unit <vga_rgb> synthesized.
 
 Synthesizing Unit <kcpsm3_io_registers_decoder>.
     Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/kcpsm3_io_registers_decoder.vhd".
+WARNING:Xst:1305 - Output <o_test0> is never assigned. Tied to value 00000000.
+WARNING:Xst:1305 - Output <o_test1> is never assigned. Tied to value 00000000.
+WARNING:Xst:1305 - Output <o_test2> is never assigned. Tied to value 00000000.
+WARNING:Xst:1305 - Output <o_test3> is never assigned. Tied to value 00000000.
+WARNING:Xst:1305 - Output <o_test4> is never assigned. Tied to value 00000000.
+WARNING:Xst:1305 - Output <o_test5> is never assigned. Tied to value 00000000.
+WARNING:Xst:1305 - Output <o_test6> is never assigned. Tied to value 00000000.
+WARNING:Xst:1305 - Output <o_test7> is never assigned. Tied to value 00000000.
+WARNING:Xst:1305 - Output <o_test8> is never assigned. Tied to value 00000000.
     Found 1-bit register for signal <o_pixel_write<0>>.
+    Found 8-bit register for signal <o_kcpsm3_in_port>.
     Found 15-bit register for signal <o_pixel_coordination>.
     Found 6-bit register for signal <o_pixel_color>.
-    Found 15-bit adder for signal <o_pixel_coordination$addsub0000> created at line 92.
+    Found 15-bit adder for signal <o_pixel_coordination$addsub0000> created at line 135.
     Found 8-bit register for signal <x_coordination>.
     Found 15-bit register for signal <y_coordination>.
-    Found 7x8-bit multiplier for signal <y_coordination$mult0000> created at line 83.
+    Found 7x8-bit multiplier for signal <y_coordination$mult0000> created at line 126.
     Summary:
-	inferred  45 D-type flip-flop(s).
+	inferred  53 D-type flip-flop(s).
 	inferred   1 Adder/Subtractor(s).
 	inferred   1 Multiplier(s).
 Unit <kcpsm3_io_registers_decoder> synthesized.
+
+
+Synthesizing Unit <ps2_mouse>.
+    Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/ps2_mouse.vhd".
+    Found 256x1-bit ROM for signal <rx_parity$rom0000> created at line 221.
+    Found 1-bit register for signal <o_scan_ready>.
+    Found 1-bit register for signal <o_y_overflow>.
+    Found 1-bit register for signal <o_button_right>.
+    Found 1-bit register for signal <o_x_overflow>.
+    Found 1-bit register for signal <o_button_middle>.
+    Found 1-bit xor2 for signal <o_parity_error>.
+    Found 8-bit register for signal <o_y_movement>.
+    Found 1-bit register for signal <o_x_sign>.
+    Found 8-bit register for signal <o_x_movement>.
+    Found 1-bit register for signal <o_button_left>.
+    Found 1-bit register for signal <o_y_sign>.
+    Found 4-bit up counter for signal <bit_count>.
+    Found 3-bit register for signal <byte_count_sr>.
+    Found 4-bit comparator less for signal <byte_count_sr$cmp_lt0000> created at line 259.
+    Found 2-bit register for signal <clear_reg>.
+    Found 2-bit adder for signal <clear_reg$addsub0000> created at line 226.
+    Found 2-bit comparator greatequal for signal <clear_reg$cmp_ge0000> created at line 227.
+    Found 3-bit up counter for signal <clk_high_filter>.
+    Found 3-bit up counter for signal <clk_low_filter>.
+    Found 1-bit register for signal <filter_clk>.
+    Found 1-bit register for signal <rx_parity>.
+    Found 1-bit register for signal <rx_parity_received>.
+    Found 9-bit register for signal <s_reg>.
+    Found 1-bit register for signal <scan_state<0>>.
+    Found 1-bit register for signal <trigger>.
+    Found 4-bit comparator greatequal for signal <trigger$cmp_ge0000> created at line 259.
+    Summary:
+	inferred   1 ROM(s).
+	inferred   3 Counter(s).
+	inferred  40 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred   3 Comparator(s).
+Unit <ps2_mouse> synthesized.
 
 
 Synthesizing Unit <kcpsm3>.
@@ -677,10 +728,33 @@ Unit <program> synthesized.
 Synthesizing Unit <top>.
     Related source file is "/home/user/_WORKSPACE_/kedziorno/kcpsm3_vga/top.vhd".
 WARNING:Xst:647 - Input <i_vga_clock> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:646 - Signal <kcpsm3_read_strobe> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
-WARNING:Xst:646 - Signal <kcpsm3_interrupt_ack> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
-WARNING:Xst:653 - Signal <kcpsm3_interrupt> is used but never assigned. This sourceless signal will be automatically connected to value 0.
-WARNING:Xst:653 - Signal <kcpsm3_in_port> is used but never assigned. This sourceless signal will be automatically connected to value 00000000.
+WARNING:Xst:1780 - Signal <test_concatenate_8765> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <test_concatenate_87> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <test_concatenate_65> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <test_concatenate_4321> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <test_concatenate_43> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <test_concatenate_21> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <ps2_mouse_y_sign> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <ps2_mouse_y_overflow> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <ps2_mouse_x_sign> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <ps2_mouse_x_overflow> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <ps2_mouse_scan_ready> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <ps2_mouse_parity_error> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <ps2_mouse_do_read> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <o_test8> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <o_test7> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <o_test6> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <o_test5> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <o_test4> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <o_test3> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <o_test2> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <o_test1> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <o_test0> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 1-bit register for signal <kcpsm3_interrupt>.
+    Found 1-bit register for signal <ps2_mouse_trigger_prev>.
+    Found 1-bit register for signal <state<0>>.
+    Summary:
+	inferred   3 D-type flip-flop(s).
 Unit <top> synthesized.
 
 INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
@@ -689,23 +763,36 @@ INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmet
 HDL Synthesis Report
 
 Macro Statistics
+# ROMs                                                 : 1
+ 256x1-bit ROM                                         : 1
 # Multipliers                                          : 1
  7x8-bit multiplier                                    : 1
-# Adders/Subtractors                                   : 2
+# Adders/Subtractors                                   : 3
  15-bit adder                                          : 2
-# Counters                                             : 7
+ 2-bit adder                                           : 1
+# Counters                                             : 10
  10-bit up counter                                     : 2
  2-bit up counter                                      : 3
+ 3-bit up counter                                      : 2
+ 4-bit up counter                                      : 1
  7-bit up counter                                      : 1
  8-bit up counter                                      : 1
-# Registers                                            : 11
- 1-bit register                                        : 5
+# Registers                                            : 33
+ 1-bit register                                        : 21
  15-bit register                                       : 4
+ 2-bit register                                        : 1
+ 3-bit register                                        : 1
  6-bit register                                        : 1
- 8-bit register                                        : 1
-# Comparators                                          : 6
+ 8-bit register                                        : 4
+ 9-bit register                                        : 1
+# Comparators                                          : 9
  10-bit comparator greater                             : 2
  10-bit comparator less                                : 4
+ 2-bit comparator greatequal                           : 1
+ 4-bit comparator greatequal                           : 1
+ 4-bit comparator less                                 : 1
+# Xors                                                 : 1
+ 1-bit xor2                                            : 1
 
 =========================================================================
 
@@ -715,6 +802,7 @@ Macro Statistics
 
 Reading core <ipcore_dir/ipcore_vga_ramb16_dp.ngc>.
 Loading core <ipcore_vga_ramb16_dp> for timing and area information for instance <inst_ipcore_vga_ramb16_dp>.
+WARNING:Xst:1293 - FF/Latch <vga25_q_0> has a constant value of 0 in block <inst_vga_clock_25mhz>. This FF/Latch will be trimmed during the optimization process.
 
 Synthesizing (advanced) Unit <kcpsm3_io_registers_decoder>.
 	Found pipelined multiplier on signal <y_coordination_mult0000>:
@@ -726,25 +814,36 @@ Unit <kcpsm3_io_registers_decoder> synthesized (advanced).
 Advanced HDL Synthesis Report
 
 Macro Statistics
+# ROMs                                                 : 1
+ 256x1-bit ROM                                         : 1
 # Multipliers                                          : 1
  7x8-bit registered multiplier                         : 1
-# Adders/Subtractors                                   : 2
+# Adders/Subtractors                                   : 3
  15-bit adder                                          : 2
-# Counters                                             : 6
+ 2-bit adder                                           : 1
+# Counters                                             : 9
  10-bit up counter                                     : 2
  2-bit up counter                                      : 3
+ 3-bit up counter                                      : 2
+ 4-bit up counter                                      : 1
  8-bit up counter                                      : 1
-# Registers                                            : 140
- Flip-Flops                                            : 140
-# Comparators                                          : 6
+# Registers                                            : 194
+ Flip-Flops                                            : 194
+# Comparators                                          : 9
  10-bit comparator greater                             : 2
  10-bit comparator less                                : 4
+ 2-bit comparator greatequal                           : 1
+ 4-bit comparator greatequal                           : 1
+ 4-bit comparator less                                 : 1
+# Xors                                                 : 1
+ 1-bit xor2                                            : 1
 
 =========================================================================
 
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
+WARNING:Xst:1293 - FF/Latch <vga25_q_0> has a constant value of 0 in block <vga_clock_25mhz>. This FF/Latch will be trimmed during the optimization process.
 INFO:Xst:2146 - In block <vga_address_generator>, Counter <y_step_q> <row_index_q> are equivalent, XST will keep only <y_step_q>.
 
 Optimizing unit <top> ...
@@ -757,6 +856,17 @@ Optimizing unit <kcpsm3_io_registers_decoder> ...
 
 Optimizing unit <kcpsm3> ...
 
+Optimizing unit <ps2_mouse> ...
+WARNING:Xst:2677 - Node <inst_ps2_mouse/rx_parity> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_ps2_mouse/o_y_overflow> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_ps2_mouse/rx_parity_received> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_ps2_mouse/o_y_sign> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_ps2_mouse/o_x_overflow> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_ps2_mouse/o_x_sign> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_ps2_mouse/o_scan_ready> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_ps2_mouse/clear_reg_1> of sequential type is unconnected in block <top>.
+WARNING:Xst:2677 - Node <inst_ps2_mouse/clear_reg_0> of sequential type is unconnected in block <top>.
+
 Mapping all equations...
 Building and optimizing final netlist ...
 Found area constraint ratio of 100 (+ 5) on block top, actual ratio is 2.
@@ -767,8 +877,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 172
- Flip-Flops                                            : 172
+# Registers                                            : 226
+ Flip-Flops                                            : 226
 
 =========================================================================
 
@@ -794,31 +904,33 @@ Optimization Goal                  : Speed
 Keep Hierarchy                     : No
 
 Design Statistics
-# IOs                              : 14
+# IOs                              : 24
 
 Cell Usage :
-# BELS                             : 563
+# BELS                             : 626
 #      GND                         : 2
-#      INV                         : 14
+#      INV                         : 15
 #      LUT1                        : 33
-#      LUT2                        : 67
+#      LUT2                        : 83
 #      LUT2_D                      : 1
-#      LUT2_L                      : 2
-#      LUT3                        : 101
+#      LUT2_L                      : 1
+#      LUT3                        : 110
 #      LUT3_D                      : 1
-#      LUT4                        : 103
-#      LUT4_D                      : 6
-#      LUT4_L                      : 33
+#      LUT3_L                      : 1
+#      LUT4                        : 127
+#      LUT4_D                      : 7
+#      LUT4_L                      : 40
 #      MULT_AND                    : 2
 #      MUXCY                       : 92
-#      MUXF5                       : 9
+#      MUXF5                       : 14
 #      VCC                         : 2
 #      XORCY                       : 95
-# FlipFlops/Latches                : 175
+# FlipFlops/Latches                : 229
 #      FD                          : 24
-#      FDC                         : 48
-#      FDCE                        : 38
-#      FDE                         : 15
+#      FDC                         : 67
+#      FDCE                        : 62
+#      FDE                         : 25
+#      FDPE                        : 1
 #      FDR                         : 30
 #      FDRE                        : 8
 #      FDRSE                       : 10
@@ -831,12 +943,12 @@ Cell Usage :
 #      RAMB16_S1_S1                : 6
 #      RAMB16_S2_S2                : 1
 #      RAMB16_S4_S4                : 1
-# Clock Buffers                    : 2
-#      BUFG                        : 1
+# Clock Buffers                    : 3
+#      BUFG                        : 2
 #      BUFGP                       : 1
-# IO Buffers                       : 12
-#      IBUF                        : 1
-#      OBUF                        : 11
+# IO Buffers                       : 22
+#      IBUF                        : 3
+#      OBUF                        : 19
 # MULTs                            : 1
 #      MULT18X18SIO                : 1
 =========================================================================
@@ -846,16 +958,16 @@ Device utilization summary:
 
 Selected Device : 3s1200efg320-4 
 
- Number of Slices:                      226  out of   8672     2%  
- Number of Slice Flip Flops:            175  out of  17344     1%  
- Number of 4 input LUTs:                429  out of  17344     2%  
-    Number used as logic:               361
+ Number of Slices:                      259  out of   8672     2%  
+ Number of Slice Flip Flops:            229  out of  17344     1%  
+ Number of 4 input LUTs:                487  out of  17344     2%  
+    Number used as logic:               419
     Number used as RAMs:                 68
- Number of IOs:                          14
- Number of bonded IOBs:                  13  out of    250     5%  
+ Number of IOs:                          24
+ Number of bonded IOBs:                  23  out of    250     9%  
  Number of BRAMs:                         9  out of     28    32%  
  Number of MULT18X18SIOs:                 1  out of     28     3%  
- Number of GCLKs:                         2  out of     24     8%  
+ Number of GCLKs:                         3  out of     24    12%  
 
 ---------------------------
 Partition Resource Summary:
@@ -879,7 +991,8 @@ Clock Information:
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
 inst_vga_clock_25mhz/vga_clock1    | BUFG                   | 75    |
-i_cpu_clock                        | BUFGP                  | 144   |
+i_cpu_clock                        | BUFGP                  | 161   |
+inst_ps2_mouse/filter_clk1         | BUFG                   | 37    |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -887,17 +1000,17 @@ Asynchronous Control Signals Information:
 -----------------------------------+------------------------+-------+
 Control Signal                     | Buffer(FF name)        | Load  |
 -----------------------------------+------------------------+-------+
-i_reset                            | IBUF                   | 86    |
+i_reset                            | IBUF                   | 130   |
 -----------------------------------+------------------------+-------+
 
 Timing Summary:
 ---------------
 Speed Grade: -4
 
-   Minimum period: 11.106ns (Maximum Frequency: 90.039MHz)
-   Minimum input arrival time before clock: 8.384ns
+   Minimum period: 10.816ns (Maximum Frequency: 92.456MHz)
+   Minimum input arrival time before clock: 8.399ns
    Maximum output required time after clock: 9.796ns
-   Maximum combinational path delay: 8.932ns
+   Maximum combinational path delay: 8.947ns
 
 Timing Detail:
 --------------
@@ -919,7 +1032,7 @@ Delay:               9.877ns (Levels of Logic = 20)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDCE:C->Q             2   0.591   0.622  inst_vga_address_generator/x_q_3 (inst_vga_address_generator/x_q_3)
-     LUT4:I0->O            1   0.704   0.424  inst_vga_address_generator/x_q_cmp_eq00002_SW0 (N42)
+     LUT4:I0->O            1   0.704   0.424  inst_vga_address_generator/x_q_cmp_eq00002_SW0 (N55)
      LUT4:I3->O           24   0.704   1.331  inst_vga_address_generator/x_q_cmp_eq00002 (inst_vga_address_generator/x_q_cmp_eq0000_mand)
      LUT2:I1->O            4   0.704   0.591  inst_vga_address_generator/x_q_cmp_eq00001 (inst_vga_address_generator/x_q_cmp_eq0000)
      LUT4:I3->O            1   0.704   0.000  inst_vga_address_generator/Madd_vga_address_step_next_i_share0000_lut<0> (inst_vga_address_generator/Madd_vga_address_step_next_i_share0000_lut<0>)
@@ -946,58 +1059,58 @@ Delay:               9.877ns (Levels of Logic = 20)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'i_cpu_clock'
-  Clock period: 11.106ns (frequency: 90.039MHz)
-  Total number of paths / destination ports: 7390 / 562
+  Clock period: 10.816ns (frequency: 92.456MHz)
+  Total number of paths / destination ports: 8002 / 580
 -------------------------------------------------------------------------
-Delay:               11.106ns (Levels of Logic = 5)
+Delay:               10.816ns (Levels of Logic = 5)
   Source:            inst_kcpsm3_rom_memory_content/ram_1024_x_18 (RAM)
-  Destination:       inst_kcpsm3_io_registers_decoder/o_pixel_coordination_13 (FF)
+  Destination:       inst_kcpsm3_io_registers_decoder/o_pixel_color_5 (FF)
   Source Clock:      i_cpu_clock rising
   Destination Clock: i_cpu_clock rising
 
-  Data Path: inst_kcpsm3_rom_memory_content/ram_1024_x_18 to inst_kcpsm3_io_registers_decoder/o_pixel_coordination_13
+  Data Path: inst_kcpsm3_rom_memory_content/ram_1024_x_18 to inst_kcpsm3_io_registers_decoder/o_pixel_color_5
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      RAMB16_S18:CLK->DO5   10   2.800   0.882  inst_kcpsm3_rom_memory_content/ram_1024_x_18 (kcpsm3_instruction<5>)
      RAM16X1D:DPRA1->DPO    1   0.704   0.455  inst_kcpsm3/reg_loop[4].register_bit (inst_kcpsm3/sy<4>)
-     LUT3:I2->O           23   0.704   1.377  inst_kcpsm3/reg_loop[4].operand_select_mux (kcpsm3_port_id<4>)
-     LUT4_D:I0->O         29   0.704   1.340  inst_kcpsm3_io_registers_decoder/x_coordination_and0000111_2 (inst_kcpsm3_io_registers_decoder/x_coordination_and00001111)
-     LUT2:I1->O            1   0.704   0.424  inst_kcpsm3_io_registers_decoder/o_pixel_coordination_mux0000<1>1_SW0 (N54)
-     LUT4:I3->O            1   0.704   0.000  inst_kcpsm3_io_registers_decoder/o_pixel_coordination_mux0000<1>1 (inst_kcpsm3_io_registers_decoder/o_pixel_coordination_mux0000<1>)
-     FDC:D                     0.308          inst_kcpsm3_io_registers_decoder/o_pixel_coordination_1
+     LUT3:I2->O           24   0.704   1.331  inst_kcpsm3/reg_loop[4].operand_select_mux (kcpsm3_port_id<4>)
+     LUT4:I1->O           15   0.704   1.096  inst_kcpsm3_io_registers_decoder/x_coordination_and0000121 (inst_kcpsm3_io_registers_decoder/o_pixel_write_0_or0000)
+     LUT2:I1->O            1   0.704   0.424  inst_kcpsm3_io_registers_decoder/o_pixel_coordination_mux0000<14>1_SW0 (N151)
+     LUT4:I3->O            1   0.704   0.000  inst_kcpsm3_io_registers_decoder/o_pixel_coordination_mux0000<14>1 (inst_kcpsm3_io_registers_decoder/o_pixel_coordination_mux0000<14>)
+     FDC:D                     0.308          inst_kcpsm3_io_registers_decoder/o_pixel_coordination_14
     ----------------------------------------
-    Total                     11.106ns (6.628ns logic, 4.478ns route)
-                                       (59.7% logic, 40.3% route)
+    Total                     10.816ns (6.628ns logic, 4.188ns route)
+                                       (61.3% logic, 38.7% route)
 
 =========================================================================
-Timing constraint: Default OFFSET IN BEFORE for Clock 'inst_vga_clock_25mhz/vga_clock1'
-  Total number of paths / destination ports: 119 / 59
+Timing constraint: Default period analysis for Clock 'inst_ps2_mouse/filter_clk1'
+  Clock period: 4.822ns (frequency: 207.383MHz)
+  Total number of paths / destination ports: 137 / 60
 -------------------------------------------------------------------------
-Offset:              8.384ns (Levels of Logic = 5)
-  Source:            i_reset (PAD)
-  Destination:       inst_vga_address_generator/vga_address_step_temp_q_14 (FF)
-  Destination Clock: inst_vga_clock_25mhz/vga_clock1 rising
+Delay:               4.822ns (Levels of Logic = 2)
+  Source:            inst_ps2_mouse/scan_state_0 (FF)
+  Destination:       inst_ps2_mouse/scan_state_0 (FF)
+  Source Clock:      inst_ps2_mouse/filter_clk1 rising
+  Destination Clock: inst_ps2_mouse/filter_clk1 rising
 
-  Data Path: i_reset to inst_vga_address_generator/vga_address_step_temp_q_14
+  Data Path: inst_ps2_mouse/scan_state_0 to inst_ps2_mouse/scan_state_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            92   1.218   1.456  i_reset_IBUF (i_reset_IBUF)
-     LUT4:I0->O           13   0.704   0.987  inst_vga_timing/o_blank (o_blank_OBUF)
-     LUT4:I3->O            1   0.704   0.424  inst_vga_address_generator/vga_address_step_next_i<0>5_SW0 (N4)
-     LUT4_D:I3->O         14   0.704   1.175  inst_vga_address_generator/vga_address_step_next_i<0>5 (inst_vga_address_generator/N5)
-     LUT3:I0->O            2   0.704   0.000  inst_vga_address_generator/vga_address_step_next_i<8> (inst_vga_address_generator/vga_address_step_next_i<8>)
-     FDC:D                     0.308          inst_vga_address_generator/vga_address_step_q_8
+     FDCE:C->Q            17   0.591   1.051  inst_ps2_mouse/scan_state_0 (inst_ps2_mouse/scan_state_0)
+     MUXF5:S->O            4   0.739   0.762  inst_ps2_mouse/scan_state_0_not00012_f5 (inst_ps2_mouse/byte_count_sr_not0001)
+     LUT3:I0->O            1   0.704   0.420  inst_ps2_mouse/scan_state_0_not00011 (inst_ps2_mouse/scan_state_0_not0001)
+     FDCE:CE                   0.555          inst_ps2_mouse/scan_state_0
     ----------------------------------------
-    Total                      8.384ns (4.342ns logic, 4.042ns route)
-                                       (51.8% logic, 48.2% route)
+    Total                      4.822ns (2.589ns logic, 2.233ns route)
+                                       (53.7% logic, 46.3% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'i_cpu_clock'
-  Total number of paths / destination ports: 11 / 11
+  Total number of paths / destination ports: 30 / 29
 -------------------------------------------------------------------------
-Offset:              5.920ns (Levels of Logic = 3)
+Offset:              5.935ns (Levels of Logic = 3)
   Source:            i_reset (PAD)
   Destination:       inst_kcpsm3_io_registers_decoder/x_coordination_7 (FF)
   Destination Clock: i_cpu_clock rising
@@ -1006,13 +1119,56 @@ Offset:              5.920ns (Levels of Logic = 3)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            92   1.218   1.360  i_reset_IBUF (i_reset_IBUF)
-     LUT2:I1->O            2   0.704   0.622  inst_kcpsm3_io_registers_decoder/x_coordination_and000011_SW0 (N114)
+     IBUF:I->O           138   1.218   1.375  i_reset_IBUF (i_reset_IBUF)
+     LUT2:I1->O            2   0.704   0.622  inst_kcpsm3_io_registers_decoder/x_coordination_and000012_SW0 (N176)
      LUT4:I0->O            8   0.704   0.757  inst_kcpsm3_io_registers_decoder/x_coordination_and00002 (inst_kcpsm3_io_registers_decoder/x_coordination_and0000)
      FDE:CE                    0.555          inst_kcpsm3_io_registers_decoder/x_coordination_0
     ----------------------------------------
-    Total                      5.920ns (3.181ns logic, 2.739ns route)
-                                       (53.7% logic, 46.3% route)
+    Total                      5.935ns (3.181ns logic, 2.754ns route)
+                                       (53.6% logic, 46.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'inst_vga_clock_25mhz/vga_clock1'
+  Total number of paths / destination ports: 119 / 59
+-------------------------------------------------------------------------
+Offset:              8.399ns (Levels of Logic = 5)
+  Source:            i_reset (PAD)
+  Destination:       inst_vga_address_generator/vga_address_step_temp_q_14 (FF)
+  Destination Clock: inst_vga_clock_25mhz/vga_clock1 rising
+
+  Data Path: i_reset to inst_vga_address_generator/vga_address_step_temp_q_14
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O           138   1.218   1.471  i_reset_IBUF (i_reset_IBUF)
+     LUT4:I0->O           13   0.704   0.987  inst_vga_timing/o_blank (o_blank_OBUF)
+     LUT4:I3->O            1   0.704   0.424  inst_vga_address_generator/vga_address_step_next_i<0>5_SW0 (N17)
+     LUT4_D:I3->O         14   0.704   1.175  inst_vga_address_generator/vga_address_step_next_i<0>5 (inst_vga_address_generator/N5)
+     LUT3:I0->O            2   0.704   0.000  inst_vga_address_generator/vga_address_step_next_i<9> (inst_vga_address_generator/vga_address_step_next_i<9>)
+     FDC:D                     0.308          inst_vga_address_generator/vga_address_step_q_9
+    ----------------------------------------
+    Total                      8.399ns (4.342ns logic, 4.057ns route)
+                                       (51.7% logic, 48.3% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'inst_ps2_mouse/filter_clk1'
+  Total number of paths / destination ports: 2 / 2
+-------------------------------------------------------------------------
+Offset:              3.423ns (Levels of Logic = 2)
+  Source:            i_ps2_mdata (PAD)
+  Destination:       inst_ps2_mouse/scan_state_0 (FF)
+  Destination Clock: inst_ps2_mouse/filter_clk1 rising
+
+  Data Path: i_ps2_mdata to inst_ps2_mouse/scan_state_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             2   1.218   0.526  i_ps2_mdata_IBUF (i_ps2_mdata_IBUF)
+     LUT3:I1->O            1   0.704   0.420  inst_ps2_mouse/scan_state_0_not00011 (inst_ps2_mouse/scan_state_0_not0001)
+     FDCE:CE                   0.555          inst_ps2_mouse/scan_state_0
+    ----------------------------------------
+    Total                      3.423ns (2.477ns logic, 0.946ns route)
+                                       (72.4% logic, 27.6% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'inst_vga_clock_25mhz/vga_clock1'
@@ -1020,55 +1176,74 @@ Timing constraint: Default OFFSET OUT AFTER for Clock 'inst_vga_clock_25mhz/vga_
 -------------------------------------------------------------------------
 Offset:              9.796ns (Levels of Logic = 5)
   Source:            inst_vga_timing/v_counter_6 (FF)
-  Destination:       o_b<1> (PAD)
+  Destination:       o_b<3> (PAD)
   Source Clock:      inst_vga_clock_25mhz/vga_clock1 rising
 
-  Data Path: inst_vga_timing/v_counter_6 to o_b<1>
+  Data Path: inst_vga_timing/v_counter_6 to o_b<3>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDCE:C->Q             4   0.591   0.762  inst_vga_timing/v_counter_6 (inst_vga_timing/v_counter_6)
-     LUT2_L:I0->LO         1   0.704   0.104  inst_vga_timing/o_v_blank_SW0 (N01)
+     LUT2_L:I0->LO         1   0.704   0.104  inst_vga_timing/o_v_blank_SW0 (N13)
      LUT4:I3->O            6   0.704   0.673  inst_vga_timing/o_v_blank (o_v_blank_OBUF)
      LUT4:I3->O           13   0.704   1.158  inst_vga_timing/o_blank (o_blank_OBUF)
-     LUT2:I0->O            1   0.704   0.420  inst_vga_rgb/o_r_1_mux00001 (o_r_1_OBUF)
-     OBUF:I->O                 3.272          o_r_1_OBUF (o_r<1>)
+     LUT2:I0->O            1   0.704   0.420  inst_vga_rgb/o_r_1_mux00001 (o_r_3_OBUF)
+     OBUF:I->O                 3.272          o_r_3_OBUF (o_r<3>)
     ----------------------------------------
     Total                      9.796ns (6.679ns logic, 3.117ns route)
                                        (68.2% logic, 31.8% route)
 
 =========================================================================
-Timing constraint: Default path analysis
-  Total number of paths / destination ports: 7 / 7
+Timing constraint: Default OFFSET OUT AFTER for Clock 'inst_ps2_mouse/filter_clk1'
+  Total number of paths / destination ports: 3 / 3
 -------------------------------------------------------------------------
-Delay:               8.932ns (Levels of Logic = 4)
-  Source:            i_reset (PAD)
-  Destination:       o_b<1> (PAD)
+Offset:              4.310ns (Levels of Logic = 1)
+  Source:            inst_ps2_mouse/o_button_left (FF)
+  Destination:       o_led<2> (PAD)
+  Source Clock:      inst_ps2_mouse/filter_clk1 rising
 
-  Data Path: i_reset to o_b<1>
+  Data Path: inst_ps2_mouse/o_button_left to o_led<2>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            92   1.218   1.456  i_reset_IBUF (i_reset_IBUF)
-     LUT4:I0->O           13   0.704   1.158  inst_vga_timing/o_blank (o_blank_OBUF)
-     LUT2:I0->O            1   0.704   0.420  inst_vga_rgb/o_r_1_mux00001 (o_r_1_OBUF)
-     OBUF:I->O                 3.272          o_r_1_OBUF (o_r<1>)
+     FDCE:C->Q             2   0.591   0.447  inst_ps2_mouse/o_button_left (inst_ps2_mouse/o_button_left)
+     OBUF:I->O                 3.272          o_led_2_OBUF (o_led<2>)
     ----------------------------------------
-    Total                      8.932ns (5.898ns logic, 3.034ns route)
-                                       (66.0% logic, 34.0% route)
+    Total                      4.310ns (3.863ns logic, 0.447ns route)
+                                       (89.6% logic, 10.4% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 7 / 7
+-------------------------------------------------------------------------
+Delay:               8.947ns (Levels of Logic = 4)
+  Source:            i_reset (PAD)
+  Destination:       o_b<3> (PAD)
+
+  Data Path: i_reset to o_b<3>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O           138   1.218   1.471  i_reset_IBUF (i_reset_IBUF)
+     LUT4:I0->O           13   0.704   1.158  inst_vga_timing/o_blank (o_blank_OBUF)
+     LUT2:I0->O            1   0.704   0.420  inst_vga_rgb/o_r_1_mux00001 (o_r_3_OBUF)
+     OBUF:I->O                 3.272          o_r_3_OBUF (o_r<3>)
+    ----------------------------------------
+    Total                      8.947ns (5.898ns logic, 3.049ns route)
+                                       (65.9% logic, 34.1% route)
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 14.00 secs
-Total CPU time to Xst completion: 13.27 secs
+Total REAL time to Xst completion: 4.00 secs
+Total CPU time to Xst completion: 4.33 secs
  
 --> 
 
 
-Total memory usage is 541656 kilobytes
+Total memory usage is 535672 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :  123 (   0 filtered)
+Number of warnings :  164 (   0 filtered)
 Number of infos    :    2 (   0 filtered)
 

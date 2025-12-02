@@ -11,7 +11,7 @@ package p_package1 is
   constant c_all_pixels                 : integer := c_x * c_y; -- 19200,307200
   constant c_memory_address_bits        : integer := 15;
   constant c_color_bits                 : integer := 6;
-  constant c_vga_clock_divider_25mhz    : integer := 2;
+  constant c_vga_clock_divider_25mhz    : integer := 1; -- 1 - 50 MHz, 2 - 100 MHz
   constant c_kcpsm3_port_id_pixel_row   : std_logic_vector (7 downto 0) := x"16";
   constant c_kcpsm3_port_id_pixel_col   : std_logic_vector (7 downto 0) := x"17";
   constant c_kcpsm3_port_id_pixel_color : std_logic_vector (7 downto 0) := x"20";

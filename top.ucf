@@ -1,0 +1,29 @@
+NET "i_cpu_clock"         LOC = "B8";
+#NET "clk1"        LOC = "U9";
+NET "i_reset"      LOC = "B18";
+NET "i_reset"      TIG; 
+
+#NET "o_r<1>"   LOC = "R9";
+NET "o_r<2>"   LOC = "T8";
+NET "o_r<3>"   LOC = "R8";
+#NET "o_g<1>" LOC = "N8";
+NET "o_g<2>" LOC = "P8";
+NET "o_g<3>" LOC = "P6";
+NET "o_b<2>"  LOC = "U5";
+NET "o_b<3>"  LOC = "U4";
+
+NET "o_hsync"       LOC = "T4";
+NET "o_vsync"       LOC = "U3";
+
+NET "i_ps2_mclk"        LOC = "R12";
+NET "i_ps2_mdata"        LOC = "P11";
+
+NET "o_led<0>"      LOC = "J14";
+NET "o_led<1>"      LOC = "J15";
+NET "o_led<2>"      LOC = "K15";
+NET "o_led<3>"      LOC = "K14";
+NET "o_led<4>"      LOC = "E16";
+NET "o_led<5>"      LOC = "P16";
+NET "o_led<6>"      LOC = "E4";
+NET "o_led<7>"      LOC = "P4";
+

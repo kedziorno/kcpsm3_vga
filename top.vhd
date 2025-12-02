@@ -46,11 +46,12 @@ o_vsync     : out std_logic;
 o_blank     : out std_logic;
 o_h_blank   : out std_logic;
 o_v_blank   : out std_logic;
-o_r         : out std_logic_vector (1 downto 0);
-o_g         : out std_logic_vector (1 downto 0);
-o_b         : out std_logic_vector (1 downto 0);
+o_r         : out std_logic_vector (3 downto 2);
+o_g         : out std_logic_vector (3 downto 2);
+o_b         : out std_logic_vector (3 downto 2);
 i_ps2_mdata : in  std_logic;
-i_ps2_mclk  : in  std_logic
+i_ps2_mclk  : in  std_logic;
+o_led       : out std_logic_vector (7 downto 0)
 );
 end entity top;
 
@@ -245,6 +246,7 @@ architecture behavioral of top is
   signal ps2_mouse_button_right   : std_logic;
   signal ps2_mouse_button_left    : std_logic;
   signal ps2_mouse_do_read        : std_logic;
+  signal ps2_mouse_flags          : std_logic_vector (7 downto 0);
 
 --synthesis translate_ff
   signal o_test0 : std_logic_vector (7 downto 0);
@@ -467,8 +469,9 @@ begin
   o_test0               => o_test0,
   i_mouse_x             => ps2_mouse_x_movement,
   i_mouse_y             => ps2_mouse_y_movement,
-  i_mouse_flags         => "0000000" & ps2_mouse_button_left
+  i_mouse_flags         => ps2_mouse_flags
   );
+  ps2_mouse_flags <= "0000000" & ps2_mouse_button_left;
 
   inst_ipcore_vga_ramb16_dp : ipcore_vga_ramb16_dp
   port map (
@@ -501,5 +504,6 @@ begin
   o_button_right  => ps2_mouse_button_right,
   o_button_left   => ps2_mouse_button_left
   );
+  o_led <= "00000" & ps2_mouse_button_left & ps2_mouse_button_middle & ps2_mouse_button_right;
 
 end architecture behavioral;
