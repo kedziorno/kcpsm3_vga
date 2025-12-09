@@ -169,6 +169,10 @@ architecture behavioral of top is
   i_mouse_x             : in  std_logic_vector (7 downto 0);
   i_mouse_y             : in  std_logic_vector (7 downto 0);
   i_mouse_flags         : in  std_logic_vector (7 downto 0);
+  i_mouse_x_sgn         : in  std_logic;
+  i_mouse_y_sgn         : in  std_logic;
+  i_mouse_x_ofw         : in  std_logic;
+  i_mouse_y_ofw         : in  std_logic;
   -- o_testX not used in synthesis
   o_test8               : out std_logic_vector (7 downto 0);
   o_test7               : out std_logic_vector (7 downto 0);
@@ -455,8 +459,6 @@ begin
   clk         => i_cpu_clock
   );
 
-  zero_ps2_mouse_x_sign <= zero_7 & ps2_mouse_x_sign;
-  zero_ps2_mouse_y_sign <= zero_7 & ps2_mouse_y_sign;
   inst_kcpsm3_io_registers_decoder : kcpsm3_io_registers_decoder
   port map (
   i_clock               => i_cpu_clock,
@@ -473,8 +475,12 @@ begin
   o_test2               => o_test2,
   o_test1               => o_test1,
   o_test0               => o_test0,
-  i_mouse_x             => zero_ps2_mouse_x_sign, --ps2_mouse_x_movement,
-  i_mouse_y             => zero_ps2_mouse_y_sign, --ps2_mouse_y_movement,
+  i_mouse_x             => ps2_mouse_x_movement,
+  i_mouse_y             => ps2_mouse_y_movement,
+  i_mouse_x_sgn         => ps2_mouse_x_sign,
+  i_mouse_y_sgn         => ps2_mouse_y_sign,
+  i_mouse_x_ofw         => ps2_mouse_x_overflow,
+  i_mouse_y_ofw         => ps2_mouse_y_overflow,
   i_mouse_flags         => ps2_mouse_flags
   );
   ps2_mouse_flags <= "0000000" & ps2_mouse_button_left;
@@ -510,6 +516,14 @@ begin
   o_button_right  => ps2_mouse_button_right,
   o_button_left   => ps2_mouse_button_left
   );
-  o_led <= ps2_mouse_parity_error & "0000" & ps2_mouse_button_left & ps2_mouse_button_middle & ps2_mouse_button_right;
+  o_led <=
+    ps2_mouse_parity_error &
+    ps2_mouse_x_overflow &
+    ps2_mouse_y_overflow &
+    ps2_mouse_x_sign &
+    ps2_mouse_y_sign &
+    ps2_mouse_button_left &
+    ps2_mouse_button_middle &
+    ps2_mouse_button_right;
 
 end architecture behavioral;

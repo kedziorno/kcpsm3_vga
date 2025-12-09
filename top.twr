@@ -44,7 +44,7 @@ Setup/Hold to clock i_cpu_clock
             |Max Setup to|Max Hold to |                  | Clock  |
 Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------------+--------+
-i_ps2_mclk  |    3.711(R)|    0.359(R)|i_cpu_clock_BUFGP |   0.000|
+i_ps2_mclk  |    3.896(R)|    0.238(R)|i_cpu_clock_BUFGP |   0.000|
 ------------+------------+------------+------------------+--------+
 
 Clock i_cpu_clock to Pad
@@ -52,7 +52,7 @@ Clock i_cpu_clock to Pad
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-o_led<7>    |   12.008(R)|i_cpu_clock_BUFGP |   0.000|
+o_led<7>    |   12.133(R)|i_cpu_clock_BUFGP |   0.000|
 ------------+------------+------------------+--------+
 
 Clock to Setup on destination clock i_cpu_clock
@@ -60,18 +60,18 @@ Clock to Setup on destination clock i_cpu_clock
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-i_cpu_clock    |   17.399|         |         |         |
+i_cpu_clock    |   16.401|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
-Analysis completed Tue Dec  9 15:18:47 2025 
+Analysis completed Tue Dec  9 19:01:45 2025 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 355 MB
+Peak Memory Usage: 357 MB
 
 
 

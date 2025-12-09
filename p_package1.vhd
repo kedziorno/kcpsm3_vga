@@ -18,6 +18,10 @@ package p_package1 is
   constant c_kcpsm3_port_id_mouse_x     : std_logic_vector (7 downto 0) := x"21";
   constant c_kcpsm3_port_id_mouse_y     : std_logic_vector (7 downto 0) := x"22";
   constant c_kcpsm3_port_id_mouse_flags : std_logic_vector (7 downto 0) := x"23";
+  constant c_kcpsm3_port_id_mouse_x_sgn : std_logic_vector (7 downto 0) := x"24";
+  constant c_kcpsm3_port_id_mouse_y_sgn : std_logic_vector (7 downto 0) := x"25";
+  constant c_kcpsm3_port_id_mouse_x_ofw : std_logic_vector (7 downto 0) := x"26";
+  constant c_kcpsm3_port_id_mouse_y_ofw : std_logic_vector (7 downto 0) := x"27";
 
   type t_color_array is array (63 downto 0) of std_logic_vector (5 downto 0);
   constant c_color : t_color_array := (
