@@ -57,11 +57,8 @@ o_pixel_color         : out std_logic_vector (c_color_bits - 1 downto 0);
 o_pixel_write         : out std_logic_vector (0 downto 0);
 i_mouse_x             : in  std_logic_vector (7 downto 0);
 i_mouse_y             : in  std_logic_vector (7 downto 0);
+i_mouse_z             : in  std_logic_vector (7 downto 0);
 i_mouse_flags         : in  std_logic_vector (7 downto 0);
-i_mouse_x_sgn         : in  std_logic;
-i_mouse_y_sgn         : in  std_logic;
-i_mouse_x_ofw         : in  std_logic;
-i_mouse_y_ofw         : in  std_logic;
 -- o_testX not used in synthesis
 o_test8               : out std_logic_vector (7 downto 0);
 o_test7               : out std_logic_vector (7 downto 0);
@@ -92,27 +89,15 @@ begin
           if (i_kcpsm3_read_strobe = '1') then
             o_kcpsm3_in_port <= i_mouse_y;
           end if;
+        when c_kcpsm3_port_id_mouse_z =>
+          if (i_kcpsm3_read_strobe = '1') then
+            o_kcpsm3_in_port <= i_mouse_z;
+          end if;
         when c_kcpsm3_port_id_mouse_flags =>
           if (i_kcpsm3_read_strobe = '1') then
             o_kcpsm3_in_port <= i_mouse_flags;
           end if;
-        when c_kcpsm3_port_id_mouse_x_sgn =>
-          if (i_kcpsm3_read_strobe = '1') then
-            o_kcpsm3_in_port <= "0000000" & i_mouse_x_sgn;
-          end if;
-        when c_kcpsm3_port_id_mouse_y_sgn =>
-          if (i_kcpsm3_read_strobe = '1') then
-            o_kcpsm3_in_port <= "0000000" & i_mouse_y_sgn;
-          end if;
-        when c_kcpsm3_port_id_mouse_x_ofw =>
-          if (i_kcpsm3_read_strobe = '1') then
-            o_kcpsm3_in_port <= "0000000" & i_mouse_x_ofw;
-          end if;
-        when c_kcpsm3_port_id_mouse_y_ofw =>
-          if (i_kcpsm3_read_strobe = '1') then
-            o_kcpsm3_in_port <= "0000000" & i_mouse_y_ofw;
-          end if;
-        when others => null;
+        when others => o_kcpsm3_in_port <= (others => '0');
       end case;
     end if;
   end process p_io_registers_decoder_mouse;
@@ -167,7 +152,6 @@ begin
     end if;
   end process p_io_registers_decoder_vga;
 
---synthesis translate_off
   p_io_registers_decoder_debug : process (i_clock, i_reset) is
   begin
     if (i_reset = '1') then
@@ -227,6 +211,5 @@ begin
       end case;
     end if;
   end process p_io_registers_decoder_debug;
---synthesis translate_on
 
 end architecture behavioral;

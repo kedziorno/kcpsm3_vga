@@ -169,10 +169,7 @@ architecture behavioral of top is
   i_mouse_x             : in  std_logic_vector (7 downto 0);
   i_mouse_y             : in  std_logic_vector (7 downto 0);
   i_mouse_flags         : in  std_logic_vector (7 downto 0);
-  i_mouse_x_sgn         : in  std_logic;
-  i_mouse_y_sgn         : in  std_logic;
-  i_mouse_x_ofw         : in  std_logic;
-  i_mouse_y_ofw         : in  std_logic;
+  i_mouse_z             : in  std_logic_vector (7 downto 0);
   -- o_testX not used in synthesis
   o_test8               : out std_logic_vector (7 downto 0);
   o_test7               : out std_logic_vector (7 downto 0);
@@ -198,6 +195,7 @@ architecture behavioral of top is
   o_parity_error  : out std_logic;
   o_x_movement    : out std_logic_vector (7 downto 0);
   o_y_movement    : out std_logic_vector (7 downto 0);
+  o_z_movement    : out std_logic_vector (7 downto 0);
   o_x_overflow    : out std_logic;
   o_y_overflow    : out std_logic;
   o_x_sign        : out std_logic;
@@ -222,9 +220,9 @@ architecture behavioral of top is
 
   signal vga_clock                           : std_logic;
   signal vga_blank, vga_h_blank, vga_v_blank : std_logic;
-  signal pixel_coordination, vga_address     : std_logic_vector (c_memory_address_bits - 1 downto 0);
-  signal pixel_color, vga_color              : std_logic_vector (c_color_bits - 1 downto 0);
-  signal pixel_write                         : std_logic_vector (0 downto 0);
+  signal pixel_coordination, pixel_coordination_reset, pixel_coordination_running, vga_address : std_logic_vector (c_memory_address_bits - 1 downto 0);
+  signal pixel_color, pixel_color_reset, pixel_color_running, vga_color : std_logic_vector (c_color_bits - 1 downto 0);
+  signal pixel_write, pixel_write_reset, pixel_write_running : std_logic_vector (0 downto 0);
 
   signal kcpsm3_address       : std_logic_vector (9 downto 0);
   signal kcpsm3_instruction   : std_logic_vector (17 downto 0);
@@ -242,6 +240,10 @@ architecture behavioral of top is
   signal ps2_mouse_parity_error   : std_logic;
   signal ps2_mouse_x_movement     : std_logic_vector (7 downto 0);
   signal ps2_mouse_y_movement     : std_logic_vector (7 downto 0);
+  signal ps2_mouse_z_movement     : std_logic_vector (7 downto 0);
+  signal ps2_mouse_x_movement_reg : std_logic_vector (7 downto 0);
+  signal ps2_mouse_y_movement_reg : std_logic_vector (7 downto 0);
+  signal ps2_mouse_z_movement_reg : std_logic_vector (7 downto 0);
   signal ps2_mouse_x_overflow     : std_logic;
   signal ps2_mouse_y_overflow     : std_logic;
   signal ps2_mouse_x_sign         : std_logic;
@@ -251,6 +253,7 @@ architecture behavioral of top is
   signal ps2_mouse_button_left    : std_logic;
   signal ps2_mouse_do_read        : std_logic;
   signal ps2_mouse_flags          : std_logic_vector (7 downto 0);
+  signal ps2_mouse_flags_reg      : std_logic_vector (7 downto 0);
 
 --synthesis translate_ff
   signal o_test0 : std_logic_vector (7 downto 0);
@@ -276,128 +279,61 @@ architecture behavioral of top is
   signal zero_ps2_mouse_x_sign : std_logic_vector (7 downto 0);
   signal zero_ps2_mouse_y_sign : std_logic_vector (7 downto 0);
 
-begin
+  type p0_states is (r0, r1, a, b);
+  signal p0_state : p0_states;
 
---synthesis translate_off
-  test_concatenate_4321 <= o_test4 & o_test3 & o_test2 & o_test1;
-  test_concatenate_8765 <= o_test8 & o_test7 & o_test6 & o_test5;
-  test_concatenate_21 <= o_test2 & o_test1;
-  test_concatenate_43 <= o_test4 & o_test3;
-  test_concatenate_65 <= o_test6 & o_test5;
-  test_concatenate_87 <= o_test8 & o_test7;
---synthesis translate_on
+begin
 
   o_blank   <= vga_blank;
   o_h_blank <= vga_h_blank;
   o_v_blank <= vga_v_blank;
 
+  pixel_write <= pixel_write_reset when (p0_state = r0 or p0_state = r1) else pixel_write_running;
+  pixel_coordination <= pixel_coordination_reset when (p0_state = r0 or p0_state = r1) else pixel_coordination_running;
+  pixel_color <= pixel_color_reset when (p0_state = r0 or p0_state = r1) else pixel_color_running;
+
   p0 : process (i_cpu_clock, i_reset) is
-    type states is (a,b);
-    variable state : states;
+    variable memory_address_index : integer range 0 to c_all_pixels - 1;
   begin
     if (i_reset = '1') then
-      state := a;
+      p0_state <= r0;
+      memory_address_index := 0;
+      pixel_write_reset <= "0";
+      pixel_coordination_reset <= (others => '0');
+      pixel_color_reset <= (others => '0');
     elsif (rising_edge (i_cpu_clock)) then
       ps2_mouse_trigger_prev <= ps2_mouse_trigger;
-      case (state) is
+      case (p0_state) is
+        when r0 => -- reset VGA memory content
+          p0_state <= r1;
+          pixel_write_reset <= "1";
+          pixel_coordination_reset <= std_logic_vector (to_unsigned (memory_address_index, c_memory_address_bits));
+          pixel_color_reset <= (others => '0');
+        when r1 =>
+          pixel_write_reset <= "0";
+          pixel_coordination_reset <= (others => '0');
+          pixel_color_reset <= (others => '0');
+          if (memory_address_index = c_all_pixels - 1) then
+            memory_address_index := 0;
+            p0_state <= a;
+          else
+            memory_address_index := memory_address_index + 1;
+            p0_state <= r0;
+          end if;
         when a =>
           if (ps2_mouse_trigger_prev = '1' and ps2_mouse_trigger = '0') then
-            state := b;
+            p0_state <= b;
             kcpsm3_interrupt <= '1';
             ps2_mouse_do_read <= kcpsm3_interrupt_ack;
           end if;
         when b =>
           if (kcpsm3_interrupt_ack = '1') then
-            state := a;
+            p0_state <= a;
             kcpsm3_interrupt <= '0';
           end if;
       end case;
     end if;
   end process p0;
-
-  --synthesis translate_off
---  p_report_address_and_color : process (pixel_write(0)) is
---  begin
---    if (rising_edge (pixel_write(0))) then
---      report
---        "Color " & integer'image (to_integer (unsigned (pixel_color))) & " " &
---        "at address " & integer'image (to_integer (unsigned (pixel_coordination)));
---    end if;
---  end process p_report_address_and_color;
-  --synthesis translate_on
-
---synthesis translate_off
---  p_report1 : process (i_cpu_clock) is
---    variable i : integer := 0;
---  begin
---    if (rising_edge (i_cpu_clock)) then
---      if (to_integer (unsigned (kcpsm3_address)) = 103) then
---        report integer'image (i) & " tick address " & integer'image (to_integer (unsigned (kcpsm3_address)));
---        i := i + 1;
---      end if;
---    end if;
---  end process p_report1;
-  p_report2 : process (kcpsm3_write_strobe) is
-    variable factor : real := 256.0;
-    variable factor_theta : real := 256.0 / 4.0;
-    variable rad_2_ang : real := 180.0 / 3.1415;
-    variable ang_2_rad : real := 3.1415 / 180.0;
-    variable v_theta_r, v_sin_r, v_cos_r, v_sin_o, v_cos_o : real := 0.0;
-    variable v_sin_v, v_cos_v : std_logic_vector (7 downto 0); -- use variables, signals appear on next clock (mistakes)
-    variable v_theta_v : std_logic_vector (15 downto 0); -- use variables, signals appear on next clock (mistakes)
-    -- we can use one variable for all out ports, but can be problem when in psm code we mistake OUTPUT's order.
-    variable flag : boolean := false;
-  begin
-    if (falling_edge (kcpsm3_write_strobe)) then
-      if (to_integer (unsigned (kcpsm3_port_id)) = 1) then -- SIN
---        v_sin_v := kcpsm3_out_port & v_sin_v (15 downto 8); -- LO first
-        v_sin_v := kcpsm3_out_port; -- LO first
---        if (flag = true) then
-          v_sin_r := real (to_integer (signed (v_sin_v)));
-          s_sin_v <= v_sin_v;
-          v_sin_r := v_sin_r / factor;
-          --report "sin_cordic " & real'image (v_sin_r);
-          s_sin_r <= v_sin_r;
---          flag := false;
---        else
---          flag := true;
---        end if;
-      end if;
-      if (to_integer (unsigned (kcpsm3_port_id)) = 2) then -- COS
---        v_cos_v := kcpsm3_out_port & v_cos_v (15 downto 8); -- LO first
-        v_cos_v := kcpsm3_out_port; -- LO first
---        if (flag = true) then
-          v_cos_r := real (to_integer (signed (v_cos_v)));
-          s_cos_v <= v_cos_v;
-          v_cos_r := v_cos_r / factor;
-          --report "cos_cordic " & real'image (v_cos_r);
-          s_cos_r <= v_cos_r;
---        else
---          flag := true;
---        end if;
-      end if;
-      if (to_integer (unsigned (kcpsm3_port_id)) = 3) then -- THETA
-        v_theta_v := kcpsm3_out_port & v_theta_v (15 downto 8); -- LO first
-        if (flag = true) then
-          s_theta_v <= v_theta_v;
-          v_theta_r := (real (to_integer (unsigned (v_theta_v)))); -- radians
-          v_theta_r := v_theta_r / factor_theta; -- radians after normalize
-          s_theta_r_rad <= v_theta_r;
-          s_theta_r_ang <= v_theta_r * rad_2_ang;
-          v_sin_o := sin (v_theta_r);
-          --report "sin_original " & real'image (v_sin_o);
-          s_sin_f <= v_sin_o;
-          v_cos_o := cos (v_theta_r);
-          --report "cos_original " & real'image (v_cos_o);
-          s_cos_f <= v_cos_o;
-          flag := false;
-        else
-          flag := true;
-        end if;
-      end if;
-    end if;
-  end process p_report2;
---synthesis translate_on
 
   inst_vga_clock_25mhz : vga_clock_25mhz
   port map (
@@ -468,22 +404,18 @@ begin
   o_kcpsm3_in_port      => kcpsm3_in_port,
   i_kcpsm3_write_strobe => kcpsm3_write_strobe,
   i_kcpsm3_read_strobe  => kcpsm3_read_strobe,
-  o_pixel_coordination  => pixel_coordination,
-  o_pixel_color         => pixel_color,
-  o_pixel_write         => pixel_write,
+  o_pixel_coordination  => pixel_coordination_running,
+  o_pixel_color         => pixel_color_running,
+  o_pixel_write         => pixel_write_running,
   o_test3               => o_test3,
   o_test2               => o_test2,
   o_test1               => o_test1,
   o_test0               => o_test0,
-  i_mouse_x             => ps2_mouse_x_movement,
-  i_mouse_y             => ps2_mouse_y_movement,
-  i_mouse_x_sgn         => ps2_mouse_x_sign,
-  i_mouse_y_sgn         => ps2_mouse_y_sign,
-  i_mouse_x_ofw         => ps2_mouse_x_overflow,
-  i_mouse_y_ofw         => ps2_mouse_y_overflow,
-  i_mouse_flags         => ps2_mouse_flags
+  i_mouse_x             => ps2_mouse_x_movement_reg,
+  i_mouse_y             => ps2_mouse_y_movement_reg,
+  i_mouse_z             => ps2_mouse_z_movement_reg,
+  i_mouse_flags         => ps2_mouse_flags_reg
   );
-  ps2_mouse_flags <= "0000000" & ps2_mouse_button_left;
 
   inst_ipcore_vga_ramb16_dp : ipcore_vga_ramb16_dp
   port map (
@@ -496,18 +428,38 @@ begin
   doutb => vga_color
   );
 
+  p1 : process (i_cpu_clock) is
+  begin
+    if (rising_edge (i_cpu_clock)) then
+      if (kcpsm3_interrupt_ack = '1') then
+        ps2_mouse_x_movement_reg <= ps2_mouse_x_movement;
+        ps2_mouse_y_movement_reg <= ps2_mouse_y_movement;
+        ps2_mouse_z_movement_reg <= ps2_mouse_z_movement;
+        ps2_mouse_flags_reg <= ps2_mouse_parity_error &
+        ps2_mouse_x_overflow &
+        ps2_mouse_y_overflow &
+        ps2_mouse_x_sign &
+        ps2_mouse_y_sign &
+        ps2_mouse_button_right &
+        ps2_mouse_button_middle &
+        ps2_mouse_button_left;
+      end if;
+    end if;
+  end process p1;
+
   inst_ps2_mouse : ps2_mouse
   port map (
   i_clock         => i_cpu_clock,
   i_reset         => i_reset,
   i_PS2_Clk       => i_ps2_mclk,
   i_PS2_Data      => i_ps2_mdata,
-  i_do_read       => '1',
+  i_do_read       => ps2_mouse_do_read, --'1',
   o_scan_ready    => ps2_mouse_scan_ready,
   o_trigger       => ps2_mouse_trigger,
   o_parity_error  => ps2_mouse_parity_error,
   o_x_movement    => ps2_mouse_x_movement,
   o_y_movement    => ps2_mouse_y_movement,
+  o_z_movement    => ps2_mouse_z_movement,
   o_x_overflow    => ps2_mouse_x_overflow,
   o_y_overflow    => ps2_mouse_y_overflow,
   o_x_sign        => ps2_mouse_x_sign,
@@ -516,14 +468,43 @@ begin
   o_button_right  => ps2_mouse_button_right,
   o_button_left   => ps2_mouse_button_left
   );
-  o_led <=
-    ps2_mouse_parity_error &
-    ps2_mouse_x_overflow &
-    ps2_mouse_y_overflow &
-    ps2_mouse_x_sign &
-    ps2_mouse_y_sign &
-    ps2_mouse_button_left &
-    ps2_mouse_button_middle &
-    ps2_mouse_button_right;
+  --o_led <= ps2_mouse_x_movement_reg;
+  --o_led <= ps2_mouse_y_movement_reg;
+  --o_led <= ps2_mouse_z_movement_reg;
+  --o_led <= ps2_mouse_flags_reg;
+  o_led <= o_test1 or o_test2 or o_test3 or o_test4 or o_test5 or o_test6 or o_test7 or o_test8;
+
+--synthesis translate_off
+  p_report_address_and_color : process (pixel_write(0)) is
+  begin
+    if (rising_edge (pixel_write(0))) then
+      report
+        "Color " & integer'image (to_integer (unsigned (pixel_color))) & " " &
+        "at address " & integer'image (to_integer (unsigned (pixel_coordination)));
+    end if;
+  end process p_report_address_and_color;
+--synthesis translate_on
+
+--synthesis translate_off
+  p_report1 : process (i_cpu_clock) is
+    variable i : integer := 0;
+  begin
+    if (rising_edge (i_cpu_clock)) then
+      if (to_integer (unsigned (kcpsm3_address)) = 103) then
+        report integer'image (i) & " tick address " & integer'image (to_integer (unsigned (kcpsm3_address)));
+        i := i + 1;
+      end if;
+    end if;
+  end process p_report1;
+--synthesis translate_on
+
+--synthesis translate_off
+  test_concatenate_4321 <= o_test4 & o_test3 & o_test2 & o_test1;
+  test_concatenate_8765 <= o_test8 & o_test7 & o_test6 & o_test5;
+  test_concatenate_21 <= o_test2 & o_test1;
+  test_concatenate_43 <= o_test4 & o_test3;
+  test_concatenate_65 <= o_test6 & o_test5;
+  test_concatenate_87 <= o_test8 & o_test7;
+--synthesis translate_on
 
 end architecture behavioral;

@@ -18,6 +18,8 @@ sleep 1
 echo -n "."
 done
 
+sleep 1
+
 . /home/user/.local/Xilinx/14.7/ISE_DS/settings64.sh
 
 if [ -f PROGRAM.VHD ]; then

@@ -68,6 +68,7 @@ o_trigger : out std_logic;
 o_parity_error : out std_logic;
 o_x_movement : out std_logic_vector (7 downto 0);
 o_y_movement : out std_logic_vector (7 downto 0);
+o_z_movement : out std_logic_vector (7 downto 0);
 o_x_overflow : out std_logic;
 o_y_overflow : out std_logic;
 o_x_sign : out std_logic;
@@ -94,7 +95,7 @@ signal scan_state : states;
 
 signal rx_parity, rx_parity_received : std_logic;
 
-signal byte_count_sr : std_logic_vector (2 downto 0);
+signal byte_count_sr : std_logic_vector (3 downto 0);
 
 -- (odd) parity bit ROM
 -- Used instead of logic because this way speed is far greater
@@ -169,18 +170,50 @@ begin
     o_y_movement <= (others => '0');
   elsif (rising_edge (filter_clk)) then
     case (byte_count_sr) is
-      when "001" =>
-        o_y_overflow <= s_reg (7);
-        o_x_overflow <= s_reg (6);
-        o_y_sign <= s_reg (5);
-        o_x_sign <= s_reg (4);
+      when "0001" =>
+--        o_x_movement    <= (others => '0');
+--        o_y_movement    <= (others => '0');
+--        o_z_movement    <= (others => '0');
+        o_y_overflow    <= s_reg (7);
+        o_x_overflow    <= s_reg (6);
+        o_y_sign        <= s_reg (5);
+        o_x_sign        <= s_reg (4);
         o_button_middle <= s_reg (2);
-        o_button_right <= s_reg (1);
-        o_button_left <= s_reg (0);
-      when "010" =>
-        o_x_movement <= s_reg (7 downto 0);
+        o_button_right  <= s_reg (1);
+        o_button_left   <= s_reg (0);
+      when "0010" =>
+        o_x_movement    <= s_reg (7 downto 0);
+--        o_y_movement    <= (others => '0');
+--        o_z_movement    <= (others => '0');
+--        o_y_overflow    <= '0';
+--        o_x_overflow    <= '0';
+--        o_y_sign        <= '0';
+--        o_x_sign        <= '0';
+--        o_button_middle <= '0';
+--        o_button_right  <= '0';
+--        o_button_left   <= '0';
+      when "0100" =>
+--        o_x_movement    <= (others => '0');
+        o_y_movement    <= s_reg (7 downto 0);
+--        o_z_movement    <= (others => '0');
+--        o_y_overflow    <= '0';
+--        o_x_overflow    <= '0';
+--        o_y_sign        <= '0';
+--        o_x_sign        <= '0';
+--        o_button_middle <= '0';
+--        o_button_right  <= '0';
+--        o_button_left   <= '0';
       when others =>
-        o_y_movement <= s_reg (7 downto 0);
+--        o_x_movement    <= (others => '0');
+--        o_y_movement    <= (others => '0');
+        o_z_movement    <= s_reg (7 downto 0);
+--        o_y_overflow    <= '0';
+--        o_x_overflow    <= '0';
+--        o_y_sign        <= '0';
+--        o_x_sign        <= '0';
+--        o_button_middle <= '0';
+--        o_button_right  <= '0';
+--        o_button_left   <= '0';
     end case;
   end if;
 end process p_byte_output;
@@ -239,7 +272,7 @@ begin
     scan_state <= idle;
     s_reg <= (others => '0');
     trigger <= '0';
-    byte_count_sr <= "001";
+    byte_count_sr <= "0001";
   elsif (rising_edge (filter_clk)) then
     case (scan_state) is
       when idle => -- Waiting to receive data input from PS2 port
@@ -249,6 +282,7 @@ begin
         if (i_PS2_Data = '0') then -- start bit received
           scan_state <= shifting; -- goto shifting state
         end if;
+        --byte_count_sr <= "0001";
       when shifting => -- receiving data
         bit_count <= bit_count + 1; -- number of bits received incremented
         s_reg <= i_PS2_Data & s_reg (8 downto 1); -- PS2_Data bit shifeted into s_reg
@@ -259,7 +293,7 @@ begin
         if (bit_count >= c_nine) then -- stop bit recieved
           trigger <= '0';
           scan_state <= idle; -- goto idle state
-          byte_count_sr <= byte_count_sr (1 downto 0) & byte_count_sr (2);
+          byte_count_sr <= byte_count_sr (2 downto 0) & byte_count_sr (3);
         end if;
     end case;
   end if;

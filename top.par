@@ -1,7 +1,7 @@
 Release 14.7 par P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-work::  Tue Dec 09 23:37:06 2025
+work::  Wed Dec 10 22:57:40 2025
 
 par -w -intstyle ise -ol std -rl std -t 1 top_map.ncd top.ncd top.pcf 
 
@@ -44,7 +44,7 @@ Design Summary Report:
    Number of BUFGMUXs                        3 out of 24     12%
    Number of MULT18X18SIOs                   1 out of 28      3%
    Number of RAMB16s                         9 out of 28     32%
-   Number of Slices                        299 out of 8672    3%
+   Number of Slices                        391 out of 8672    4%
       Number of SLICEMs                     34 out of 4336    1%
 
 
@@ -58,13 +58,13 @@ Finished initial Timing Analysis.  REAL time: 0 secs
 Starting Router
 
 
-Phase  1  : 2422 unrouted;      REAL time: 3 secs 
+Phase  1  : 3060 unrouted;      REAL time: 3 secs 
 
-Phase  2  : 2177 unrouted;      REAL time: 3 secs 
+Phase  2  : 2737 unrouted;      REAL time: 3 secs 
 
-Phase  3  : 508 unrouted;      REAL time: 3 secs 
+Phase  3  : 643 unrouted;      REAL time: 3 secs 
 
-Phase  4  : 508 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 4 secs 
+Phase  4  : 643 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 4 secs 
 
 Phase  5  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 4 secs 
 
@@ -95,13 +95,13 @@ Generating Clock Report
 +---------------------+--------------+------+------+------------+-------------+
 |        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
 +---------------------+--------------+------+------+------------+-------------+
-|   i_cpu_clock_BUFGP | BUFGMUX_X2Y11| No   |  119 |  0.196     |  0.370      |
+|   i_cpu_clock_BUFGP | BUFGMUX_X2Y11| No   |  189 |  0.202     |  0.371      |
 +---------------------+--------------+------+------+------------+-------------+
 |inst_vga_clock_25mhz |              |      |      |            |             |
-|          /vga_clock |  BUFGMUX_X1Y0| No   |   59 |  0.186     |  0.370      |
+|          /vga_clock |  BUFGMUX_X1Y0| No   |   58 |  0.143     |  0.373      |
 +---------------------+--------------+------+------+------------+-------------+
 |inst_ps2_mouse/filte |              |      |      |            |             |
-|               r_clk | BUFGMUX_X1Y10| No   |   36 |  0.090     |  0.261      |
+|               r_clk | BUFGMUX_X1Y10| No   |   44 |  0.097     |  0.294      |
 +---------------------+--------------+------+------+------------+-------------+
 
 * Net Skew is the difference between the minimum and maximum routing
@@ -123,7 +123,7 @@ All signals are completely routed.
 Total REAL time to PAR completion: 4 secs 
 Total CPU time to PAR completion: 4 secs 
 
-Peak Memory Usage:  514 MB
+Peak Memory Usage:  515 MB
 
 Placer: Placement generated during map.
 Routing: Completed - No errors found.
