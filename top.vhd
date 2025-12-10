@@ -255,11 +255,11 @@ architecture behavioral of top is
   signal ps2_mouse_flags          : std_logic_vector (7 downto 0);
   signal ps2_mouse_flags_reg      : std_logic_vector (7 downto 0);
 
---synthesis translate_ff
   signal o_test0 : std_logic_vector (7 downto 0);
   signal o_test4, o_test3, o_test2, o_test1 : std_logic_vector (7 downto 0);
   signal o_test8, o_test7, o_test6, o_test5 : std_logic_vector (7 downto 0);
 
+--synthesis translate_off
   signal test_concatenate_21 : std_logic_vector (15 downto 0);
   signal test_concatenate_43 : std_logic_vector (15 downto 0);
   signal test_concatenate_65 : std_logic_vector (15 downto 0);
@@ -274,10 +274,6 @@ architecture behavioral of top is
   signal s_theta_v : std_logic_vector (15 downto 0);
   signal s_sin_v, s_cos_v : std_logic_vector (7 downto 0);
 --synthesis translate_on
-
-  constant zero_7 : std_logic_vector (6 downto 0) := (others => '0');
-  signal zero_ps2_mouse_x_sign : std_logic_vector (7 downto 0);
-  signal zero_ps2_mouse_y_sign : std_logic_vector (7 downto 0);
 
   type p0_states is (r0, r1, a, b);
   signal p0_state : p0_states;
@@ -407,6 +403,11 @@ begin
   o_pixel_coordination  => pixel_coordination_running,
   o_pixel_color         => pixel_color_running,
   o_pixel_write         => pixel_write_running,
+  o_test8               => o_test8,
+  o_test7               => o_test7,
+  o_test6               => o_test6,
+  o_test5               => o_test5,
+  o_test4               => o_test4,
   o_test3               => o_test3,
   o_test2               => o_test2,
   o_test1               => o_test1,
@@ -431,7 +432,7 @@ begin
   p1 : process (i_cpu_clock) is
   begin
     if (rising_edge (i_cpu_clock)) then
-      if (kcpsm3_interrupt_ack = '1') then
+      if (ps2_mouse_trigger = '1') then
         ps2_mouse_x_movement_reg <= ps2_mouse_x_movement;
         ps2_mouse_y_movement_reg <= ps2_mouse_y_movement;
         ps2_mouse_z_movement_reg <= ps2_mouse_z_movement;
@@ -472,7 +473,7 @@ begin
   --o_led <= ps2_mouse_y_movement_reg;
   --o_led <= ps2_mouse_z_movement_reg;
   --o_led <= ps2_mouse_flags_reg;
-  o_led <= o_test1 or o_test2 or o_test3 or o_test4 or o_test5 or o_test6 or o_test7 or o_test8;
+  o_led <= o_test0 or o_test1 or o_test2 or o_test3 or o_test4 or o_test5 or o_test6 or o_test7 or o_test8;
 
 --synthesis translate_off
   p_report_address_and_color : process (pixel_write(0)) is
