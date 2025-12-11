@@ -43,7 +43,7 @@ else
 				echo "error on par";
 				exit;
 			else
-				trce -intstyle ise -v 3 -s 10 -n 3 -fastpaths -xml ${PROJECT}.twx ${PROJECT}.ncd -o ${PROJECT}.twr ${PROJECT}.pcf -ucf ${PROJECT}.ucf
+				trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml ${PROJECT}.twx ${PROJECT}.ncd -o ${PROJECT}.twr ${PROJECT}.pcf -ucf ${PROJECT}.ucf
 				if [ $? -ne 0 ];
 				then
 					echo "error on trce";

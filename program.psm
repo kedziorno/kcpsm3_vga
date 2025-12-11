@@ -1,257 +1,282 @@
 ; Mś Pseudo-Paint
 
 ; Constants in code
-CONSTANT RESET, 00;
-CONSTANT SET,  01;
-CONSTANT ZERO, 00;
-CONSTANT ONE,  01;
-CONSTANT LEFT_BIT, 80;
-CONSTANT RIGHT_BIT, 01;
-CONSTANT X_MAX, 9f; 159
-CONSTANT Y_MAX, 77; 119
-CONSTANT COLOR_WHITE, 3f;
+CONSTANT RESET        , 00;
+CONSTANT SET          , 01;
+CONSTANT ZERO         , 00;
+CONSTANT ONE          , 01;
+CONSTANT X_MAX        , 9f; 159
+CONSTANT Y_MAX        , 77; 119
+CONSTANT COLOR_WHITE  , 3f; 64
 
 ; Registers aliases
-CONSTANT PORT_0, 00;
-CONSTANT PORT_1, 01;
-CONSTANT PORT_2, 02;
-CONSTANT PORT_3, 03;
-CONSTANT PORT_4, 04;
-CONSTANT PORT_5, 05;
-CONSTANT PORT_6, 06;
-CONSTANT PORT_7, 07;
-CONSTANT PORT_8, 08;
+CONSTANT PORT_0 , 00;
+CONSTANT PORT_1 , 01;
+CONSTANT PORT_2 , 02;
+CONSTANT PORT_3 , 03;
+CONSTANT PORT_4 , 04;
+CONSTANT PORT_5 , 05;
+CONSTANT PORT_6 , 06;
+CONSTANT PORT_7 , 07;
+CONSTANT PORT_8 , 08;
 
-CONSTANT VGA_X, 16;
-CONSTANT VGA_Y, 17;
-CONSTANT VGA_COLOR, 20;
+CONSTANT VGA_X      , 16;
+CONSTANT VGA_Y      , 17;
+CONSTANT VGA_COLOR  , 20;
 
-CONSTANT MOUSE_X, 21;
-CONSTANT MOUSE_Y, 22;
-CONSTANT MOUSE_Z, 23;
-CONSTANT MOUSE_FLAGS, 24;
+CONSTANT MOUSE_X      , 21;
+CONSTANT MOUSE_Y      , 22;
+CONSTANT MOUSE_Z      , 23;
+CONSTANT MOUSE_FLAGS  , 24;
 
 ; CPU registers aliases
-NAMEREG s0, CNTR;
-NAMEREG s1, M_X;
-NAMEREG s2, M_Y;
-NAMEREG s3, X_CNTR;
-NAMEREG s4, Y_CNTR;
-NAMEREG s5, TMP;
-NAMEREG s6, CNTR_1;
-NAMEREG s7, CNTR_2;
-NAMEREG s8, ISR_FLAG;
-NAMEREG s9, M_F;
-NAMEREG sa, COLOR_REG;
-NAMEREG sb, CNTR_3;
-NAMEREG sc, TMP_1;
-NAMEREG sd, TMP_2;
-
-; White point on middle screen
-LOAD X_CNTR, 50;
-LOAD Y_CNTR, 3c;
-LOAD COLOR_REG, COLOR_WHITE;
-
-LOAD CNTR_1, RESET;
-LOAD CNTR_2, RESET;
-LOAD ISR_FLAG, RESET;
-LOAD M_F, RESET;
+NAMEREG s0  , CNTR;
+NAMEREG s1  , M_X;
+NAMEREG s2  , M_Y;
+NAMEREG s3  , X_CNTR;
+NAMEREG s4  , Y_CNTR;
+NAMEREG s5  , TMP;
+NAMEREG s6  , CNTR_1;
+NAMEREG s7  , CNTR_2;
+NAMEREG s8  , ISR_FLAG;
+NAMEREG s9  , M_F;
+NAMEREG sa  , COLOR_REG;
+NAMEREG sb  , CNTR_3;
+NAMEREG sc  , TMP_1;
+NAMEREG sd  , TMP_2;
+NAMEREG se  , X_PREV;
+NAMEREG sf  , Y_PREV;
 
 ; Wait for reset memory content (16 bit) and test debug output
+CALL TEST_DEBUG_PORTS;
 
-TEST_DEBUG_PORTS:
-LOAD CNTR_1, ZERO;
-LOAD CNTR_2, ZERO;
-TDP_WAIT_16BIT_1:
-LOAD TMP, 11;
-OUTPUT TMP, PORT_0;
-ADD CNTR_1, ONE;
-ADDCY CNTR_2, ZERO;
-COMPARE CNTR_2, FF;
-JUMP NZ, TDP_WAIT_16BIT_1;
-LOAD CNTR_1, ZERO;
-LOAD CNTR_2, ZERO;
-TDP_WAIT_16BIT_2:
-LOAD TMP, 22;
-OUTPUT TMP, PORT_1;
-ADD CNTR_1, ONE;
-ADDCY CNTR_2, ZERO;
-COMPARE CNTR_2, FF;
-JUMP NZ, TDP_WAIT_16BIT_2;
-LOAD CNTR_1, ZERO;
-LOAD CNTR_2, ZERO;
-TDP_WAIT_16BIT_3:
-LOAD TMP, 33;
-OUTPUT TMP, PORT_2;
-ADD CNTR_1, ONE;
-ADDCY CNTR_2, ZERO;
-COMPARE CNTR_2, FF;
-JUMP NZ, TDP_WAIT_16BIT_3;
-LOAD CNTR_1, ZERO;
-LOAD CNTR_2, ZERO;
-TDP_WAIT_16BIT_4:
-LOAD TMP, 44;
-OUTPUT TMP, PORT_3;
-ADD CNTR_1, ONE;
-ADDCY CNTR_2, ZERO;
-COMPARE CNTR_2, FF;
-JUMP NZ, TDP_WAIT_16BIT_4;
-LOAD CNTR_1, ZERO;
-LOAD CNTR_2, ZERO;
-TDP_WAIT_16BIT_5:
-LOAD TMP, 55;
-OUTPUT TMP, PORT_4;
-ADD CNTR_1, ONE;
-ADDCY CNTR_2, ZERO;
-COMPARE CNTR_2, FF;
-JUMP NZ, TDP_WAIT_16BIT_5;
-LOAD CNTR_1, ZERO;
-LOAD CNTR_2, ZERO;
-TDP_WAIT_16BIT_6:
-LOAD TMP, 66;
-OUTPUT TMP, PORT_5;
-ADD CNTR_1, ONE;
-ADDCY CNTR_2, ZERO;
-COMPARE CNTR_2, FF;
-JUMP NZ, TDP_WAIT_16BIT_6;
-LOAD CNTR_1, ZERO;
-LOAD CNTR_2, ZERO;
-TDP_WAIT_16BIT_7:
-LOAD TMP, 77;
-OUTPUT TMP, PORT_6;
-ADD CNTR_1, ONE;
-ADDCY CNTR_2, ZERO;
-COMPARE CNTR_2, FF;
-JUMP NZ, TDP_WAIT_16BIT_7;
-LOAD CNTR_1, ZERO;
-LOAD CNTR_2, ZERO;
-TDP_WAIT_16BIT_8:
-LOAD TMP, 88;
-OUTPUT TMP, PORT_7;
-ADD CNTR_1, ONE;
-ADDCY CNTR_2, ZERO;
-COMPARE CNTR_2, FF;
-JUMP NZ, TDP_WAIT_16BIT_8;
-LOAD CNTR_1, ZERO;
-LOAD CNTR_2, ZERO;
-TDP_WAIT_16BIT_9:
-LOAD TMP, 99;
-OUTPUT TMP, PORT_8;
-ADD CNTR_1, ONE;
-ADDCY CNTR_2, ZERO;
-COMPARE CNTR_2, FF;
-JUMP NZ, TDP_WAIT_16BIT_9;
-
+; White point on middle screen
+MIDDLE_POINT:
+  LOAD    X_CNTR    , 50          ;
+  LOAD    Y_CNTR    , 3c          ;
+  LOAD    COLOR_REG , COLOR_WHITE ;
 MIDDLE_PIXEL:
-OUTPUT X_CNTR, VGA_X;
-OUTPUT Y_CNTR, VGA_Y;
-OUTPUT COLOR_REG, VGA_COLOR;
+  OUTPUT  X_CNTR    , VGA_X       ;
+  OUTPUT  Y_CNTR    , VGA_Y       ;
+  OUTPUT  COLOR_REG , VGA_COLOR   ;
 
 ENABLE INTERRUPT;
 
+; MAIN LOOP
 TEST_PS2_MOUSE:
 
-COMPARE ISR_FLAG, SET;
-JUMP NZ, JUMP_1;
-LOAD ISR_FLAG, RESET;
-INPUT M_X, MOUSE_X;
-INPUT M_Y, MOUSE_Y;
-INPUT M_F, MOUSE_FLAGS;
+PS_DATA_AVAILABLE:
+  COMPARE ISR_FLAG  , SET         ;
+  JUMP    NZ        , JUMP_END    ;
+  INPUT   M_F       , MOUSE_X     ;
+  INPUT   M_X       , MOUSE_Y     ;
+  INPUT   M_Y       , MOUSE_FLAGS ;
+  LOAD    ISR_FLAG  , RESET       ;
 
-COMPARE M_F, 01;
-JUMP NZ, CHECK;
-SUB COLOR_REG, ONE;
-;JUMP END_ISR;
+CALL WAIT_16BIT; less sensitivity
 
-CHECK:
+CHECK_MIDDLE_BUTTON:
+  COMPARE M_F       , 02                ;
+  JUMP    NZ        , CHECK_LEFT_BUTTON ;
+  SUB     COLOR_REG , ONE               ;
 
-LOAD TMP, M_F;
-AND TMP, 10;
-AND M_X, 01;
-OR M_X, TMP;
+CHECK_LEFT_BUTTON:
+  COMPARE M_F   , 01                  ;
+  JUMP    NZ    , CHECK_RIGHT_BUTTON  ;
+  LOAD    TMP_1 , ONE                 ;
 
-LOAD TMP, M_F;
-AND TMP, 20;
-AND M_Y, 01;
-OR M_Y, TMP;
+CHECK_RIGHT_BUTTON:
+  COMPARE M_F   , 04                  ;
+  JUMP    NZ    , X_SIGN              ;
+  LOAD    TMP_1 , ZERO                ;
 
-OUTPUT M_Y, PORT_0;
-CALL WAIT_16BIT;
+X_SIGN:
+  LOAD    TMP     , M_F               ;
+  AND     TMP     , 10                ;
+  COMPARE TMP     , 10                ;
+  JUMP    Z       , X_SIGN_SET        ;
+X_SIGN_NO_SET:
+  COMPARE M_X     , ONE               ;
+  JUMP    NC      , X_SIGN_NO_SET_PLUS;
+X_SIGN_NO_SET_ZERO:
+  JUMP    Y_SIGN                      ;
+X_SIGN_NO_SET_PLUS:
+  ADD     X_CNTR  , ONE               ;
+  JUMP    Y_SIGN                      ;
+X_SIGN_SET:
+  COMPARE M_X     , ONE               ;
+  JUMP    NC      , X_SIGN_SET_PLUS   ;
+X_SIGN_SET_ZERO:
+  JUMP    Y_SIGN                      ;
+X_SIGN_SET_PLUS:
+  SUB     X_CNTR  , ONE               ;
 
-TEST M_X, 01;
-JUMP NZ, NEXT_1;
-TEST M_X, 10;
-JUMP NZ, NEXT_2;
-TEST M_Y, 01;
-JUMP NZ, NEXT_3;
-TEST M_Y, 20;
-JUMP NZ, NEXT_4;
-JUMP JUMP_1;
-
-NEXT_1:
-ADD X_CNTR, SET;
-ADD Y_CNTR, ZERO;
-JUMP END_ISR;
-
-NEXT_2:
-SUB X_CNTR, SET;
-SUB Y_CNTR, ZERO;
-JUMP END_ISR;
-
-NEXT_3:
-ADD X_CNTR, ZERO;
-ADD Y_CNTR, SET;
-JUMP END_ISR;
-
-NEXT_4:
-SUB X_CNTR, ZERO;
-SUB Y_CNTR, SET;
+Y_SIGN:
+  LOAD    TMP     , M_F               ;
+  AND     TMP     , 08                ;
+  COMPARE TMP     , 08                ;
+  JUMP    Z       , Y_SIGN_SET        ;
+Y_SIGN_NO_SET:
+  COMPARE M_Y     , ONE               ;
+  JUMP    NC      , Y_SIGN_NO_SET_PLUS;
+Y_SIGN_NO_SET_ZERO:
+  JUMP    END_ISR                     ;
+Y_SIGN_NO_SET_PLUS:
+  SUB     Y_CNTR  , ONE               ;
+  JUMP    END_ISR                     ;
+Y_SIGN_SET:
+  COMPARE M_Y     , ONE               ;
+  JUMP    NC      , Y_SIGN_SET_PLUS   ;
+Y_SIGN_SET_ZERO:
+  JUMP    END_ISR                     ;
+Y_SIGN_SET_PLUS:
+  ADD     Y_CNTR  , ONE               ;
 
 END_ISR:
-OUTPUT X_CNTR, VGA_X;
-OUTPUT Y_CNTR, VGA_Y;
-OUTPUT COLOR_REG, VGA_COLOR;
+  COMPARE TMP_1     , ONE       ;
+  JUMP    Z         , END_ISR_N ;
+  LOAD    TMP_2     , 00        ;
+  OUTPUT  X_PREV    , VGA_X     ;
+  OUTPUT  Y_PREV    , VGA_Y     ;
+  OUTPUT  TMP_2     , VGA_COLOR ;
+  LOAD    TMP_1     , ZERO      ;
+END_ISR_N:
+  OUTPUT  X_CNTR    , VGA_X     ;
+  OUTPUT  Y_CNTR    , VGA_Y     ;
+  OUTPUT  COLOR_REG , VGA_COLOR ;
 
-JUMP_1:
-;LOAD M_X, ZERO;
-;LOAD M_Y, ZERO;
-;LOAD M_F, ZERO;
+JUMP_END:
+  LOAD X_PREV , X_CNTR  ;
+  LOAD Y_PREV , Y_CNTR  ;
+
+; reset zero and carry
+RESET_FLAGS:
+  LOAD TMP_2  , 05    ;
+  TEST TMP_2  , 04    ;
+  AND  TMP_2  , TMP_2 ;
 
 JUMP TEST_PS2_MOUSE;
 
 WAIT_8BIT:
-LOAD CNTR_1, ZERO;
-WAIT_8BIT_1:
-ADDCY CNTR_1, ONE;
-JUMP NC, WAIT_8BIT_1;
-RETURN;
+  LOAD  CNTR_1  , ZERO          ;
+_WAIT_8BIT_1:
+  ADDCY CNTR_1  , ONE           ;
+  JUMP  NC      , _WAIT_8BIT_1  ;
+  RETURN                        ;
 
 WAIT_16BIT:
-LOAD CNTR_1, ZERO;
-LOAD CNTR_2, ZERO;
-WAIT_16BIT_1:
-ADD CNTR_1, ONE;
-ADDCY CNTR_2, ZERO;
-COMPARE CNTR_2, FF;
-JUMP NZ, WAIT_16BIT_1;
-RETURN;
+  LOAD    CNTR_1  , ZERO          ;
+  LOAD    CNTR_2  , ZERO          ;
+_WAIT_16BIT_1:
+  ADD     CNTR_1  , ONE           ;
+  ADDCY   CNTR_2  , ZERO          ;
+  COMPARE CNTR_2  , FF            ;
+  JUMP    NZ      , _WAIT_16BIT_1 ;
+  RETURN;
 
 WAIT_24BIT:
-LOAD CNTR_1, ZERO;
-LOAD CNTR_2, ZERO;
-LOAD CNTR_3, ZERO;
-WAIT_24BIT_1:
-ADD CNTR_1, ONE;
-ADDCY CNTR_2, ZERO;
-ADDCY CNTR_3, ZERO;
-COMPARE CNTR_3, FF;
-JUMP NZ, WAIT_24BIT_1;
-RETURN;
+  LOAD    CNTR_1  , ZERO          ;
+  LOAD    CNTR_2  , ZERO          ;
+  LOAD    CNTR_3  , ZERO          ;
+_WAIT_24BIT_1:
+  ADD     CNTR_1  , ONE           ;
+  ADDCY   CNTR_2  , ZERO          ;
+  ADDCY   CNTR_3  , ZERO          ;
+  COMPARE CNTR_3  , FF            ;
+  JUMP    NZ      , _WAIT_24BIT_1 ;
+  RETURN;
 
+; Output some values over debug ports - currently output is LEDs
+TEST_DEBUG_PORTS:
+  LOAD    CNTR_1, ZERO              ;
+  LOAD    CNTR_2, ZERO              ;
+TDP_WAIT_16BIT_1:
+  LOAD    TMP   , 11                ;
+  OUTPUT  TMP   , PORT_0            ;
+  ADD     CNTR_1, ONE               ;
+  ADDCY   CNTR_2, ZERO              ;
+  COMPARE CNTR_2, FF                ;
+  JUMP    NZ    , TDP_WAIT_16BIT_1  ;
+  LOAD    CNTR_1, ZERO              ;
+  LOAD    CNTR_2, ZERO              ;
+TDP_WAIT_16BIT_2:
+  LOAD    TMP   , 22                ;
+  OUTPUT  TMP   , PORT_1            ;
+  ADD     CNTR_1, ONE               ;
+  ADDCY   CNTR_2, ZERO              ;
+  COMPARE CNTR_2, FF                ;
+  JUMP    NZ    , TDP_WAIT_16BIT_2  ;
+  LOAD    CNTR_1, ZERO              ;
+  LOAD    CNTR_2, ZERO              ;
+TDP_WAIT_16BIT_3:
+  LOAD    TMP   , 33                ;
+  OUTPUT  TMP   , PORT_2            ;
+  ADD     CNTR_1, ONE               ;
+  ADDCY   CNTR_2, ZERO              ;
+  COMPARE CNTR_2, FF                ;
+  JUMP    NZ    , TDP_WAIT_16BIT_3  ;
+  LOAD    CNTR_1, ZERO              ;
+  LOAD    CNTR_2, ZERO              ;
+TDP_WAIT_16BIT_4:
+  LOAD    TMP   , 44                ;
+  OUTPUT  TMP   , PORT_3            ;
+  ADD     CNTR_1, ONE               ;
+  ADDCY   CNTR_2, ZERO              ;
+  COMPARE CNTR_2, FF                ;
+  JUMP    NZ    , TDP_WAIT_16BIT_4  ;
+  LOAD    CNTR_1, ZERO              ;
+  LOAD    CNTR_2, ZERO              ;
+TDP_WAIT_16BIT_5:
+  LOAD    TMP   , 55                ;
+  OUTPUT  TMP   , PORT_4            ;
+  ADD     CNTR_1, ONE               ;
+  ADDCY   CNTR_2, ZERO              ;
+  COMPARE CNTR_2, FF                ;
+  JUMP    NZ    , TDP_WAIT_16BIT_5  ;
+  LOAD    CNTR_1, ZERO              ;
+  LOAD    CNTR_2, ZERO              ;
+TDP_WAIT_16BIT_6:
+  LOAD    TMP   , 66                ;
+  OUTPUT  TMP   , PORT_5            ;
+  ADD     CNTR_1, ONE               ;
+  ADDCY   CNTR_2, ZERO              ;
+  COMPARE CNTR_2, FF                ;
+  JUMP    NZ    , TDP_WAIT_16BIT_6  ;
+  LOAD    CNTR_1, ZERO              ;
+  LOAD    CNTR_2, ZERO              ;
+TDP_WAIT_16BIT_7:
+  LOAD    TMP   , 77                ;
+  OUTPUT  TMP   , PORT_6            ;
+  ADD     CNTR_1, ONE               ;
+  ADDCY   CNTR_2, ZERO              ;
+  COMPARE CNTR_2, FF                ;
+  JUMP    NZ    , TDP_WAIT_16BIT_7  ;
+  LOAD    CNTR_1, ZERO              ;
+  LOAD    CNTR_2, ZERO              ;
+TDP_WAIT_16BIT_8:
+  LOAD    TMP   , 88                ;
+  OUTPUT  TMP   , PORT_7            ;
+  ADD     CNTR_1, ONE               ;
+  ADDCY   CNTR_2, ZERO              ;
+  COMPARE CNTR_2, FF                ;
+  JUMP    NZ    , TDP_WAIT_16BIT_8  ;
+  LOAD    CNTR_1, ZERO              ;
+  LOAD    CNTR_2, ZERO              ;
+TDP_WAIT_16BIT_9:
+  LOAD    TMP   , 99                ;
+  OUTPUT  TMP   , PORT_8            ;
+  ADD     CNTR_1, ONE               ;
+  ADDCY   CNTR_2, ZERO              ;
+  COMPARE CNTR_2, FF                ;
+  JUMP    NZ    , TDP_WAIT_16BIT_9  ;
+  RETURN                            ;
+
+; Set flag if PS/2 data available
 ISR:
-LOAD ISR_FLAG, SET;
-RETURNI ENABLE;
+  LOAD    ISR_FLAG  , SET ;
+  RETURNI ENABLE          ;
 
 ADDRESS 3FF;
 JUMP ISR;
+
 

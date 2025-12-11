@@ -98,7 +98,8 @@ begin
           if (i_kcpsm3_read_strobe = '1') then
             o_kcpsm3_in_port <= i_mouse_flags;
           end if;
-        when others => o_kcpsm3_in_port <= (others => '0');
+        when others => null;
+--        o_kcpsm3_in_port <= (others => '0');
       end case;
     end if;
   end process p_io_registers_decoder_mouse;
@@ -166,6 +167,15 @@ begin
       o_test7 <= (others => '0');
       o_test8 <= (others => '0');
     elsif (rising_edge (i_clock)) then
+      o_test0 <= (others => '0');
+      o_test1 <= (others => '0');
+      o_test2 <= (others => '0');
+      o_test3 <= (others => '0');
+      o_test4 <= (others => '0');
+      o_test5 <= (others => '0');
+      o_test6 <= (others => '0');
+      o_test7 <= (others => '0');
+      o_test8 <= (others => '0');
       case (i_kcpsm3_port_id) is
         when x"00" =>
           if (i_kcpsm3_write_strobe = '1') then
@@ -203,16 +213,16 @@ begin
           if (i_kcpsm3_write_strobe = '1') then
             o_test8 <= i_kcpsm3_out_port;
           end if;
-        when others =>
-          o_test0 <= (others => '0');
-          o_test1 <= (others => '0');
-          o_test2 <= (others => '0');
-          o_test3 <= (others => '0');
-          o_test4 <= (others => '0');
-          o_test5 <= (others => '0');
-          o_test6 <= (others => '0');
-          o_test7 <= (others => '0');
-          o_test8 <= (others => '0');
+        when others => null;
+--          o_test0 <= (others => '0');
+--          o_test1 <= (others => '0');
+--          o_test2 <= (others => '0');
+--          o_test3 <= (others => '0');
+--          o_test4 <= (others => '0');
+--          o_test5 <= (others => '0');
+--          o_test6 <= (others => '0');
+--          o_test7 <= (others => '0');
+--          o_test8 <= (others => '0');
       end case;
     end if;
   end process p_io_registers_decoder_debug;

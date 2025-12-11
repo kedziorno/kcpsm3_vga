@@ -429,10 +429,10 @@ begin
   doutb => vga_color
   );
 
-  p1 : process (i_cpu_clock) is
-  begin
-    if (rising_edge (i_cpu_clock)) then
-      if (ps2_mouse_trigger = '1') then
+--  p1 : process (i_cpu_clock) is
+--  begin
+--    if (rising_edge (i_cpu_clock)) then
+--      if (kcpsm3_interrupt_ack = '1') then
         ps2_mouse_x_movement_reg <= ps2_mouse_x_movement;
         ps2_mouse_y_movement_reg <= ps2_mouse_y_movement;
         ps2_mouse_z_movement_reg <= ps2_mouse_z_movement;
@@ -444,9 +444,9 @@ begin
         ps2_mouse_button_right &
         ps2_mouse_button_middle &
         ps2_mouse_button_left;
-      end if;
-    end if;
-  end process p1;
+--      end if;
+--    end if;
+--  end process p1;
 
   inst_ps2_mouse : ps2_mouse
   port map (
@@ -469,10 +469,10 @@ begin
   o_button_right  => ps2_mouse_button_right,
   o_button_left   => ps2_mouse_button_left
   );
-  --o_led <= ps2_mouse_x_movement_reg;
-  --o_led <= ps2_mouse_y_movement_reg;
-  --o_led <= ps2_mouse_z_movement_reg;
-  --o_led <= ps2_mouse_flags_reg;
+  --o_led <= ps2_mouse_x_movement_reg; -- ok
+  --o_led <= ps2_mouse_y_movement_reg; -- ok
+  --o_led <= ps2_mouse_z_movement_reg; -- ok
+  --o_led <= ps2_mouse_flags_reg; -- ok
   o_led <= o_test0 or o_test1 or o_test2 or o_test3 or o_test4 or o_test5 or o_test6 or o_test7 or o_test8;
 
 --synthesis translate_off
