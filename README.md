@@ -1,3 +1,3 @@
 # kcpsm3_vga
-### This simple project show example where PicoBlaze CPU and him assembler can be harnessed to draw some pixels in VGA.
-![Five typeface 5x7 characters with different colors - example smile character](vga.bmp)
+### This simple project show example where PicoBlaze CPU and him assembler can be harnessed to draw some pixels in VGA (with PS/2 mouse).
+![pseudo_paint_xc3s1200e_ps2_vga_160x120_64colors](pseudo_paint.jpg)
