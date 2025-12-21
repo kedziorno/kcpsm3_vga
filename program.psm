@@ -48,7 +48,7 @@ NAMEREG se  , X_PREV;
 NAMEREG sf  , Y_PREV;
 
 ; Wait for reset memory content (16 bit) and test debug output
-CALL TEST_DEBUG_PORTS;
+; CALL TEST_DEBUG_PORTS;
 
 ; White point on middle screen
 MIDDLE_POINT:

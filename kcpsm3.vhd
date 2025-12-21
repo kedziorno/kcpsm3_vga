@@ -276,6 +276,7 @@ attribute INIT of read_active_lut       : label is "0100";
 --
 ------------------------------------------------------------------------------------
 --	
+signal clkp : std_logic;
 begin
 --
 ------------------------------------------------------------------------------------
@@ -1626,6 +1627,7 @@ begin
   variable     sy_decode : string(1 to 2);                     --sY register specification
   variable     kk_decode : string(1 to 2);                     --constant value specification
   variable    aaa_decode : string(1 to 3);                     --address specification
+  variable    ddd_decode : string(1 to 3);
   --
   --------------------------------------------------------------------------------
   --
@@ -1679,6 +1681,10 @@ begin
     aaa_decode(1) := hexcharacter("00" & instruction(9 downto 8));
     aaa_decode(2) := hexcharacter(instruction(7 downto 4));
     aaa_decode(3) := hexcharacter(instruction(3 downto 0));
+
+    ddd_decode(1) := hexcharacter("00" & pc(9 downto 8));
+    ddd_decode(2) := hexcharacter(pc(7 downto 4));
+    ddd_decode(3) := hexcharacter(pc(3 downto 0));
 
     -- decode instruction
     case instruction(17 downto 12) is
@@ -1766,12 +1772,14 @@ begin
       when others => kcpsm3_opcode := "Invalid Instruction";
     end case;
 
-    if clk'event and clk='1' then 
-
+    if rising_edge (clk) then 
       --reset and flag status information
       if reset='1' or reset_delay='1' then
         kcpsm3_status := "NZ, NC, Reset";
+        report "*** RESET ***";
+        clkp <= '0';
        else
+        clkp <= not clkp;
         kcpsm3_status(7 to 13) := "       ";
         if flag_enable='1' then
           if zero_carry='1' then
@@ -1784,6 +1792,9 @@ begin
            else
             kcpsm3_status(5 to 6) := "NC";
           end if;
+        end if;
+        if (clkp = '1') then
+          report ddd_decode & " , " & kcpsm3_opcode & " , " & kcpsm3_status;
         end if;
       end if;
 
@@ -1880,7 +1891,7 @@ begin
           when others => null;
         end case;
       end if;
-
+      flag := false;
     end if;
 
   end process simulation;

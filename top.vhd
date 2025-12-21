@@ -254,6 +254,8 @@ architecture behavioral of top is
   signal ps2_mouse_do_read        : std_logic;
   signal ps2_mouse_flags          : std_logic_vector (7 downto 0);
   signal ps2_mouse_flags_reg      : std_logic_vector (7 downto 0);
+  signal ps2_mouse_trigger_4x     : std_logic;
+  signal ps2_mouse_trigger_4x_sr  : std_logic_vector (3 downto 0);
 
   signal o_test0 : std_logic_vector (7 downto 0);
   signal o_test4, o_test3, o_test2, o_test1 : std_logic_vector (7 downto 0);
@@ -275,7 +277,7 @@ architecture behavioral of top is
   signal s_sin_v, s_cos_v : std_logic_vector (7 downto 0);
 --synthesis translate_on
 
-  type p0_states is (r0, r1, a, b);
+  type p0_states is (r0, r1, a, b, c);
   signal p0_state : p0_states;
 
 begin
@@ -297,6 +299,8 @@ begin
       pixel_write_reset <= "0";
       pixel_coordination_reset <= (others => '0');
       pixel_color_reset <= (others => '0');
+      ps2_mouse_trigger_4x <= '0';
+      ps2_mouse_trigger_4x_sr <= "0001";
     elsif (rising_edge (i_cpu_clock)) then
       ps2_mouse_trigger_prev <= ps2_mouse_trigger;
       case (p0_state) is
@@ -318,11 +322,20 @@ begin
           end if;
         when a =>
           if (ps2_mouse_trigger_prev = '1' and ps2_mouse_trigger = '0') then
-            p0_state <= b;
-            kcpsm3_interrupt <= '1';
-            ps2_mouse_do_read <= kcpsm3_interrupt_ack;
+--            if (ps2_mouse_trigger_4x_sr = "1000") then -- XXX trigger after each ps2 byte draw box ok
+--              ps2_mouse_trigger_4x_sr <= "0001";
+--              ps2_mouse_trigger_4x <= '1';
+              p0_state <= b;
+--            else
+--              ps2_mouse_trigger_4x_sr <= ps2_mouse_trigger_4x_sr (2 downto 0) & ps2_mouse_trigger_4x_sr (3);
+--            end if;
           end if;
         when b =>
+          p0_state <= c;
+          ps2_mouse_trigger_4x <= '0';
+          kcpsm3_interrupt <= '1';
+          ps2_mouse_do_read <= kcpsm3_interrupt_ack;
+        when c =>
           if (kcpsm3_interrupt_ack = '1') then
             p0_state <= a;
             kcpsm3_interrupt <= '0';

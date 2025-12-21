@@ -124,7 +124,7 @@ begin
             x_coordination :=
               to_integer (unsigned (i_kcpsm3_out_port (7 downto 0)));
             --synthesis translate_off
-            report "x_coordination : " & integer'image (x_coordination);
+            --report "x_coordination : " & integer'image (x_coordination);
             --synthesis translate_on
           end if;
         when c_kcpsm3_port_id_pixel_col => -- y coordination pixel 6 bit (0 to 119)
@@ -133,7 +133,7 @@ begin
             y_coordination :=
               to_integer (unsigned (i_kcpsm3_out_port (6 downto 0))) * c_x;
             --synthesis translate_off
-            report "y_coordination : " & integer'image (y_coordination);
+            --report "y_coordination : " & integer'image (y_coordination);
             --synthesis translate_on
           end if;
         when c_kcpsm3_port_id_pixel_color => -- color pixel (0 to 63)
@@ -141,7 +141,7 @@ begin
             o_pixel_write <= "1";
             o_pixel_coordination <= std_logic_vector (to_unsigned (y_coordination + x_coordination, c_memory_address_bits));
             --synthesis translate_off
-            report "o_pixel_coordination : " & integer'image (y_coordination + x_coordination);
+            --report "o_pixel_coordination : " & integer'image (y_coordination + x_coordination);
             --synthesis translate_on
             o_pixel_color <=
               i_kcpsm3_out_port (c_color_bits - 1 downto 0);

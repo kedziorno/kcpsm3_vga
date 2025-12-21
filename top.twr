@@ -44,7 +44,7 @@ Setup/Hold to clock i_cpu_clock
             |Max Setup to|Max Hold to |                  | Clock  |
 Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------------+--------+
-i_ps2_mclk  |    3.856(R)|    0.363(R)|i_cpu_clock_BUFGP |   0.000|
+i_ps2_mclk  |    4.668(R)|    0.418(R)|i_cpu_clock_BUFGP |   0.000|
 ------------+------------+------------+------------------+--------+
 
 Clock i_cpu_clock to Pad
@@ -52,14 +52,14 @@ Clock i_cpu_clock to Pad
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-o_led<0>    |   11.573(R)|i_cpu_clock_BUFGP |   0.000|
-o_led<1>    |   12.071(R)|i_cpu_clock_BUFGP |   0.000|
-o_led<2>    |   11.422(R)|i_cpu_clock_BUFGP |   0.000|
-o_led<3>    |   12.350(R)|i_cpu_clock_BUFGP |   0.000|
-o_led<4>    |   13.091(R)|i_cpu_clock_BUFGP |   0.000|
-o_led<5>    |   13.242(R)|i_cpu_clock_BUFGP |   0.000|
-o_led<6>    |   13.361(R)|i_cpu_clock_BUFGP |   0.000|
-o_led<7>    |   13.014(R)|i_cpu_clock_BUFGP |   0.000|
+o_led<0>    |   12.103(R)|i_cpu_clock_BUFGP |   0.000|
+o_led<1>    |   11.619(R)|i_cpu_clock_BUFGP |   0.000|
+o_led<2>    |   11.768(R)|i_cpu_clock_BUFGP |   0.000|
+o_led<3>    |   12.064(R)|i_cpu_clock_BUFGP |   0.000|
+o_led<4>    |   13.350(R)|i_cpu_clock_BUFGP |   0.000|
+o_led<5>    |   13.299(R)|i_cpu_clock_BUFGP |   0.000|
+o_led<6>    |   12.823(R)|i_cpu_clock_BUFGP |   0.000|
+o_led<7>    |   12.562(R)|i_cpu_clock_BUFGP |   0.000|
 ------------+------------+------------------+--------+
 
 Clock to Setup on destination clock i_cpu_clock
@@ -67,11 +67,11 @@ Clock to Setup on destination clock i_cpu_clock
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-i_cpu_clock    |   14.974|         |         |         |
+i_cpu_clock    |   15.231|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
-Analysis completed Thu Dec 11 22:22:37 2025 
+Analysis completed Sun Dec 21 00:45:54 2025 
 --------------------------------------------------------------------------------
 
 Trace Settings:

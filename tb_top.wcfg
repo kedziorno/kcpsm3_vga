@@ -22,18 +22,42 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="44" />
-   <wvobject fp_name="/tb_top/uut/vga_color" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_color[5:0]</obj_property>
-      <obj_property name="ObjectShortName">vga_color[5:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <WVObjectSize size="50" />
+   <wvobject fp_name="/tb_top/uut/kcpsm3_write_strobe" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">kcpsm3_write_strobe</obj_property>
+      <obj_property name="ObjectShortName">kcpsm3_write_strobe</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/vga_address" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">vga_address[14:0]</obj_property>
-      <obj_property name="ObjectShortName">vga_address[14:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   <wvobject fp_name="/tb_top/uut/o_vsync" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_vsync</obj_property>
+      <obj_property name="ObjectShortName">o_vsync</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/kcpsm3_read_strobe" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">kcpsm3_read_strobe</obj_property>
+      <obj_property name="ObjectShortName">kcpsm3_read_strobe</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/kcpsm3_interrupt" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">kcpsm3_interrupt</obj_property>
+      <obj_property name="ObjectShortName">kcpsm3_interrupt</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/kcpsm3_interrupt_ack" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">kcpsm3_interrupt_ack</obj_property>
+      <obj_property name="ObjectShortName">kcpsm3_interrupt_ack</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/ps2_mouse_trigger_4x" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ps2_mouse_trigger_4x</obj_property>
+      <obj_property name="ObjectShortName">ps2_mouse_trigger_4x</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/ps2_mouse_trigger_4x_sr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ps2_mouse_trigger_4x_sr[3:0]</obj_property>
+      <obj_property name="ObjectShortName">ps2_mouse_trigger_4x_sr[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/i_ps2_mdata" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_ps2_mdata</obj_property>
+      <obj_property name="ObjectShortName">i_ps2_mdata</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/i_ps2_mclk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_ps2_mclk</obj_property>
+      <obj_property name="ObjectShortName">i_ps2_mclk</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/ps2_mouse_scan_ready" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">ps2_mouse_scan_ready</obj_property>
@@ -71,6 +95,10 @@
       <obj_property name="ElementShortName">ps2_mouse_y_sign</obj_property>
       <obj_property name="ObjectShortName">ps2_mouse_y_sign</obj_property>
    </wvobject>
+   <wvobject fp_name="/tb_top/uut/ps2_mouse_button_left" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ps2_mouse_button_left</obj_property>
+      <obj_property name="ObjectShortName">ps2_mouse_button_left</obj_property>
+   </wvobject>
    <wvobject fp_name="/tb_top/uut/ps2_mouse_button_middle" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">ps2_mouse_button_middle</obj_property>
       <obj_property name="ObjectShortName">ps2_mouse_button_middle</obj_property>
@@ -79,13 +107,43 @@
       <obj_property name="ElementShortName">ps2_mouse_button_right</obj_property>
       <obj_property name="ObjectShortName">ps2_mouse_button_right</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/ps2_mouse_button_left" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">ps2_mouse_button_left</obj_property>
-      <obj_property name="ObjectShortName">ps2_mouse_button_left</obj_property>
-   </wvobject>
    <wvobject fp_name="/tb_top/uut/ps2_mouse_do_read" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">ps2_mouse_do_read</obj_property>
       <obj_property name="ObjectShortName">ps2_mouse_do_read</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/vga_color" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">vga_color[5:0]</obj_property>
+      <obj_property name="ObjectShortName">vga_color[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/o_hsync" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_hsync</obj_property>
+      <obj_property name="ObjectShortName">o_hsync</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/o_vsync" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_vsync</obj_property>
+      <obj_property name="ObjectShortName">o_vsync</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/vga_address" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">vga_address[14:0]</obj_property>
+      <obj_property name="ObjectShortName">vga_address[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/o_blank" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_blank</obj_property>
+      <obj_property name="ObjectShortName">o_blank</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/o_h_blank" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_h_blank</obj_property>
+      <obj_property name="ObjectShortName">o_h_blank</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/o_v_blank" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_v_blank</obj_property>
+      <obj_property name="ObjectShortName">o_v_blank</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/kcpsm3_address" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">kcpsm3_address[9:0]</obj_property>
@@ -111,21 +169,13 @@
       <obj_property name="ElementShortName">kcpsm3_in_port[7:0]</obj_property>
       <obj_property name="ObjectShortName">kcpsm3_in_port[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/kcpsm3_write_strobe" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">kcpsm3_write_strobe</obj_property>
-      <obj_property name="ObjectShortName">kcpsm3_write_strobe</obj_property>
+   <wvobject fp_name="/tb_top/i_ps2_mdata" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_ps2_mdata</obj_property>
+      <obj_property name="ObjectShortName">i_ps2_mdata</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/kcpsm3_read_strobe" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">kcpsm3_read_strobe</obj_property>
-      <obj_property name="ObjectShortName">kcpsm3_read_strobe</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/kcpsm3_interrupt" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">kcpsm3_interrupt</obj_property>
-      <obj_property name="ObjectShortName">kcpsm3_interrupt</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/kcpsm3_interrupt_ack" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">kcpsm3_interrupt_ack</obj_property>
-      <obj_property name="ObjectShortName">kcpsm3_interrupt_ack</obj_property>
+   <wvobject fp_name="/tb_top/i_ps2_mclk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_ps2_mclk</obj_property>
+      <obj_property name="ObjectShortName">i_ps2_mclk</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/i_cpu_clock" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">i_cpu_clock</obj_property>
@@ -183,55 +233,31 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ff00ff</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_hsync" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_hsync</obj_property>
-      <obj_property name="ObjectShortName">o_hsync</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_vsync" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_vsync</obj_property>
-      <obj_property name="ObjectShortName">o_vsync</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_blank" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_blank</obj_property>
-      <obj_property name="ObjectShortName">o_blank</obj_property>
+   <wvobject fp_name="/tb_top/uut/o_test0" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_test0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_test0[7:0]</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ff00ff</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_h_blank" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_h_blank</obj_property>
-      <obj_property name="ObjectShortName">o_h_blank</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/o_v_blank" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_v_blank</obj_property>
-      <obj_property name="ObjectShortName">o_v_blank</obj_property>
-   </wvobject>
    <wvobject fp_name="/tb_top/uut/o_r" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_r[1:0]</obj_property>
-      <obj_property name="ObjectShortName">o_r[1:0]</obj_property>
+      <obj_property name="ElementShortName">o_r[3:2]</obj_property>
+      <obj_property name="ObjectShortName">o_r[3:2]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/o_g" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_g[1:0]</obj_property>
-      <obj_property name="ObjectShortName">o_g[1:0]</obj_property>
+      <obj_property name="ElementShortName">o_g[3:2]</obj_property>
+      <obj_property name="ObjectShortName">o_g[3:2]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/o_b" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_b[1:0]</obj_property>
-      <obj_property name="ObjectShortName">o_b[1:0]</obj_property>
+      <obj_property name="ElementShortName">o_b[3:2]</obj_property>
+      <obj_property name="ObjectShortName">o_b[3:2]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_ps2_mdata" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">i_ps2_mdata</obj_property>
-      <obj_property name="ObjectShortName">i_ps2_mdata</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/i_ps2_mclk" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">i_ps2_mclk</obj_property>
-      <obj_property name="ObjectShortName">i_ps2_mclk</obj_property>
    </wvobject>
 </wave_config>
