@@ -3,3 +3,5 @@
 ![pseudo_paint_xc3s1200e_ps2_vga_160x120_64colors](pseudo_paint.jpg)
 ### Other Examples
 - Cordic Algorithm on 8bit PicoBlaze - https://github.com/kedziorno/kcpsm3_vga/tree/main
+### Documentation
+![Top module](top.jpg "Top module")

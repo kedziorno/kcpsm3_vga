@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<symbol version="7" name="ps2_mouse">
+    <symboltype>BLOCK</symboltype>
+    <timestamp>2025-12-25T19:36:5</timestamp>
+    <pin polarity="Output" x="480" y="-160" name="o_x_movement(7:0)" />
+    <pin polarity="Output" x="480" y="-96" name="o_y_movement(7:0)" />
+    <pin polarity="Output" x="480" y="-32" name="o_z_movement(7:0)" />
+    <pin polarity="Input" x="0" y="-928" name="i_clock" />
+    <pin polarity="Input" x="0" y="-672" name="i_do_read" />
+    <pin polarity="Input" x="0" y="-736" name="i_PS2_Data" />
+    <pin polarity="Input" x="0" y="-800" name="i_PS2_Clk" />
+    <pin polarity="Input" x="0" y="-864" name="i_reset" />
+    <pin polarity="Output" x="480" y="-928" name="o_scan_ready" />
+    <pin polarity="Output" x="480" y="-864" name="o_trigger" />
+    <pin polarity="Output" x="480" y="-768" name="o_parity_error" />
+    <pin polarity="Output" x="480" y="-704" name="o_x_overflow" />
+    <pin polarity="Output" x="480" y="-640" name="o_y_overflow" />
+    <pin polarity="Output" x="480" y="-576" name="o_x_sign" />
+    <pin polarity="Output" x="480" y="-512" name="o_y_sign" />
+    <pin polarity="Output" x="480" y="-320" name="o_button_left" />
+    <pin polarity="Output" x="480" y="-448" name="o_button_right" />
+    <pin polarity="Output" x="480" y="-384" name="o_button_middle" />
+    <graph>
+        <rect width="64" x="416" y="-172" height="24" />
+        <line x2="480" y1="-160" y2="-160" x1="416" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="408" y="-96" type="pin o_y_movement(7:0)" />
+        <rect width="64" x="416" y="-108" height="24" />
+        <line x2="480" y1="-96" y2="-96" x1="416" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="408" y="-32" type="pin o_z_movement(7:0)" />
+        <rect width="64" x="416" y="-44" height="24" />
+        <line x2="480" y1="-32" y2="-32" x1="416" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="408" y="-160" type="pin o_x_movement(7:0)" />
+        <rect width="352" x="64" y="-964" height="964" />
+        <arc ex="224" ey="-220" sx="80" sy="-220" r="75" cx="151" cy="-245" />
+        <line x2="224" y1="-380" y2="-380" x1="80" />
+        <line x2="224" y1="-336" y2="-336" x1="80" />
+        <line x2="80" y1="-380" y2="-220" x1="80" />
+        <line x2="120" y1="-380" y2="-336" x1="120" />
+        <line x2="180" y1="-380" y2="-336" x1="180" />
+        <text style="alignment:CENTER;fontsize:16;fontname:Courier New" x="100" y="-360">L</text>
+        <text style="alignment:CENTER;fontsize:16;fontname:Courier New" x="204" y="-360">R</text>
+        <arc ex="84" ey="-396" sx="148" sy="-380" r="34" cx="118" cy="-401" />
+        <line x2="136" y1="-188" y2="-188" x1="168" />
+        <line x2="160" y1="-188" y2="-180" x1="168" />
+        <line x2="160" y1="-188" y2="-196" x1="168" />
+        <line x2="144" y1="-188" y2="-180" x1="136" />
+        <line x2="136" y1="-196" y2="-188" x1="144" />
+        <line x2="224" y1="-380" y2="-220" x1="224" />
+        <line x2="216" y1="-288" y2="-280" x1="208" />
+        <line x2="208" y1="-256" y2="-288" x1="208" />
+        <line x2="216" y1="-256" y2="-264" x1="208" />
+        <line x2="208" y1="-264" y2="-256" x1="200" />
+        <line x2="200" y1="-288" y2="-280" x1="208" />
+        <text style="alignment:RIGHT;fontsize:16;fontname:Courier New" x="156" y="-368">M</text>
+        <text style="alignment:RIGHT;fontsize:16;fontname:Courier New" x="156" y="-344">S</text>
+        <attrtext style="alignment:CENTER;fontsize:32;fontname:Courier New" attrname="InstName" x="232" y="-980" type="symbol" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-928" type="pin i_clock" />
+        <line x2="0" y1="-928" y2="-928" x1="64" />
+        <attrtext style="alignment:VCENTER;fontsize:56;fontname:Arial" attrname="SymbolName" x="220" y="-808" type="symbol" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-672" type="pin i_do_read" />
+        <line x2="0" y1="-672" y2="-672" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-736" type="pin i_PS2_Data" />
+        <line x2="0" y1="-736" y2="-736" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-800" type="pin i_PS2_Clk" />
+        <line x2="0" y1="-800" y2="-800" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-864" type="pin i_reset" />
+        <line x2="0" y1="-864" y2="-864" x1="64" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="408" y="-928" type="pin o_scan_ready" />
+        <line x2="480" y1="-928" y2="-928" x1="416" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="408" y="-864" type="pin o_trigger" />
+        <line x2="480" y1="-864" y2="-864" x1="416" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="408" y="-768" type="pin o_parity_error" />
+        <line x2="480" y1="-768" y2="-768" x1="416" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="408" y="-704" type="pin o_x_overflow" />
+        <line x2="480" y1="-704" y2="-704" x1="416" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="408" y="-640" type="pin o_y_overflow" />
+        <line x2="480" y1="-640" y2="-640" x1="416" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="408" y="-576" type="pin o_x_sign" />
+        <line x2="480" y1="-576" y2="-576" x1="416" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="408" y="-512" type="pin o_y_sign" />
+        <line x2="480" y1="-512" y2="-512" x1="416" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="408" y="-320" type="pin o_button_left" />
+        <line x2="480" y1="-320" y2="-320" x1="416" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="408" y="-448" type="pin o_button_right" />
+        <line x2="480" y1="-448" y2="-448" x1="416" />
+        <line x2="480" y1="-384" y2="-384" x1="416" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="408" y="-384" type="pin o_button_middle" />
+    </graph>
+</symbol>

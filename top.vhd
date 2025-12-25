@@ -467,7 +467,7 @@ begin
   i_reset         => i_reset,
   i_PS2_Clk       => i_ps2_mclk,
   i_PS2_Data      => i_ps2_mdata,
-  i_do_read       => ps2_mouse_do_read, --'1',
+  i_do_read       => '1', -- ps2_mouse_do_read
   o_scan_ready    => ps2_mouse_scan_ready,
   o_trigger       => ps2_mouse_trigger,
   o_parity_error  => ps2_mouse_parity_error,

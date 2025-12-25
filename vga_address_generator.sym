@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<symbol version="7" name="vga_address_generator">
+    <symboltype>BLOCK</symboltype>
+    <timestamp>2025-12-25T18:39:56</timestamp>
+    <pin polarity="Output" x="512" y="-32" name="o_vga_address(14:0)" />
+    <pin polarity="Input" x="0" y="-672" name="i_clock" />
+    <pin polarity="Input" x="0" y="-608" name="i_reset" />
+    <pin polarity="Input" x="0" y="-544" name="i_vga_blank" />
+    <pin polarity="Input" x="0" y="-480" name="i_vga_v_blank" />
+    <graph>
+        <rect width="384" x="64" y="-704" height="704" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="440" y="-32" type="pin o_vga_address(14:0)" />
+        <rect width="64" x="448" y="-44" height="24" />
+        <line x2="512" y1="-32" y2="-32" x1="448" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-672" type="pin i_clock" />
+        <line x2="0" y1="-672" y2="-672" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-608" type="pin i_reset" />
+        <line x2="0" y1="-608" y2="-608" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-544" type="pin i_vga_blank" />
+        <line x2="0" y1="-544" y2="-544" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-480" type="pin i_vga_v_blank" />
+        <line x2="0" y1="-480" y2="-480" x1="64" />
+        <rect width="272" x="80" y="-288" height="192" />
+        <rect width="240" x="96" y="-272" height="160" />
+        <rect width="132" x="160" y="-96" height="16" />
+        <rect width="164" x="144" y="-80" height="16" />
+        <attrtext style="alignment:VCENTER;fontsize:56;fontname:Arial" attrname="SymbolName" x="400" y="-384" type="symbol" />
+        <rect width="48" x="112" y="-256" height="16" />
+        <line x2="128" y1="-240" y2="-256" x1="128" />
+        <line x2="144" y1="-240" y2="-256" x1="144" />
+        <circle r="4" cx="168" cy="-244" />
+        <circle r="4" cx="180" cy="-244" />
+        <circle r="4" cx="192" cy="-244" />
+        <line x2="120" y1="-260" y2="-328" x1="120" />
+        <line x2="152" y1="-260" y2="-328" x1="136" />
+        <line x2="188" y1="-260" y2="-332" x1="152" />
+        <text style="fontsize:32;fontname:Arial" x="116" y="-336">1</text>
+        <text style="fontsize:32;fontname:Arial" x="152" y="-336">2</text>
+        <text style="fontsize:32;fontname:Arial" x="188" y="-336">3</text>
+        <attrtext style="alignment:CENTER;fontsize:32;fontname:Courier New" attrname="InstName" x="244" y="-724" type="symbol" />
+    </graph>
+</symbol>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<symbol version="7" name="p1">
+    <symboltype>BLOCK</symboltype>
+    <timestamp>2025-12-25T19:21:17</timestamp>
+    <pin polarity="Output" x="1056" y="-32" name="ps2_mouse_z_movement_reg(7:0)" />
+    <pin polarity="Output" x="1056" y="-96" name="ps2_mouse_y_movement_reg(7:0)" />
+    <pin polarity="Output" x="1056" y="-160" name="ps2_mouse_x_movement_reg(7:0)" />
+    <pin polarity="Output" x="1056" y="-800" name="ps2_mouse_flags_reg(7:0)" />
+    <pin polarity="Input" x="0" y="-160" name="ps2_mouse_x_movement(7:0)" />
+    <pin polarity="Input" x="0" y="-96" name="ps2_mouse_y_movement(7:0)" />
+    <pin polarity="Input" x="0" y="-32" name="ps2_mouse_z_movement(7:0)" />
+    <pin polarity="Input" x="0" y="-768" name="ps2_mouse_parity_error" />
+    <pin polarity="Input" x="0" y="-704" name="ps2_mouse_x_overflow" />
+    <pin polarity="Input" x="0" y="-640" name="ps2_mouse_y_overflow" />
+    <pin polarity="Input" x="0" y="-576" name="ps2_mouse_x_sign" />
+    <pin polarity="Input" x="0" y="-512" name="ps2_mouse_y_sign" />
+    <pin polarity="Input" x="0" y="-448" name="ps2_mouse_button_right" />
+    <pin polarity="Input" x="0" y="-384" name="ps2_mouse_button_middle" />
+    <pin polarity="Input" x="0" y="-320" name="ps2_mouse_button_left" />
+    <graph>
+        <rect width="928" x="64" y="-840" height="840" />
+        <rect width="64" x="992" y="-44" height="24" />
+        <line x2="1056" y1="-32" y2="-32" x1="992" />
+        <rect width="64" x="992" y="-108" height="24" />
+        <line x2="1056" y1="-96" y2="-96" x1="992" />
+        <rect width="64" x="992" y="-172" height="24" />
+        <line x2="1056" y1="-160" y2="-160" x1="992" />
+        <line x2="1056" y1="-800" y2="-800" x1="992" />
+        <rect width="64" x="0" y="-172" height="24" />
+        <line x2="0" y1="-160" y2="-160" x1="64" />
+        <rect width="64" x="0" y="-108" height="24" />
+        <line x2="0" y1="-96" y2="-96" x1="64" />
+        <rect width="64" x="0" y="-44" height="24" />
+        <line x2="0" y1="-32" y2="-32" x1="64" />
+        <line x2="0" y1="-768" y2="-768" x1="64" />
+        <line x2="0" y1="-704" y2="-704" x1="64" />
+        <line x2="0" y1="-640" y2="-640" x1="64" />
+        <line x2="0" y1="-576" y2="-576" x1="64" />
+        <line x2="0" y1="-512" y2="-512" x1="64" />
+        <line x2="0" y1="-448" y2="-448" x1="64" />
+        <line x2="0" y1="-384" y2="-384" x1="64" />
+        <line x2="0" y1="-320" y2="-320" x1="64" />
+        <line x2="992" y1="-160" y2="-160" style="linestyle:Dash" x1="64" />
+        <line x2="992" y1="-96" y2="-96" style="linestyle:Dash" x1="64" />
+        <line x2="992" y1="-32" y2="-32" style="linestyle:Dash" x1="64" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="984" y="-176" type="pin ps2_mouse_x_movement_reg(7:0)" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="984" y="-112" type="pin ps2_mouse_y_movement_reg(7:0)" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="984" y="-48" type="pin ps2_mouse_z_movement_reg(7:0)" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="76" y="-112" type="pin ps2_mouse_y_movement(7:0)" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="76" y="-48" type="pin ps2_mouse_z_movement(7:0)" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="76" y="-176" type="pin ps2_mouse_x_movement(7:0)" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="76" y="-736" type="pin ps2_mouse_x_overflow" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="80" y="-548" type="pin ps2_mouse_y_sign" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="80" y="-348" type="pin ps2_mouse_button_left" />
+        <line x2="528" y1="-800" y2="-800" style="linestyle:Dash" x1="992" />
+        <line x2="528" y1="-800" y2="-320" style="linestyle:Dash" x1="528" />
+        <line x2="528" y1="-320" y2="-320" style="linestyle:Dash" x1="64" />
+        <line x2="64" y1="-768" y2="-768" style="linestyle:Dash" x1="528" />
+        <line x2="64" y1="-704" y2="-704" style="linestyle:Dash" x1="528" />
+        <line x2="64" y1="-640" y2="-640" style="linestyle:Dash" x1="528" />
+        <line x2="64" y1="-576" y2="-576" style="linestyle:Dash" x1="528" />
+        <line x2="64" y1="-512" y2="-512" style="linestyle:Dash" x1="528" />
+        <line x2="64" y1="-448" y2="-448" style="linestyle:Dash" x1="528" />
+        <line x2="64" y1="-384" y2="-384" style="linestyle:Dash" x1="528" />
+        <attrtext style="alignment:VCENTER;fontsize:56;fontname:Arial" attrname="SymbolName" x="524" y="-268" type="symbol" />
+        <line x2="512" y1="-176" y2="-160" style="linestyle:Dash" x1="496" />
+        <line x2="496" y1="-96" y2="-112" style="linestyle:Dash" x1="512" />
+        <line x2="496" y1="-32" y2="-48" style="linestyle:Dash" x1="512" />
+        <line x2="496" y1="-160" y2="-144" style="linestyle:Dash" x1="512" />
+        <line x2="496" y1="-96" y2="-80" style="linestyle:Dash" x1="512" />
+        <line x2="496" y1="-32" y2="-16" style="linestyle:Dash" x1="512" />
+        <line x2="512" y1="-792" y2="-776" style="linestyle:Dash" x1="528" />
+        <line x2="512" y1="-744" y2="-728" style="linestyle:Dash" x1="528" />
+        <line x2="512" y1="-680" y2="-664" style="linestyle:Dash" x1="528" />
+        <line x2="512" y1="-616" y2="-600" style="linestyle:Dash" x1="528" />
+        <line x2="512" y1="-552" y2="-536" style="linestyle:Dash" x1="528" />
+        <line x2="512" y1="-488" y2="-472" style="linestyle:Dash" x1="528" />
+        <line x2="512" y1="-424" y2="-408" style="linestyle:Dash" x1="528" />
+        <line x2="512" y1="-360" y2="-344" style="linestyle:Dash" x1="528" />
+        <line x2="544" y1="-792" y2="-776" style="linestyle:Dash" x1="528" />
+        <line x2="544" y1="-744" y2="-728" style="linestyle:Dash" x1="528" />
+        <line x2="544" y1="-680" y2="-664" style="linestyle:Dash" x1="528" />
+        <line x2="544" y1="-616" y2="-600" style="linestyle:Dash" x1="528" />
+        <line x2="544" y1="-552" y2="-536" style="linestyle:Dash" x1="528" />
+        <line x2="544" y1="-488" y2="-472" style="linestyle:Dash" x1="528" />
+        <line x2="544" y1="-424" y2="-408" style="linestyle:Dash" x1="528" />
+        <line x2="544" y1="-360" y2="-344" style="linestyle:Dash" x1="528" />
+        <line x2="648" y1="-800" y2="-784" style="linestyle:Dash" x1="672" />
+        <line x2="672" y1="-816" y2="-800" style="linestyle:Dash" x1="648" />
+        <attrtext style="alignment:CENTER;fontsize:32;fontname:Courier New" attrname="InstName" x="532" y="-864" type="symbol" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="980" y="-780" type="pin ps2_mouse_flags_reg(7:0)" />
+        <rect width="64" x="992" y="-812" height="24" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="80" y="-796" type="pin ps2_mouse_parity_error" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="76" y="-672" type="pin ps2_mouse_y_overflow" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="80" y="-608" type="pin ps2_mouse_x_sign" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="80" y="-480" type="pin ps2_mouse_button_right" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="80" y="-416" type="pin ps2_mouse_button_middle" />
+    </graph>
+</symbol>

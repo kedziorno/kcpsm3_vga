@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<symbol version="7" name="kcpsm3_io_registers_decoder">
+    <symboltype>BLOCK</symboltype>
+    <timestamp>2025-12-25T19:38:51</timestamp>
+    <pin polarity="Input" x="0" y="-1152" name="i_clock" />
+    <pin polarity="Input" x="0" y="-1072" name="i_reset" />
+    <pin polarity="Input" x="0" y="-992" name="i_kcpsm3_write_strobe" />
+    <pin polarity="Input" x="0" y="-912" name="i_kcpsm3_read_strobe" />
+    <pin polarity="Input" x="0" y="-832" name="i_kcpsm3_port_id(7:0)" />
+    <pin polarity="Input" x="0" y="-752" name="i_kcpsm3_out_port(7:0)" />
+    <pin polarity="Output" x="720" y="-800" name="o_kcpsm3_in_port(7:0)" />
+    <pin polarity="Output" x="720" y="-736" name="o_pixel_coordination(14:0)" />
+    <pin polarity="Output" x="720" y="-672" name="o_pixel_color(5:0)" />
+    <pin polarity="Output" x="720" y="-608" name="o_pixel_write(0:0)" />
+    <pin polarity="Output" x="720" y="-544" name="o_test8(7:0)" />
+    <pin polarity="Output" x="720" y="-480" name="o_test7(7:0)" />
+    <pin polarity="Output" x="720" y="-416" name="o_test6(7:0)" />
+    <pin polarity="Output" x="720" y="-352" name="o_test5(7:0)" />
+    <pin polarity="Output" x="720" y="-288" name="o_test4(7:0)" />
+    <pin polarity="Output" x="720" y="-224" name="o_test3(7:0)" />
+    <pin polarity="Output" x="720" y="-160" name="o_test2(7:0)" />
+    <pin polarity="Output" x="720" y="-96" name="o_test1(7:0)" />
+    <pin polarity="Output" x="720" y="-32" name="o_test0(7:0)" />
+    <pin polarity="Input" x="0" y="-464" name="i_mouse_z(7:0)" />
+    <pin polarity="Input" x="0" y="-528" name="i_mouse_y(7:0)" />
+    <pin polarity="Input" x="0" y="-592" name="i_mouse_x(7:0)" />
+    <pin polarity="Input" x="0" y="-656" name="i_mouse_flags(7:0)" />
+    <graph>
+        <rect width="592" x="64" y="-1196" height="1196" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-1152" type="pin i_clock" />
+        <line x2="0" y1="-1152" y2="-1152" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-1072" type="pin i_reset" />
+        <line x2="0" y1="-1072" y2="-1072" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-992" type="pin i_kcpsm3_write_strobe" />
+        <line x2="0" y1="-992" y2="-992" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-912" type="pin i_kcpsm3_read_strobe" />
+        <line x2="0" y1="-912" y2="-912" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-832" type="pin i_kcpsm3_port_id(7:0)" />
+        <rect width="64" x="0" y="-844" height="24" />
+        <line x2="0" y1="-832" y2="-832" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-752" type="pin i_kcpsm3_out_port(7:0)" />
+        <rect width="64" x="0" y="-764" height="24" />
+        <line x2="0" y1="-752" y2="-752" x1="64" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="648" y="-800" type="pin o_kcpsm3_in_port(7:0)" />
+        <rect width="64" x="656" y="-812" height="24" />
+        <line x2="720" y1="-800" y2="-800" x1="656" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="648" y="-736" type="pin o_pixel_coordination(14:0)" />
+        <rect width="64" x="656" y="-748" height="24" />
+        <line x2="720" y1="-736" y2="-736" x1="656" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="648" y="-672" type="pin o_pixel_color(5:0)" />
+        <rect width="64" x="656" y="-684" height="24" />
+        <line x2="720" y1="-672" y2="-672" x1="656" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="648" y="-608" type="pin o_pixel_write(0:0)" />
+        <rect width="64" x="656" y="-620" height="24" />
+        <line x2="720" y1="-608" y2="-608" x1="656" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="648" y="-544" type="pin o_test8(7:0)" />
+        <rect width="64" x="656" y="-556" height="24" />
+        <line x2="720" y1="-544" y2="-544" x1="656" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="648" y="-480" type="pin o_test7(7:0)" />
+        <rect width="64" x="656" y="-492" height="24" />
+        <line x2="720" y1="-480" y2="-480" x1="656" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="648" y="-416" type="pin o_test6(7:0)" />
+        <rect width="64" x="656" y="-428" height="24" />
+        <line x2="720" y1="-416" y2="-416" x1="656" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="648" y="-352" type="pin o_test5(7:0)" />
+        <rect width="64" x="656" y="-364" height="24" />
+        <line x2="720" y1="-352" y2="-352" x1="656" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="648" y="-288" type="pin o_test4(7:0)" />
+        <rect width="64" x="656" y="-300" height="24" />
+        <line x2="720" y1="-288" y2="-288" x1="656" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="648" y="-224" type="pin o_test3(7:0)" />
+        <rect width="64" x="656" y="-236" height="24" />
+        <line x2="720" y1="-224" y2="-224" x1="656" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="648" y="-160" type="pin o_test2(7:0)" />
+        <rect width="64" x="656" y="-172" height="24" />
+        <line x2="720" y1="-160" y2="-160" x1="656" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="648" y="-96" type="pin o_test1(7:0)" />
+        <rect width="64" x="656" y="-108" height="24" />
+        <line x2="720" y1="-96" y2="-96" x1="656" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="648" y="-32" type="pin o_test0(7:0)" />
+        <rect width="64" x="656" y="-44" height="24" />
+        <line x2="720" y1="-32" y2="-32" x1="656" />
+        <attrtext style="alignment:VCENTER;fontsize:40;fontname:Arial" attrname="SymbolName" x="344" y="-908" type="symbol" />
+        <attrtext style="alignment:CENTER;fontsize:32;fontname:Courier New" attrname="InstName" x="356" y="-1216" type="symbol" />
+        <rect width="240" x="160" y="-384" height="368" />
+        <line x2="400" y1="-368" y2="-368" x1="432" />
+        <line x2="400" y1="-320" y2="-320" x1="432" />
+        <line x2="400" y1="-272" y2="-272" x1="432" />
+        <line x2="400" y1="-224" y2="-224" x1="432" />
+        <line x2="400" y1="-176" y2="-176" x1="432" />
+        <line x2="400" y1="-128" y2="-128" x1="432" />
+        <line x2="400" y1="-80" y2="-80" x1="432" />
+        <line x2="400" y1="-32" y2="-32" x1="432" />
+        <line x2="128" y1="-256" y2="-256" x1="160" />
+        <line x2="128" y1="-208" y2="-208" x1="160" />
+        <line x2="128" y1="-160" y2="-160" x1="160" />
+        <line x2="176" y1="-256" y2="-256" style="linestyle:Dash" x1="160" />
+        <line x2="192" y1="-208" y2="-208" style="linestyle:Dash" x1="160" />
+        <line x2="208" y1="-160" y2="-160" style="linestyle:Dash" x1="160" />
+        <line x2="176" y1="-256" y2="-32" style="linestyle:Dash" x1="176" />
+        <line x2="208" y1="-160" y2="-64" style="linestyle:Dash" x1="208" />
+        <line x2="384" y1="-368" y2="-368" style="linestyle:Dash" x1="400" />
+        <line x2="376" y1="-320" y2="-320" style="linestyle:Dash" x1="400" />
+        <line x2="368" y1="-272" y2="-272" style="linestyle:Dash" x1="400" />
+        <line x2="360" y1="-224" y2="-224" style="linestyle:Dash" x1="400" />
+        <line x2="352" y1="-176" y2="-176" style="linestyle:Dash" x1="400" />
+        <line x2="344" y1="-128" y2="-128" style="linestyle:Dash" x1="400" />
+        <line x2="336" y1="-80" y2="-80" style="linestyle:Dash" x1="400" />
+        <line x2="328" y1="-32" y2="-32" style="linestyle:Dash" x1="400" />
+        <line x2="384" y1="-368" y2="-40" style="linestyle:Dash" x1="384" />
+        <line x2="376" y1="-320" y2="-368" style="linestyle:Dash" x1="376" />
+        <line x2="368" y1="-272" y2="-40" style="linestyle:Dash" x1="368" />
+        <line x2="360" y1="-224" y2="-368" style="linestyle:Dash" x1="360" />
+        <line x2="352" y1="-176" y2="-40" style="linestyle:Dash" x1="352" />
+        <line x2="344" y1="-128" y2="-352" style="linestyle:Dash" x1="344" />
+        <line x2="336" y1="-80" y2="-40" style="linestyle:Dash" x1="336" />
+        <line x2="328" y1="-32" y2="-336" style="linestyle:Dash" x1="328" />
+        <line x2="304" y1="-32" y2="-32" style="linestyle:Dash" x1="176" />
+        <line x2="304" y1="-32" y2="-336" style="linestyle:Dash" x1="304" />
+        <line x2="328" y1="-336" y2="-336" style="linestyle:Dash" x1="304" />
+        <line x2="288" y1="-48" y2="-48" style="linestyle:Dash" x1="192" />
+        <line x2="288" y1="-48" y2="-352" style="linestyle:Dash" x1="288" />
+        <line x2="344" y1="-352" y2="-352" style="linestyle:Dash" x1="288" />
+        <line x2="272" y1="-64" y2="-64" style="linestyle:Dash" x1="208" />
+        <line x2="272" y1="-64" y2="-368" style="linestyle:Dash" x1="272" />
+        <line x2="360" y1="-368" y2="-368" style="linestyle:Dash" x1="272" />
+        <rect style="linestyle:Dash" width="12" x="116" y="-260" height="8" />
+        <rect style="linestyle:Dash" width="12" x="116" y="-212" height="8" />
+        <rect style="linestyle:Dash" width="12" x="116" y="-164" height="8" />
+        <rect style="linestyle:Dash" width="16" x="432" y="-372" height="8" />
+        <rect style="linestyle:Dash" width="16" x="432" y="-324" height="8" />
+        <rect style="linestyle:Dash" width="16" x="432" y="-276" height="8" />
+        <rect style="linestyle:Dash" width="16" x="432" y="-228" height="8" />
+        <rect style="linestyle:Dash" width="16" x="432" y="-180" height="8" />
+        <rect style="linestyle:Dash" width="16" x="432" y="-132" height="8" />
+        <rect style="linestyle:Dash" width="16" x="432" y="-84" height="8" />
+        <rect style="linestyle:Dash" width="16" x="432" y="-36" height="8" />
+        <rect style="linestyle:Dash;fillcolor:rgb(0,0,128);fillstyle:Solid" width="4" x="176" y="-208" height="4" />
+        <rect style="linestyle:Dash;fillcolor:rgb(0,0,128);fillstyle:Solid" width="4" x="368" y="-224" height="4" />
+        <rect style="linestyle:Dash;fillcolor:rgb(0,0,128);fillstyle:Solid" width="4" x="368" y="-128" height="4" />
+        <rect style="linestyle:Dash;fillcolor:rgb(0,0,128);fillstyle:Solid" width="4" x="384" y="-176" height="4" />
+        <rect style="linestyle:Dash;fillcolor:rgb(0,0,128);fillstyle:Solid" width="4" x="384" y="-80" height="4" />
+        <rect style="linestyle:Dash;fillcolor:rgb(0,0,128);fillstyle:Solid" width="4" x="384" y="-272" height="4" />
+        <rect style="linestyle:Dash;fillcolor:rgb(0,0,128);fillstyle:Solid" width="8" x="176" y="-208" height="8" />
+        <rect style="linestyle:Dash;fillcolor:rgb(0,0,128);fillstyle:Solid" width="8" x="192" y="-160" height="8" />
+        <line x2="192" y1="-208" y2="-48" style="linestyle:Dash" x1="192" />
+        <rect style="linestyle:Dash;fillcolor:rgb(0,0,128);fillstyle:Solid" width="8" x="384" y="-80" height="8" />
+        <rect style="linestyle:Dash;fillcolor:rgb(0,0,128);fillstyle:Solid" width="8" x="368" y="-128" height="8" />
+        <rect style="linestyle:Dash;fillcolor:rgb(0,0,128);fillstyle:Solid" width="8" x="384" y="-176" height="8" />
+        <rect style="linestyle:Dash;fillcolor:rgb(0,0,128);fillstyle:Solid" width="8" x="368" y="-224" height="8" />
+        <rect style="linestyle:Dash;fillcolor:rgb(0,0,128);fillstyle:Solid" width="8" x="384" y="-272" height="8" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-464" type="pin i_mouse_z(7:0)" />
+        <rect width="64" x="0" y="-476" height="24" />
+        <line x2="0" y1="-464" y2="-464" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-528" type="pin i_mouse_y(7:0)" />
+        <rect width="64" x="0" y="-540" height="24" />
+        <line x2="0" y1="-528" y2="-528" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-592" type="pin i_mouse_x(7:0)" />
+        <rect width="64" x="0" y="-604" height="24" />
+        <line x2="0" y1="-592" y2="-592" x1="64" />
+        <rect width="64" x="0" y="-668" height="24" />
+        <line x2="0" y1="-656" y2="-656" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-656" type="pin i_mouse_flags(7:0)" />
+    </graph>
+</symbol>

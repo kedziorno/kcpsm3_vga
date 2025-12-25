@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<symbol version="7" name="program">
+    <symboltype>BLOCK</symboltype>
+    <timestamp>2025-12-25T19:42:25</timestamp>
+    <pin polarity="Input" x="0" y="-288" name="clk" />
+    <pin polarity="Input" x="0" y="-240" name="address(9:0)" />
+    <pin polarity="Output" x="448" y="-288" name="instruction(17:0)" />
+    <graph>
+        <rect width="320" x="64" y="-324" height="324" />
+        <attrtext style="alignment:CENTER;fontsize:32;fontname:Courier New" attrname="InstName" x="232" y="-340" type="symbol" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-288" type="pin clk" />
+        <line x2="0" y1="-288" y2="-288" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-240" type="pin address(9:0)" />
+        <rect width="64" x="0" y="-252" height="24" />
+        <line x2="0" y1="-240" y2="-240" x1="64" />
+        <attrtext style="alignment:VCENTER;fontsize:32;fontname:Arial" attrname="SymbolName" x="232" y="-164" type="symbol" />
+        <rect width="48" x="100" y="-84" height="64" />
+        <line x2="84" y1="-28" y2="-28" x1="100" />
+        <line x2="84" y1="-44" y2="-44" x1="100" />
+        <line x2="84" y1="-60" y2="-60" x1="100" />
+        <line x2="84" y1="-76" y2="-76" x1="100" />
+        <line x2="148" y1="-28" y2="-28" x1="164" />
+        <line x2="148" y1="-44" y2="-44" x1="164" />
+        <line x2="148" y1="-60" y2="-60" x1="164" />
+        <line x2="148" y1="-76" y2="-76" x1="164" />
+        <circle r="4" cx="140" cy="-76" />
+        <text style="alignment:VCENTER;fontsize:16;fontname:Times New Roman" x="124" y="-52">ROM</text>
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="376" y="-288" type="pin instruction(17:0)" />
+        <rect width="64" x="384" y="-300" height="24" />
+        <line x2="448" y1="-288" y2="-288" x1="384" />
+    </graph>
+</symbol>

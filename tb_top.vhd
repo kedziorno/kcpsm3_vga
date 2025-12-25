@@ -54,8 +54,7 @@ constant i_vga_clock_period : time := 40 ns; -- 25 MHz
 -- Component Declaration for the Unit Under Test (UUT)
 COMPONENT top
 PORT(
-  i_cpu_clock : IN  std_logic;
-  i_vga_clock : IN  std_logic;
+  i_clock     : IN  std_logic;
   i_reset     : IN  std_logic;
   o_hsync     : OUT std_logic;
   o_vsync     : OUT std_logic;
@@ -109,8 +108,7 @@ BEGIN
 
 -- Instantiate the Unit Under Test (UUT)
 uut : top PORT MAP (
-  i_cpu_clock => i_cpu_clock,
-  i_vga_clock => i_vga_clock,
+  i_clock     => i_cpu_clock,
   i_reset     => i_reset,
   o_hsync     => o_hsync,
   o_vsync     => o_vsync,

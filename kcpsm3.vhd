@@ -1776,8 +1776,8 @@ begin
       --reset and flag status information
       if reset='1' or reset_delay='1' then
         kcpsm3_status := "NZ, NC, Reset";
-        report "*** RESET ***";
-        clkp <= '0';
+        --report "*** RESET ***";
+        --clkp <= '0';
        else
         clkp <= not clkp;
         kcpsm3_status(7 to 13) := "       ";
@@ -1793,9 +1793,9 @@ begin
             kcpsm3_status(5 to 6) := "NC";
           end if;
         end if;
-        if (clkp = '1') then
-          report ddd_decode & " , " & kcpsm3_opcode & " , " & kcpsm3_status;
-        end if;
+        --if (clkp = '1') then
+          --report ddd_decode & " , " & kcpsm3_opcode & " , " & kcpsm3_status;
+        --end if;
       end if;
 
       --simulation of register contents
@@ -1891,7 +1891,6 @@ begin
           when others => null;
         end case;
       end if;
-      flag := false;
     end if;
 
   end process simulation;
